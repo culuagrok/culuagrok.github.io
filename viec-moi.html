@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Việc mới – TP.HCM</title>
+<style>body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f1f5f9;color:#1e293b}
+header{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:24px}header a{color:#fde68a}h1{margin:0 0 6px}
+main{max-width:900px;margin:0 auto;padding:20px}h2{font-size:18px;margin:26px 0 10px;color:#0f3d75;border-bottom:2px solid #cbd5e1;padding-bottom:4px}
+.j{background:#fff;border-radius:12px;padding:14px 16px;margin:10px 0;box-shadow:0 2px 8px #0001;border-left:5px solid #15803d}
+.j a{font-weight:700;color:#0f3d75;text-decoration:none;font-size:16px}.j a:hover{text-decoration:underline}
+.m{font-size:13px;color:#475569;margin:4px 0}.r{font-size:14px}.dl{color:#c2410c;font-weight:600}
+.e{color:#64748b;font-style:italic}input{padding:8px 12px;border-radius:8px;border:1px solid #cbd5e1;width:100%;box-sizing:border-box;font-size:15px}</style></head>
+<body><header><h1>🆕 Việc mới – TP.HCM</h1><div>Ngân hàng, fintech, cấp chuyên viên trở xuống · tự cập nhật sáng thứ 2–6 · <a href="index.html">← Trang chủ</a></div></header>
+<main><input id="q" placeholder="Lọc theo tên việc, công ty..."><div id="list"><p class="e">Đang tải...</p></div></main>
+<script>
+const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let data=[];
+function render(){const q=document.getElementById('q').value.toLowerCase();const L=document.getElementById('list');
+ const items=data.filter(j=>!q||(j.title+' '+j.company+' '+(j.note||'')).toLowerCase().includes(q));
+ if(!items.length){L.innerHTML='<p class="e">Chưa có việc mới nào. Lần quét tiếp theo: 7:58 sáng thứ 2–6.</p>';return}
+ const by={};items.forEach(j=>(by[j.added]=by[j.added]||[]).push(j));
+ L.innerHTML=Object.keys(by).sort().reverse().map(d=>`<h2>📅 ${d.split('-').reverse().join('/')} · ${by[d].length} việc</h2>`+by[d].map(j=>`<div class="j"><a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a>
+ <div class="m">🏢 ${esc(j.company)}${j.salary?' · 💰 '+esc(j.salary):''}${j.deadline?' · <span class="dl">⏰ Hạn '+esc(j.deadline)+'</span>':''}${j.source?' · '+esc(j.source):''}</div>
+ ${j.note?`<div class="r">${esc(j.note)}</div>`:''}</div>`).join('')).join('')}
+fetch('new-jobs.json?'+Date.now()).then(r=>r.json()).then(d=>{data=d;render()}).catch(()=>{document.getElementById('list').innerHTML='<p class="e">Không tải được dữ liệu.</p>'});
+document.getElementById('q').oninput=render;
+</script></body></html>
