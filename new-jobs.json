@@ -996,5 +996,104 @@
     "note": "Part-time hỗ trợ chương trình CMA tại SAPP (Q1); làm thêm ngoài giờ hành chính.",
     "added": "2026-10-16",
     "cat": "phu"
+  },
+  {
+    "title": "Business Analyst (Chinese) - Khối CNTT (2026TD450181)",
+    "company": "MBBANK",
+    "salary": "Thỏa thuận",
+    "deadline": "2026-10-21",
+    "source": "Joboko",
+    "url": "https://vn.joboko.com/viec-lam-business-analyst-chinese-khoi-cong-nghe-thong-tin-2026td450181-xvi6657275",
+    "note": "BA ngân hàng từ 1 năm KN; cần tiếng Trung (HSK4+), hạn gần.",
+    "added": "2026-10-17",
+    "cat": "chinh"
+  },
+  {
+    "title": "Data Analyst (Danh Mục Thu Hồi Nợ)",
+    "company": "FE CREDIT",
+    "salary": "Cạnh tranh",
+    "deadline": "2026-11-02",
+    "source": "CareerViet",
+    "url": "https://careerviet.vn/vi/tim-viec-lam/data-analyst-danh-muc-thu-hoi-no.35C8A276.html",
+    "note": "Phân tích dữ liệu tín dụng tiêu dùng, từ 1 năm KN, SQL/Python/Excel.",
+    "added": "2026-10-17",
+    "cat": "chinh"
+  },
+  {
+    "title": "Chuyên viên Báo cáo và Phân tích Dữ liệu (Thu hồi nợ)",
+    "company": "VIB",
+    "salary": "Thỏa thuận",
+    "deadline": "2026-11-16",
+    "source": "VIB careers (qua U&Bank)",
+    "url": "https://ub.com.vn/viec-lam/chuyen-vien-bao-cao-va-phan-tich-du-lieu-vib-32055",
+    "note": "Báo cáo/phân tích dữ liệu ngân hàng; nhận cả cấp Nhân viên/Chuyên viên.",
+    "added": "2026-10-17",
+    "cat": "chinh"
+  },
+  {
+    "title": "Data Analyst",
+    "company": "VIB",
+    "salary": "Thỏa thuận",
+    "deadline": "2026-10-31",
+    "source": "Joboko",
+    "url": "https://vn.joboko.com/viec-lam-data-analyst-xvi6609787",
+    "note": "Nhiều cấp; ứng tuyển cấp Chuyên viên (2 năm KN), cần SQL/BI.",
+    "added": "2026-10-17",
+    "cat": "chinh"
+  },
+  {
+    "title": "Technical Consultant - Fintech (Fluent English)",
+    "company": "Murex",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/viec-lam-it/technical-consultant-fintech-fluent-english-murex-5307",
+    "note": "Fintech thị trường vốn, nhận 0–3 năm KN; SQL/Linux, tiếng Anh tốt.",
+    "added": "2026-10-17",
+    "cat": "chinh"
+  },
+  {
+    "title": "Backend (Java API) Intern",
+    "company": "GoTymeX",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "vietnamdevs.com",
+    "url": "https://vietnamdevs.com/jobs/931741551185658/backend-java-api-intern",
+    "note": "Thực tập backend ngân hàng số, Java/Spring Boot; điểm vào fintech.",
+    "added": "2026-10-17",
+    "cat": "chinh"
+  },
+  {
+    "title": "Investment Trading Support Specialist (Part-Time)",
+    "company": "Everwealth Advisory Limited",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "VietnamWorks",
+    "url": "https://www.vietnamworks.com/investment-trading-support-specialist-part-time--2096162-jv",
+    "note": "Part-time hỗ trợ giao dịch đầu tư, liên quan tài chính.",
+    "added": "2026-10-17",
+    "cat": "phu"
+  },
+  {
+    "title": "Freelance Web Scraping Engineer",
+    "company": "Mindrift",
+    "salary": "Đến 32 USD/giờ",
+    "deadline": "",
+    "source": "Remotive",
+    "url": "https://remotive.com/remote/jobs/data/freelance-web-scraping-engineer-3885553",
+    "note": "Remote, tự chọn giờ, dùng Python; làm tối/cuối tuần được.",
+    "added": "2026-10-17",
+    "cat": "phu"
+  },
+  {
+    "title": "AI Data Specialist - Vietnamese (Freelance)",
+    "company": "RWS",
+    "salary": "6 USD/giờ",
+    "deadline": "",
+    "source": "Jobgether",
+    "url": "https://jobgether.com/offer/69a8c0ee7f0cfae7f12a3575-ai-data-specialist---vietnamese",
+    "note": "Remote linh hoạt 10+ giờ/tuần, gán nhãn/đánh giá dữ liệu AI.",
+    "added": "2026-10-17",
+    "cat": "phu"
   }
 ]
