@@ -1,0 +1,6 @@
+/* Yahoo! JAPAN theme tokens (default). See DESIGN.md. */
+html[data-theme="yahoojp"]{
+  --bg:#fff;--fg:#000;--muted:#666;--link:#1d3994;--visited:#5b2a8c;--red:#ff0033;
+  --bd:#9eb4db;--bd2:#cedaf3;--line:#e5e5e5;--panel:#f1f5ff;--panel2:#e6ecfe;
+  --btn:#4070ff;--btn-fg:#fff;--input-bd:#999;--new:#f5a700;--new-fg:#000;--warn-bg:#fff5f6;--warn-bd:#ffb3c1;
+  color-scheme:light}

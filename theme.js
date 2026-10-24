@@ -7,7 +7,8 @@
   var THEMES = [
     { id: 'yahoojp', name: 'Yahoo! JAPAN', desc: 'Mặc định · nền trắng, chữ đỏ, bố cục cổng thông tin 3 cột', sw: ['#ffffff', '#ff0033', '#1d3994', '#e6ecfe'] },
     { id: 'classic', name: 'Cổ điển (giao diện cũ)', desc: 'Giao diện ban đầu: nền gradient xanh, thẻ bo góc', sw: ['#0f3d75', '#15803d', '#f1f5f9', '#ea580c'] },
-    { id: 'dark', name: 'Tối', desc: 'Bố cục Yahoo! JAPAN trên nền tối, dịu mắt ban đêm', sw: ['#16181d', '#ff4d6a', '#8fb0ff', '#232b3b'] }
+    { id: 'dark', name: 'Tối', desc: 'Bố cục Yahoo! JAPAN trên nền tối, dịu mắt ban đêm', sw: ['#16181d', '#ff4d6a', '#8fb0ff', '#232b3b'] },
+    { id: 'steam', name: 'Steam', desc: 'Kiểu cửa hàng Steam · nền xanh navy, hàng thẻ, nhãn xanh lá', sw: ['#171a21', '#1b2838', '#66c0f4', '#a4d007'] }
   ];
   var root = document.documentElement;
   var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);

@@ -1,0 +1,131 @@
+/* Steam store inspired theme. Text/CSS only, no Valve assets. See DESIGN.md.
+   Builds on the shared portal layout in /themes.css and overrides it. */
+html[data-theme="steam"]{
+  --bg:#1b2838;--fg:#c7d5e0;--muted:#8f98a0;--link:#66c0f4;--visited:#a7c4dc;--red:#66c0f4;
+  --bd:#2a475e;--bd2:#233c51;--line:rgba(255,255,255,.06);--panel:#16202d;--panel2:#213245;
+  --btn:#1a9fff;--btn-fg:#fff;--input-bd:#316282;--new:#4c6b22;--new-fg:#beee11;--warn-bg:#2b1d22;--warn-bd:#6e2f3a;
+  --st-top:#171a21;--st-nav:linear-gradient(90deg,rgba(62,103,150,.92) 11%,rgba(58,120,177,.8) 25%,#0f216e 100%);
+  --st-row:rgba(0,0,0,.2);--st-hover:linear-gradient(90deg,#c6e6f8 5%,#95bcd3 95%);--st-hover-fg:#10161b;--st-hover-muted:#384959;
+  --st-green:linear-gradient(90deg,#75b022 5%,#588a1b 95%);--st-green-fg:#d2efa9;--st-lime:#a4d007;--st-lime2:#beee11;
+  --st-blue:linear-gradient(90deg,#47bfff 5%,#1a44c2 60%);--st-white:#fff;
+  --tp-bg:#1f2a38;--tp-fg:#c7d5e0;--tp-muted:#8f98a0;--tp-bd:#2a475e;--tp-act:#2a475e;--tp-acc:#66c0f4;--tp-shadow:0 0 24px rgba(0,0,0,.7);
+  color-scheme:dark}
+html[data-theme="steam"] body{font-family:"Motiva Sans",Arial,Helvetica,"Segoe UI","Noto Sans",Roboto,sans-serif;
+  background:radial-gradient(ellipse 120% 600px at 50% 0,#2a475e 0%,#1b2838 70%) no-repeat,#1b2838}
+html[data-theme="steam"] a:hover{text-decoration:none;color:var(--st-white)}
+
+/* Global top bar (#171a21) spans the full window width. */
+html[data-theme="steam"] .yj-util,html[data-theme="steam"] .yj-logo-row,html[data-theme="steam"] .yj-foot{
+  background:var(--st-top);box-shadow:0 0 0 100vmax var(--st-top);clip-path:inset(0 -100vmax)}
+html[data-theme="steam"] .yj-util{border:0;font-size:11px;color:var(--muted)}
+html[data-theme="steam"] .yj-util .yj-tick b{color:var(--st-green-fg);background:var(--st-green);padding:1px 6px;border-radius:2px;font-weight:400}
+html[data-theme="steam"] .yj-util .yj-tick a,html[data-theme="steam"] .yj-ulinks a,html[data-theme="steam"] .yj-linkbtn{color:#b8b6b4}
+html[data-theme="steam"] .yj-util .yj-tick a:hover,html[data-theme="steam"] .yj-ulinks a:hover,html[data-theme="steam"] .yj-linkbtn:hover{color:var(--st-white);text-decoration:none}
+html[data-theme="steam"] .yj-ulinks i{color:#3d4450}
+
+/* Logo row: wordmark left, upper-case menu links. */
+html[data-theme="steam"] .yj-logo-row{display:flex;align-items:center;gap:6px;padding:16px 0 18px}
+html[data-theme="steam"] .yj-word{order:-1;padding:0 26px 0 0;display:flex;align-items:baseline;gap:8px}
+html[data-theme="steam"] .yj-word b{font-family:"Motiva Sans",Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;letter-spacing:2px;color:#dcdedf;transform:none;text-transform:uppercase}
+html[data-theme="steam"] .yj-word small{font-family:inherit;font-size:12px;letter-spacing:3px;color:var(--link);margin:0}
+html[data-theme="steam"] .yj-svc{gap:4px;justify-content:flex-start}
+html[data-theme="steam"] .yj-svc a{flex-direction:row;min-width:0;padding:6px 9px;font-size:14px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#dcdedf;border-bottom:3px solid transparent}
+html[data-theme="steam"] .yj-svc a span{display:none}
+html[data-theme="steam"] .yj-svc a:hover{color:var(--st-white);border-bottom-color:var(--link)}
+
+/* Store nav bar with the search box on the right. */
+html[data-theme="steam"] .yj-search{background:var(--st-nav);border:0;box-shadow:0 0 3px rgba(0,0,0,.4);padding:0;margin:18px 0 10px;border-radius:0}
+html[data-theme="steam"] .yj-sin{width:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 4px 0 0}
+html[data-theme="steam"] .yj-stabs{margin:0;display:flex;font-size:13px}
+html[data-theme="steam"] .yj-stabs a{margin:0;padding:0 14px;line-height:35px;color:#e5e5e5}
+html[data-theme="steam"] .yj-stabs a:hover,html[data-theme="steam"] .yj-stabs a.on{background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.06));color:var(--st-white);font-weight:400}
+html[data-theme="steam"] .yj-sbox{flex:0 1 330px;gap:0;background:#316282;border-radius:3px;padding:2px}
+html[data-theme="steam"] .yj-sbox input{height:27px;border:0;background:transparent;color:var(--st-white);font-size:14px;box-shadow:none}
+html[data-theme="steam"] .yj-sbox input::placeholder{color:#0e1c25;font-style:italic}
+html[data-theme="steam"] .yj-sbox input:focus{box-shadow:none}
+html[data-theme="steam"] .yj-sbox:focus-within{box-shadow:0 0 0 1px var(--link)}
+html[data-theme="steam"] .yj-sbox button{width:auto;height:27px;padding:0 10px;background:var(--st-blue);border-radius:3px;font-size:13px}
+html[data-theme="steam"] .yj-ticker{color:var(--muted)}
+html[data-theme="steam"] .yj-ticker em{color:var(--link)}
+
+/* Boxes and section headings. */
+html[data-theme="steam"] .yj-box{border:0;background:var(--st-row);border-radius:0}
+html[data-theme="steam"] .yj-left .yj-box{background:transparent}
+html[data-theme="steam"] .yj-box>h3,html[data-theme="steam"] .pg-chinh .card>h2,html[data-theme="steam"] .pg-phu .picks h2,html[data-theme="steam"] .pg-phu .grp h2,html[data-theme="steam"] .pg-home .g::before{
+  background:transparent;color:var(--st-white);border-bottom:1px solid var(--bd);text-transform:uppercase;letter-spacing:.06em;font-size:12px;font-weight:400}
+html[data-theme="steam"] .yj-left .yj-box>h3{color:var(--muted);font-size:11px}
+html[data-theme="steam"] .yj-nav li a{color:var(--fg)}
+html[data-theme="steam"] .yj-nav li a:hover{color:var(--st-white);background:rgba(102,192,244,.12)}
+html[data-theme="steam"] .yj-nav li a.on{background:rgba(102,192,244,.2);color:var(--st-white);border-left-color:var(--link);font-weight:400}
+html[data-theme="steam"] .pg-phu .yj-nav li a.on{border-left:0;border-bottom-color:var(--link)}
+html[data-theme="steam"] .yj-btn{background:rgba(103,193,245,.2);color:var(--link);border:0;border-radius:2px;padding:5px 12px}
+html[data-theme="steam"] .yj-btn:hover{background:var(--st-blue);color:var(--st-white)}
+html[data-theme="steam"] .yj-big{color:var(--st-white);font-weight:400}
+html[data-theme="steam"] .yj-warnbox{background:linear-gradient(180deg,rgba(110,47,58,.35),rgba(0,0,0,.2))}
+html[data-theme="steam"] .yj-warnbox>h3{color:#ff7b7b}
+html[data-theme="steam"] .yj-center h1{border-left:0;padding-left:0;color:var(--st-white);font-weight:400;font-size:20px;letter-spacing:.02em}
+
+/* Tabs (home topics, new-jobs tabs, side-jobs filter bar). */
+html[data-theme="steam"] .yj-tabs,html[data-theme="steam"] .pg-moi .tabs,html[data-theme="steam"] .pg-phu .bar{background:transparent;border:0;border-bottom:1px solid var(--bd);gap:2px}
+html[data-theme="steam"] .yj-tabs button,html[data-theme="steam"] .pg-moi .tabs button,html[data-theme="steam"] .pg-phu .bar button{
+  background:rgba(0,0,0,.25);color:var(--muted);border:0;margin:0;height:33px;font-size:13px}
+html[data-theme="steam"] .yj-tabs button:hover,html[data-theme="steam"] .pg-moi .tabs button:hover,html[data-theme="steam"] .pg-phu .bar button:hover{color:var(--st-white)}
+html[data-theme="steam"] .yj-tabs .on,html[data-theme="steam"] .pg-moi .tabs button.on,html[data-theme="steam"] .pg-phu .bar button.on{
+  background:linear-gradient(180deg,#2a475e,#213245);color:var(--st-white);font-weight:400;border:0;height:33px;margin:0}
+html[data-theme="steam"] .pg-phu .bar{position:sticky;background:var(--bg);padding:6px 6px 0}
+html[data-theme="steam"] .pg-phu .bar label{color:var(--fg);font-weight:400}
+
+/* Capsule rows: dark row, light-blue gradient on hover. */
+html[data-theme="steam"] .yj-topics{padding:6px}
+html[data-theme="steam"] .yj-topics li,html[data-theme="steam"] .pg-moi .j,html[data-theme="steam"] .pg-home a.c{
+  background:var(--st-row);margin:0 0 2px;padding:6px 10px;border:0;transition:background .1s}
+html[data-theme="steam"] .yj-topics li::before,html[data-theme="steam"] .pg-moi .j::before,html[data-theme="steam"] .pg-home a.c::before{display:none}
+html[data-theme="steam"] .yj-topics li:hover,html[data-theme="steam"] .pg-moi .j:hover,html[data-theme="steam"] .pg-home a.c:hover{background:var(--st-hover)}
+html[data-theme="steam"] .yj-topics li:hover a,html[data-theme="steam"] .pg-moi .j:hover a,html[data-theme="steam"] .pg-moi .j:hover .r,html[data-theme="steam"] .pg-home a.c:hover,html[data-theme="steam"] .pg-home a.c:hover h2{color:var(--st-hover-fg)}
+html[data-theme="steam"] .yj-topics li:hover small,html[data-theme="steam"] .pg-moi .j:hover .m{color:var(--st-hover-muted)}
+html[data-theme="steam"] .pg-moi .j a,html[data-theme="steam"] .yj-topics li a{color:var(--st-white)}
+html[data-theme="steam"] .pg-moi .j a:visited{color:var(--visited)}
+html[data-theme="steam"] .pg-moi #list h2{background:transparent;border:0;border-bottom:1px solid var(--bd);color:var(--st-white);text-transform:uppercase;letter-spacing:.06em;font-weight:400;margin:12px 0 6px;padding:4px 0}
+html[data-theme="steam"] .pg-moi #list{padding:4px 6px 8px}
+html[data-theme="steam"] .pg-moi main{border:0;background:transparent}
+html[data-theme="steam"] .pg-moi .dl{color:#e4b04a}
+html[data-theme="steam"] .pg-home a.c h2{color:var(--st-white)}
+
+/* "Buy" style green badges for NEW and top ratings. */
+html[data-theme="steam"] .yj-new,html[data-theme="steam"] .pg-moi #list>h2:first-child~.j>a::after{background:var(--new);color:var(--st-lime2);border-radius:2px;font-weight:400;font-size:10px;padding:0 4px}
+html[data-theme="steam"] .pg-moi #list>h2:not(:first-child)~.j>a::after{content:none}
+html[data-theme="steam"] .yj-center .tag.a{background:var(--st-green);color:var(--st-green-fg);font-weight:400}
+html[data-theme="steam"] .yj-center .tag.b{background:rgba(103,193,245,.2);color:var(--link);font-weight:400}
+html[data-theme="steam"] .yj-center .tag.c{background:rgba(0,0,0,.3);color:var(--muted);border:0;font-weight:400}
+html[data-theme="steam"] .pg-phu .pt{background:rgba(103,193,245,.2);color:var(--link);border:0;border-radius:2px}
+html[data-theme="steam"] .pg-phu .num{background:var(--st-green);color:var(--st-green-fg)}
+html[data-theme="steam"] .pg-phu .stats span{background:rgba(0,0,0,.25);border:0}
+
+/* Content panels and tables. */
+html[data-theme="steam"] .pg-chinh .card,html[data-theme="steam"] .pg-phu .picks,html[data-theme="steam"] .pg-phu .grp,html[data-theme="steam"] .pg-home .g{background:var(--st-row);border:0}
+html[data-theme="steam"] .pg-phu .tw{background:transparent}
+html[data-theme="steam"] .yj-center th{background:rgba(0,0,0,.3);color:var(--muted);border:0;text-transform:uppercase;font-weight:400;font-size:11px;letter-spacing:.04em}
+html[data-theme="steam"] .yj-center td{border:0;border-top:1px solid var(--line)}
+html[data-theme="steam"] .yj-center tr:hover td{background:rgba(102,192,244,.08)}
+html[data-theme="steam"] .yj-center td a{color:var(--link)}
+html[data-theme="steam"] .yj-center td a:hover{color:var(--st-white)}
+html[data-theme="steam"] .pg-phu .wrap>footer{background:var(--st-row);border:0}
+html[data-theme="steam"] .pg-phu .warn{background:rgba(110,47,58,.35);border:0;color:#ffb3b3}
+html[data-theme="steam"] .pg-chinh .card h3{border-left-color:var(--link);color:var(--st-white);font-weight:400}
+
+/* Footer and picker. */
+html[data-theme="steam"] .yj-foot{border:0;margin-top:30px;color:var(--muted)}
+html[data-theme="steam"] .yj-foot a{color:#c6d4df}
+html[data-theme="steam"] .tp-box{border-radius:3px;background:linear-gradient(180deg,#2a3f5a,#1f2a38 120px)}
+html[data-theme="steam"] .tp-list li{border-radius:2px}
+html[data-theme="steam"] .tp-list li.act{background:var(--st-hover);color:var(--st-hover-fg)}
+html[data-theme="steam"] .tp-list li.act small{color:var(--st-hover-muted)}
+html[data-theme="steam"] .tp-list li.act .tp-cur{color:#1a44c2}
+
+@media (max-width:700px){
+  html[data-theme="steam"] .yj-logo-row{justify-content:center}
+  html[data-theme="steam"] .yj-word{padding:0}
+  html[data-theme="steam"] .yj-sin{flex-direction:column;align-items:stretch;padding:0 0 6px}
+  html[data-theme="steam"] .yj-stabs{overflow-x:auto}
+  html[data-theme="steam"] .yj-sbox{flex:none;margin:0 6px}
+}

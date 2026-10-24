@@ -1,22 +1,11 @@
-/* Shared theme styles.
-   html[data-theme] picks the palette; html[data-layout="portal"] turns on the
-   Yahoo! JAPAN style portal layout (used by the "yahoojp" and "dark" themes).
-   The "classic" theme keeps each page's original inline <style id="theme-classic">. */
+/* Shared theme base: portal layout, page restyling and the theme picker.
+   html[data-layout="portal"] turns on the portal layout (every theme except
+   "classic"). Palettes and per-theme overrides live in themes/<name>/theme.css;
+   the "classic" theme is each page's original inline <style id="theme-classic">.
+   See themes/README.md. */
 
-/* ---------- Palettes ---------- */
+/* Picker defaults (light); themes may override the --tp-* tokens. */
 :root{--tp-bg:#fff;--tp-fg:#111;--tp-muted:#666;--tp-bd:#d5d9e0;--tp-act:#eef3ff;--tp-acc:#ff0033;--tp-shadow:0 12px 40px rgba(0,0,0,.25)}
-html[data-theme="yahoojp"]{
-  --bg:#fff;--fg:#000;--muted:#666;--link:#1d3994;--visited:#5b2a8c;--red:#ff0033;
-  --bd:#9eb4db;--bd2:#cedaf3;--line:#e5e5e5;--panel:#f1f5ff;--panel2:#e6ecfe;
-  --btn:#4070ff;--btn-fg:#fff;--input-bd:#999;--new:#f5a700;--warn-bg:#fff5f6;--warn-bd:#ffb3c1;
-  color-scheme:light}
-html[data-theme="dark"]{
-  --bg:#16181d;--fg:#e4e6eb;--muted:#9aa0a8;--link:#8fb0ff;--visited:#c3a6ff;--red:#ff4d6a;
-  --bd:#3b465c;--bd2:#2d3546;--line:#2a2f3a;--panel:#1d2330;--panel2:#232b3b;
-  --btn:#3a63e0;--btn-fg:#fff;--input-bd:#4a5468;--new:#d99400;--warn-bg:#2a1a1e;--warn-bd:#6b2a36;
-  --tp-bg:#1f232b;--tp-fg:#e4e6eb;--tp-muted:#9aa0a8;--tp-bd:#353b47;--tp-act:#2a3246;--tp-acc:#ff4d6a;
-  color-scheme:dark}
-
 /* ---------- Portal-only chrome is hidden in the classic theme ---------- */
 html:not([data-layout="portal"]) .yj{display:none!important}
 html:not([data-layout="portal"]) .yj-cols,html:not([data-layout="portal"]) .yj-center{display:contents}
@@ -68,7 +57,16 @@ html:not([data-layout="portal"]) .yj-cols,html:not([data-layout="portal"]) .yj-c
 
 /* Three columns */
 .yj-cols{display:grid;grid-template-columns:170px minmax(0,1fr) 300px;gap:10px;align-items:start}
-.pg-chinh .yj-cols,.pg-phu .yj-cols{grid-template-columns:170px minmax(0,1fr)}
+.pg-chinh .yj-cols{grid-template-columns:170px minmax(0,1fr)}
+/* The side-jobs page has an 8-column table: give it the full page width and
+   turn the left column into a one-line category strip above it. */
+[data-layout="portal"] .pg-phu .yj-cols.yj-page{width:auto;max-width:1240px;margin-left:auto;margin-right:auto;padding:0 10px}
+.pg-phu .yj-cols{grid-template-columns:minmax(0,1fr);gap:0}
+.pg-phu .yj-left .yj-box{margin-bottom:8px}
+.pg-phu .yj-left .yj-box:not(:first-child){display:none}
+.pg-phu .yj-left .yj-box>h3{display:none}
+.pg-phu .yj-nav{display:flex;flex-wrap:wrap;padding:0}
+.pg-phu .yj-nav li a.on{border-left:0;padding-left:8px;border-bottom:2px solid var(--red)}
 .yj-center{min-width:0}
 
 /* Boxed modules */
@@ -96,10 +94,14 @@ html:not([data-layout="portal"]) .yj-cols,html:not([data-layout="portal"]) .yj-c
 .yj-tabs .on{background:var(--bg);color:var(--fg);font-weight:700;border-color:var(--bd);margin-bottom:-1px;height:36px}
 .yj-tabs .on:first-child{border-left-color:transparent}
 .yj-topics{list-style:none;margin:0;padding:6px 10px 8px}
-.yj-topics li{position:relative;padding:2px 0 2px 11px;font-size:14px;line-height:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yj-topics li{position:relative;display:flex;align-items:baseline;padding:2px 0 2px 11px;font-size:14px;line-height:21px;white-space:nowrap}
+/* Title ellipsizes; the NEW badge never shrinks; the company name gives way first. */
+.yj-topics li>a{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.yj-topics li>.yj-new{flex:none}
+.yj-topics li>small{flex:0 1000 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .yj-topics li::before,.yj-dot::before{content:"";position:absolute;left:2px;top:11px;width:4px;height:4px;background:var(--fg);border-radius:50%}
 .yj-topics li small{color:var(--muted);font-size:11px;margin-left:6px}
-.yj-new{display:inline-block;vertical-align:1px;margin-left:5px;padding:0 3px;font-size:9px;line-height:13px;font-weight:700;color:#fff;background:var(--new);border-radius:2px;letter-spacing:.3px}
+.yj-new{display:inline-block;vertical-align:1px;margin-left:5px;padding:0 3px;font-size:9px;line-height:13px;font-weight:700;color:var(--new-fg,#fff);background:var(--new);border-radius:2px;letter-spacing:.3px}
 .yj-more{display:flex;gap:20px;padding:4px 12px 8px;font-size:13px}
 .yj-stamp{font-size:11px;color:var(--muted);padding:6px 10px 0}
 
@@ -144,7 +146,7 @@ html:not([data-layout="portal"]) .yj-cols,html:not([data-layout="portal"]) .yj-c
 [data-layout="portal"] .pg-moi .j::before{content:"";position:absolute;left:2px;top:13px;width:4px;height:4px;background:var(--fg);border-radius:50%}
 [data-layout="portal"] .pg-moi .j a{font-weight:400;font-size:14px;color:var(--link)}
 [data-layout="portal"] .pg-moi .j a:visited{color:var(--visited)}
-[data-layout="portal"] .pg-moi #list>h2:first-child~.j>a::after{content:"NEW";display:inline-block;vertical-align:1px;margin-left:5px;padding:0 3px;font-size:9px;line-height:13px;font-weight:700;color:#fff;background:var(--new);border-radius:2px}
+[data-layout="portal"] .pg-moi #list>h2:first-child~.j>a::after{content:"NEW";display:inline-block;vertical-align:1px;margin-left:5px;padding:0 3px;font-size:9px;line-height:13px;font-weight:700;color:var(--new-fg,#fff);background:var(--new);border-radius:2px}
 [data-layout="portal"] .pg-moi #list>h2:not(:first-child)~.j>a::after{content:none}
 [data-layout="portal"] .pg-moi .m{font-size:12px;color:var(--muted);margin:1px 0}
 [data-layout="portal"] .pg-moi .r{font-size:12px;color:var(--fg);opacity:.85}
@@ -185,8 +187,9 @@ html:not([data-layout="portal"]) .yj-cols,html:not([data-layout="portal"]) .yj-c
 [data-layout="portal"] .pg-phu .tw{border:0;border-radius:0;background:var(--bg);overflow-x:auto}
 [data-layout="portal"] .pg-phu .pt{background:var(--panel);color:var(--link);border:1px solid var(--bd2);border-radius:0;font-size:10px;padding:0 4px}
 [data-layout="portal"] .pg-phu .chk{font-size:11px;color:var(--muted)}
-[data-layout="portal"] .pg-phu td:nth-child(1){min-width:200px}
-[data-layout="portal"] .pg-phu td.note{min-width:220px;color:var(--fg);font-size:12px}
+[data-layout="portal"] .pg-phu td:nth-child(1){min-width:180px}
+[data-layout="portal"] .pg-phu td.note{min-width:240px;color:var(--fg);font-size:12px}
+[data-layout="portal"] .pg-phu .yj-center th,[data-layout="portal"] .pg-phu .yj-center td{padding:3px 5px}
 [data-layout="portal"] .pg-phu .wrap>footer{margin:12px 0 0;padding:8px;background:var(--bg);border:1px solid var(--bd2);border-radius:0;color:var(--muted);font-size:12px}
 [data-layout="portal"] .pg-phu .warn{background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--red);border-radius:0;padding:6px 8px;margin-bottom:8px}
 
