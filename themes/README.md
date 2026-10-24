@@ -1,6 +1,6 @@
 # Themes
 
-The job board ships four themes. You switch between them with the
+The job board ships nine themes. You switch between them with the
 `Ctrl+K` / `Cmd+K` picker or the "Giao diện" button. The choice is saved in
 `localStorage["jb-theme"]`.
 
@@ -10,6 +10,26 @@ The job board ships four themes. You switch between them with the
 | `classic` | Cổ điển (giao diện cũ) | original page CSS | inline `<style id="theme-classic">` in each page | [classic/DESIGN.md](classic/DESIGN.md) |
 | `dark` | Tối | portal | `themes/dark/theme.css` | [dark/DESIGN.md](dark/DESIGN.md) |
 | `steam` | Steam | portal | `themes/steam/theme.css` | [steam/DESIGN.md](steam/DESIGN.md) |
+| `shadcn` | shadcn/ui | portal | `themes/shadcn/theme.css` | [shadcn/DESIGN.md](shadcn/DESIGN.md) |
+| `dracula` | Dracula | portal | `themes/dracula/theme.css` | [dracula/DESIGN.md](dracula/DESIGN.md) |
+| `catppuccin` | Catppuccin Mocha | portal | `themes/catppuccin/theme.css` | [catppuccin/DESIGN.md](catppuccin/DESIGN.md) |
+| `nord` | Nord | portal | `themes/nord/theme.css` | [nord/DESIGN.md](nord/DESIGN.md) |
+| `cupcake` | Cupcake (daisyUI) | portal | `themes/cupcake/theme.css` | [cupcake/DESIGN.md](cupcake/DESIGN.md) |
+
+### Popular Tailwind themes
+
+`shadcn`, `dracula`, `catppuccin`, `nord` and `cupcake` port widely used
+Tailwind CSS color schemes to the portal layout. Each uses the official
+palette from its source, and its DESIGN.md credits the source, its license
+and any value that was darkened for WCAG AA contrast.
+
+| id | Source | License | Popularity signal (Oct 2026) |
+|---|---|---|---|
+| `shadcn` | shadcn/ui "Zinc" theme variables | MIT | shadcn-ui/ui, about 126k GitHub stars |
+| `dracula` | Dracula spec palette (also a daisyUI built-in) | MIT | dracula/dracula-theme, about 23.6k stars |
+| `catppuccin` | `@catppuccin/palette` Mocha flavor | MIT | catppuccin/catppuccin, about 19.9k stars; official Tailwind plugin |
+| `nord` | Nord palette, light variant as in daisyUI `nord` | MIT | nordtheme/nord, about 6.9k stars; daisyUI built-in |
+| `cupcake` | daisyUI 5 built-in `cupcake` theme | MIT | daisyUI, about 42.7k stars and about 4M npm downloads per month |
 
 ## How it fits together
 
@@ -23,6 +43,7 @@ themes/yahoojp/theme.css    @theme block = shared token contract with the defaul
 src/portal.css              shared portal layout, page restyling, picker modal (uses var(--color-*) tokens)
 themes/dark/theme.css       html[data-theme="dark"] token overrides
 themes/steam/theme.css      html[data-theme="steam"] token overrides + nested component overrides
+themes/<popular>/theme.css  shadcn, dracula, catppuccin, nord, cupcake: same pattern as steam
 assets/tailwind.css         compiled, minified output linked by every page (do not edit by hand)
 theme.js                    theme registry, Ctrl/Cmd+K picker, header search, widgets
 <head> inline script        reads localStorage["jb-theme"] and sets the theme before first paint
@@ -45,8 +66,9 @@ theme.js                    theme registry, Ctrl/Cmd+K picker, header search, wi
    `html[data-theme="<name>"]`. A theme can stop there (`dark`) or add nested
    overrides in the same block (`steam`).
 5. `src/tailwind.css` defines a variant per theme with `@custom-variant`
-   (`yahoojp:`, `classic:`, `dark:`, `steam:`, plus `portal:`), for markup that
-   uses utilities.
+   (`yahoojp:`, `classic:`, `dark:`, `steam:`, `shadcn:`, `dracula:`,
+   `catppuccin:`, `nord:`, `cupcake:`, plus `portal:`), for markup that uses
+   utilities.
 6. `theme.js` holds the `THEMES` list used by the picker (id, label,
    description, swatch colors). `apply(id)` flips the same attributes at
    runtime and saves the choice.
@@ -87,6 +109,7 @@ the standalone CLI works the same way:
 | `--color-muted` | `text-muted` | Secondary text: meta lines, timestamps |
 | `--color-link`, `--color-visited` | `text-link`, `visited:text-visited` | Link colors |
 | `--color-accent` | `text-accent`, `border-l-accent` | Brand accent: wordmark, page-title bar, active nav marker (was `--red`) |
+| `--color-accent-fg` | `text-accent-fg` | Text on accent fills: "Rất hợp" tag, side-jobs group number (default `#fff`) |
 | `--color-bd` | `border-bd` | Module borders, tab borders |
 | `--color-bd2` | `border-bd2` | Light borders: search panel, table header cells |
 | `--color-line` | `border-line` | Hairlines between rows |

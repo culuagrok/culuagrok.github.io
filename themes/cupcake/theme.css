@@ -1,0 +1,68 @@
+/* daisyUI "cupcake" theme. Official values from daisyUI 5
+   (daisyui/theme/cupcake.css, MIT), https://daisyui.com/docs/themes/.
+   Tailwind v4 source file, compiled into assets/tailwind.css. Overrides the
+   @theme tokens from themes/yahoojp/theme.css; extra rules are nested under
+   html[data-theme="cupcake"]. See DESIGN.md. */
+html[data-theme="cupcake"] {
+  /* Shared tokens */
+  --color-bg: oklch(97.788% 0.004 56.375);
+  --color-fg: oklch(23.574% 0.066 313.189);
+  --color-muted: oklch(45% 0.04 313.189);
+  --color-link: oklch(43% 0.078 188.216);
+  --color-visited: oklch(29% 0.066 243.157);
+  --color-accent: oklch(45% 0.187 3.815);
+  --color-accent-fg: oklch(97.788% 0.004 56.375);
+  --color-bd: oklch(91.586% 0.006 53.44);
+  --color-bd2: oklch(91.586% 0.006 53.44);
+  --color-line: oklch(91.586% 0.006 53.44);
+  --color-panel: oklch(93.982% 0.007 61.449);
+  --color-panel2: oklch(89% 0.061 343.231);
+  --color-btn: oklch(85% 0.138 181.071);
+  --color-btn-fg: oklch(30% 0.06 188.216);
+  --color-input-bd: oklch(75% 0.02 313.189);
+  --color-new: oklch(90% 0.076 70.697);
+  --color-new-fg: oklch(40% 0.14 37.304);
+  --color-warn-bg: oklch(96% 0.02 16.439);
+  --color-warn-bd: oklch(64% 0.246 16.439);
+  --color-picker-bg: oklch(97.788% 0.004 56.375);
+  --color-picker-fg: oklch(23.574% 0.066 313.189);
+  --color-picker-muted: oklch(45% 0.04 313.189);
+  --color-picker-bd: oklch(91.586% 0.006 53.44);
+  --color-picker-act: oklch(93.982% 0.007 61.449);
+  --color-picker-acc: oklch(45% 0.187 3.815);
+  --shadow-picker: 0 12px 40px rgba(41,19,52,.2);
+  --font-portal: "Nunito", "Quicksand", ui-rounded, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-wordmark: "Nunito", "Quicksand", ui-rounded, "Segoe UI", Roboto, Arial, sans-serif;
+  /* daisyUI cupcake: --radius-box 1rem, --radius-field 2rem, --border 2px */
+  --cc-radius-box: 1rem;
+  --cc-radius-field: 2rem;
+  --cc-primary: oklch(85% 0.138 181.071);
+  --cc-secondary: oklch(89% 0.061 343.231);
+  --cc-error-text: oklch(50% 0.2 16.439);
+  color-scheme: light;
+
+  /* Rounded modules and fields */
+  .yj-box, .pg-moi main, .pg-home .g, .pg-phu .grp { border-radius: var(--cc-radius-box); overflow: hidden }
+  .yj-search, .pg-chinh .card, .pg-phu .picks, .pg-phu .bar, .pg-phu .wrap>footer, .pg-phu .warn { border-radius: var(--cc-radius-box) }
+  .yj-sbox input, .yj-sbox button, .yj-btn { border-radius: var(--cc-radius-field) }
+  .yj-new, .pg-moi #list>h2:first-child~.j>a::after, .yj-center .tag, .pg-phu .pt, .pg-phu .num, .pg-phu .stats span { border-radius: 9999px }
+
+  /* 2px borders, pink module headers, white module bodies */
+  .yj-box, .pg-chinh .card, .pg-phu .picks, .pg-phu .grp, .pg-home .g, .pg-moi main, .yj-search { border-width: 2px; background: #fff }
+  .yj-left .yj-box { background: var(--color-panel) }
+  .yj-box>h3, .pg-chinh .card>h2, .pg-phu .picks h2, .pg-phu .grp h2, .pg-home .g::before { border-bottom-width: 2px }
+
+  /* Wordmark: rounded heavy sans in deep pink, teal subline */
+  .yj-word b { font-weight: 900; letter-spacing: 0; transform: none }
+  .yj-word small { font-family: var(--font-portal); color: var(--color-link); letter-spacing: 5px }
+
+  /* Pill search field and teal button */
+  .yj-sbox input { border-width: 2px; padding: 0 14px; background: #fff }
+  .yj-sbox input:focus { border-color: var(--cc-primary); box-shadow: none }
+  .yj-sbox button { font-weight: 700 }
+  .yj-btn { background: var(--cc-secondary); color: var(--color-accent); border: 0; padding: 4px 12px; font-weight: 700 }
+  .yj-btn:hover { background: var(--cc-primary); color: var(--color-btn-fg) }
+  .yj-nav li a.on { border-left-color: var(--color-accent) }
+
+  .yj-warnbox>h3, .pg-phu .warn { color: var(--cc-error-text) }
+}

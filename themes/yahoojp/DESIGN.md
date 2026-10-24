@@ -37,6 +37,7 @@ every other theme overrides (see section 10).
 | `--color-link` | `#1d3994` | All links, inactive tabs |
 | `--color-visited` | `#5b2a8c` | Visited job links |
 | `--color-accent` | `#ff0033` | Wordmark, page-title bar, active nav marker, deadlines, "Rất hợp" tag |
+| `--color-accent-fg` | `#ffffff` | Text on accent fills (`.tag.a`, side-jobs `.num`) |
 | `--color-bd` | `#9eb4db` | Module borders, tab row border, selected tab sides |
 | `--color-bd2` | `#cedaf3` | Search panel border, table header cells, date strips |
 | `--color-line` | `#e5e5e5` | Row separators, utility bar hairline, table cells |
@@ -139,7 +140,7 @@ in `--color-warn-bg` / `--color-warn-bd` and a red header.
 ```css
 .yj-new{padding:0 3px;font-size:9px;line-height:13px;font-weight:700;color:var(--color-new-fg);background:var(--color-new);border-radius:2px}
 .tag{padding:0 5px;border-radius:2px;font-size:11px;line-height:16px;font-weight:700}
-.tag.a{background:var(--color-accent);color:#fff}   .tag.b{background:var(--color-link);color:var(--color-bg)}
+.tag.a{background:var(--color-accent);color:var(--color-accent-fg)}   .tag.b{background:var(--color-link);color:var(--color-bg)}
 .tag.c{background:var(--color-bg);color:var(--color-muted);border:1px solid var(--color-input-bd)}
 ```
 
@@ -241,6 +242,7 @@ The site is built with Tailwind CSS v4 (CSS-first config, no
   --color-link: #1d3994;
   --color-visited: #5b2a8c;
   --color-accent: #ff0033;
+  --color-accent-fg: #fff;
   --color-bd: #9eb4db;
   --color-bd2: #cedaf3;
   --color-line: #e5e5e5;

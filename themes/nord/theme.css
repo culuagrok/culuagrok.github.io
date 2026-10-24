@@ -1,0 +1,63 @@
+/* Nord theme (light, "Snow Storm" ambiance). Official Nord palette (MIT),
+   https://www.nordtheme.com, as used by the daisyUI "nord" theme. Link,
+   visited and warning text use darker shades of nord10 / nord15 / nord11 so
+   small text meets WCAG AA (see DESIGN.md).
+   Tailwind v4 source file, compiled into assets/tailwind.css. Overrides the
+   @theme tokens from themes/yahoojp/theme.css; extra rules are nested under
+   html[data-theme="nord"]. See DESIGN.md. */
+html[data-theme="nord"] {
+  /* Shared tokens */
+  --color-bg: #eceff4;
+  --color-fg: #2e3440;
+  --color-muted: #4c566a;
+  --color-link: #40628b;
+  --color-visited: #84607e;
+  --color-accent: #5e81ac;
+  --color-accent-fg: #2e3440;
+  --color-bd: #d8dee9;
+  --color-bd2: #d8dee9;
+  --color-line: #d8dee9;
+  --color-panel: #e5e9f0;
+  --color-panel2: #d8dee9;
+  --color-btn: #81a1c1;
+  --color-btn-fg: #2e3440;
+  --color-input-bd: #4c566a;
+  --color-new: #ebcb8b;
+  --color-new-fg: #2e3440;
+  --color-warn-bg: #f1e4e7;
+  --color-warn-bd: #bf616a;
+  --color-picker-bg: #eceff4;
+  --color-picker-fg: #2e3440;
+  --color-picker-muted: #4c566a;
+  --color-picker-bd: #d8dee9;
+  --color-picker-act: #e5e9f0;
+  --color-picker-acc: #40628b;
+  --shadow-picker: 0 12px 40px rgba(46,52,64,.25);
+  --font-portal: "Inter", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-wordmark: "Inter", ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  /* Nord colors not mapped to a shared token */
+  --nord9: #81a1c1;
+  --nord11-text: #9e4852;
+  color-scheme: light;
+
+  /* Rounded modules and fields */
+  .yj-box, .pg-moi main, .pg-home .g, .pg-phu .grp { border-radius: 8px; overflow: hidden }
+  .yj-search, .pg-chinh .card, .pg-phu .picks, .pg-phu .bar, .pg-phu .wrap>footer, .pg-phu .warn { border-radius: 8px }
+  .yj-sbox input, .yj-sbox button, .yj-btn { border-radius: 4px }
+  .yj-new, .pg-moi #list>h2:first-child~.j>a::after, .yj-center .tag, .pg-phu .pt, .pg-phu .num, .pg-phu .stats span { border-radius: 4px }
+
+  /* Light modules on the Snow Storm page */
+  .yj-box, .pg-chinh .card, .pg-phu .picks, .pg-phu .grp, .pg-home .g, .pg-moi main { background: #fff; border-color: var(--color-bd) }
+  .yj-left .yj-box { background: var(--color-panel) }
+
+  /* Wordmark in nord10, frost subline */
+  .yj-word b { font-weight: 800; letter-spacing: -1px; transform: none }
+  .yj-word small { font-family: var(--font-portal); color: var(--color-muted); letter-spacing: 6px }
+
+  /* Small text that would use nord10 (3.5:1) uses darker shades instead */
+  .yj-util .yj-tick b { color: var(--color-link) }
+  .yj-warnbox>h3, .pg-moi .dl, .pg-phu .warn, .pg-home .w>footer { color: var(--nord11-text) }
+  .yj-center .tag.a, .pg-phu .num { background: var(--nord9); color: var(--color-fg) }
+  .yj-sbox input { background: #fff }
+  .yj-sbox input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent) inset }
+}

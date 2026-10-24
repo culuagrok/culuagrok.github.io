@@ -8,7 +8,12 @@
     { id: 'yahoojp', name: 'Yahoo! JAPAN', desc: 'Mặc định · nền trắng, chữ đỏ, bố cục cổng thông tin 3 cột', sw: ['#ffffff', '#ff0033', '#1d3994', '#e6ecfe'] },
     { id: 'classic', name: 'Cổ điển (giao diện cũ)', desc: 'Giao diện ban đầu: nền gradient xanh, thẻ bo góc', sw: ['#0f3d75', '#15803d', '#f1f5f9', '#ea580c'] },
     { id: 'dark', name: 'Tối', desc: 'Bố cục Yahoo! JAPAN trên nền tối, dịu mắt ban đêm', sw: ['#16181d', '#ff4d6a', '#8fb0ff', '#232b3b'] },
-    { id: 'steam', name: 'Steam', desc: 'Kiểu cửa hàng Steam · nền xanh navy, hàng thẻ, nhãn xanh lá', sw: ['#171a21', '#1b2838', '#66c0f4', '#a4d007'] }
+    { id: 'steam', name: 'Steam', desc: 'Kiểu cửa hàng Steam · nền xanh navy, hàng thẻ, nhãn xanh lá', sw: ['#171a21', '#1b2838', '#66c0f4', '#a4d007'] },
+    { id: 'shadcn', name: 'shadcn/ui', desc: 'Tối giản trắng–đen kiểu shadcn/ui (Zinc), thẻ bo góc, bóng nhẹ', sw: ['#ffffff', '#18181b', '#f4f4f5', '#e7000b'] },
+    { id: 'dracula', name: 'Dracula', desc: 'Nền tối tím xám, chữ hồng, xanh cyan và tím (Dracula)', sw: ['#282a36', '#ff79c6', '#8be9fd', '#bd93f9'] },
+    { id: 'catppuccin', name: 'Catppuccin Mocha', desc: 'Nền tối dịu, màu pastel tím mauve và xanh (Catppuccin)', sw: ['#1e1e2e', '#cba6f7', '#89b4fa', '#a6e3a1'] },
+    { id: 'nord', name: 'Nord', desc: 'Sáng, xám xanh băng giá Bắc Âu (Nord Snow Storm + Frost)', sw: ['#eceff4', '#2e3440', '#5e81ac', '#88c0d0'] },
+    { id: 'cupcake', name: 'Cupcake (daisyUI)', desc: 'Sáng, pastel hồng và xanh ngọc, bo tròn (daisyUI cupcake)', sw: ['#faf7f5', '#a0004a', '#44ebd3', '#f9cbe5'] }
   ];
   var root = document.documentElement;
   var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);

@@ -190,7 +190,7 @@ html:not([data-layout="portal"]) .pg-chinh .card{overflow-x:auto}
 [data-layout="portal"] .pg-phu .grp{margin:10px 0 0;border:1px solid var(--color-bd)}
 [data-layout="portal"] .pg-phu .grp h2{margin:0;padding:5px 8px;font-size:13px;color:var(--color-fg);background:var(--color-panel2);border-bottom:1px solid var(--color-bd);gap:6px}
 [data-layout="portal"] .pg-phu .grp h2 small{color:var(--color-muted);font-weight:400}
-[data-layout="portal"] .pg-phu .num{display:inline-flex;align-items:center;justify-content:center;flex:none;width:18px;height:18px;border-radius:0;background:var(--color-accent);color:#fff;font-size:11px}
+[data-layout="portal"] .pg-phu .num{display:inline-flex;align-items:center;justify-content:center;flex:none;width:18px;height:18px;border-radius:0;background:var(--color-accent);color:var(--color-accent-fg);font-size:11px}
 [data-layout="portal"] .pg-phu .gnote{display:block;margin:0;padding:4px 8px;background:none;color:var(--color-muted);font-size:12px;border-radius:0}
 [data-layout="portal"] .pg-phu .tw{border:0;border-radius:0;background:var(--color-bg);overflow-x:auto}
 [data-layout="portal"] .pg-phu .pt{background:var(--color-panel);color:var(--color-link);border:1px solid var(--color-bd2);border-radius:0;font-size:10px;padding:0 4px}
@@ -211,7 +211,7 @@ html:not([data-layout="portal"]) .pg-chinh .card{overflow-x:auto}
 [data-layout="portal"] .yj-center .co{color:var(--color-muted);font-size:11px}
 [data-layout="portal"] .pg-chinh .n{color:var(--color-fg);font-size:12px;max-width:none;min-width:200px}
 [data-layout="portal"] .yj-center .tag{display:inline-block;padding:0 5px;border-radius:2px;font-size:11px;line-height:16px;font-weight:700;white-space:nowrap}
-[data-layout="portal"] .yj-center .tag.a{background:var(--color-accent);color:#fff}
+[data-layout="portal"] .yj-center .tag.a{background:var(--color-accent);color:var(--color-accent-fg)}
 [data-layout="portal"] .yj-center .tag.b{background:var(--color-link);color:var(--color-bg)}
 [data-layout="portal"] .yj-center .tag.c{background:var(--color-bg);color:var(--color-muted);border:1px solid var(--color-input-bd)}
 [data-layout="portal"] .yj-center .tag.d{background:var(--color-line);color:var(--color-muted)}
@@ -242,7 +242,7 @@ html:not([data-layout="portal"]) .pg-chinh .card{overflow-x:auto}
 .tp-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--color-picker-bd)}
 .tp-head input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--color-picker-fg);font-size:16px;padding:4px 0;font-family:inherit}
 .tp-box kbd{display:inline-block;border:1px solid var(--color-picker-bd);border-bottom-width:2px;border-radius:4px;padding:0 5px;font:11px/16px var(--font-kbd);color:var(--color-picker-muted);background:transparent;margin-right:3px}
-.tp-list{list-style:none;margin:0;padding:6px;max-height:50vh;overflow:auto}
+.tp-list{list-style:none;margin:0;padding:6px;max-height:max(50vh,calc(88vh - 120px));overflow:auto}
 .tp-list li{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
 .tp-list li.act{background:var(--color-picker-act)}
 .tp-list li.cur{border-left-color:var(--color-picker-acc)}

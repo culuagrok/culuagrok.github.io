@@ -1,0 +1,64 @@
+/* Catppuccin Mocha theme. Official palette from @catppuccin/palette (MIT),
+   https://catppuccin.com/palette.
+   Tailwind v4 source file, compiled into assets/tailwind.css. Overrides the
+   @theme tokens from themes/yahoojp/theme.css; extra rules are nested under
+   html[data-theme="catppuccin"]. See DESIGN.md. */
+html[data-theme="catppuccin"] {
+  /* Shared tokens */
+  --color-bg: #1e1e2e;
+  --color-fg: #cdd6f4;
+  --color-muted: #a6adc8;
+  --color-link: #89b4fa;
+  --color-visited: #b4befe;
+  --color-accent: #cba6f7;
+  --color-accent-fg: #11111b;
+  --color-bd: #45475a;
+  --color-bd2: #313244;
+  --color-line: #313244;
+  --color-panel: #181825;
+  --color-panel2: #313244;
+  --color-btn: #89b4fa;
+  --color-btn-fg: #11111b;
+  --color-input-bd: #6c7086;
+  --color-new: #a6e3a1;
+  --color-new-fg: #11111b;
+  --color-warn-bg: #2f2333;
+  --color-warn-bd: #f38ba8;
+  --color-picker-bg: #1e1e2e;
+  --color-picker-fg: #cdd6f4;
+  --color-picker-muted: #a6adc8;
+  --color-picker-bd: #45475a;
+  --color-picker-act: #313244;
+  --color-picker-acc: #cba6f7;
+  --shadow-picker: 0 12px 40px rgba(17,17,27,.6);
+  /* Mocha colors not mapped to a shared token */
+  --ctp-red: #f38ba8;
+  --ctp-peach: #fab387;
+  --ctp-pink: #f5c2e7;
+  --ctp-lavender: #b4befe;
+  --ctp-crust: #11111b;
+  color-scheme: dark;
+
+  /* Rounded modules and fields */
+  .yj-box, .pg-moi main, .pg-home .g, .pg-phu .grp { border-radius: 12px; overflow: hidden }
+  .yj-search, .pg-chinh .card, .pg-phu .picks, .pg-phu .bar, .pg-phu .wrap>footer, .pg-phu .warn { border-radius: 12px }
+  .yj-sbox input, .yj-sbox button, .yj-btn { border-radius: 8px }
+  .yj-new, .pg-moi #list>h2:first-child~.j>a::after, .yj-center .tag, .pg-phu .pt, .pg-phu .num, .pg-phu .stats span { border-radius: 6px }
+
+  /* Page: crust behind mantle/base panels */
+  body { background: var(--ctp-crust) }
+  .yj-box, .pg-chinh .card, .pg-phu .picks, .pg-phu .grp, .pg-home .g, .pg-moi main { background: var(--color-bg) }
+  .yj-left .yj-box { background: var(--color-panel) }
+
+  /* Wordmark in mauve with a pink subline */
+  .yj-word b { letter-spacing: 0; transform: none; font-weight: 800 }
+  .yj-word small { color: var(--ctp-pink) }
+
+  .yj-sbox input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent) inset }
+  .yj-sbox button:hover { filter: none; background: var(--ctp-lavender) }
+  .yj-nav li a.on { border-left-color: var(--color-accent) }
+
+  /* Red for warnings, peach for deadlines */
+  .yj-warnbox>h3, .pg-phu .warn { color: var(--ctp-red) }
+  .pg-moi .dl { color: var(--ctp-peach) }
+}

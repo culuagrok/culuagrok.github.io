@@ -1,0 +1,77 @@
+/* shadcn/ui (Zinc) theme. Official light "zinc" CSS variables from the
+   shadcn/ui registry (MIT), https://ui.shadcn.com/themes.
+   Tailwind v4 source file, compiled into assets/tailwind.css. Overrides the
+   @theme tokens from themes/yahoojp/theme.css; extra rules are nested under
+   html[data-theme="shadcn"]. See DESIGN.md. */
+html[data-theme="shadcn"] {
+  /* Shared tokens */
+  --color-bg: oklch(1 0 0);
+  --color-fg: oklch(0.141 0.005 285.823);
+  --color-muted: oklch(0.552 0.016 285.938);
+  --color-link: oklch(0.21 0.006 285.885);
+  --color-visited: oklch(0.442 0.017 285.786);
+  --color-accent: oklch(0.21 0.006 285.885);
+  --color-accent-fg: oklch(0.985 0 0);
+  --color-bd: oklch(0.92 0.004 286.32);
+  --color-bd2: oklch(0.92 0.004 286.32);
+  --color-line: oklch(0.92 0.004 286.32);
+  --color-panel: oklch(0.985 0 0);
+  --color-panel2: oklch(0.967 0.001 286.375);
+  --color-btn: oklch(0.21 0.006 285.885);
+  --color-btn-fg: oklch(0.985 0 0);
+  --color-input-bd: oklch(0.92 0.004 286.32);
+  --color-new: oklch(0.577 0.245 27.325);
+  --color-new-fg: oklch(0.985 0 0);
+  --color-warn-bg: oklch(0.971 0.013 17.38);
+  --color-warn-bd: oklch(0.885 0.062 18.334);
+  --color-picker-bg: oklch(1 0 0);
+  --color-picker-fg: oklch(0.141 0.005 285.823);
+  --color-picker-muted: oklch(0.442 0.017 285.786);
+  --color-picker-bd: oklch(0.92 0.004 286.32);
+  --color-picker-act: oklch(0.967 0.001 286.375);
+  --color-picker-acc: oklch(0.21 0.006 285.885);
+  --shadow-picker: 0 10px 15px -3px rgb(0 0 0 / .1), 0 4px 6px -4px rgb(0 0 0 / .1);
+  --font-portal: "Geist", "Inter", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-wordmark: "Geist", "Inter", ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  /* shadcn/ui --radius: 0.625rem; --radius-md = --radius - 2px */
+  --sc-radius: 0.625rem;
+  /* Tailwind red-700 / zinc-600: AA-safe text on the red-50 warning tint
+     (shadcn --destructive is used for the NEW badge) */
+  --sc-destructive-text: oklch(0.505 0.213 27.518);
+  --sc-zinc-600: oklch(0.442 0.017 285.786);
+  --sc-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / .05);
+  color-scheme: light;
+
+  /* Rounded modules and fields */
+  .yj-box, .pg-moi main, .pg-home .g, .pg-phu .grp { border-radius: var(--sc-radius); overflow: hidden }
+  .yj-search, .pg-chinh .card, .pg-phu .picks, .pg-phu .bar, .pg-phu .wrap>footer, .pg-phu .warn { border-radius: var(--sc-radius) }
+  .yj-sbox input, .yj-sbox button, .yj-btn { border-radius: calc(var(--sc-radius) - 2px) }
+  .yj-new, .pg-moi #list>h2:first-child~.j>a::after, .yj-center .tag, .pg-phu .pt, .pg-phu .num, .pg-phu .stats span { border-radius: calc(var(--sc-radius) - 4px) }
+
+  /* Cards: white with a soft shadow and plain headers */
+  .yj-box, .pg-chinh .card, .pg-phu .picks, .pg-phu .grp, .pg-home .g, .pg-moi main { box-shadow: var(--sc-shadow-xs) }
+  .yj-box>h3, .pg-chinh .card>h2, .pg-phu .picks h2, .pg-phu .grp h2, .pg-home .g::before { background: transparent; font-weight: 600 }
+  .yj-left .yj-box { background: var(--color-bg) }
+  .yj-search { border-color: var(--color-bd) }
+
+  /* Wordmark: tight, heavy sans in the foreground color */
+  .yj-word { color: var(--color-fg) !important }
+  .yj-word b { font-weight: 800; letter-spacing: -0.04em; transform: none }
+  .yj-word small { font-family: var(--font-portal); font-weight: 500; letter-spacing: 0.3em; color: var(--color-muted) }
+
+  /* Inputs and buttons (h-9, ring on focus) */
+  .yj-sbox input { height: 36px; border-color: var(--color-input-bd); box-shadow: var(--sc-shadow-xs) }
+  .yj-sbox input:focus { border-color: oklch(0.705 0.015 286.067); box-shadow: 0 0 0 3px oklch(0.705 0.015 286.067 / .5) }
+  .yj-sbox button { height: 36px; font-size: 14px; font-weight: 500 }
+  .yj-sbox button:hover { filter: none; background: oklch(0.21 0.006 285.885 / .9) }
+  .yj-btn { background: var(--color-bg); color: var(--color-fg); box-shadow: var(--sc-shadow-xs); padding: 4px 10px; font-weight: 500 }
+  .yj-btn:hover { background: var(--color-panel2) }
+
+  /* Links: foreground color, underline on hover (as in shadcn/ui) */
+  .yj-topics li>a, .pg-moi .j a { font-weight: 500 }
+
+  /* Red for warnings and deadlines */
+  .yj-warnbox>h3, .pg-moi .dl, .pg-phu .warn, .pg-home .w>footer { color: var(--sc-destructive-text) }
+  .yj-warnbox .yj-muted, .yj-center .tag.d { color: var(--sc-zinc-600) }
+  .yj-util .yj-tick b { background: var(--color-accent); color: var(--color-accent-fg); padding: 0 6px; border-radius: 9999px; font-weight: 500 }
+}

@@ -14,6 +14,11 @@
 @import "./portal.css";
 @import "../themes/dark/theme.css";
 @import "../themes/steam/theme.css";
+@import "../themes/shadcn/theme.css";
+@import "../themes/dracula/theme.css";
+@import "../themes/catppuccin/theme.css";
+@import "../themes/nord/theme.css";
+@import "../themes/cupcake/theme.css";
 
 /* Scan only the pages and the picker script for utility classes. Job data
    (new-jobs.json) is rendered with the semantic classes in portal.css. */
@@ -29,4 +34,9 @@
 @custom-variant classic (&:where([data-theme="classic"], [data-theme="classic"] *));
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 @custom-variant steam (&:where([data-theme="steam"], [data-theme="steam"] *));
+@custom-variant shadcn (&:where([data-theme="shadcn"], [data-theme="shadcn"] *));
+@custom-variant dracula (&:where([data-theme="dracula"], [data-theme="dracula"] *));
+@custom-variant catppuccin (&:where([data-theme="catppuccin"], [data-theme="catppuccin"] *));
+@custom-variant nord (&:where([data-theme="nord"], [data-theme="nord"] *));
+@custom-variant cupcake (&:where([data-theme="cupcake"], [data-theme="cupcake"] *));
 @custom-variant portal (&:where([data-layout="portal"], [data-layout="portal"] *));
