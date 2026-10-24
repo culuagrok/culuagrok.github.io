@@ -11,7 +11,8 @@ soft shadows, and Segoe UI / Roboto type.
 - **Where it lives:** each page's own inline `<style id="theme-classic">`.
   `classic` is the only theme that does not use the portal layout. When it is
   active, `<html>` has no `data-layout` attribute, the original stylesheet
-  stays enabled, and `themes.css` hides every `.yj` element. The `.yj-cols` /
+  stays enabled, and the compiled `assets/tailwind.css` hides every `.yj`
+  element. The `.yj-cols` /
   `.yj-center` wrappers become `display: contents`, so the original layout is
   untouched.
 - **Signature elements:**
@@ -152,3 +153,53 @@ which is fine for the large header text.
    `theme.js` `apply('classic')` does this.
 3. To reuse it elsewhere, copy the snippets above. Replace the literal hex
    values with the suggested variables if you want a token-based version.
+4. One portal-only fix applies here too: on narrow screens the main-jobs
+   tables scroll inside their `.card` instead of widening the page
+   (`html:not([data-layout="portal"]) .pg-chinh .card{overflow-x:auto}` in
+   `src/portal.css`).
+
+## 10. Tailwind v4 tokens and utilities
+
+The classic CSS is not compiled by Tailwind; it stays inline so that the
+original look is untouched. For the same reason the site build does not
+import Tailwind's Preflight reset: classic relies on browser default
+margins and heading sizes. A `classic:` variant is still available on this
+site (`@custom-variant classic` in `src/tailwind.css`).
+
+To rebuild this look in another Tailwind v4 project, turn the suggested
+variables into an `@theme` block:
+
+```css
+@import "tailwindcss";
+@theme {
+  --color-classic-navy: #0f3d75;
+  --color-classic-green: #15803d;
+  --color-classic-orange: #ea580c;
+  --color-classic-bg: #f1f5f9;
+  --color-classic-card: #ffffff;
+  --color-classic-text: #1e293b;
+  --color-classic-muted: #64748b;
+  --color-classic-border: #cbd5e1;
+  --color-classic-link: #1d4ed8;
+  --color-classic-deadline: #c2410c;
+  --color-classic-gold: #fde68a;
+  --font-classic: "Segoe UI", Roboto, Arial, sans-serif;
+  --radius-card: 16px;
+  --shadow-card: 0 10px 30px #0004;
+}
+```
+
+Examples:
+
+```html
+<!-- Home category card -->
+<a class="block rounded-card bg-classic-card p-6 text-classic-text shadow-card
+          border-t-6 border-classic-navy transition-transform hover:-translate-y-1">…</a>
+<!-- Gradient header -->
+<header class="bg-linear-135 from-classic-navy to-classic-green p-6 text-white">…</header>
+<!-- Pill tag A -->
+<span class="rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-800">Rất hợp</span>
+```
+
+The tag colors are Tailwind's default palette (`green-100/800`,
+`blue-100/800`, `yellow-100/800`, `red-100/800`), so they need no tokens.

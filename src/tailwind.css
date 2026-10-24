@@ -1,0 +1,32 @@
+/* Tailwind CSS v4 entry point for the job board.
+   Build: npm run build:css  ->  assets/tailwind.css (committed, served as is).
+
+   Only Tailwind's theme and utilities layers are imported. Preflight (the
+   base reset) is left out on purpose: the "classic" theme is each page's
+   original inline CSS and relies on browser default styles. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+/* Theme tokens (@theme) and the default palette, then the shared portal
+   layout, then per-theme overrides. Order matches the old <link> order. */
+@import "../themes/yahoojp/theme.css";
+@import "./portal.css";
+@import "../themes/dark/theme.css";
+@import "../themes/steam/theme.css";
+
+/* Scan only the pages and the picker script for utility classes. Job data
+   (new-jobs.json) is rendered with the semantic classes in portal.css. */
+@source "../*.html";
+@source "../theme.js";
+/* Ignore plain words in page text that happen to match utility names. */
+@source not inline("visible block hidden table");
+
+/* One variant per theme, e.g. class="steam:bg-panel2 dark:text-link".
+   "dark" replaces Tailwind's prefers-color-scheme variant with the
+   [data-theme="dark"] attribute set by the picker. */
+@custom-variant yahoojp (&:where([data-theme="yahoojp"], [data-theme="yahoojp"] *));
+@custom-variant classic (&:where([data-theme="classic"], [data-theme="classic"] *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant steam (&:where([data-theme="steam"], [data-theme="steam"] *));
+@custom-variant portal (&:where([data-layout="portal"], [data-layout="portal"] *));

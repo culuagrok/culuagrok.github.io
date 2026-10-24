@@ -1,6 +1,52 @@
-/* Yahoo! JAPAN theme tokens (default). See DESIGN.md. */
-html[data-theme="yahoojp"]{
-  --bg:#fff;--fg:#000;--muted:#666;--link:#1d3994;--visited:#5b2a8c;--red:#ff0033;
-  --bd:#9eb4db;--bd2:#cedaf3;--line:#e5e5e5;--panel:#f1f5ff;--panel2:#e6ecfe;
-  --btn:#4070ff;--btn-fg:#fff;--input-bd:#999;--new:#f5a700;--new-fg:#000;--warn-bg:#fff5f6;--warn-bd:#ffb3c1;
-  color-scheme:light}
+/* Yahoo! JAPAN theme (default). Tailwind v4 source file, compiled into
+   assets/tailwind.css by src/tailwind.css. See DESIGN.md.
+
+   The @theme block is the token contract shared by every portal theme. Its
+   values are the Yahoo! JAPAN palette, so they are the :root defaults; other
+   themes override the same variables under html[data-theme="<id>"].
+   Each --color-* token also creates Tailwind utilities (bg-panel, text-link,
+   border-bd, ...), each --font-* token a font-* utility. */
+@theme {
+  /* Palette */
+  --color-bg: #fff;
+  --color-fg: #000;
+  --color-muted: #666;
+  --color-link: #1d3994;
+  --color-visited: #5b2a8c;
+  --color-accent: #ff0033;
+  --color-bd: #9eb4db;
+  --color-bd2: #cedaf3;
+  --color-line: #e5e5e5;
+  --color-panel: #f1f5ff;
+  --color-panel2: #e6ecfe;
+  --color-btn: #4070ff;
+  --color-btn-fg: #fff;
+  --color-input-bd: #999;
+  --color-new: #f5a700;
+  --color-new-fg: #000;
+  --color-warn-bg: #fff5f6;
+  --color-warn-bd: #ffb3c1;
+
+  /* Theme picker modal (also used by the classic theme) */
+  --color-picker-bg: #fff;
+  --color-picker-fg: #111;
+  --color-picker-muted: #666;
+  --color-picker-bd: #d5d9e0;
+  --color-picker-act: #eef3ff;
+  --color-picker-acc: #ff0033;
+  --shadow-picker: 0 12px 40px rgba(0,0,0,.25);
+
+  /* Fonts */
+  --font-portal: Arial, "Helvetica Neue", "Segoe UI", "Noto Sans", Roboto, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, "MS PGothic", sans-serif;
+  --font-wordmark: Georgia, "Times New Roman", "Noto Serif", serif;
+  --font-picker: Arial, "Helvetica Neue", "Segoe UI", "Noto Sans", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --font-kbd: ui-monospace, Menlo, Consolas, monospace;
+
+  /* Layout widths (w-portal / max-w-portal-wide utilities) */
+  --container-portal: 990px;
+  --container-portal-wide: 1240px;
+}
+
+html[data-theme="yahoojp"] {
+  color-scheme: light;
+}
