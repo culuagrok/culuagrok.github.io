@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rust trong bình yên — Blog</title>
+<meta name="description" content="Bản dịch tiếng Việt của Rust in Peace (Calif): thay thế các thành phần C++ dễ bị tổn thương bằng Rust, từng binding một.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">Rust trong bình yên</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>Rust trong bình yên</h1>
+<p class="blog-meta"><strong>Tiêu đề gốc:</strong> Rust in Peace<br>
+<strong>Tác giả:</strong> Ha Pham · <strong>Ngày:</strong> 29 tháng 10, 2026<br>
+Thẻ: rust · memory-safety</p>
+<p class="blog-note">Bản dịch tiếng Việt của bài gốc <a href="https://calif.io/research/rust-in-peace" target="_blank" rel="noopener">Rust in Peace</a> trên Calif — bản quyền thuộc tác giả/Calif. Bài dịch chỉ nhằm mục đích chia sẻ kỹ thuật; mọi quyền đối với nội dung gốc thuộc về Calif.</p>
+<p><em>Thay thế các thành phần C++ dễ bị tổn thương bằng Rust, từng binding một.</em></p>
+<nav class="blog-toc" aria-label="Mục lục"><h2>Mục lục</h2><ol>
+<li><a href="#boi-canh">Bối cảnh</a></li>
+<li><a href="#cpp-goi-rust-nhu-the-nao">C++ gọi Rust như thế nào</a></li>
+<li><a href="#vi-du-voi-icu4c">Ví dụ với ICU4C</a></li>
+<li><a href="#dung-crubit-de-dung-cau-noi">Dùng Crubit để dựng cầu nối</a></li>
+<li><a href="#hieu-ranh-gioi-an-toan">Hiểu ranh giới an toàn</a></li>
+<li><a href="#chi-phi-hieu-nang">Chi phí hiệu năng</a></li>
+<li><a href="#ket-luan">Kết luận</a></li>
+<li><a href="#explanation-of-cve-2021-30535">Phụ lục: Giải thích CVE-2021-30535</a></li>
+</ol></nav>
+<img src="img/poster.jpeg" alt="Rust in Peace: orange Rust crabs in a moonlit Halloween landscape." loading="lazy">
+<p>At Calif, chúng tôi dành nhiều thời gian nghiên cứu bảo mật tấn công trên phần mềm và phần cứng. Nếu bạn đã theo dõi các bài gần đây của chúng tôi, bạn đã thấy công việc đó trong thực tế. Điều chúng tôi ít nói hơn là cách công việc khai thác (exploitation) giúp chúng tôi hiểu sâu hơn về cách tấn công thành công và biện pháp phòng thủ nào hiệu quả trong việc ngăn chúng. Từ đó, chúng tôi xây dựng chiến lược giúp khách hàng ngăn ngừa và giảm thiểu lỗi bảo mật, hạn chế tác động của exploitation. Công việc phòng thủ bảo mật phần mềm của chúng tôi bao gồm, nhưng không giới hạn ở, các lĩnh vực sau:</p>
+<ul>
+<li>Binding an toàn bộ nhớ (memory-safe bindings)</li>
+<li>Các biện pháp giảm thiểu (mitigations)</li>
+<li>Sandboxing</li>
+<li>Củng cố chuỗi cung ứng bên thứ ba (third-party supply chain hardening)</li>
+</ul>
+<p>Bài viết này là phần đầu trong một chuỗi nhằm chia sẻ những gì chúng tôi học được từ công việc đó. Chúng tôi bắt đầu với memory-safe bindings: cách chúng tôi dùng công cụ interop để hỗ trợ chuyển mã C++ sang Rust.</p>
+<h2 id="boi-canh">Bối cảnh</h2>
+<p>Do các vấn đề memory safety trong mã C/C++, nhiều công ty đã cân nhắc viết lại toàn bộ codebase bằng Rust. Tuy nhiên, cách này thường không khả thi, đặc biệt với hệ thống production không thể thay mã quy mô lớn trong một đêm. Một codebase lớn liên tục thay đổi khi developer thêm tính năng và sửa lỗi. Việc viết lại hoàn toàn phải bắt kịp những thay đổi đó đồng thời giữ nguyên hành vi hiện có, khiến nó tốn kém và rủi ro. Cách dễ quản lý hơn là viết lại có chọn lọc các thành phần quan trọng và dễ bị tổn thương bằng Rust, trong khi giữ phần còn lại của ứng dụng bằng C/C++. Điều này đòi hỏi một cách để mã C++ hiện có gọi mã Rust mới.</p>
+<p>Binding viết tay có thể đủ với ví dụ nhỏ, nhưng việc bảo trì trở nên phức tạp hơn khi ranh giới mở rộng. C++ và Rust biểu diễn giá trị và quản lý ownership khác nhau. Chúng ta cần công cụ chuyển đổi kiểu qua lại và làm rõ ai sở hữu cũng như ai giải phóng bộ nhớ. Các công cụ interop như <a href="https://github.com/dtolnay/cxx" target="_blank" rel="noopener">cxx</a>, <a href="https://github.com/rust-lang/rust-bindgen" target="_blank" rel="noopener">bindgen</a>, <a href="https://github.com/rust-diplomat/diplomat" target="_blank" rel="noopener">Diplomat</a> và <a href="https://github.com/google/crubit" target="_blank" rel="noopener">Crubit</a> có thể tự động hóa phần lớn công việc này, giảm lượng mã giao diện phải viết, review và bảo trì. Các công cụ này hỗ trợ hướng ngôn ngữ và ánh xạ kiểu khác nhau. Trong bài này, chúng tôi minh họa cách tiếp cận bằng Crubit để sinh binding C++ cho một API Rust nhỏ.</p>
+<p>Với một thư viện Rust, Crubit sinh header C++ và mã cầu nối cần thiết để gọi các hàm public của nó. Các kiểu được hỗ trợ được ánh xạ qua ranh giới ngôn ngữ. Tuy nhiên, không phải mọi kiểu Rust hay tính năng ngôn ngữ đều có ánh xạ hỗ trợ; trong những trường hợp đó, một lớp bọc Rust mỏng có thể phơi bày chức năng qua các kiểu và chữ ký hàm mà Crubit hiểu.</p>
+<h2 id="cpp-goi-rust-nhu-the-nao">C++ gọi Rust như thế nào</h2>
+<p>Hãy xem một ví dụ đơn giản. Giả sử một crate Rust tên <code>foo</code> cung cấp hàm <code>add</code>. Chúng ta có thể phơi bày nó qua giao diện tương thích C, khai báo giao diện đó trong một header, rồi liên kết thư viện Rust đã biên dịch vào ứng dụng C++.</p>
+<pre><code>/// binding.rs
+#[unsafe(no_mangle)]
+pub extern &quot;C&quot; fn add(a: i32, b: i32) -&gt; i32 {
+    foo::add(a, b)
+}</code></pre>
+<p>Trình biên dịch Rust đặt hàm đã biên dịch vào một object file. <code>extern &quot;C&quot;</code> chỉ định quy ước gọi C, trong khi <code>#[unsafe(no_mangle)]</code> giữ nguyên tên symbol <code>add</code> để linker tìm được. Sau đó chúng ta khai báo hàm trong một header để trình biên dịch C++ biết cách gọi nó.</p>
+<pre><code>// binding.h
+#include &lt;stdint.h&gt;
+
+extern &quot;C&quot; int32_t add(int32_t a, int32_t b);</code></pre>
+<p>Cuối cùng, mã ứng dụng tham chiếu tới nó qua đường dẫn header.</p>
+<pre><code>// main.cpp
+#include &quot;binding.h&quot;
+int main(void) {
+    add(2, 3);
+}</code></pre>
+<p>Khi biên dịch <code>main.cpp</code>, trình biên dịch C++ đọc <code>binding.h</code> để biết chữ ký hàm <code>add</code>. Trình biên dịch kiểm tra rằng <code>add(2, 3)</code> khớp với khai báo đó. Nó rồi biên dịch mã C++, nhưng phần triển khai thực tế nằm trong object file hoặc thư viện do Rust sinh ra. Linker sau đó tìm symbol tương ứng và kết hợp mã C++ cùng Rust đã biên dịch thành một file thực thi.</p>
+<img src="img/p1.png" alt="Rust and C++ compilation pipelines meet at the linker to produce an executable." loading="lazy">
+<h2 id="vi-du-voi-icu4c">Ví dụ với ICU4C</h2>
+<p>Để thấy cách này hoạt động trong thực tế, hãy dựng một ứng dụng C++ nhỏ nhận một locale và sắp xếp tên theo quy tắc collation của locale đó, dùng thư viện ICU4C phổ biến. Chúng tôi sẽ dựng hai phiên bản. Phiên bản thứ nhất dùng một phiên bản cũ của ICU4C chứa lỗ hổng bảo mật use-after-free (<a href="https://nvd.nist.gov/vuln/detail/cve-2021-30535" target="_blank" rel="noopener">CVE-2021-30535</a>). Phiên bản thứ hai dùng ICU4X, một triển khai Rust của ICU4C, với binding Crubit. Nguyên nhân gốc của UAF không phải trọng tâm thảo luận ở đây, nhưng bạn có thể đọc phần giải thích trong <a href="#explanation-of-cve-2021-30535">Giải thích CVE-2021-30535</a>. Mã nguồn của ứng dụng nằm <a href="https://github.com/califio/icu4x-crubit-demo" target="_blank" rel="noopener">ở đây</a>.</p>
+<p>Khi chạy ICU4C, AddressSanitizer bắt được lần đọc không hợp lệ và báo cáo UAF như bên dưới.</p>
+<pre><code>% ./build/icu4c-demo --cve
+=================================================================
+==40228==ERROR: AddressSanitizer: heap-use-after-free on address 0x60f000000220 at pc 0x00010287671c bp 0x00016f9f5a90 sp 0x00016f9f5260
+READ of size 2 at 0x60f000000220 thread T0
+    #0 0x000102876718 in strlen+0x22c (libclang_rt.asan_osx_dynamic.dylib:arm64e+0x16718)
+    #1 0x0001004dd988 in uprv_strdup_66+0x10 (icu4c-demo:arm64+0x1000d5988)
+    #2 0x0001004a9950 in icu_66::Locale::operator=(icu_66::Locale const&amp;)+0x1d0 (icu4c-demo:arm64+0x1000a1950)
+    #3 0x0001004a9be4 in icu_66::Locale::Locale(icu_66::Locale const&amp;)+0x64 (icu4c-demo:arm64+0x1000a1be4)
+    #4 0x000100420328 in icu_66::CollationLoader::getCacheEntry(UErrorCode&amp;)+0x104 (icu4c-demo:arm64+0x100018328)
+    #5 0x0001004200b8 in icu_66::CollationLoader::loadTailoring(icu_66::Locale const&amp;, UErrorCode&amp;)+0x194 (icu4c-demo:arm64+0x1000180b8)
+    #6 0x000100415c90 in icu_66::Collator::makeInstance(icu_66::Locale const&amp;, UErrorCode&amp;)+0x24 (icu4c-demo:arm64+0x10000dc90)
+    #7 0x00010041603c in icu_66::Collator::createInstance(icu_66::Locale const&amp;, UErrorCode&amp;)+0x28c (icu4c-demo:arm64+0x10000e03c)
+    #8 0x0001004096b8 in main main.cc:20
+    #9 0x0001849cc4e0 in start+0x1b4c (dyld:arm64e+0x204e0)</code></pre>
+<p>ICU4X tránh lỗi ownership cụ thể này bằng một cách biểu diễn khác. Kiểu <a href="https://github.com/unicode-org/icu4x/blob/a14f2dad852be26bad277ae704abf27a15cbfed1/components/locale_core/src/locale.rs#L100-L107" target="_blank" rel="noopener">Locale</a> của nó lưu language identifier và các extension dưới dạng các trường có cấu trúc, được sở hữu. Nó không duy trì cặp con trỏ chuỗi đồng bộ thủ công như ICU4C. Do đó, phiên bản thứ hai chạy mà không bị crash,</p>
+<pre><code>% ./build/icu4x-demo --cve
+Andersson
+Meyer
+Mueller
+Müller
+Özil
+Zimmermann</code></pre>
+<h2 id="dung-crubit-de-dung-cau-noi">Dùng Crubit để dựng cầu nối</h2>
+<p>Hãy xem chúng tôi đã dựng lại ứng dụng C++ với ICU4X bằng Crubit như thế nào.</p>
+<p>Vì ứng dụng của chúng tôi viết bằng C++, để dùng ICU4X cần một giao diện interop C++/Rust. Chúng ta có thể tự viết giao diện đó hoặc sinh nó bằng Crubit. Cách thủ công bắt đầu với một giao diện tương thích C phơi bày một opaque handle và ba thao tác:</p>
+<pre><code>typedef struct ManualCollatorHandle ManualCollatorHandle;
+
+uint8_t manual_collator_create(
+    const uint8_t* locale, size_t len,
+    ManualCollatorHandle** out);
+
+int32_t manual_collator_compare(
+    const ManualCollatorHandle* collator,
+    const uint8_t* left, size_t left_len,
+    const uint8_t* right, size_t right_len);
+
+void manual_collator_destroy(ManualCollatorHandle* collator);</code></pre>
+<p>Phần triển khai Rust chuyển các cặp pointer-and-length đầu vào thành slice:</p>
+<pre><code>unsafe fn bytes&lt;&#x27;a&gt;(data: *const u8, len: usize) -&gt; &amp;&#x27;a [u8] {
+    if len == 0 {
+        &amp;[]
+    } else {
+        unsafe { slice::from_raw_parts(data, len) }
+    }
+}</code></pre>
+<p>Sau đó nó gọi ICU4X để tạo collator và so sánh chuỗi:</p>
+<pre><code>#[unsafe(no_mangle)]
+pub unsafe extern &quot;C&quot; fn manual_collator_create(
+    locale: *const u8,
+    len: usize,
+    out: *mut *mut Collator,
+) -&gt; u8 {
+    // SAFETY: The caller supplies a valid output slot and readable locale.
+    unsafe { *out = ptr::null_mut() };
+    match Collator::new(unsafe { bytes(locale, len) }) {
+        Ok(collator) =&gt; {
+            unsafe { *out = Box::into_raw(Box::new(collator)) };
+            0
+        }
+        Err(code) =&gt; code,
+    }
+}
+
+#[unsafe(no_mangle)]
+pub unsafe extern &quot;C&quot; fn manual_collator_compare(
+    collator: *const Collator,
+    left: *const u8,
+    left_len: usize,
+    right: *const u8,
+    right_len: usize,
+) -&gt; i32 {
+    unsafe { (&amp;*collator).compare_utf8(bytes(left, left_len), bytes(right, right_len)) }
+}</code></pre>
+<p>Handle trả về từ hàm <code>manual_collator_create</code> cuối cùng phải được truyền cho hàm destroy để giải phóng đối tượng Rust:</p>
+<pre><code>#[unsafe(no_mangle)]
+pub unsafe extern &quot;C&quot; fn manual_collator_destroy(collator: *mut Collator) {
+    if !collator.is_null() {
+        unsafe { drop(Box::from_raw(collator)) };
+    }
+}</code></pre>
+<p>Phía C++ vẫn cần một owner tự động giải phóng handle, ngăn copy vô tình, và xử lý lỗi constructor. Nếu bạn nghĩ đây là nhiều việc thủ công chỉ cho ba hàm, đúng vậy. Và nó chỉ càng phức tạp, càng cồng kềnh khi bạn muốn hỗ trợ thêm kiểu/hàm. <a href="https://github.com/califio/icu4x-crubit-demo/tree/main/manual" target="_blank" rel="noopener">Ví dụ đầy đủ</a> của chúng tôi cho thấy cầu nối Rust, header C và owner C++.</p>
+<p>Hãy xem Crubit tự động hóa quy trình như thế nào. Lần thử đầu tiên sinh binding cho toàn bộ API collator của ICU4X tạo ra một header C++ không biên dịch được vì alias trait <code>ZeroFrom</code> chưa được hỗ trợ. Để vượt qua hạn chế này, chúng tôi định nghĩa một struct Rust <code>Collator</code> nhỏ giữ đối tượng ICU4X ở private và chỉ phơi bày các thao tác mà ứng dụng cần:</p>
+<pre><code>pub struct Collator {
+    inner: CollatorBorrowed&lt;&#x27;static&gt;,
+}
+
+impl Collator {
+    pub fn new(locale: &amp;[u8]) -&gt; Result&lt;Self, u8&gt; {
+        let locale = Locale::try_from_utf8(locale).map_err(|_| 1u8)?;
+        let inner = CollatorBorrowed::try_new(locale.into(), Default::default())
+            .map_err(|_| 2u8)?;
+        Ok(Self { inner })
+    }
+
+    pub fn compare_utf8(&amp;self, left: &amp;[u8], right: &amp;[u8]) -&gt; i32 {
+        match self.inner.compare_utf8(left, right) {
+            std::cmp::Ordering::Less =&gt; -1,
+            std::cmp::Ordering::Equal =&gt; 0,
+            std::cmp::Ordering::Greater =&gt; 1,
+        }
+    }
+}</code></pre>
+<p>Với API Rust đã sẵn sàng, chúng ta có thể nối nó vào build CMake qua <a href="https://github.com/corrosion-rs/corrosion" target="_blank" rel="noopener">Corrosion</a>. Corrosion quản lý các target Cargo trong một dự án CMake. Sau khi chuẩn bị các dependency đã pin, chúng tôi bật Crubit cho crate <code>locale_collator</code> và liên kết thư viện kết quả vào ứng dụng:</p>
+<pre><code>include(FetchContent)
+FetchContent_Declare(Crubit SOURCE_DIR &quot;${CRUBIT_SOURCE}&quot;)
+FetchContent_Declare(Corrosion SOURCE_DIR &quot;${CORROSION_SOURCE}&quot;)
+FetchContent_MakeAvailable(Corrosion)
+
+# Generate C++ bindings for the Rust crate.
+corrosion_experimental_crubit(locale_collator)
+corrosion_import_crate(MANIFEST_PATH rust/Cargo.toml LOCKED)
+
+get_target_property(
+    support_targets crubit_support INTERFACE_LINK_LIBRARIES)
+add_dependencies(crubit_support ${support_targets})
+
+# Expose the Rust library and Crubit&#x27;s support code to C++.
+add_library(collation INTERFACE)
+target_include_directories(
+    collation INTERFACE &quot;${CMAKE_CURRENT_SOURCE_DIR}&quot;)
+target_link_libraries(
+    collation INTERFACE locale_collator crubit_support)
+add_dependencies(collation crubit_support)
+
+add_executable(icu4x-demo main.cc contacts.cc)
+target_link_libraries(icu4x-demo PRIVATE collation)</code></pre>
+<p>Hai dòng then chốt là <code>corrosion_experimental_crubit()</code>, bật sinh binding, và <code>corrosion_import_crate()</code>, thêm crate Rust vào build. Khi chạy <code>cmake --build build</code>, Corrosion gọi Crubit để sinh header C++ và mã cầu nối Rust, rồi build thư viện Rust. Và voilà! Ứng dụng C++ giờ có thể dùng giao diện được sinh để tạo collator và sắp xếp đầu vào:</p>
+<pre><code>#include &quot;collation.h&quot;
+#include &quot;contacts.h&quot;
+
+#include &lt;algorithm&gt;
+#include &lt;exception&gt;
+#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+
+int main(int argc, char** argv) {
+    try {
+        auto request = contacts::ParseArguments(
+            argc, argv, &quot;ICU4X 2.3.1 through Crubit&quot;);
+        if (request.done) return 0;
+
+        const auto locale = contacts::ToLanguageTag(request.locale);
+        auto result = collation::Collator::new_(locale);
+        if (!result.has_value())
+            throw std::runtime_error(&quot;Invalid or unsupported locale&quot;);
+
+        const auto&amp; collator = result.value();
+        std::stable_sort(request.names.begin(), request.names.end(),
+            [&amp;](const auto&amp; left, const auto&amp; right) {
+                return collator.compare_utf8(left, right) &lt; 0;
+            });
+
+        contacts::Print(request.names);
+        return 0;
+    } catch (const std::exception&amp; error) {
+        std::cerr &lt;&lt; &quot;error: &quot; &lt;&lt; error.what() &lt;&lt; &#x27;\n&#x27;;
+        return 1;
+    }
+}</code></pre>
+<h2 id="hieu-ranh-gioi-an-toan">Hiểu ranh giới an toàn</h2>
+<p>Crubit giúp chúng ta khỏi phải viết phần lớn boilerplate để nối C++ với Rust. Nếu nhìn vào mã được sinh, bạn sẽ thấy nó dùng Rust <code>unsafe</code>. Từ khóa <code>unsafe</code> trong Rust nghĩa là caller phải tuân theo một số quy tắc, chẳng hạn giữ bộ nhớ được mượn còn sống và không đổi trong lúc Rust dùng nó. Crubit không thể làm toàn bộ ứng dụng C++ an toàn bộ nhớ, và sai sót ở một trong hai phía ranh giới vẫn có thể gây lỗi.</p>
+<p>Ngoài rủi ro vốn có khi trộn mã memory-safe với memory-unsafe, bản thân cầu nối cũng có thể đưa vào lỗi memory-safety. Ví dụ, giao diện C++ của Crubit cho vector Rust vẫn còn lỗi có thể gây ghi ngoài biên và use-after-free. Những vấn đề này cho thấy binding được sinh và mã hỗ trợ của chúng cũng cần được review và kiểm thử cẩn thận. Một số cuộc di chuyển cần còn ít công việc tích hợp hơn. Trong một bài blog sau, chúng tôi sẽ chỉ cách <a href="https://github.com/dropbox/rust-brotli/#using-the-c-interface" target="_blank" rel="noopener">C FFI của rust-brotli</a> cho phép dùng nó như thay thế drop-in trong khi giữ nguyên caller. Tái sử dụng giao diện đó giảm overhead và cơ hội lỗi tích hợp mới, dù FFI hiện có vẫn cần được chỉnh sửa.</p>
+<p>Dù vậy, việc thay thế từng phần mã C++ rủi ro cao bằng Rust vẫn mang lại lợi ích bảo mật rõ ràng. Trong demo của chúng tôi, cải thiện an toàn chính đến từ việc thay mã dễ tổn thương của ICU4C bằng ICU4X. API Rust nhỏ của chúng tôi cấm mã <code>unsafe</code> và không giữ tham chiếu tới chuỗi đầu vào sau mỗi lần gọi. Crubit rồi xử lý phần lớn công việc nối API đó với C++, giảm lượng mã chúng tôi phải viết và review.</p>
+<h2 id="chi-phi-hieu-nang">Chi phí hiệu năng</h2>
+<p>Một cân nhắc thực tế khác với người duy trì codebase lớn là liệu Crubit có thêm overhead hiệu năng cho ứng dụng hay không. Để đo chi phí lớp binding, chúng tôi so sánh cùng một adapter ICU4X được gọi trực tiếp từ Rust và qua Crubit từ C++. Cả hai đường dùng cùng collator và các cặp đầu vào giống hệt. <a href="https://github.com/califio/icu4x-crubit-demo/blob/main/benchmark/README.md" target="_blank" rel="noopener">Đường Crubit chậm hơn khoảng 1,0–2,4%, thêm khoảng 0,5–1,3 ns mỗi lần so sánh</a>. Các kết quả này gợi ý rằng gọi thành phần Rust qua Crubit có chi phí hiệu năng nhỏ — một đánh đổi hợp lý cho lợi ích an toàn khi thay thế triển khai dễ tổn thương.</p>
+<h2 id="ket-luan">Kết luận</h2>
+<p>Làm cho một ứng dụng C++ an toàn hơn không đòi hỏi viết lại toàn bộ bằng Rust. Bằng cách thay thế dần các thành phần dễ mắc lỗi memory-safety, chúng ta hưởng lợi từ hệ thống kiểu và mô hình ownership của Rust trong khi giữ phần còn lại của ứng dụng. Các công cụ tương thích như Crubit khiến cách tiếp cận này khả thi, giúp củng cố phòng thủ trước exploitation với chỉ một chi phí hiệu năng nhỏ. Memory safety chỉ là một phần của phòng thủ rộng hơn, vì vậy hãy theo dõi các bài sắp tới khi chúng tôi khám phá các kỹ thuật khiến lỗ hổng còn lại khó khai thác hơn và hạn chế thiệt hại khi attacker vượt qua được.</p>
+<h2 id="phu-luc">Phụ lục</h2>
+<h3 id="explanation-of-cve-2021-30535">Giải thích CVE-2021-30535</h3>
+<p>Triển khai ICU4C dễ tổn thương lưu tên đầy đủ và tên không có keyword của locale trong <code>fullName</code> và <code>baseName</code>. Khi không có keyword, cả hai trỏ tới cùng một buffer như Hình 1 bên dưới.</p>
+<img src="img/p2.png" alt="The Locale fullName and baseName pointers share the same heap buffer." loading="lazy">
+<p class="cap">Hai con trỏ chuỗi chia sẻ cùng một heap buffer</p>
+<p>Trong lúc dựng collator, <code>CollationLoader</code> tạo một locale không có keyword rồi khôi phục thiết lập collation của người dùng. Base name dài của chúng tôi khiến việc thêm <code>collation=phonebook</code> đòi hỏi buffer lớn hơn.</p>
+<p>Trong <code>Locale::setKeywordValue()</code>, <a href="https://github.com/unicode-org/icu/blob/5f681ecbc75898a6484217b322f3883b6d1b2049/icu4c/source/common/locid.cpp#L1350-L1371" target="_blank" rel="noopener">dòng 1360 giải phóng buffer cũ, và dòng 1362 cập nhật <code>fullName</code>, để <code>baseName</code> bị dangling</a>. Vì các con trỏ không còn khớp, ICU4C bỏ qua việc dựng lại base name. Một lần copy sau đó đọc bộ nhớ đã giải phóng, và lúc hủy có thể giải phóng lần nữa như Hình 2 bên dưới.</p>
+<img src="img/p3.png" alt="After reallocation, fullName points to a new buffer while baseName points to freed memory." loading="lazy">
+<p class="cap">Con trỏ baseName bị dangling sau khi tái cấp phát</p>
+</article>
+<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://calif.io/research/rust-in-peace" target="_blank" rel="noopener">Bài gốc trên Calif</a></p>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script src="../../theme.js"></script>
+</body>
+</html>

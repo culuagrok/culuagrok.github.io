@@ -23,6 +23,7 @@
 /* Scan only the pages and the picker script for utility classes. Job data
    (new-jobs.json) is rendered with the semantic classes in portal.css. */
 @source "../*.html";
+@source "../blogs/**/*.html";
 @source "../theme.js";
 /* Ignore plain words in page text that happen to match utility names. */
 @source not inline("visible block hidden table");
