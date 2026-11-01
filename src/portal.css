@@ -279,6 +279,11 @@ html:not([data-layout="portal"]) .pg-chinh .card{overflow-x:auto}
 .blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:var(--color-panel2,#e6ecfe);padding:.1em .35em;border-radius:3px}
 .blog-prose pre{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
 .blog-prose pre code{background:transparent;color:inherit;padding:0;font-size:inherit}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid var(--color-bd,#94a3b8);background:var(--color-panel,#f8fafc);color:var(--color-fg,#334155);font-size:15px;border-radius:0 4px 4px 0}
+.blog-prose table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.4;margin:1em 0}
+.blog-prose table th,.blog-prose table td{border:1px solid var(--color-bd2,#cbd5e1);padding:8px 10px;text-align:left;vertical-align:top}
+.blog-prose table th{background:var(--color-panel,#f1f5f9);font-weight:600}
+.blog-prose table thead th{white-space:nowrap}
 .blog-toc{background:var(--color-panel,#f1f5ff);border:1px solid var(--color-bd2,#cedaf3);border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
 .blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0}
 .blog-toc ol{margin:0;padding-left:1.2em;font-size:14px}
