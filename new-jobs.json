@@ -3614,5 +3614,137 @@
     "note": "Phỏng vấn nghiên cứu thị trường, sắp xếp giờ linh hoạt (từ 4 tiếng/ngày).",
     "added": "2026-10-31",
     "cat": "phu"
+  },
+  {
+    "title": "Real-Time Analyst (Data Analytics & Workforce Management)",
+    "company": "MiTek Việt Nam",
+    "salary": "Thương lượng",
+    "deadline": "2026-12-01",
+    "source": "VietnamWorks",
+    "url": "https://www.vietnamworks.com/real-time-analyst-data-analytics-workforce-management-1793490801702831050-2124429-jv",
+    "note": "Phân tích dữ liệu vận hành thời gian thực (Q7); yêu cầu ~2 năm.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Product Business Analyst (Fintech)",
+    "company": "FinanOne (Finan Pte Ltd)",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "LinkedIn",
+    "url": "https://vn.linkedin.com/jobs/view/product-business-analyst-fintech-at-finanone-finan-pte-ltd-4485147054",
+    "note": "Product BA mảng fintech (kế toán, thuế); khoảng 2 năm BA/Product Analyst.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Digital Payment Engagement Specialist",
+    "company": "UOB",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "LinkedIn",
+    "url": "https://vn.linkedin.com/jobs/view/digital-payment-engagement-specialist-at-uob-4458984873",
+    "note": "Chuyên viên thanh toán số tại ngân hàng UOB; 3–5 năm digital banking/CRM/data.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Software Engineer I",
+    "company": "Axon",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "LinkedIn",
+    "url": "https://vn.linkedin.com/jobs/view/software-engineer-i-at-axon-4441449065",
+    "note": "Kỹ sư phần mềm cấp đầu (Level I); bằng CNTT hoặc ~2 năm kinh nghiệm.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Product Business Analyst",
+    "company": "Kingfoodmart",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/it-jobs/product-business-analyst-kingfoodmart-2229",
+    "note": "Product BA mảng bán lẻ; yêu cầu từ 4 năm BA/Product.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Data Analyst (Commercial)",
+    "company": "Kingfoodmart",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/it-jobs/data-analyst-commercial-kingfoodmart-0838",
+    "note": "Phân tích dữ liệu thương mại; 2–4 năm BI/Data Analyst.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Data Analyst (User Growth & Ecom)",
+    "company": "Kingfoodmart",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/it-jobs/data-analyst-user-growth-ecom-kingfoodmart-0522",
+    "note": "Phân tích dữ liệu tăng trưởng người dùng/TMĐT; 2–4 năm.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Data Engineer (Python, SQL, ETL/ELT)",
+    "company": "HAPAS",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/it-jobs/data-engineer-python-sql-etl-elt-hapas-2847",
+    "note": "Data Engineer Python/SQL/ETL; từ 1 năm kinh nghiệm.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Data Scientist - AGI Project",
+    "company": "Trusting Social",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/it-jobs/data-scientist-agi-project-trusting-social-3343",
+    "note": "Data Scientist tại công ty fintech chấm điểm tín dụng/AI.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Database Engineer (Oracle, Linux, SQL)",
+    "company": "Central Retail",
+    "salary": "Thỏa thuận",
+    "deadline": "",
+    "source": "ITviec",
+    "url": "https://itviec.com/it-jobs/database-engineer-oracle-linux-sql-central-retail-0232",
+    "note": "Kỹ sư CSDL Oracle/SQL; yêu cầu 4+ năm.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Nhân viên Bán sản phẩm Thị trường tài chính KHCN (FX Sales)",
+    "company": "Ngân Hàng TMCP Phương Đông - OCB",
+    "salary": "Cạnh tranh",
+    "deadline": "2026-11-12",
+    "source": "CareerViet",
+    "url": "https://careerviet.vn/vi/tim-viec-lam/k-thi-truong-tai-chinh_nhan-vien-ban-san-pham-thi-truong-tai-chinh-khcn-fx-sales.35C8A405.html",
+    "note": "Bán sản phẩm ngoại hối/thị trường tài chính KHCN tại OCB; cấp nhân viên.",
+    "added": "2026-11-02",
+    "cat": "chinh"
+  },
+  {
+    "title": "Trợ Giảng/Giảng Viên Phân Tích Dữ Liệu Part-time",
+    "company": "Datapot Analytics Group",
+    "salary": "4–20 triệu/tháng (tùy vị trí)",
+    "deadline": "2026-11-15",
+    "source": "YBOX",
+    "url": "https://ybox.vn/tuyen-dung/hn-hcm-cong-ty-datapot-analytics-group-tuyen-dung-tro-giang-giang-vien-phan-tich-du-lieu-part-time-2026-6ad05a655637854308e68142",
+    "note": "Trợ giảng/giảng dạy phân tích dữ liệu buổi tối (19h30–21h30, 2 buổi/tuần) tại HCM.",
+    "added": "2026-11-02",
+    "cat": "phu"
   }
 ]
