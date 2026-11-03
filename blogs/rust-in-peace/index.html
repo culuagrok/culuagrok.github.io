@@ -25,6 +25,21 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
 .blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
 .blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
 <link rel="icon" href="data:,">
@@ -54,6 +69,16 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <strong>Tác giả:</strong> Ha Pham · <strong>Ngày:</strong> 29 tháng 10, 2026<br>
 Thẻ: rust · memory-safety</p>
 <p class="blog-note">Bản dịch tiếng Việt của bài gốc <a href="https://calif.io/research/rust-in-peace" target="_blank" rel="noopener">Rust in Peace</a> trên Calif — bản quyền thuộc tác giả/Calif. Bài dịch chỉ nhằm mục đích chia sẻ kỹ thuật; mọi quyền đối với nội dung gốc thuộc về Calif.</p>
+<section class="blog-tldr" aria-label="TL;DR">
+<h2>TL;DR</h2>
+<ul>
+<li>Viết lại toàn bộ C++ sang Rust thường không khả thi; Calif đề xuất thay thế có chọn lọc các thành phần dễ lỗi memory-safety bằng Rust, giữ phần còn lại bằng C/C++.</li>
+<li>Cần cầu nối interop để C++ gọi Rust; binding viết tay nhanh phức tạp vì ownership và kiểu khác nhau — các công cụ như cxx, bindgen, Diplomat, Crubit tự động hóa phần lớn việc này.</li>
+<li>Demo ICU4C cũ lộ CVE-2021-30535 use-after-free; thay bằng ICU4X Rust qua Crubit thì cùng kịch bản collation chạy ổn.</li>
+<li>Crubit + Corrosion sinh binding C++ từ API Rust mỏng; vẫn còn <code>unsafe</code> ở ranh giới — binding và mã hỗ trợ vẫn cần review/test.</li>
+<li>Chi phí gọi qua Crubit khoảng 1,0–2,4% chậm hơn gọi Rust trực tiếp theo benchmark của bài; memory safety chỉ là một phần phòng thủ rộng hơn.</li>
+</ul>
+</section>
 <p><em>Thay thế các thành phần C++ dễ bị tổn thương bằng Rust, từng binding một.</em></p>
 <nav class="blog-toc" aria-label="Mục lục"><h2>Mục lục</h2><ol>
 <li><a href="#boi-canh">Bối cảnh</a></li>
@@ -277,12 +302,57 @@ int main(int argc, char** argv) {
 <p>Trong <code>Locale::setKeywordValue()</code>, <a href="https://github.com/unicode-org/icu/blob/5f681ecbc75898a6484217b322f3883b6d1b2049/icu4c/source/common/locid.cpp#L1350-L1371" target="_blank" rel="noopener">dòng 1360 giải phóng buffer cũ, và dòng 1362 cập nhật <code>fullName</code>, để <code>baseName</code> bị dangling</a>. Vì các con trỏ không còn khớp, ICU4C bỏ qua việc dựng lại base name. Một lần copy sau đó đọc bộ nhớ đã giải phóng, và lúc hủy có thể giải phóng lần nữa như Hình 2 bên dưới.</p>
 <img src="img/p3.png" alt="After reallocation, fullName points to a new buffer while baseName points to freed memory." loading="lazy">
 <p class="cap">Con trỏ baseName bị dangling sau khi tái cấp phát</p>
+<section class="blog-insight" aria-label="Know-how và Insight">
+<h2>Know-how &amp; Insight</h2>
+<p class="blog-insight-label">Ghi chú của người dịch — không phải lời của tác giả</p>
+<p>Bài này là playbook di trú dần C++ → Rust thay vì big-bang rewrite. Một số điểm áp dụng được:</p>
+<ol>
+<li><strong>Ưu tiên bề mặt dễ bị tấn công.</strong> Không cần Rust hóa cả monolith; chọn thư viện parse, collation, codec, crypto wrapper — nơi UAF/OOB từng xảy ra — rồi giữ caller C++.</li>
+<li><strong>Thu hẹp API trước khi sinh binding.</strong> Crubit không cover mọi trait/kiểu Rust; lớp bọc mỏng chỉ phơi thao tác cần thiết giúp binding biên dịch được và giảm mặt tấn công.</li>
+<li><strong>So sánh tay vs tool.</strong> Ba hàm create/compare/destroy thủ công đã đủ nặng; mở rộng API thì Crubit/Corrosion đáng hơn để giảm boilerplate và lỗi ownership.</li>
+<li><strong>Ranh giới vẫn unsafe.</strong> Memory-safe bên Rust không tự làm an toàn phía C++; review binding sinh ra và thêm test AddressSanitizer / fuzz ở cả hai phía.</li>
+<li><strong>Đo overhead trước khi từ chối.</strong> Bài báo ~1–2,4% chậm cho collator qua Crubit — với nhiều đường nóng, con số này chấp nhận được đổi lấy giảm CVE class.</li>
+<li><strong>Kế hoạch phòng thủ tầng.</strong> Memory-safe bindings chỉ là lớp đầu; vẫn cần mitigation, sandbox và hardening supply chain như Calif nêu ở đầu bài.</li>
+</ol>
+</section>
+<section class="blog-mindmap" aria-label="Mindmap">
+<h2>Mindmap</h2>
+<div class="blog-mindmap-scroll pele">
+<pre class="mermaid">mindmap
+  root((Rust in Peace))
+    Boi canh
+      Viet lai toan bo kho
+      Thay the chon loc
+      C++ goi Rust
+    Cong cu interop
+      cxx
+      bindgen
+      Diplomat
+      Crubit
+    Vi du ICU
+      ICU4C UAF CVE
+      ICU4X an toan hon
+      Demo Crubit
+    Ran gioi an toan
+      Van con unsafe
+      Review binding
+      Loi vector Crubit
+    Hieu nang
+      Cham them 1 den 2 phan tram
+      Doi lay an toan
+    Ket luan
+      Di tru dan
+      Memory safety la mot lop
+</pre>
+</div>
+</section>
 </article>
 <p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://calif.io/research/rust-in-peace" target="_blank" rel="noopener">Bài gốc trên Calif</a></p>
 </main>
 </div>
 </div>
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
 </body>
 </html>

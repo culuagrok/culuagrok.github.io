@@ -36,6 +36,11 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
 .blog-insight li{margin:.4em 0}
 .blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
 <link rel="icon" href="data:,">
@@ -103,12 +108,41 @@ Thẻ: ai-agents · programming-languages · opus · category-theory</p>
 </ol>
 <p><em>Lưu ý:</em> Zed chưa phát hành tại thời điểm bài gốc; hãy theo <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a> cho cập nhật từ tác giả. Các con số tiến độ trên ảnh (ví dụ ~16–17/246 task) là snapshot lúc đăng, không phải cam kết roadmap công khai.</p>
 </section>
+<section class="blog-mindmap" aria-label="Mindmap">
+<h2>Mindmap</h2>
+<div class="blog-mindmap-scroll pele">
+<pre class="mermaid">mindmap
+  root((Ngon ngu Zed))
+    Thiet ke 20 nam
+      Category theory
+      Tu song song hoa
+      Khong GC khong malloc tay
+      Partial evaluation
+      Don vi do trong kieu
+    Ke hoach bang Opus
+      200 trang ghi chu
+      Gop thanh ke hoach
+    Phe binh cheo
+      Claude ChatGPT Gemini
+      Meta-critique
+      All-pairs dac ta
+    DAG nhiem vu
+      Topo sort buoc nho
+      Visualizer realtime
+      Trang thai task
+    Ket luan
+      Doi quan agent
+      Bu bang thong con nguoi
+</pre>
+</div>
+</section>
 </article>
 <p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://x.com/LH/status/2117484142753648831" target="_blank" rel="noopener">Bài gốc trên X</a> · <a href="https://x.com/LH" target="_blank" rel="noopener">@LH</a></p>
 </main>
 </div>
 </div>
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
 </body>
 </html>

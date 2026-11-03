@@ -26,6 +26,21 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
 .blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
 .blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
 <link rel="icon" href="data:,">
@@ -55,6 +70,16 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <strong>Tác giả:</strong> DeepSeek Harness (Yujia Qiao &amp; nhóm) · <strong>Ngày:</strong> 1 tháng 11, 2026<br>
 Thẻ: agents · architecture · deepseek-harness</p>
 <p class="blog-note">Bản dịch tiếng Việt của bài X Article <a href="https://x.com/DeepSeekHarness/status/2116857257245987236" target="_blank" rel="noopener">Exploring Super-agent Design: Towards a More Autonomous Agent System</a> bởi <a href="https://x.com/DeepSeekHarness" target="_blank" rel="noopener">@DeepSeekHarness</a>. Bài gốc ghi là bản dịch máy từ tiếng Trung; bản quyền thuộc DeepSeek Harness / DeepSeek. Prototype liên quan: <a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank" rel="noopener">dsh-superagent-prototype</a> (GitHub). Bài dịch chỉ nhằm chia sẻ kỹ thuật; mọi quyền đối với nội dung gốc thuộc về tác giả/DeepSeek.</p>
+<section class="blog-tldr" aria-label="TL;DR">
+<h2>TL;DR</h2>
+<ul>
+<li>Super-agent là agent liên tục, năng suất, chủ động và bền vững — vượt giới hạn agent gắn một session do người điều khiển thủ công.</li>
+<li>Kiến trúc hai tầng: Router sống lâu tương tác/điều phối; nhiều Worker cô lập ngữ cảnh chạy song song, không trả lời người trực tiếp.</li>
+<li>Đầu vào chính là Trigger sự kiện môi trường; lọc Fast/Slow Path, subscription + pass-through, Inline &amp; Spill / Chain of Recall, và speculative execution.</li>
+<li>ReAct bất đồng bộ full-duplex + phản hồi theo kênh; tách compute, state bền vững và môi trường thực thi; Watchdog ngoài tự phục hồi.</li>
+<li>Thí nghiệm sơ bộ: Super-agent hoàn thành nhanh/ổn hơn single-session; pass-through cắt ~37% cache-read token của Router. Còn bài toán mở về scale, UX không-session, A2A và bảo mật.</li>
+</ul>
+</section>
 <nav class="blog-toc" aria-label="Mục lục"><h2>Mục lục</h2><ol><li><a href="#1-super-agent">1. Super-agent</a></li><li><a href="#2-two-level-architecture">2. Kiến trúc hai tầng</a></li><li><a href="#2-1-router-layer">2.1 Tầng Router</a></li><li><a href="#2-2-worker-layer">2.2 Tầng Worker</a></li><li><a href="#3-event-driven-triggers">3. Trigger theo sự kiện</a></li><li><a href="#3-1-event-filtering">3.1 Lọc sự kiện</a></li><li><a href="#3-2-event-routing">3.2 Định tuyến sự kiện</a></li><li><a href="#3-3-context-organization">3.3 Tổ chức ngữ cảnh</a></li><li><a href="#3-4-acting-ahead">3.4 Hành động trước</a></li><li><a href="#4-full-duplex-multi-channel-interaction">4. Tương tác full-duplex đa kênh</a></li><li><a href="#4-1-full-duplex">4.1 Full-Duplex</a></li><li><a href="#4-2-multi-channel">4.2 Đa kênh</a></li><li><a href="#5-separating-compute-state-and-environments">5. Tách compute, state và môi trường</a></li><li><a href="#5-1-separating-compute-from-state">5.1 Tách compute khỏi state</a></li><li><a href="#5-2-separating-compute-from-execution-environments">5.2 Tách compute khỏi môi trường thực thi</a></li><li><a href="#6-watchdog">6. Watchdog</a></li><li><a href="#7-preliminary-experiments">7. Thí nghiệm sơ bộ</a></li><li><a href="#7-1-ablation-study">7.1 Nghiên cứu ablation</a></li><li><a href="#7-2-router-layer-batching">7.2 Batching tầng Router</a></li><li><a href="#8-open-problems">8. Các bài toán mở</a></li><li><a href="#8-1-how-to-scale-the-two-layer-architecture">8.1 Làm sao scale kiến trúc hai tầng</a></li><li><a href="#8-2-how-to-work-with-an-agent-without-sessions">8.2 Làm việc với agent không session như thế nào</a></li><li><a href="#8-3-how-to-define-context-boundaries-and-collaborate-via-a2a">8.3 Định nghĩa biên ngữ cảnh và cộng tác qua A2A</a></li><li><a href="#8-4-how-to-ensure-security-and-privacy">8.4 Đảm bảo bảo mật và riêng tư</a></li><li><a href="#9-conclusion">9. Kết luận</a></li></ol></nav>
 <img src="img/poster.jpg" alt="Ảnh bìa: Exploring Super-agent Design" loading="lazy">
 <blockquote>Bài gốc viết bằng tiếng Trung. Đây là bản dịch máy sang tiếng Anh.</blockquote>
@@ -225,12 +250,59 @@ Thẻ: agents · architecture · deepseek-harness</p>
 <blockquote>Một phần thiết kế trong bài này được triển khai trong <a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank" rel="noopener"><strong>dsh-superagent-prototype</strong></a>. Plugin này chỉ là prototype để kiểm chứng hướng kỹ thuật, không phải sản phẩm chính thức của DeepSeek.</blockquote>
 <blockquote>Tác giả &amp; Lời cảm ơn</blockquote>
 <blockquote>Bài viết dựa trên công việc chung của nhóm DeepSeek Harness. Yujia Qiao triển khai hệ thống và viết bài. Huanqi Cao, Zui Chen, Xieting Chu, Tianyi Cui, Shiyuan Feng, Yudong Han, Kexin Liu, Shichun Liu, Gesi Luo, Yifan Shi, Tongrui Xiong, Hanxiang Xu, C.C. Yu, Ziya Zhang, F. Zhou và những người khác tham gia review, thảo luận và góp ý. Cả hệ thống lẫn bài viết này đều nợ nhiều vào trao đổi hàng ngày của nhóm và kinh nghiệm họ đã tích lũy.</blockquote>
+<section class="blog-insight" aria-label="Know-how và Insight">
+<h2>Know-how &amp; Insight</h2>
+<p class="blog-insight-label">Ghi chú của người dịch — không phải lời của tác giả</p>
+<p>Bài DeepSeek Harness phác kiến trúc hệ thống cho agent luôn online, không phải feature đã GA. Gợi ý áp dụng khi dựng bot nội bộ / CI agent:</p>
+<ol>
+<li><strong>Tách “điều phối” khỏi “làm việc”.</strong> Một session vừa chat vừa chạy tool dài sẽ nghẽn; Router mỏng + Worker mạnh khớp pattern lead/worker trong team agent.</li>
+<li><strong>Sự kiện môi trường thay vì chỉ prompt.</strong> Nối IM, GitHub, CI làm Trigger; lọc deterministic trước rồi mới LLM — giảm chi phí và độ trễ trên kênh nhiễu.</li>
+<li><strong>Pass-through / subscribe Thread.</strong> Follow-up cùng PR hoặc topic đi thẳng Worker đã nhận việc; Router chỉ cold-start và điều phối xuyên nhiệm vụ.</li>
+<li><strong>Ngữ cảnh như cache.</strong> Inline tóm tắt + ID, Spill phần dài, Chain of Recall theo đồ thị tham chiếu — hữu ích khi Router sống lâu không nhét hết lịch sử.</li>
+<li><strong>Full-duplex và tách máy.</strong> start/stop bất đồng bộ để chat không bị chặn; Agent Loop trên cloud + daemon trên máy dev giữ credential/local change tại chỗ.</li>
+<li><strong>Watchdog ngoài vòng chính.</strong> Giám sát cả hang logic chứ không chỉ process alive; và nhớ bài toán bảo mật khi cloud điều khiển endpoint có secret.</li>
+</ol>
+<p><em>Lưu ý:</em> số liệu thí nghiệm là workload tổng hợp chỉ báo; prototype công khai là <a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank" rel="noopener">dsh-superagent-prototype</a>, không phải sản phẩm chính thức DeepSeek.</p>
+</section>
+<section class="blog-mindmap" aria-label="Mindmap">
+<h2>Mindmap</h2>
+<div class="blog-mindmap-scroll pele">
+<pre class="mermaid">mindmap
+  root((Super-agent))
+    Bon dac tinh
+      Lien tuc
+      Nang suat
+      Chu dong
+      Ben vung
+    Kien truc hai tang
+      Router song lau
+      Worker co lap
+      Batching su kien
+    Trigger su kien
+      Loc Fast Slow
+      Subscribe pass-through
+      Inline Spill Recall
+      Speculative exec
+    Tuong tac
+      Full-duplex ReAct
+      Da kenh IM GitHub
+    Ha tang
+      Tach compute state
+      BYOM daemon
+      Watchdog
+    Thi nghiem va mo
+      Ablation
+      Scale A2A bao mat
+</pre>
+</div>
+</section>
 </article>
 <p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://x.com/DeepSeekHarness/status/2116857257245987236" target="_blank" rel="noopener">Bài gốc trên X</a> · <a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank" rel="noopener">Prototype trên GitHub</a></p>
 </main>
 </div>
 </div>
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
 </body>
 </html>
