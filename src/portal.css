@@ -293,6 +293,16 @@ html:not([data-layout="portal"]) .pg-chinh .card{overflow-x:auto}
 .blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0;padding:0}
 .blog-list .d{font-size:13px;color:var(--color-muted,#666);margin:0 0 8px}
 .blog-list p{margin:0;font-size:15px;line-height:1.55}
+.blog-tldr{background:var(--color-panel,#eff6ff);border:1px solid var(--color-bd2,#bfdbfe);border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:var(--color-fg,#1e40af)}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:var(--color-panel,#fefce8);border:1px solid var(--color-bd2,#fde68a);border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:var(--color-fg,#854d0e)}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:var(--color-muted,#a16207);margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
 [data-layout="portal"] .pg-blog .yj-search{display:none}
 [data-layout="portal"] .pg-blog .yj-ticker{display:none}
 @media (max-width:900px){
