@@ -4065,5 +4065,60 @@
     "note": "Pha chế/phục vụ theo giờ tại Quận 11.",
     "added": "2026-11-03",
     "cat": "phu"
+  },
+  {
+    "title": "Chuyên viên Báo cáo và Phân tích Dữ liệu",
+    "company": "Ngân hàng VIB",
+    "salary": "Thỏa thuận",
+    "deadline": "2026-11-16",
+    "source": "VIB Careers",
+    "url": "https://careers.vib.com.vn/careers/job/32055",
+    "note": "Báo cáo, phân tích dữ liệu thu hồi nợ; cấp Chuyên viên ~2 năm KN.",
+    "cat": "chinh",
+    "added": "2026-11-04"
+  },
+  {
+    "title": "HO - Business Intelligence Executive",
+    "company": "ACB - Ngân hàng TMCP Á Châu",
+    "salary": "Thỏa thuận",
+    "deadline": "2026-11-30",
+    "source": "Joboko",
+    "url": "https://vn.joboko.com/viec-lam-ho-business-intelligence-executive-xvi3924737",
+    "note": "BA/BI ngân hàng: Power BI, SQL, Tableau; yêu cầu 1 năm KN ngân hàng.",
+    "cat": "chinh",
+    "added": "2026-11-04"
+  },
+  {
+    "title": "Chuyên viên Hỗ trợ Kinh doanh NHBL (Phân tích dữ liệu)",
+    "company": "Ngân hàng TMCP Quốc Tế Việt Nam (VIB)",
+    "salary": "Thỏa thuận",
+    "deadline": "2026-11-15",
+    "source": "CareerViet",
+    "url": "https://careerviet.vn/vi/jobseekers/jobs/apply?job_id=35C8AA54",
+    "note": "Phân tích dữ liệu bán lẻ ngân hàng, hợp nền tảng ngân hàng + dữ liệu.",
+    "cat": "chinh",
+    "added": "2026-11-04"
+  },
+  {
+    "title": "Phục vụ ca tối 16h-22h Quận 11",
+    "company": "Quán Thiệu Anh",
+    "salary": "25.000 đ/giờ",
+    "deadline": "2026-11-16",
+    "source": "Muaban.net",
+    "url": "https://muaban.net/viec-lam/nhan-vien-phuc-vu-quan-11-ho-chi-minh/can-tuyen-1-nam-phuc-vu-ca-toi-id71329212",
+    "note": "Ca tối, bao ăn; nghỉ thứ 2.",
+    "cat": "phu",
+    "added": "2026-11-04"
+  },
+  {
+    "title": "Nhân viên phục vụ part-time Tân Bình",
+    "company": "Quán Cua Ngon",
+    "salary": "30.000 đ/giờ",
+    "deadline": "",
+    "source": "Việc Làm Tốt",
+    "url": "https://www.vieclamtot.com/viec-lam-quan-tan-binh-tp-ho-chi-minh/134079919.htm",
+    "note": "Ca tối 17h/18h-22h, có tip.",
+    "cat": "phu",
+    "added": "2026-11-04"
   }
 ]
