@@ -88,8 +88,13 @@ async function renderWithPele(blocks) {
       host.appendChild(target);
       applyPeleThemeVars(target);
       if (typeof mount === 'function') {
+        const width = Math.max(host.clientWidth || 0, host.parentElement?.clientWidth || 0, 640);
         const mounted = mount(target, source, {
           zoom: false,
+          maxWidth: width,
+          autoDirection: false,
+          fontSize: 15,
+          padding: 12,
           onError(err) {
             console.warn('[mindmap] Pele mount error', err);
           },
