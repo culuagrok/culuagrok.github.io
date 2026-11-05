@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>API JSON mới cho Go — encoding/json/v2 — Blog</title>
+<meta name="description" content="Bản dịch tiếng Việt bài Go Blog về encoding/json/v2 và encoding/json/jsontext ổn định trong Go 1.27: vấn đề của v1, API mới, tương thích và di chuyển.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">API JSON mới cho Go</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>API JSON mới cho Go</h1>
+<p class="blog-meta"><strong>Tiêu đề gốc:</strong> A new Go API for JSON<br>
+<strong>Tác giả:</strong> Michael Pratt, Joe Tsai, Daniel Martí, Johan Brandhorst-Satzkorn, Roger Peppe, Chris Hines, and Damien Neil<br>
+<strong>Ngày:</strong> 4 tháng 11, 2026<br>
+Thẻ: go · encoding/json · json/v2 · jsontext · go1.27</p>
+<p class="blog-note">Bản dịch tiếng Việt của bài <a href="https://go.dev/blog/jsonv2" target="_blank" rel="noopener">A new Go API for JSON</a> trên The Go Blog (4 tháng 11, 2026). Nội dung văn bản gốc thuộc giấy phép <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>; mã nguồn minh họa thuộc giấy phép BSD (xem <a href="https://go.dev/copyright" target="_blank" rel="noopener">go.dev/copyright</a> và footer trang Go). Bản dịch ghi công các tác giả gốc và liên kết về bài gốc; chỉ nhằm chia sẻ kỹ thuật.</p>
+
+<section class="blog-tldr" aria-label="TL;DR">
+<h2>TL;DR</h2>
+<ul>
+<li>Go <strong>1.27</strong> đưa <code>encoding/json/v2</code> và <code>encoding/json/jsontext</code> vào trạng thái <strong>ổn định, dùng được rộng rãi</strong> — sau giai nghiệm (<code>GOEXPERIMENT=jsonv2</code>) từ Go 1.25.</li>
+<li><code>jsontext</code> tách lớp cú pháp (encode/decode token &amp; value, streaming thật); <code>json/v2</code> lo ngữ nghĩa (marshal/unmarshal) và nhận <code>Options</code> như tham số hạng nhất.</li>
+<li>Mặc định an toàn hơn: từ chối UTF-8 không hợp lệ, từ chối tên trùng trong object, nil slice/map → <code>[]</code>/<code>{}</code>, khớp tên field phân biệt hoa thường, <code>omitempty</code> theo “JSON rỗng”.</li>
+<li><code>Unmarshal</code> của v2 nhanh hơn rõ (benchmark lên tới ~10×); migrate dần nhờ options tương thích v1/v2; dưới hood v1 được triển khai trên v2.</li>
+</ul>
+</section>
+
+<nav class="blog-toc" aria-label="Mục lục">
+<h2>Mục lục</h2>
+<ol>
+<li><a href="#intro">Giới thiệu</a></li>
+<li><a href="#problems">Vấn đề với encoding/json</a></li>
+<li><a href="#fix-directly">Cố sửa encoding/json trực tiếp</a></li>
+<li><a href="#jsontext">Xây trên encoding/json/jsontext</a></li>
+<li><a href="#v2">Giới thiệu encoding/json/v2</a></li>
+<li><a href="#compat">Tương thích</a></li>
+<li><a href="#migration">Di chuyển</a></li>
+<li><a href="#more">Thêm thông tin</a></li>
+<li><a href="#history">Một hành trình dài</a></li>
+<li><a href="#insight">Know-how &amp; Insight</a></li>
+<li><a href="#mindmap">Mindmap</a></li>
+</ol>
+</nav>
+
+<h2 id="intro">Giới thiệu</h2>
+<p>JavaScript Object Notation (JSON) là định dạng trao đổi dữ liệu đơn giản, định dạng dữ liệu phổ biến nhất trên internet, và được các chương trình Go đọc/ghi rộng rãi. Go đã có hỗ trợ JSON trong thư viện chuẩn từ lâu trước Go 1.0. Chúng tôi lần đầu viết về hỗ trợ JSON trong Go hơn 15 năm trước!</p>
+<p>Theo thời gian, các package tiến hóa theo nhu cầu người dùng, và <code>encoding/json</code> cũng không ngoại lệ. Năm ngoái, chúng tôi đã viết về một API thực nghiệm mới cho JSON, nhằm mang lại các cải tiến và sửa lỗi đã chờ đợi lâu.</p>
+<p>Sau thêm phản hồi và tinh chỉnh, các package mới <code>encoding/json/v2</code> và <code>encoding/json/jsontext</code> đã ổn định và sẵn sàng dùng rộng rãi trong Go 1.27! Bài này là phiên bản cập nhật của bài giới thiệu thí nghiệm, mô tả các vấn đề của <code>encoding/json</code>, và giới thiệu các package mới.</p>
+
+<h2 id="problems">Vấn đề với <code>encoding/json</code></h2>
+<p>Nhìn chung, <code>encoding/json</code> đã đứng vững tốt. Ý tưởng marshal và unmarshal các kiểu Go tùy ý với một biểu diễn JSON mặc định, kết hợp khả năng tùy biến biểu diễn, đã chứng tỏ rất linh hoạt. Tuy nhiên, qua nhiều năm kể từ khi ra mắt, nhiều người dùng đã chỉ ra nhiều hạn chế.</p>
+
+<h3>Lỗi hành vi</h3>
+<p>Có nhiều lỗi hành vi trong <code>encoding/json</code>:</p>
+<ul>
+<li><strong>Xử lý cú pháp JSON thiếu chính xác:</strong> Qua thời gian, JSON được chuẩn hóa mạnh hơn để các chương trình giao tiếp đúng. Nói chung, decoder ngày càng nghiêm khi từ chối đầu vào mơ hồ, nhằm giảm khả năng hai triển khai hiểu khác nhau (nhưng vẫn “thành công”) về cùng một giá trị JSON.</li>
+<li><code>encoding/json</code> hiện chấp nhận UTF-8 không hợp lệ, trong khi Internet Standard mới nhất (RFC 8259) yêu cầu UTF-8 hợp lệ. Hành vi mặc định nên báo lỗi khi gặp UTF-8 không hợp lệ, thay vì âm thầm làm hỏng dữ liệu — điều có thể gây vấn đề ở tầng sau.</li>
+<li><code>encoding/json</code> hiện chấp nhận object có tên member trùng. RFC 8259 không quy định cách xử lý tên trùng, nên triển khai được tự do chọn giá trị tùy ý, gộp giá trị, bỏ giá trị, hoặc báo lỗi. Sự hiện diện của tên trùng tạo ra một giá trị JSON không có nghĩa được thống nhất toàn cầu. Điều này có thể bị khai thác trong ứng dụng bảo mật và đã từng bị khai thác (như CVE-2017-12635). Hành vi mặc định nên nghiêng về an toàn và từ chối tên trùng.</li>
+<li><strong>Lộ tính nil của slice và map:</strong> JSON thường dùng để giao tiếp với chương trình dùng triển khai JSON không cho phép <code>null</code> được unmarshal vào kiểu dữ liệu kỳ vọng là mảng hoặc object JSON. Vì <code>encoding/json</code> marshal slice hoặc map nil thành JSON <code>null</code>, điều này có thể gây lỗi khi phía kia unmarshal. Một khảo sát cho thấy hầu hết người dùng Go thích mặc định marshal slice/map nil thành mảng hoặc object JSON rỗng.</li>
+<li><strong>Unmarshal không phân biệt hoa thường:</strong> Khi unmarshal, tên member object JSON được ánh xạ tới tên field struct Go bằng khớp không phân biệt hoa thường. Đây là mặc định gây ngạc nhiên, tiềm ẩn rủi ro bảo mật, và hạn chế hiệu năng.</li>
+<li><strong>Gọi method không nhất quán:</strong> Do chi tiết triển khai, các method <code>MarshalJSON</code> khai báo trên pointer receiver được <code>encoding/json</code> gọi không nhất quán. Dù được coi là bug, không thể sửa vì quá nhiều ứng dụng phụ thuộc hành vi hiện tại.</li>
+</ul>
+
+<h3>Thiếu sót API</h3>
+<p>API của <code>encoding/json</code> có thể khó dùng hoặc hạn chế:</p>
+<ul>
+<li>Khó unmarshal đúng từ một <code>io.Reader</code>. Người dùng thường viết <code>json.NewDecoder(r).Decode(v)</code>, cách này không từ chối rác trailing ở cuối input.</li>
+<li>Có thể đặt option trên kiểu <code>Encoder</code> và <code>Decoder</code>, nhưng không dùng được với hàm <code>Marshal</code> và <code>Unmarshal</code>. Tương tự, kiểu triển khai interface <code>Marshaler</code> và <code>Unmarshaler</code> không dùng được các option, và không có cách “luồn” option xuống call stack. Ví dụ, option <code>Decoder.DisallowUnknownFields</code> mất hiệu lực khi gọi method <code>UnmarshalJSON</code> tùy chỉnh.</li>
+<li>Các hàm <code>Compact</code>, <code>Indent</code>, và <code>HTMLEscape</code> ghi vào <code>bytes.Buffer</code> thay vì thứ linh hoạt hơn như <code>[]byte</code> hoặc <code>io.Writer</code>. Điều này hạn chế khả năng dùng các hàm đó.</li>
+</ul>
+
+<h3>Hạn chế hiệu năng</h3>
+<p>Gạt sang một bên chi tiết triển khai nội bộ, API công khai buộc package vào một số hạn chế hiệu năng:</p>
+<ul>
+<li><strong>MarshalJSON:</strong> Method interface <code>MarshalJSON</code> buộc triển khai phải cấp phát <code>[]byte</code> trả về. Ngoài ra, ngữ nghĩa yêu cầu <code>encoding/json</code> kiểm tra kết quả là JSON hợp lệ và định dạng lại cho khớp indentation đã chỉ định.</li>
+<li><strong>UnmarshalJSON:</strong> Method interface <code>UnmarshalJSON</code> yêu cầu cung cấp một giá trị JSON đầy đủ (không có dữ liệu trailing). Điều này buộc <code>encoding/json</code> parse toàn bộ giá trị JSON cần unmarshal để xác định nơi nó kết thúc trước khi gọi <code>UnmarshalJSON</code>. Sau đó, chính method <code>UnmarshalJSON</code> lại phải parse lại JSON đã cung cấp.</li>
+<li><strong>Thiếu streaming:</strong> Dù kiểu <code>Encoder</code> và <code>Decoder</code> thao tác trên <code>io.Writer</code> hoặc <code>io.Reader</code>, chúng vẫn buffer toàn bộ giá trị JSON trong bộ nhớ. Method <code>Decoder.Token</code> để đọc từng token tốn nhiều cấp phát và không có API tương ứng để ghi token.</li>
+</ul>
+<p>Hơn nữa, nếu triển khai của <code>MarshalJSON</code> hoặc <code>UnmarshalJSON</code> đệ quy gọi hàm <code>Marshal</code> hoặc <code>Unmarshal</code>, hiệu năng trở thành bậc hai (quadratic).</p>
+
+<h2 id="fix-directly">Cố sửa <code>encoding/json</code> trực tiếp</h2>
+<p>Giới thiệu một major version mới, không tương thích của một package là quyết định nặng. Nếu có thể, chúng ta nên cố sửa package hiện có.</p>
+<p>Dễ tương đối khi thêm tính năng mới, nhưng khó thay đổi tính năng hiện có. Đáng tiếc, các vấn đề trên là hệ quả vốn có của API hiện tại, khiến chúng thực tế không thể sửa trong khuôn khổ lời hứa tương thích Go 1.</p>
+<p>Về nguyên tắc có thể khai báo tên riêng như <code>MarshalV2</code> hoặc <code>UnmarshalV2</code>, nhưng điều đó chẳng khác tạo một không gian tên song song trong cùng package. Điều này dẫn tới <code>encoding/json/v2</code> (gọi tắt là <code>v2</code>), nơi chúng ta có thể thay đổi trong một không gian tên <code>v2</code> riêng, đối lập với <code>encoding/json</code> (gọi tắt là <code>v1</code>).</p>
+
+<h2 id="jsontext">Xây trên <code>encoding/json/jsontext</code></h2>
+<p>Trước khi bàn API <code>v2</code>, chúng tôi trước hết giới thiệu package <code>encoding/json/jsontext</code> — nền tảng cho các cải tiến JSON trong Go.</p>
+<p>Serialization JSON trong Go có thể tách thành hai thành phần chính:</p>
+<ul>
+<li>chức năng <strong>cú pháp</strong> xử lý JSON dựa trên ngữ pháp của nó, và</li>
+<li>chức năng <strong>ngữ nghĩa</strong> định nghĩa quan hệ giữa giá trị JSON và giá trị Go.</li>
+</ul>
+<p>Chúng tôi dùng thuật ngữ “encode” và “decode” cho chức năng cú pháp, và “marshal” / “unmarshal” cho chức năng ngữ nghĩa. Mục tiêu là phân biệt rõ chức năng chỉ liên quan đến encoding với chức năng marshaling.</p>
+<p>Sơ đồ sau tổng quan sự tách này. Khối tím là kiểu; khối xanh là hàm hoặc method. Hướng mũi tên gần đúng với luồng dữ liệu. Nửa dưới sơ đồ, do package <code>jsontext</code> triển khai, chỉ quan tâm cú pháp; nửa trên, do package <code>json/v2</code> triển khai, gán nghĩa ngữ nghĩa cho dữ liệu cú pháp mà nửa dưới xử lý.</p>
+
+<img src="img/api.png" alt="Sơ đồ tách jsontext (cú pháp) và json/v2 (ngữ nghĩa)" loading="lazy" width="100%">
+<p class="cap">Sơ đồ API: jsontext (encode/decode) ở dưới; json/v2 (marshal/unmarshal) ở trên — ảnh từ bài gốc, lưu local</p>
+
+<p>API cơ bản của <code>jsontext</code> như sau:</p>
+<pre><code>package jsontext
+
+type Encoder struct { ... }
+func NewEncoder(io.Writer, ...Options) *Encoder
+func (*Encoder) WriteValue(Value) error
+func (*Encoder) WriteToken(Token) error
+
+type Decoder struct { ... }
+func NewDecoder(io.Reader, ...Options) *Decoder
+func (*Decoder) ReadValue() (Value, error)
+func (*Decoder) ReadToken() (Token, error)
+
+type Kind byte
+type Value []byte
+func (Value) Kind() Kind
+type Token struct { ... }
+func (Token) Kind() Kind
+</code></pre>
+<p>Package <code>jsontext</code> cung cấp chức năng tương tác với JSON ở mức cú pháp và lấy tên từ RFC 8259, mục 2, nơi ngữ pháp dữ liệu JSON được gọi đúng là <code>JSON-text</code>. Vì chỉ tương tác ở mức cú pháp, nó không phụ thuộc reflection của Go.</p>
+<p><code>Encoder</code> và <code>Decoder</code> hỗ trợ encode và decode giá trị cùng token JSON. Constructor nhận các option biến thiên ảnh hưởng hành vi cụ thể. Khác với <code>Encoder</code>/<code>Decoder</code> trong <code>v1</code>, các kiểu mới trong <code>jsontext</code> tránh làm mờ ranh giới cú pháp–ngữ nghĩa và vận hành theo kiểu streaming thật sự.</p>
+<p>Một giá trị JSON là đơn vị dữ liệu đầy đủ và được biểu diễn trong Go bằng một <code>[]byte</code> có tên. Nó giống <code>RawMessage</code> trong <code>v1</code>, nay là type alias tới <code>jsontext.Value</code>. Một giá trị JSON được cấu thành cú pháp từ một hoặc nhiều token JSON. Token JSON được biểu diễn bằng kiểu opaque <code>Token</code> với constructor và method accessor — tương tự <code>Token</code> trong <code>v1</code> nhưng thiết kế để biểu diễn token JSON tùy ý mà không cần cấp phát.</p>
+<p>Để giải quyết vấn đề hiệu năng nền tảng của method interface <code>MarshalJSON</code> và <code>UnmarshalJSON</code>, cần cách encode/decode JSON hiệu quả như chuỗi streaming của token và value. Trong <code>v2</code>, chúng tôi giới thiệu method interface <code>MarshalJSONTo</code> và <code>UnmarshalJSONFrom</code> thao tác trên <code>Encoder</code> hoặc <code>Decoder</code>, cho phép triển khai xử lý JSON theo kiểu streaming thuần. Nhờ đó, package <code>json</code> không còn phải chịu trách nhiệm kiểm tra/định dạng giá trị JSON trả về bởi <code>MarshalJSON</code>, cũng không phải xác định biên của giá trị JSON đưa vào <code>UnmarshalJSON</code>. Những trách nhiệm đó thuộc về <code>Encoder</code> và <code>Decoder</code>.</p>
+
+<h2 id="v2">Giới thiệu <code>encoding/json/v2</code></h2>
+<p>Xây trên package <code>jsontext</code>, chúng tôi giới thiệu package <code>encoding/json/v2</code>. Nó được thiết kế để sửa các vấn đề trong <code>v1</code>, đồng thời vẫn quen thuộc với người dùng package <code>v1</code>. Mục tiêu là các cách dùng <code>v1</code> sẽ vận hành gần như giống khi chuyển thẳng sang <code>v2</code>.</p>
+<p>Ở đây chúng tôi chủ yếu nêu API cấp cao của <code>v2</code>. Để xem ví dụ cách dùng, khuyến khích đọc các example trong package <code>v2</code>, tutorial “Working with JSON”, hoặc blog của Anton Zhiyanov về chủ đề này.</p>
+<p>API cơ bản của <code>v2</code> như sau:</p>
+<pre><code>package json
+
+func Marshal(in any, opts ...Options) (out []byte, err error)
+func MarshalWrite(out io.Writer, in any, opts ...Options) error
+func MarshalEncode(out *jsontext.Encoder, in any, opts ...Options) error
+
+func Unmarshal(in []byte, out any, opts ...Options) error
+func UnmarshalRead(in io.Reader, out any, opts ...Options) error
+func UnmarshalDecode(in *jsontext.Decoder, out any, opts ...Options) error
+</code></pre>
+<p>Hàm <code>Marshal</code> và <code>Unmarshal</code> có chữ ký giống <code>v1</code>, nhưng nhận option để cấu hình hành vi. <code>MarshalWrite</code> và <code>UnmarshalRead</code> thao tác trực tiếp trên <code>io.Writer</code> hoặc <code>io.Reader</code>, tránh phải tạm tạo <code>Encoder</code>/<code>Decoder</code> chỉ để ghi/đọc từ các kiểu đó. <code>MarshalEncode</code> và <code>UnmarshalDecode</code> thao tác trên <code>jsontext.Encoder</code> và <code>jsontext.Decoder</code> và thực ra là triển khai nền của các hàm nêu trên. Khác <code>v1</code>, option là đối số hạng nhất của mọi hàm marshal/unmarshal, mở rộng mạnh tính linh hoạt và khả năng cấu hình của <code>v2</code>. Có nhiều option trong <code>v2</code> không được bài này đề cập hết.</p>
+
+<h3>Tùy biến theo kiểu (type-specified)</h3>
+<p>Giống <code>v1</code>, <code>v2</code> cho phép kiểu tự định nghĩa biểu diễn JSON bằng cách thỏa các interface cụ thể.</p>
+<pre><code>type Marshaler interface {
+    MarshalJSON() ([]byte, error)
+}
+type MarshalerTo interface {
+    MarshalJSONTo(*jsontext.Encoder) error
+}
+
+type Unmarshaler interface {
+    UnmarshalJSON([]byte) error
+}
+type UnmarshalerFrom interface {
+    UnmarshalJSONFrom(*jsontext.Decoder) error
+}
+</code></pre>
+<p>Interface <code>Marshaler</code> và <code>Unmarshaler</code> giống hệt trong <code>v1</code>. Interface mới <code>MarshalerTo</code> và <code>UnmarshalerFrom</code> cho phép kiểu tự biểu diễn thành JSON bằng <code>jsontext.Encoder</code> hoặc <code>jsontext.Decoder</code>. Điều này cho phép option được chuyển tiếp xuống call stack, vì option có thể lấy qua method accessor <code>Options</code> trên <code>Encoder</code> hoặc <code>Decoder</code>.</p>
+<p>Xem example <code>OrderedObject</code> về cách triển khai kiểu tùy chỉnh giữ thứ tự member của object JSON.</p>
+
+<h3>Tùy biến theo caller (caller-specified)</h3>
+<p>Trong <code>v2</code>, caller của <code>Marshal</code> và <code>Unmarshal</code> cũng có thể chỉ định biểu diễn JSON tùy chỉnh cho bất kỳ kiểu nào; hàm do caller chỉ định được ưu tiên hơn method do kiểu định nghĩa hoặc biểu diễn mặc định của kiểu đó.</p>
+<pre><code>func WithMarshalers(*Marshalers) Options
+
+type Marshalers struct { ... }
+func MarshalFunc[T any](fn func(T) ([]byte, error)) *Marshalers
+func MarshalToFunc[T any](fn func(*jsontext.Encoder, T) error) *Marshalers
+
+func WithUnmarshalers(*Unmarshalers) Options
+
+type Unmarshalers struct { ... }
+func UnmarshalFunc[T any](fn func([]byte, T) error) *Unmarshalers
+func UnmarshalFromFunc[T any](fn func(*jsontext.Decoder, T) error) *Unmarshalers
+</code></pre>
+<p><code>MarshalFunc</code> và <code>MarshalToFunc</code> tạo marshaler tùy chỉnh có thể truyền vào lời gọi <code>Marshal</code> qua <code>WithMarshalers</code> để ghi đè marshaling của kiểu cụ thể. Tương tự, <code>UnmarshalFunc</code> và <code>UnmarshalFromFunc</code> hỗ trợ tùy biến tương ứng cho <code>Unmarshal</code>.</p>
+<p>Example <code>ProtoJSON</code> minh họa cách tính năng này cho phép serialization mọi kiểu <code>proto.Message</code> được xử lý bởi package <code>protojson</code>.</p>
+
+<h3>Khác biệt hành vi</h3>
+<p>Dù <code>v2</code> nhắm hành vi gần giống <code>v1</code>, hành vi đã đổi ở một số điểm để xử lý vấn đề của <code>v1</code>, đáng chú ý:</p>
+<ul>
+<li><code>v2</code> báo lỗi khi gặp UTF-8 không hợp lệ.</li>
+<li><code>v2</code> báo lỗi nếu object JSON chứa tên trùng.</li>
+<li><code>v2</code> marshal slice Go nil hoặc map Go nil thành mảng JSON rỗng hoặc object JSON rỗng, tương ứng.</li>
+<li><code>v2</code> unmarshal object JSON vào struct Go bằng khớp <strong>phân biệt hoa thường</strong> từ tên member JSON tới tên field Go.</li>
+<li><code>v2</code> định nghĩa lại option tag <code>omitempty</code> để bỏ field nếu nó sẽ encode thành giá trị JSON “rỗng” (là <code>null</code>, <code>""</code>, <code>[]</code>, và <code>{}</code>).</li>
+<li><code>v2</code> báo lỗi khi cố serialize <code>time.Duration</code>, hiện chưa có biểu diễn mặc định, nhưng cung cấp option để caller quyết định.</li>
+</ul>
+<p>Với hầu hết thay đổi hành vi, có option trên struct tag hoặc option do caller chỉ định để cấu hình vận hành theo ngữ nghĩa <code>v1</code> hoặc <code>v2</code>, hoặc thậm chí hành vi do caller quyết định khác. Xem “Migrating to v2” để biết thêm.</p>
+
+<h3>Tối ưu hiệu năng</h3>
+<p>Hiệu năng <code>Marshal</code> của <code>v2</code> gần ngang <code>v1</code>. Đôi khi nhanh hơn một chút, đôi khi chậm hơn một chút. Hiệu năng <code>Unmarshal</code> của <code>v2</code> nhanh hơn rõ so với <code>v1</code>, với benchmark cho thấy cải thiện lên tới 10×.</p>
+<p>Để đạt mức tăng hiệu năng lớn hơn, các triển khai hiện có của <code>Marshaler</code> và <code>Unmarshaler</code> nên migrate để cũng triển khai <code>MarshalerTo</code> và <code>UnmarshalerFrom</code>, nhằm hưởng lợi từ xử lý JSON theo kiểu streaming thuần. Ví dụ, parse đệ quy đặc tả OpenAPI trong các method <code>UnmarshalJSON</code> làm giảm mạnh hiệu năng ở một dịch vụ Kubernetes cụ thể (xem kubernetes/kube-openapi#315), trong khi chuyển sang <code>UnmarshalJSONFrom</code> cải thiện hiệu năng theo nhiều bậc độ lớn.</p>
+<p>Chi tiết benchmark xem repository <code>go-json-experiment/jsonbench</code>.</p>
+<p>Ngoài cải tiến cấu trúc, nhóm tiếp tục đầu tư tối ưu hiệu năng trong triển khai cho các trường hợp <code>v2</code> chậm hơn <code>v1</code>. Có thể kỳ vọng thêm cải tiến trong Go 1.28.</p>
+
+<h2 id="compat">Tương thích</h2>
+<p>Lời hứa tương thích Go 1 là bảo đảm cốt lõi của dự án Go, cho phép developer xây ứng dụng bền vững theo thời gian và tiếp tục chạy trên các phiên bản Go tương lai.</p>
+<p>Package gốc <code>encoding/json</code> và package mới <code>encoding/json/v2</code> đương nhiên đều thuộc lời hứa tương thích Go 1. Ứng dụng dùng <code>v1</code> sẽ tiếp tục được hỗ trợ vô thời hạn và không bắt buộc phải migrate sang <code>v2</code>.</p>
+<p>Dẫu vậy, khi thiết kế các package <code>v2</code>, chúng tôi muốn làm tốt hơn việc chỉ giữ hỗ trợ <code>v1</code>. Chúng tôi muốn đảm bảo <code>v1</code> và <code>v2</code> tương thích với nhau để các package dùng phiên bản khác nhau vẫn làm việc cùng nhau. Điều đó cho phép hệ sinh thái migrate mượt thay vì buộc người dùng chọn một phiên bản vì lựa chọn của dependency.</p>
+<p>Ví dụ, giả sử package của bạn dùng <code>v2</code> để marshal một struct chứa field có kiểu định nghĩa ở package khác. Package kia có thể dùng method <code>MarshalJSON</code> gốc của <code>v1</code> để định nghĩa hành vi marshal. Không sao — <code>v2</code> hỗ trợ method <code>MarshalJSON</code>, nên marshaling vẫn hoạt động như kỳ vọng.</p>
+<p>Ngược lại, giả sử package của bạn dùng <code>v1</code> để marshal cùng struct đó. Package kia có thể dùng method <code>MarshalJSONTo</code> của <code>v2</code> để hiệu năng tốt hơn. Cũng không sao — triển khai <code>v1</code> hỗ trợ method <code>MarshalJSONTo</code> của <code>v2</code> dưới hood.</p>
+<p>Chúng tôi đạt được điều này bằng cách thiết kế các package mới sao cho, dưới hood, <code>v1</code> được triển khai trên <code>v2</code>. Như đã nêu, <code>v2</code> hỗ trợ nhiều <code>Options</code>. Mỗi khác biệt hành vi được điều khiển bởi một trong các option đó. Vì vậy, <code>v1</code> có thể được triển khai trên <code>v2</code> bằng cách truyền đủ bộ option tương thích <code>v1</code>.</p>
+<p>Với cách này, các bổ sung tương thích ngược như method mới (ví dụ <code>MarshalJSONTo</code>) hoặc struct tag mới (ví dụ <code>embed</code>) tự động được hỗ trợ, mang lợi ích cho người dùng <code>v1</code> hiện hữu.</p>
+
+<h2 id="migration">Di chuyển</h2>
+<p>Việc triển khai <code>v1</code> trên các option của <code>v2</code> còn mang lợi ích cho phép migrate dần từng callsite.</p>
+<p><code>encoding/json</code> tài liệu hóa đầy đủ các khác biệt hành vi giữa <code>v1</code> và <code>v2</code>, cùng option điều khiển từng hành vi.</p>
+<p>Nhiều ứng dụng có thể migrate thẳng sang <code>v2</code> mà không thấy thay đổi hành vi rõ; nhưng ứng dụng phụ thuộc hành vi <code>v1</code> có thể dùng option để chỉ đổi những hành vi chúng phụ thuộc.</p>
+<p>Ví dụ, chọn toàn bộ hành vi <code>v2</code> trừ việc cho phép tên trùng:</p>
+<pre><code>json.Marshal(..., json.DefaultOptionsV2(), jsontext.AllowDuplicateName(true))
+</code></pre>
+<p>Hoặc chọn toàn bộ hành vi <code>v1</code> trừ việc cấm tên trùng:</p>
+<pre><code>json.Marshal(..., jsonv1.DefaultOptionsV1(), jsontext.AllowDuplicateName(false))
+</code></pre>
+<p>Migration Guide của <code>encoding/json/v2</code> đi sâu hơn, bao nhiều kịch bản tiếp cận việc migrate ứng dụng từ <code>v1</code> sang <code>v2</code>.</p>
+
+<h2 id="more">Thêm thông tin</h2>
+<p>Tham khảo thêm khi làm việc với các package JSON mới:</p>
+<ul>
+<li>Tutorial “Working with JSON”,</li>
+<li>Tài liệu package <code>encoding/json/v2</code> và <code>encoding/json/jsontext</code>,</li>
+<li>Tài liệu so sánh <code>v2</code> trong package <code>encoding/json</code>,</li>
+<li>và Migration Guide của <code>encoding/json/v2</code>.</li>
+</ul>
+
+<h2 id="history">Một hành trình dài</h2>
+<p>Việc lập kế hoạch cho major version mới của <code>encoding/json</code> kéo dài nhiều năm. Cuối 2020, thúc đẩy bởi việc không thể sửa các vấn đề trong package hiện tại, Daniel Martí (một trong các maintainer của <code>encoding/json</code>) lần đầu phác thảo suy nghĩ về một package <code>v2</code> giả định sẽ trông như thế nào. Riêng biệt, sau công việc trước đó về Go API cho Protocol Buffers, Joe Tsai thất vọng vì package <code>protojson</code> phải dùng triển khai JSON tùy chỉnh — vì <code>encoding/json</code> vừa không đủ khả năng tuân chuẩn JSON nghiêm hơn mà đặc tả Protocol Buffer yêu cầu, vừa không serialize JSON hiệu quả theo kiểu streaming.</p>
+<p>Tin rằng một tương lai tốt hơn cho JSON vừa có ích vừa khả thi, Daniel và Joe hợp lực brainstorm về <code>v2</code> và bắt đầu dựng prototype (mã ban đầu là phiên bản đã được mài của logic serialization JSON từ module Go protobuf). Theo thời gian, vài người khác (Roger Peppe, Chris Hines, Johan Brandhorst-Satzkorn, Damien Neil, Austin Clements, và Michael Pratt) tham gia bằng review thiết kế, review mã, và kiểm thử hồi quy. Nhiều thảo luận sớm được công khai trong các cuộc họp được ghi và ghi chú họp. Thảo luận sau có trong ghi chú họp working group <code>encoding/json/v2</code>.</p>
+<p>Công việc này công khai từ đầu, và chúng tôi ngày càng thu hút cộng đồng Go rộng hơn: trước hết với talk GopherCon và thảo luận đăng cuối 2023, proposal chính thức đầu 2025, và cuối cùng chấp nhận <code>encoding/json/v2</code> như một Go experiment trong Go 1.25 để kiểm thử quy mô lớn bởi mọi người dùng Go.</p>
+<p>Nỗ lực <code>v2</code> mất khoảng 6 năm để tới điểm này, kết hợp phản hồi từ nhiều contributor và kinh nghiệm thực nghiệm quý từ việc dùng trong môi trường production.</p>
+<p>Đáng chú ý, phần lớn được phát triển và thúc đẩy bởi những người không làm việc cho Google — minh chứng dự án Go là nỗ lực cộng tác với cộng đồng toàn cầu năng động, tận tâm cải thiện hệ sinh thái Go.</p>
+<p>Cảm ơn tất cả những ai đã đóng góp!</p>
+
+<section class="blog-insight" aria-label="Know-how và Insight" id="insight">
+<h2>Know-how &amp; Insight</h2>
+<p class="blog-insight-label">Ghi chú của người dịch — không phải lời của tác giả</p>
+<p>Các điểm dưới đây chỉ dựa trên bài gốc và bài thí nghiệm liên quan trên go.dev (đã đối chiếu ngày dịch):</p>
+<ol>
+<li><strong>Cách thử trên từng phiên bản Go.</strong> Trong Go 1.25 (và giai nghiệm tới trước khi ổn định), bật bằng <code>GOEXPERIMENT=jsonv2</code> hoặc build tag <code>goexperiment.jsonv2</code>, ví dụ <code>GOEXPERIMENT=jsonv2 go test ./...</code> (theo bài <a href="https://go.dev/blog/jsonv2-exp" target="_blank" rel="noopener">jsonv2-exp</a>). Từ <strong>Go 1.27</strong>, <code>encoding/json/v2</code> và <code>encoding/json/jsontext</code> đã <em>generally available</em> — import trực tiếp, không cần experiment flag.</li>
+<li><strong>Gotcha migrate v1 → v2.</strong> Kiểm tra phụ thuộc vào: (a) UTF-8 “bẩn”, (b) tên object trùng, (c) slice/map nil thành <code>null</code>, (d) khớp tên field không phân biệt hoa thường, (e) nghĩa cũ của <code>omitempty</code>, (f) serialize <code>time.Duration</code>. Mỗi điểm có option để giữ ngữ nghĩa v1 hoặc chọn v2; có thể bắt đầu bằng <code>DefaultOptionsV2()</code> rồi nới từng chỗ (ví dụ <code>AllowDuplicateName(true)</code>), hoặc ngược lại từ <code>DefaultOptionsV1()</code>.</li>
+<li><strong>Streaming &amp; interface mới.</strong> Nếu bạn có <code>MarshalJSON</code>/<code>UnmarshalJSON</code> đệ quy hoặc parse nặng (kiểu OpenAPI trong kube-openapi), cân nhắc thêm <code>MarshalJSONTo</code>/<code>UnmarshalJSONFrom</code> để tránh parse đôi và quadratic. Caller có thể ghi đè marshaling toàn cục qua <code>WithMarshalers</code>/<code>WithUnmarshalers</code> (hữu ích với <code>protojson</code>).</li>
+<li><strong>Hiệu năng thực tế.</strong> Bài gốc: <code>Marshal</code> gần ngang v1; <code>Unmarshal</code> nhanh hơn rõ, benchmark lên tới ~10×. Kỳ vọng thêm tối ưu ở Go 1.28 cho chỗ v2 còn chậm hơn v1. Xem thêm <code>go-json-experiment/jsonbench</code>.</li>
+<li><strong>Tương thích hệ sinh thái.</strong> v1 được triển khai trên v2 + bộ option tương thích — package phụ thuộc v1 và v2 có thể cùng tồn tại; method/tag mới của v2 cũng tới được người dùng v1. Không bị ép “big bang” rewrite.</li>
+<li><strong>Bảo mật &amp; chuẩn.</strong> Từ chối UTF-8 không hợp lệ và tên trùng mặc định giảm lớp tấn công kiểu CVE-2017-12635 và “silent corruption”. Khi expose API công khai, ưu tiên mặc định v2 trừ khi bạn có lý do tương thích cụ thể.</li>
+</ol>
+<p><em>Nguồn giấy phép:</em> văn bản Go Blog — CC BY 4.0; mã — BSD (<a href="https://go.dev/copyright" target="_blank" rel="noopener">go.dev/copyright</a>). Bài gốc: <a href="https://go.dev/blog/jsonv2" target="_blank" rel="noopener">https://go.dev/blog/jsonv2</a>.</p>
+</section>
+
+<section class="blog-mindmap" aria-label="Mindmap" id="mindmap">
+<h2>Mindmap</h2>
+<div class="blog-mindmap-scroll pele">
+<pre class="mermaid">
+mindmap
+  root((JSON v2))
+    Vấn đề v1
+      UTF-8 lỏng
+      Tên trùng
+      Nil thành null
+      Khớp không hoa thường
+      API thiếu streaming
+    jsontext
+      Encode Decode
+      Token và Value
+      Streaming thật
+    encoding json v2
+      Options hạng nhất
+      MarshalerTo
+      UnmarshalerFrom
+      Caller tùy biến
+    Hành vi mới
+      An toàn hơn
+      omitempty JSON rỗng
+      time Duration lỗi
+    Hiệu năng
+      Unmarshal tới 10x
+      Go 1.28 tối ưu thêm
+    Tương thích
+      v1 trên v2
+      Migrate dần
+      DefaultOptions
+</pre>
+</div>
+</section>
+</article>
+<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://go.dev/blog/jsonv2" target="_blank" rel="noopener">Bài gốc trên go.dev</a> · Nguồn CC BY 4.0 (mã BSD)</p>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
