@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đừng gọi đó là mô hình ra quyết định — Blog</title>
+<meta name="description" content="Bản dịch tiếng Việt bài Don’t Call It a Decision Model của Allie Laabs (TypeSafe): Jev đưa ra nhận định, mã nguồn đưa ra quyết định.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}.blog-prose table{border-collapse:collapse;width:100%;font-size:14px;margin:1em 0}.blog-prose th,.blog-prose td{border:1px solid #cbd5e1;padding:6px 10px;text-align:left;vertical-align:top}.blog-prose th{background:#e2e8f0}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">Đừng gọi đó là mô hình ra quyết định</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>Đừng gọi đó là mô hình ra quyết định</h1>
+<p class="blog-meta"><strong>Tiêu đề gốc:</strong> Don’t Call It a Decision Model<br><strong>Tác giả:</strong> Allie Laabs, DevRel, TypeSafe<br><strong>Ngày đăng bài gốc:</strong> 3 tháng 11, 2026</p>
+<p class="blog-note">Bản dịch tiếng Việt từ <a href="https://typesafe.ai/blog/dont-call-it-a-decision-model" target="_blank" rel="noopener">Don’t Call It a Decision Model</a>. Không thấy giấy phép tái sử dụng được nêu trên trang bài viết khi kiểm tra; bản quyền nội dung và hình minh họa thuộc tác giả/TypeSafe AI (typesafe.ai). Các đoạn mã và định danh giữ nguyên tiếng Anh. Phần TL;DR, Know-how &amp; Insight và mindmap là nội dung bổ sung của người dịch.</p>
+<section class="blog-tldr" aria-label="TL;DR"><h2>TL;DR</h2><ul>
+<li><strong>Jev đưa ra nhận định; mã nguồn đưa ra quyết định.</strong> TypeSafe gọi Jev là mô hình <strong>System One</strong>, thay vì mô hình ra quyết định.</li>
+<li>Đừng nhồi cả quy trình nghiệp vụ vào một câu hỏi <code>choice</code>. Hãy tách các nhận định cần hiểu ngữ nghĩa khỏi dữ kiện và quy tắc có thể tính chính xác bằng mã.</li>
+<li>Kết hợp nhận định của mô hình với logic tường minh giúp hiểu thiết kế, truy vết nguyên nhân và mở rộng quy trình mà không phải sửa một prompt khổng lồ.</li>
+</ul></section>
+<p><strong>Jev đưa ra nhận định, mã nguồn đưa ra quyết định.</strong></p>
+<p>Chúng tôi rất vui khi mọi người nhận ra tầm quan trọng của nhóm mô hình mới mà Jev đã tiên phong. Không có gì ngạc nhiên khi thuật ngữ “mô hình ra quyết định” trở nên phổ biến để gọi nhóm này. Lần đầu thấy Jev chọn một phương án từ một danh sách, bạn rất dễ nghĩ rằng nó đang ra quyết định. Và quả thực, chính chúng tôi cũng đã dùng từ “quyết định” trong tài liệu hướng dẫn của mình! Vậy tại sao TypeSafe vẫn kiên định gọi Jev là mô hình System One thay vì mô hình ra quyết định? Hãy cùng bàn về điều đó.</p>
+<h2>Vấn đề nằm ở vị trí của Jev trong một hệ thống</h2>
+<p>Hãy phân tích một hệ thống điển hình bằng phép so sánh với mạch điện: đầu vào ở bên trái (dữ liệu, trạng thái ứng dụng, v.v.), chảy qua phần logic rồi tạo ra đầu ra ở bên phải. Lấy một phiên bản đơn giản hóa của quy trình Chăm sóc khách hàng trên trang đánh giá của chúng tôi làm ví dụ. Cách tiếp cận sơ khai khi dùng Jev trong quy trình này là đưa toàn bộ quyết định vào một câu hỏi Jev duy nhất:</p>
+<figure><picture><source media="(max-width: 480px)" srcset="figure-1-mobile.webp"><source media="(max-width: 900px)" srcset="figure-1-tablet.webp"><img src="figure-1-desktop.webp" alt="Hình 1: khối quyết định khi chưa mở nắp, với đầu vào và các nhánh đầu ra" loading="lazy" width="1440" height="776"></picture><figcaption class="cap">Hình 1: khối quyết định khi vẫn còn đậy nắp. Hình gốc của TypeSafe.</figcaption></figure>
+<p>Khi lần đầu nhìn thấy Jev, mọi người thường hình dung nó sẽ nằm trong hệ thống như thế này: cung cấp toàn bộ trạng thái và để nó quyết định điều gì nên xảy ra. Thường thì cách làm này trông giống một câu hỏi Choice lớn, với rất nhiều mô tả bằng ngôn ngữ tự nhiên về logic nghiệp vụ và các điều kiện ngoại lệ được nhồi vào trường <code>criteria</code>.</p>
+<p>Dù có thể hoạt động, cách này sẽ sớm khiến bạn phải làm điều chúng tôi gọi là “nhào lộn với prompt”: sửa đi sửa lại các phần giải thích điều kiện dài dòng để xử lý từng trường hợp biên. Rồi hôm sau, một đầu vào mà bạn chưa nghĩ tới xuất hiện, hệ thống thất bại, và bạn lại quay về nhồi thêm ngoại lệ cùng những lời làm rõ vào phần văn xuôi trong <code>criteria</code>.</p>
+<p>Điều đang diễn ra ở đây là đặt trí thông minh vào sai tầng trừu tượng. Hệ thống của bạn vốn đã biết tiêu chí cho từng kết quả dự kiến, và chỉ một phần trong số đó thực sự cần đến nhận định. Phần còn lại là logic chính xác, rành mạch:</p>
+<div style="overflow-x:auto"><table><thead><tr><th>Khi</th><th>Nhánh đầu ra</th></tr></thead><tbody>
+<tr><td>Báo có khoản thu chưa được cho phép</td><td>Nhóm chống gian lận: phong tỏa và khiếu nại giao dịch</td></tr>
+<tr><td>Yêu cầu gặp người thật hoặc đe dọa thực hiện hành động pháp lý</td><td>Chuyển cho người thật</td></tr>
+<tr><td>Muốn lấy lại tiền, yêu cầu đủ điều kiện, ≤ 25 USD</td><td>Hoàn tiền ngay</td></tr>
+<tr><td>Muốn lấy lại tiền, yêu cầu đủ điều kiện, trên 25 USD</td><td>Nhóm hoàn tiền xem xét</td></tr>
+<tr><td>Muốn hủy, gói đăng ký đang hoạt động, sẵn sàng cân nhắc ưu đãi</td><td>Đưa ra đề nghị giữ chân</td></tr>
+<tr><td>Các trường hợp còn lại</td><td>Trả lời và tiếp tục</td></tr>
+</tbody></table></div>
+<p>Vậy Jev nằm ở đâu trong kiểu hệ thống này? Để hiểu câu trả lời, chúng ta cần nhìn vào bên trong xem một quyết định thực sự được tạo nên từ những gì:</p>
+<h2>Mở nắp ra</h2>
+<p>Quyết định trong hệ thống hiếm khi là một lựa chọn nguyên tử duy nhất. Mở nắp ra, ta thấy những đường dây đi từ đầu vào qua các nút mã nguồn và các nút nhận định. Quyết định trong phần mềm, quy trình và hoạt động kinh doanh được xây dựng theo cách đó. Kiểm tra “yêu cầu đủ điều kiện, chưa được thanh toán” là chuyện tính toán. Trả lời “người dùng có muốn lấy lại tiền không?” cần đến nhận định. Đó là nơi Jev thuộc về, và cũng chính là điều chúng tôi muốn nói khi dùng tên System One: những nhận định nhanh, mang tính trực giác mà một người am hiểu đưa ra trong vài giây.</p>
+<figure><picture><source media="(max-width: 480px)" srcset="figure-2-mobile.webp"><source media="(max-width: 900px)" srcset="figure-2-tablet.webp"><img src="figure-2-desktop.webp" alt="Hình 2: mở nắp khối quyết định để thấy các nút nhận định và các nút logic trong mã nguồn" loading="lazy" width="1440" height="779"></picture><figcaption class="cap">Hình 2: khối quyết định sau khi mở nắp. Hình gốc của TypeSafe.</figcaption></figure>
+<p>Mã nguồn rất giỏi trả lời những điều nó có thể trả lời chính xác. Jev chỉ trả lời những câu hỏi nhỏ mà mã nguồn không thể. Sau đó, logic kết hợp những câu trả lời ấy thành quyết định. Chính sự kết hợp giữa nhận định và mã nguồn cho phép hệ thống đưa ra những quyết định đáng tin cậy, có thể quan sát và truy vết.</p>
+<h2>Vì sao nên xây dựng theo cách này</h2>
+<h3>1. Thiết kế rõ ràng</h3>
+<p>Hệ thống đáng tin cậy đòi hỏi phải hiểu rõ cách các quyết định được đưa ra. Bằng cách phân rã quyết định thành những nhận định nguyên tử và các đường đi logic, chúng ta hiểu rõ hơn điều gì thực sự đi qua hệ thống, cũng như những trường hợp biên cần xử lý.</p>
+<h3>2. Khả năng quan sát</h3>
+<p>Trong ví dụ gộp mọi thứ vào một nhận định ở trên, bạn sẽ viết một câu hỏi Choice duy nhất, nhồi đầy tiêu chí:</p>
+<pre><code>{
+  &quot;model&quot;: &quot;jev-latest&quot;,
+  &quot;state&quot;: {
+    &quot;conversation&quot;: &quot;Customer: Hi, I&#x27;m not saying someone stole my card or anything, but t…&quot;,
+    &quot;account&quot;: &quot;Ledger: txn-51a · Tucson Hardware Supply · $240.00 · Aug 14 · card pr…&quot;
+  },
+  &quot;questions&quot;: {
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;choice&quot;,
+      &quot;instructions&quot;: &quot;What should support do with this conversation?&quot;,
+      &quot;criteria&quot;: {
+        &quot;fraud_team&quot;: &quot;The customer reports a charge, withdrawal, login, or account change they did not make or authorize. Pick this even if they also want a refund, ask for a person, or want to cancel.&quot;,
+        &quot;handoff_person&quot;: &quot;The customer asks for a person, a manager, or a supervisor, or threatens legal action, a lawyer, or a regulator. Not if they report an unauthorized charge.&quot;,
+        &quot;instant_refund&quot;: &quot;The customer wants money back, the refund claim on the account is eligible and not already refunded, and the amount is $25 or less. Not if they report an unauthorized charge or ask for a person.&quot;,
+        &quot;refunds_team&quot;: &quot;The customer wants money back, the refund claim on the account is eligible and not already refunded, and the amount is over $25. Not if they report an unauthorized charge or ask for a person.&quot;,
+        &quot;retention_offer&quot;: &quot;The customer wants to cancel, close, or downgrade, the subscription is active, and they would stay if something were offered or fixed. Not if any option above applies.&quot;,
+        &quot;answer&quot;: &quot;None of the above. Answer the customer and continue the conversation, with no action on the account.&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Khi một trường hợp bị chuyển đến nơi không mong đợi, dữ liệu duy nhất bạn có về nguyên nhân chỉ là một con số xác suất. Nhận định nào có vai trò quyết định? Quy tắc nào? Không có gì bên trong để đọc.</p>
+<p>Nhưng khi mở nắp ra, ta có các bản ghi như sau:</p>
+<pre><code>exit  fraud_team
+  ├─ g_fraud    reports an unauthorized charge (p &gt; 0.6)        true   ← decided
+  ├─ g_person   asks for a person, or threatens legal action …  –
+  ├─ g_instant  wants money back, claim eligible, amount ≤ $25  –
+  ├─ g_large    wants money back, claim eligible, amount over…  –
+  ├─ g_offer    wants to cancel, subscription active, open to…  –
+  └─ else       answer                                          –
+  judgments · Jev
+       wants_money_back       0.99
+       reports_unauthorized   0.94  ←
+       requests_human         0.02
+       threat_legal           0.01
+       wants_to_cancel        0.02
+       open_to_offer          0.22
+  facts · your code
+       refund_eligible       false
+       small_refund          false
+       subscription_active   false</code></pre>
+<p>Thay vì “mô hình đã chọn <code>fraud_team</code>”, bạn nhận được “mô hình đã đưa ra sáu nhận định này, và đây là đường đi logic tiếp theo”. Dấu vết cho thấy <code>reports_unauthorized</code> đã đưa trường hợp đó tới nhóm chống gian lận. Giờ đây, chúng ta có dữ liệu quan sát thực sự để dựa vào mà hành động. Nhận định sai, hay quy tắc sai? Dấu vết giúp bạn phân biệt, và cách sửa có thể tập trung hơn nhiều.</p>
+<h3>3. Khả năng mở rộng</h3>
+<p>Giả sử đột nhiên bạn có thêm hai nhánh đầu ra mới, hoặc ba mươi nhánh! Khi hệ thống được thiết kế với cách phân rã tốt, bạn chỉ cần vạch ra logic dẫn tới những nhánh mới đó, thêm bất kỳ nhận định mới nào chúng cần, và tất cả các nhận định hiện có đã được lựa chọn cẩn thận vẫn giữ nguyên.</p>
+<figure><picture><source media="(max-width: 480px)" srcset="figure-3-mobile.webp"><source media="(max-width: 900px)" srcset="figure-3-tablet.webp"><img src="figure-3-desktop.webp" alt="Hình 3: thêm nhánh miễn phí với một nhận định mới và một dữ kiện được tính bằng mã nguồn" loading="lazy" width="1440" height="759"></picture><figcaption class="cap">Hình 3: thêm một nhánh đầu ra mới vào khối quyết định. Hình gốc của TypeSafe.</figcaption></figure>
+<p>Ở đây, ta thấy phần mở rộng “Miễn khoản phí”: một nhận định mới, một dữ kiện mới được tính bằng mã nguồn, còn phần còn lại của hệ thống vẫn giữ nguyên. Vì tất cả nhận định của Jev được đánh giá độc lập với nhau, chúng ta không phải lo những nhận định mới ảnh hưởng đến các nhận định đã được kiểm chứng.</p>
+<p>Chúng tôi mời bạn thử phác họa phần bên trong của một quyết định trong ứng dụng của mình. Đánh dấu những chỗ tra cứu và tính toán, rồi viết một câu hỏi bên cạnh mỗi chỗ cần đến nhận định. <a href="https://docs.typesafe.ai/concepts/how-to-build-with-system-one">How to build with TypeSafe</a> trình bày cách phân rã câu hỏi và kết hợp câu trả lời bằng mã nguồn; các <a href="https://docs.typesafe.ai/patterns">mẫu thiết kế</a> giới thiệu thêm những cách kết nối chúng.</p>
+<p>Bạn gặp khó khăn khi tìm cách phân rã các nhận định trong hệ thống của mình? Các coding agent thường đặc biệt giỏi hiểu những kiểu hệ thống này! Hãy thử chỉ cho agent của bạn bài viết này và yêu cầu nó tìm những vị trí trong hệ thống hoặc mã nguồn phù hợp với các nhận định nguyên tử. Nếu thích trao đổi trực tiếp với con người hơn, hãy ghé <a href="https://discord.gg/typesafe">Discord của chúng tôi</a>, nơi cả đội ngũ lẫn cộng đồng những người xây dựng sản phẩm đều sẵn lòng giúp đỡ!</p>
+<p><strong>Jev đưa ra nhận định, mã nguồn đưa ra quyết định.</strong></p>
+<section class="blog-insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người dịch — không thuộc nguyên văn bài gốc</p><ul>
+<li><strong>Tách “hiểu ý” khỏi “kiểm tra điều kiện”.</strong> Trong ví dụ của bài, xác định khách có muốn hoàn tiền là nhận định ngữ nghĩa; kiểm tra số tiền ≤ 25 USD và trạng thái đăng ký thuộc phần logic mã nguồn. Lập danh sách hai nhóm này trước khi thiết kế câu hỏi cho mô hình.</li>
+<li><strong>Ghi cả nhận định lẫn đường đi quy tắc.</strong> Bản ghi minh họa có sáu nhận định, ba dữ kiện và nhánh được chọn. Nhờ vậy, người vận hành có thể kiểm tra sai ở bước hiểu nội dung hay ở điều kiện định tuyến, thay vì chỉ biết nhãn đầu ra cuối cùng.</li>
+<li><strong>Đừng biến ngưỡng minh họa thành mặc định chung.</strong> <code>p &gt; 0.6</code> và mức 25 USD xuất hiện trong ví dụ chăm sóc khách hàng này; bài không chứng minh chúng phù hợp cho mọi hệ thống.</li>
+<li><strong>Phân biệt nhận định kiến trúc với cam kết chất lượng.</strong> Tác giả nói các nhận định của Jev được đánh giá độc lập; đó không phải là bằng chứng mọi nhận định đều đúng. Khi thêm nhánh, vẫn cần kiểm tra các điều kiện và tình huống liên quan đến nhánh đó.</li>
+</ul><p>Nguồn đối chiếu: <a href="https://typesafe.ai/blog/dont-call-it-a-decision-model">bài gốc của Allie Laabs</a>. Các đề xuất thực hành ở đây được rút ra từ những ví dụ trong bài, không phải số liệu benchmark hay bảo đảm của TypeSafe.</p></section>
+<section class="blog-mindmap"><h2>Mindmap</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">mindmap
+  root((Nhận định và quyết định))
+    Jev
+      Hiểu ý người dùng
+      Nhận định nhỏ
+      System One
+    Mã nguồn
+      Tra cứu dữ kiện
+      Tính toán chính xác
+      Kết hợp quy tắc
+    Thiết kế
+      Tách trách nhiệm
+      Tránh prompt khổng lồ
+    Quan sát
+      Ghi nhận định
+      Ghi đường đi
+      Tìm nguyên nhân
+    Mở rộng
+      Thêm nhánh mới
+      Giữ phần đã kiểm chứng
+</pre></div></section>
+</article>
+<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://typesafe.ai/blog/dont-call-it-a-decision-model" target="_blank" rel="noopener">Bài gốc trên typesafe.ai</a> · © Allie Laabs / TypeSafe AI</p>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
