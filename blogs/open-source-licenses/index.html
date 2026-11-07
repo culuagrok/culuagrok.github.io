@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Từ Asahi Linux đến MIT, GPL và AGPL: chọn giấy phép nào? — Blog</title>
+<meta name="description" content="So sánh giấy phép mã nguồn mở: MIT, BSD, Apache, LGPL, MPL, EPL, GPL, AGPL và source-available; bài học từ quyết định đổi giấy phép của Asahi Linux.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+.license-table-scroll{overflow-x:auto;max-width:100%;margin:1em 0;border:1px solid #94a3b8;border-radius:6px}.license-table{border-collapse:collapse;min-width:1000px;width:100%;font-size:13px;line-height:1.5}.license-table th,.license-table td{padding:10px 12px;border:1px solid #94a3b8;vertical-align:top;text-align:left}.license-table th{font-weight:700;background:color-mix(in srgb,currentColor 9%,transparent)}
+</style>
+<style>.license-table-scroll{overflow-x:auto;max-width:100%;margin:1em 0;border:1px solid #94a3b8;border-radius:6px}.license-table{border-collapse:collapse;min-width:1000px;width:100%;font-size:13px;line-height:1.5}.license-table th,.license-table td{padding:10px 12px;border:1px solid #94a3b8;vertical-align:top;text-align:left}.license-table th{font-weight:700;background:color-mix(in srgb,currentColor 9%,transparent)}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài viết kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">So sánh giấy phép mã nguồn mở</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>Từ Asahi Linux đến MIT, GPL và AGPL: chọn giấy phép nào?</h1>
+<p class="blog-meta">Bài viết tổng hợp · 8 tháng 11, 2026 (giờ Việt Nam, UTC+7)<br>Thẻ: mã nguồn mở · bản quyền · MIT · GPL · Asahi Linux</p>
+<section class="blog-tldr" aria-label="TL;DR"><h2>TL;DR</h2><ul>
+<li>Asahi Linux <strong>bắt đầu quá trình</strong> chuyển các kho mã sang <strong>GPLv2-or-later</strong>, không phải đã đổi xong mọi tệp. Nhóm muốn bảo vệ công sức trước việc lấy mã đang phát triển để làm sản phẩm cạnh tranh đóng nguồn.</li>
+<li><strong>Permissive</strong> như MIT, BSD, Apache cho phép đưa mã vào sản phẩm đóng. <strong>Copyleft</strong> yêu cầu giữ quyền tiếp cận mã nguồn trong phạm vi nhất định khi phân phối; <strong>AGPL</strong> còn có điều kiện cho phiên bản sửa đổi phục vụ người dùng qua mạng.</li>
+<li>Mọi giấy phép mã nguồn mở đúng nghĩa đều cho phép dùng thương mại. <strong>Nhìn thấy mã không đồng nghĩa với open source</strong>: SSPL, Business Source License, Elastic License và FSL có những hạn chế khác.</li>
+<li>Đừng chỉ đọc tên giấy phép: kiểm tra phiên bản, <code>-only</code>/<code>-or-later</code>, ngoại lệ, giấy phép từng tệp và toàn bộ dependency.</li>
+</ul></section>
+<p class="blog-note"><strong>Không phải tư vấn pháp lý.</strong> Bài này giúp định hướng kỹ thuật, không thay thế văn bản giấy phép hay ý kiến luật sư cho giao dịch, sản phẩm và quốc gia cụ thể. “Phải chia sẻ mã” dưới đây không mặc nhiên có nghĩa là phải đăng toàn bộ công ty lên GitHub.</p>
+<nav class="blog-toc" aria-label="Mục lục"><h2>Mục lục</h2><ol>
+<li><a href="#asahi">Asahi thực sự công bố điều gì?</a></li><li><a href="#basics">Bản quyền, phân phối và thương mại</a></li><li><a href="#families">Các họ giấy phép</a></li><li><a href="#table">Bảng so sánh</a></li><li><a href="#compat">Linking, SaaS và tương thích</a></li><li><a href="#relicense">Đổi MIT sang GPL có đơn giản không?</a></li><li><a href="#choose">Cách chọn và triển khai</a></li><li><a href="#insight">Know-how &amp; Insight</a></li><li><a href="#sources">Nguồn tham khảo</a></li><li><a href="#mindmap">Mindmap</a></li></ol></nav>
+
+<h2 id="asahi">1. Asahi thực sự công bố điều gì?</h2>
+<p>Trong <a href="https://asahilinux.org/2026/11/progress-report-7-3/">Progress Report: Linux 7.3</a>, do James Calligeros viết ngày 7/11/2026, mục <em>Learning from history</em> cho biết Asahi đã quyết định <strong>bắt đầu quá trình chuyển tất cả kho mã của mình sang GNU GPL phiên bản 2 hoặc mới hơn</strong>; mã Asahi về sau sẽ chỉ dùng giấy phép copyleft mạnh. Đây là tuyên bố về hướng chuyển đổi, không phải bằng chứng rằng mọi repository, dependency hoặc bản phát hành đã được đổi giấy phép ngay lập tức.</p>
+<p>Nhóm giải thích trước đây họ ưu tiên MIT để bạn bè ở BSD và các hệ điều hành tự do khác có thể tái sử dụng công trình reverse engineering Apple Silicon. Nhưng theo lời nhóm, đã xuất hiện các nỗ lực lấy công việc của họ để thay thế dự án và thương mại hóa quyết liệt; có trường hợp lấy tính năng còn đang làm từ fork cá nhân, xuất bản không ghi công hoặc dùng LLM viết lại nhằm che nguồn gốc. Bài báo cáo nhắc việc Wine đổi sang LGPL năm 2002 như một tiền lệ: tránh phân mảnh bởi các fork độc quyền và khuyến khích đóng góp về upstream.</p>
+<p><strong>Phân biệt lời công bố và kết luận pháp lý:</strong> đó là mô tả của Asahi, không phải kết quả điều tra độc lập trong bài này. Không cần đoán tên bên bị nhắm tới. MIT cho phép fork đóng và bán phần mềm, nhưng <a href="https://opensource.org/license/mit">văn bản MIT</a> vẫn yêu cầu giữ thông báo bản quyền và giấy phép trong bản sao hoặc phần đáng kể của phần mềm. Vì thế không nên diễn giải câu phê bình MIT trong báo cáo thành “MIT cho phép xóa mọi thông báo bản quyền”. Ghi công dưới dạng lời cảm ơn trên giao diện và giữ thông báo pháp lý trong mã cũng không phải cùng một việc.</p>
+<p>GPL không cấm kiếm tiền, không cấm đối thủ, cũng không tự động giải quyết mọi tranh chấp AI. Thay đổi chính là: khi phân phối một tác phẩm phái sinh thuộc phạm vi GPL, bên phân phối phải trao các quyền và mã nguồn tương ứng theo điều kiện GPL. Người nhận vẫn có thể tiếp tục fork và kinh doanh.</p>
+
+<h2 id="basics">2. Trước khi so sánh: ba khái niệm dễ nhầm</h2>
+<ul><li><strong>Công khai mã ≠ cấp quyền sử dụng.</strong> Không có giấy phép không đồng nghĩa với public domain. Theo mặc định, bản quyền vẫn bảo lưu; xem được trên GitHub không tự cho quyền đưa mã vào sản phẩm của bạn.</li>
+<li><strong>Miễn phí ≠ phi thương mại.</strong> Theo <a href="https://opensource.org/osd">Open Source Definition</a>, giấy phép không được phân biệt ngành nghề hay mục đích kinh doanh. Bạn có thể bán phần mềm GPL; người mua nhận quyền phân phối lại theo GPL.</li>
+<li><strong>Sử dụng nội bộ ≠ phân phối.</strong> Chạy hoặc sửa chương trình GPL trong nội bộ thường không bắt buộc công bố mã. Gửi binary cho khách, cung cấp container tải về hay giao thiết bị có phần mềm là tình huống khác. Giao mã cho nhà thầu hoặc công ty con cần xem quan hệ pháp lý cụ thể.</li></ul>
+<p>Copyleft là cách dùng bản quyền để bảo đảm quyền của người nhận, không phải từ bỏ bản quyền. Giấy phép phần mềm cũng không tự cho phép dùng nhãn hiệu hay bảo đảm bạn không vi phạm bằng sáng chế của bên thứ ba.</p>
+
+<h2 id="families">3. Các họ giấy phép</h2>
+<h3>Permissive: ưu tiên tái sử dụng rộng rãi</h3>
+<ul><li><strong>MIT:</strong> ngắn, dễ áp dụng; cho phép sửa, bán, phân phối và đóng mã sửa đổi, với nghĩa vụ giữ thông báo bản quyền và giấy phép. Không có điều khoản cấp phép bằng sáng chế rõ ràng như Apache 2.0.</li>
+<li><strong>BSD 2-Clause:</strong> gần MIT; giữ thông báo trong source và tái hiện thông báo trong tài liệu/tài liệu kèm binary. <strong>BSD 3-Clause</strong> thêm điều kiện không dùng tên tác giả/tổ chức để quảng bá sản phẩm khi chưa được cho phép. Không nhầm với BSD 4-Clause cũ có điều khoản quảng cáo.</li>
+<li><strong>Apache 2.0:</strong> permissive nhưng chi tiết hơn. Có <strong>patent grant</strong> rõ ràng từ contributor đối với các yêu cầu bằng sáng chế trong phạm vi quy định; có cơ chế chấm dứt quyền bằng sáng chế khi khởi kiện theo điều khoản giấy phép. Khi phân phối cần giữ giấy phép, đánh dấu tệp đã sửa và xử lý thông báo <code>NOTICE</code> nếu có; không phải cứ dùng Apache là được dùng nhãn hiệu Apache.</li>
+<li><strong>ISC:</strong> rất ngắn, cùng hướng permissive với MIT/BSD, giữ thông báo bản quyền và quyền sử dụng. <strong>Zlib:</strong> không được trình bày sai nguồn gốc, phải đánh dấu rõ source đã sửa và không xóa thông báo khỏi source; lời ghi công trong tài liệu sản phẩm được trân trọng nhưng không bắt buộc theo văn bản chuẩn.</li></ul>
+<p>Phù hợp cho thư viện, công cụ nền và mã mẫu khi mục tiêu là giảm rào cản tích hợp, kể cả tích hợp vào sản phẩm độc quyền. Đổi lại, không có bảo đảm người hưởng lợi sẽ gửi bản vá về.</p>
+
+<h3>Copyleft yếu: chia sẻ lại một phần, không nhất thiết toàn ứng dụng</h3>
+<ul><li><strong>LGPL:</strong> copyleft chủ yếu ở thư viện và phần sửa thư viện. Ứng dụng riêng có thể liên kết mà không phải đổi toàn bộ ứng dụng sang GPL, nếu đáp ứng điều kiện của đúng phiên bản LGPL. Phải cho phép người dùng sửa/thay thư viện và liên kết lại theo điều kiện giấy phép; liên kết tĩnh thường cần cung cấp object hoặc phương thức phù hợp để relink. Dynamic linking không phải lá bùa miễn mọi nghĩa vụ. Phân biệt LGPL 2.1 và LGPL 3.0.</li>
+<li><strong>MPL 2.0:</strong> copyleft theo <strong>tệp</strong>. Khi phân phối, mã nguồn các tệp thuộc MPL và các sửa đổi của chúng phải tiếp tục sẵn có theo MPL; các tệp riêng không chứa mã MPL trong larger work có thể giữ giấy phép khác, kể cả đóng nguồn. <a href="https://www.mozilla.org/en-US/MPL/2.0/FAQ/">Mozilla FAQ</a> giải thích cả việc liên kết tĩnh và động.</li>
+<li><strong>EPL 2.0:</strong> thường dùng trong hệ sinh thái Eclipse; yêu cầu cung cấp source của Program và các Contributions thuộc phạm vi EPL khi phân phối. Module độc lập không phải tác phẩm phái sinh có thể mang giấy phép khác. Có patent grant và điều khoản riêng cho bên phân phối thương mại. Không nên giản lược EPL thành “cứ khác tệp là được đóng”.</li></ul>
+
+<h3>Copyleft mạnh: GPLv2 và GPLv3</h3>
+<p><strong>GPLv2</strong> yêu cầu giữ GPL cho tác phẩm phái sinh được phân phối và cung cấp mã nguồn tương ứng khi giao binary, qua một phương thức được giấy phép cho phép. Mã nguồn không chỉ là vài tệp sửa: có thể gồm mã và script cần để xây dựng/cài đặt theo định nghĩa applicable. Không có nghĩa vụ gửi mọi thay đổi lên upstream; nghĩa vụ trọng tâm là với người nhận.</p>
+<p><strong>GPLv3</strong> giữ nền tảng đó, thêm quy định rõ hơn về bằng sáng chế, chống các hạn chế kỹ thuật tước quyền sửa đổi, và trong trường hợp <em>User Product</em> thuộc diện áp dụng còn yêu cầu thông tin cài đặt để chạy phiên bản đã sửa. Không phải mọi thiết bị hay mọi bản phân phối đều cần trao mọi khóa bí mật.</p>
+<p><code>GPL-2.0-only</code> là chỉ phiên bản 2. <code>GPL-2.0-or-later</code> cho người nhận chọn GPLv2 hoặc phiên bản GPL mới hơn do FSF công bố. Tương tự với <code>GPL-3.0-only</code> và <code>GPL-3.0-or-later</code>. “Or later” là <strong>một quyền lựa chọn</strong>, không phải toàn bộ repository tự động được nâng phiên bản mỗi khi FSF viết giấy phép mới.</p>
+
+<h3>Copyleft qua mạng: AGPLv3</h3>
+<p>GPL thông thường không kích hoạt nghĩa vụ source chỉ vì người dùng tương tác với backend qua mạng mà không nhận bản sao. Đây thường được gọi là “SaaS loophole”, dù cũng có thể là ranh giới chủ ý của giấy phép.</p>
+<p><strong>AGPLv3, mục 13:</strong> nếu bạn sửa chương trình và phiên bản sửa hỗ trợ tương tác từ xa qua mạng, phải cho người dùng tương tác cơ hội nhận Corresponding Source của phiên bản đó qua mạng, miễn phí. Không phải cứ một hệ thống có gọi API AGPL là mọi microservice đều tự động thành AGPL; ranh giới tác phẩm kết hợp vẫn cần phân tích. AGPL cũng không cấm bán SaaS.</p>
+
+<h3>Source-available: thấy mã, nhưng không có đủ quyền open source</h3>
+<p>Những lựa chọn sau không phải giấy phép OSI-approved ở dạng được mô tả. Đừng gọi tất cả là “copyleft mạnh hơn GPL”: chúng thay đổi cả quyền sử dụng hoặc phạm vi nghĩa vụ.</p>
+<ul><li><strong>SSPL:</strong> nếu cung cấp chương trình dưới dạng dịch vụ, đòi mã của cả phần mềm dùng để cung cấp dịch vụ theo phạm vi rất rộng của mục 13, không chỉ bản sửa của chương trình. Không phải giấy phép mã nguồn mở được OSI chấp thuận.</li>
+<li><strong>Business Source License 1.1 (BUSL/BSL):</strong> hạn chế sử dụng production ngoài Additional Use Grant; sau Change Date chuyển sang Change License được chỉ định. Phải đọc thông số của từng dự án. Đừng nhầm chữ BSL này với <strong>Boost Software License</strong>, một giấy phép permissive khác.</li>
+<li><strong>Elastic License 2.0:</strong> cho phép nhiều hình thức sử dụng nhưng hạn chế cung cấp sản phẩm như managed service theo định nghĩa giấy phép, việc vô hiệu hóa chức năng license key và xóa thông báo. Phải kiểm tra giấy phép của đúng phiên bản/tệp: tên sản phẩm Elastic không có nghĩa mọi mã của sản phẩm chỉ có một lựa chọn giấy phép.</li>
+<li><strong>Commons Clause:</strong> là điều khoản bổ sung vào giấy phép nền, hạn chế “Sell” theo định nghĩa rộng, gồm một số hình thức dịch vụ. MIT cộng Commons Clause không còn là MIT thuần hay open source theo OSI.</li>
+<li><strong>FSL — Functional Source License:</strong> thuộc hướng Fair Source, hạn chế Competing Use trong giai đoạn đầu; từng phiên bản chuyển sang MIT hoặc Apache 2.0 sau hai năm theo biến thể đã chọn. Trước thời điểm chuyển đổi, không phải giấy phép open source. Xem <a href="https://fsl.software/">FSL chính thức</a>.</li></ul>
+
+<h3>Gần public domain: CC0 và Unlicense</h3>
+<p><strong>CC0</strong> cố gắng từ bỏ quyền trong phạm vi pháp luật cho phép, kèm cơ chế dự phòng nếu việc từ bỏ không có hiệu lực. <strong>Unlicense</strong> cũng kết hợp hiến tặng public domain và quyền sử dụng dự phòng. Hiệu lực của việc từ bỏ quyền có thể khác giữa các nước; không nên coi đây là phép xóa mọi quyền của mọi bên. CC0 không cấp quyền nhãn hiệu hoặc bằng sáng chế; Unlicense không có patent grant rõ ràng. Unlicense là giấy phép được OSI chấp thuận; CC0 không phải giấy phép OSI-approved.</p>
+
+<h3>Creative Commons: ưu tiên cho nội dung, không cho phần mềm</h3>
+<p><strong>CC BY</strong> cho phép tái sử dụng, sửa đổi và thương mại hóa nội dung nếu ghi công đúng. <strong>CC BY-SA</strong> thêm ShareAlike cho nội dung chuyển thể được chia sẻ. <strong>CC BY-NC</strong> hạn chế sử dụng thương mại, nên không tương đương quyền tự do của open source. Creative Commons <a href="https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software">không khuyến nghị dùng các giấy phép CC cho phần mềm</a>: chúng không được thiết kế cho source/binary và tương thích phần mềm như GPL. CC0 là một công cụ riêng có thể dùng cho việc hiến tặng mã.</p>
+<p>Một repository có thể dùng Apache cho code, CC BY cho tài liệu và giấy phép khác cho ảnh. Ghi rõ ranh giới, thay vì đặt một chữ “LICENSE” rồi ngầm áp dụng cho mọi thứ.</p>
+
+<h2 id="table">4. Bảng so sánh nhanh</h2>
+<p><strong>Cách đọc:</strong> “chia sẻ source” dưới đây là nghĩa vụ khi phân phối ra ngoài, trừ AGPL có điều kiện mạng bổ sung. “Không rõ” ở cột patent nghĩa là không có <em>express patent grant</em> tiêu chuẩn, không phải kết luận về mọi quyền ngầm định theo pháp luật. Bảng là tóm tắt, không thay thế điều khoản.</p>
+<div class="license-table-scroll" role="region" aria-label="Bảng so sánh giấy phép, cuộn ngang" tabindex="0"><table class="license-table"><thead><tr><th>Giấy phép</th><th>Thương mại / sửa</th><th>Source phải cung cấp</th><th>Giữ giấy phép</th><th>Patent grant rõ</th><th>Link ứng dụng đóng</th><th>Chỉ chạy SaaS backend</th></tr></thead><tbody>
+<tr><td>MIT, BSD 2/3, ISC, Zlib</td><td>Có / Có</td><td>Không bắt buộc</td><td>Giữ thông báo; không ép phần sửa cùng license</td><td>Không rõ</td><td>Được</td><td>Không bắt mở source</td></tr>
+<tr><td>Apache 2.0</td><td>Có / Có</td><td>Không bắt buộc</td><td>Giữ license, thông báo, đánh dấu sửa</td><td>Có, trong phạm vi grant</td><td>Được</td><td>Không bắt mở source</td></tr>
+<tr><td>LGPL 2.1 / 3</td><td>Có / Có</td><td>Thư viện và sửa đổi</td><td>Phần thư viện theo LGPL/GPL được phép</td><td>v3: Có; v2.1: không như v3</td><td>Có điều kiện thay/relink thư viện</td><td>Không chỉ vì phục vụ qua mạng</td></tr>
+<tr><td>MPL 2.0</td><td>Có / Có</td><td>Các tệp được MPL bao phủ</td><td>Các tệp đó theo MPL; có cơ chế Secondary License</td><td>Có</td><td>Được; vẫn tuân thủ phần MPL</td><td>Không chỉ vì phục vụ qua mạng</td></tr>
+<tr><td>EPL 2.0</td><td>Có / Có</td><td>Program/Contributions thuộc EPL</td><td>Source thuộc phạm vi giữ EPL, hoặc cơ chế được phép</td><td>Có</td><td>Tùy ranh giới tác phẩm phái sinh</td><td>Không chỉ vì phục vụ qua mạng</td></tr>
+<tr><td>GPLv2</td><td>Có / Có</td><td>Corresponding source của tác phẩm thuộc GPL</td><td>Tác phẩm kết hợp thuộc phạm vi GPL</td><td>Không có grant rõ như v3</td><td>Thường không, nếu tạo tác phẩm kết hợp; xem ngoại lệ</td><td>Không chỉ vì phục vụ qua mạng</td></tr>
+<tr><td>GPLv3</td><td>Có / Có</td><td>Corresponding Source; thông tin cài đặt khi áp dụng</td><td>Tác phẩm kết hợp thuộc phạm vi GPL</td><td>Có</td><td>Thường không; xem ngoại lệ</td><td>Không chỉ vì phục vụ qua mạng</td></tr>
+<tr><td>AGPLv3</td><td>Có / Có</td><td>Như GPL; thêm bản sửa cho người dùng mạng theo mục 13</td><td>AGPL trong phạm vi áp dụng</td><td>Có</td><td>Thường không; xem ranh giới kết hợp</td><td>Có điều kiện source cho bản sửa</td></tr>
+<tr><td>CC0 / Unlicense</td><td>Có / Có</td><td>Không bắt buộc</td><td>Không copyleft</td><td>Không</td><td>Được, xem quyền bên thứ ba</td><td>Không bắt mở source</td></tr>
+<tr><td>SSPL, BUSL, ELv2, Commons Clause, FSL</td><td>Tùy giấy phép và cách dùng</td><td>Tùy điều kiện, có thể rất rộng</td><td>Tùy văn bản/phiên bản</td><td>Tùy văn bản</td><td>Không suy từ tên nhóm</td><td>Có thể bị hạn chế hoặc kích hoạt nghĩa vụ riêng</td></tr>
+</tbody></table></div>
+<p>CC BY/BY-SA/BY-NC dành cho nội dung đã được tách riêng ở trên; khái niệm linking/source của phần mềm không áp thẳng vào chúng. Nếu cần so từng giấy phép source-available, phải đọc cả Additional Use Grant, Change Date và định nghĩa dịch vụ cạnh tranh thay vì dùng một ô “Có/Không”.</p>
+
+<h2 id="compat">5. Ba bẫy: linking, SaaS và tương thích</h2>
+<h3>Linking không chỉ là static hay dynamic</h3>
+<p>Theo cách hiểu của FSF, cả liên kết tĩnh lẫn động với GPL đều có thể tạo chương trình kết hợp thuộc GPL. Plugin, giao tiếp IPC và gọi API cần xem mức độ gắn kết cùng điều khoản/ngoại lệ cụ thể. Chạy hai chương trình độc lập cạnh nhau không tự biến mọi thứ thành GPL; ngược lại, bọc một thư viện GPL trong một lớp mỏng không chắc tránh được copyleft.</p>
+<p>Ví dụ: ứng dụng đóng dùng thư viện MIT có thể giữ đóng và kèm thông báo; dùng thư viện LGPL cần đáp ứng điều kiện thư viện/relink; sửa một tệp MPL rồi giao sản phẩm cần cung cấp source tệp được bao phủ; ghép mã GPL trực tiếp vào cùng chương trình để giao khách cần kiểm tra nghĩa vụ toàn tác phẩm.</p>
+<h3>Backend khác frontend</h3>
+<p>Chạy backend GPL trên máy chủ thường không giao bản sao cho người dùng trình duyệt. Nhưng JavaScript hoặc WebAssembly gửi xuống trình duyệt là bản sao được phân phối: “đây là SaaS” không xóa nghĩa vụ của phần frontend. Nếu giao Docker image backend cho khách tự host, đó cũng không còn là tình huống chỉ chạy nội bộ.</p>
+<h3>Tương thích là có hướng, không phải hai nhãn giống nhau</h3>
+<ul><li><strong>MIT/BSD hiện đại → GPL:</strong> thường có thể kết hợp và phân phối tác phẩm kết hợp theo GPL, vẫn giữ thông báo gốc. Không có chiều ngược tự động: không thể lấy mã GPL của người khác rồi chỉ phát hành dưới MIT.</li>
+<li><strong>Apache 2.0 + GPLv2-only:</strong> không tương thích cho tác phẩm kết hợp theo đánh giá FSF được <a href="https://www.apache.org/licenses/GPL-compatibility.html">Apache Software Foundation giải thích</a>. Apache 2.0 tương thích với GPLv3 theo chiều đưa mã Apache vào tác phẩm GPLv3; mã Apache vẫn giữ thông báo cần thiết.</li>
+<li><strong>GPLv2-only + GPLv3-only:</strong> không thể mặc định ghép thành một tác phẩm cùng chịu cả hai điều kiện. Nếu phần v2 là <strong>GPLv2-or-later</strong>, có thể chọn GPLv3 để giải quyết xung đột này, nhưng vẫn phải kiểm tra mọi dependency.</li>
+<li><strong>MPL 2.0:</strong> có đường kết hợp với GPL/LGPL/AGPL qua Secondary Licenses khi đáp ứng mục 3.3; cần kiểm tra dấu <em>Incompatible With Secondary Licenses</em>. Không được đổi MPL sang GPL tùy hứng trong mọi trường hợp.</li>
+<li><strong>EPL 2.0:</strong> không tự động tương thích GPL. Cơ chế Secondary License chỉ dùng nếu chủ thể cấp phép ban đầu đã bật tùy chọn và thỏa điều kiện; EPL 1.0 không phải EPL 2.0.</li></ul>
+
+<h2 id="relicense">6. Đổi MIT sang GPL có đơn giản không?</h2>
+<p><strong>Hai việc khác nhau:</strong> phát hành tác phẩm phái sinh dựa trên mã MIT theo GPL là một việc MIT thường cho phép nếu giữ thông báo; thay chính sách cấp phép của cả dự án, thay điều kiện cho đóng góp của người khác hoặc xóa giấy phép cũ lại là việc khác.</p>
+<p>Muốn tái cấp phép toàn bộ đóng góp theo điều kiện mới, cần đủ quyền từ các chủ sở hữu: thường phải xin đồng ý contributor nếu quyền hiện có không cho phép thay đổi đó; hoặc đã có CLA/chuyển nhượng cho phép, dùng quyền có sẵn của giấy phép, hay thay thế phần không thể xin quyền. <strong>Không phải mọi đổi giấy phép đều cần xin lại từng người</strong>, nhưng cũng không phải maintainer sở hữu toàn bộ lịch sử Git. MIT vốn cho phép sublicense, nên lập luận “MIT → GPL luôn phải xin đủ mọi contributor” là quá đơn giản.</p>
+<p>Các bản sao đã được cấp MIT hợp lệ không bị thu hồi chỉ vì bản mới chuyển sang GPL. Fork có thể tiếp tục từ mốc MIT và viết thêm mã riêng; muốn lấy các thay đổi GPL mới thì phải tuân điều kiện mới. Giữ thông báo MIT trên phần mã cũ và xác định chính xác phần đóng góp mới giúp tránh mô tả sai quyền.</p>
+<h3>Tại sao một dự án vẫn chọn chuyển?</h3>
+<ul><li><strong>Hạn chế fork đóng:</strong> ai phân phối bản phái sinh mới phải chia sẻ source trong phạm vi copyleft. GPL tạo nghĩa vụ pháp lý, không bảo đảm thiện chí hay đóng góp trực tiếp về upstream.</li>
+<li><strong>Bảo vệ một tài sản chung:</strong> không cấm cạnh tranh mà yêu cầu người nhận có quyền tiếp tục sửa và chia sẻ. Đây là ưu tiên khác với tối đa hóa việc nhúng mã vào mọi sản phẩm.</li>
+<li><strong>Hợp hệ sinh thái Linux:</strong> kernel Linux dùng GPL-2.0-only cho toàn thể; mã GPL-2.0-or-later cho phép chọn v2, phù hợp hơn GPLv3-only khi upstream vào kernel. MIT trước đó cũng đã là lựa chọn tương thích GPLv2; <strong>không cần đổi MIT sang GPL chỉ để có khả năng upstream</strong>. Báo cáo Asahi nêu bảo vệ cộng đồng là động lực; phần tương thích kernel ở đây là phân tích kỹ thuật của bài viết, không gán thành lý do mới mà nhóm đã công bố.</li></ul>
+<p>Giấy phép phải theo ranh giới từng thành phần. Một distro chứa kernel, firmware, Mesa, công cụ và tài liệu của nhiều chủ thể; tuyên bố của Asahi không cho phép đổi toàn bộ phần mềm bên thứ ba thành GPL. Kiểm tra commit và SPDX của đúng tệp trước khi tái sử dụng.</p>
+
+<h2 id="choose">7. Chọn thế nào cho dự án của bạn?</h2>
+<ol><li><strong>Muốn mọi người dùng dễ nhất, kể cả đóng nguồn?</strong> MIT là mặc định gọn; Apache 2.0 khi cần patent grant rõ và chấp nhận thêm nghĩa vụ thông báo. Nếu đích bắt buộc là GPLv2-only, tránh đưa Apache 2.0 vào tác phẩm kết hợp đó.</li>
+<li><strong>Muốn bản sửa tệp quay lại cộng đồng nhưng ứng dụng khác vẫn được đóng?</strong> Cân nhắc MPL 2.0. Muốn bảo vệ thư viện với điều kiện thay/relink: cân nhắc đúng phiên bản LGPL.</li>
+<li><strong>Muốn sản phẩm phái sinh phân phối phải giữ tự do?</strong> GPL. Chọn phiên bản theo hệ sinh thái; kernel Linux khác một ứng dụng desktop mới. Quyết định rõ “only” hay “or-later”, không ghi mơ hồ “GPL”.</li>
+<li><strong>Muốn người dùng dịch vụ truy cập được source của bản sửa đang chạy?</strong> Cân nhắc AGPLv3. Nếu mục tiêu thật sự là cấm nhà cung cấp cloud cạnh tranh, AGPL không cấm việc đó khi họ tuân thủ; source-available là lựa chọn khác và phải gọi đúng tên.</li>
+<li><strong>Muốn tài trợ bằng dual licensing?</strong> Có thể cung cấp GPL/AGPL cùng giấy phép thương mại nếu bạn có đủ quyền đối với toàn bộ mã liên quan. CLA không tự động cần thiết cho mọi dự án và cũng không mặc nhiên là chuyển nhượng bản quyền.</li>
+<li><strong>Viết tài liệu, ảnh, bài blog?</strong> Cân nhắc CC BY hoặc BY-SA; chỉ chọn NC nếu chủ ý hạn chế thương mại và hiểu đó không phải open source cho phần mềm.</li></ol>
+<h3>Checklist trước khi phát hành</h3>
+<ul><li>Chọn văn bản chuẩn; thêm <code>LICENSE</code>, <code>NOTICE</code> khi cần và SPDX đúng từng tệp. Không tự viết thêm “không được dùng cho mục đích xấu” rồi vẫn gọi đó là MIT.</li>
+<li>Kiểm kê dependency trực tiếp/gián tiếp, mã copy, font, ảnh, firmware và mã sinh tự động có chứa phần được bảo hộ. Một package.json không thay cho kiểm kê toàn sản phẩm.</li>
+<li>Ghi rõ giấy phép code, docs và assets trong README; công khai chính sách đóng góp và quyền tái cấp phép nếu có.</li>
+<li>Khi giao binary copyleft, chuẩn bị source tương ứng đúng phiên bản, script và thông báo/cách nhận source phù hợp. Với LGPL kiểm tra relink; với AGPL kiểm tra đường lấy source trong dịch vụ.</li>
+<li>Giữ bằng chứng phiên bản, thông báo và quyền đã nhận. Nhờ chuyên gia xem lại nếu liên quan hợp đồng lớn, thiết bị khóa cài đặt, bằng sáng chế hoặc đổi giấy phép nhiều contributor.</li></ul>
+
+<section class="blog-insight" id="insight" aria-label="Know-how và Insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
+<ul><li><strong>Hãy chọn nghĩa vụ bạn muốn duy trì, không chọn nhãn “thoáng” hay “gắt”.</strong> Thư viện muốn phủ rộng và một nền tảng cộng đồng muốn giữ bản sửa mở có thể cùng hợp lý nhưng chọn giấy phép khác nhau.</li>
+<li><strong>Ghi công và mở mã là hai trục riêng.</strong> MIT đã yêu cầu giữ thông báo; GPL bổ sung quyền tiếp cận source và quyền phân phối tiếp, không chỉ thêm một dòng cảm ơn.</li>
+<li><strong>Giấy phép không thay quản trị dự án.</strong> GPL không bắt đối thủ gửi PR, không bắt họ tài trợ bạn và không bảo vệ thương hiệu. Muốn đóng góp bền vững còn cần review tốt, quy trình upstream và cơ chế tài trợ.</li>
+<li><strong>Ngày chuyển đổi quan trọng.</strong> Nếu lấy code quanh một đợt relicense, lưu commit cụ thể cùng LICENSE/SPDX ở commit đó. Đừng suy quyền của bản cũ từ nhãn ở nhánh main hôm nay.</li>
+<li><strong>Với Asahi, cái giá là tính tái sử dụng xuyên hệ điều hành.</strong> MIT từng giúp BSD dễ lấy mã; copyleft mạnh thay đổi bài toán tích hợp. Đó là đánh đổi chủ động giữa phổ cập mã và bảo vệ quyền downstream, không phải kết luận MIT hay GPL luôn tốt hơn.</li></ul></section>
+
+<h2 id="sources">Nguồn và ghi công</h2>
+<p>Bài viết nguyên gốc bằng tiếng Việt, tổng hợp và đối chiếu nguồn ngày 8/11/2026 (giờ Việt Nam, UTC+7); không phải bản dịch toàn văn. Quan điểm và cáo buộc của Asahi được quy về nguồn, phần phân tích lựa chọn là của người viết. Quyền đối với tài liệu nguồn thuộc các tác giả/chủ sở hữu tương ứng; không suy rằng nguồn nào cũng có cùng giấy phép với bài này.</p>
+<ul>
+<li><a href="https://asahilinux.org/2026/11/progress-report-7-3/">Asahi Linux — Progress Report: Linux 7.3</a>, James Calligeros, 7/11/2026, mục Learning from history: thông báo và lý do đổi giấy phép.</li>
+<li><a href="https://opensource.org/osd">OSI — Open Source Definition</a> và <a href="https://opensource.org/licenses">danh sách giấy phép</a>; <a href="https://opensource.org/license/mit">văn bản MIT</a>.</li>
+<li><a href="https://choosealicense.com/licenses/">Choose a License — so sánh các giấy phép phổ biến</a>; <a href="https://spdx.org/licenses/">SPDX License List</a> — tên và định danh chính xác, không phải mọi mục trong SPDX đều được OSI duyệt.</li>
+<li><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a> và <a href="https://www.apache.org/licenses/GPL-compatibility.html">Apache/GPL compatibility</a>.</li>
+<li><a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GPLv2</a>, <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>, <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a>, <a href="https://www.gnu.org/licenses/lgpl-3.0.html">LGPLv3</a> — xem điều khoản đầy đủ trước khi áp dụng.</li>
+<li><a href="https://www.mozilla.org/en-US/MPL/2.0/FAQ/">Mozilla — MPL 2.0 FAQ</a>; <a href="https://www.eclipse.org/legal/epl-2.0/">Eclipse Public License 2.0</a>; <a href="https://docs.kernel.org/process/license-rules.html">Linux kernel licensing rules</a>.</li>
+<li><a href="https://www.mongodb.com/legal/licensing/server-side-public-license">SSPL</a>; <a href="https://mariadb.com/bsl11/">Business Source License 1.1</a>; <a href="https://www.elastic.co/licensing/elastic-license">Elastic License 2.0</a>; <a href="https://commonsclause.com/">Commons Clause</a>; <a href="https://fsl.software/">FSL</a>.</li>
+<li><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>; <a href="https://unlicense.org/">Unlicense</a>; <a href="https://creativecommons.org/share-your-work/cclicenses/">Creative Commons — các giấy phép</a> và <a href="https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software">khuyến nghị về phần mềm</a>.</li>
+</ul>
+<section class="blog-mindmap" aria-label="Mindmap" id="mindmap"><h2>Mindmap — bản đồ chọn giấy phép</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
+mindmap
+  root((Giấy phép phần mềm))
+    Asahi Linux
+      Bắt đầu chuyển sang GPL
+      Bảo vệ công sức cộng đồng
+      MIT cũ vẫn có hiệu lực
+    Permissive
+      MIT BSD ISC Zlib
+      Apache có patent grant
+      Cho phép fork đóng
+    Copyleft yếu
+      LGPL bảo vệ thư viện
+      MPL bảo vệ tệp
+      EPL bảo vệ phần được bao phủ
+    Copyleft mạnh
+      GPL khi phân phối
+      AGPL thêm điều kiện mạng
+      Only khác or later
+    Không phải open source
+      SSPL và Elastic
+      BUSL và FSL
+      Commons Clause
+    Chọn và kiểm tra
+      Mục tiêu cộng đồng
+      Dependency và tương thích
+      Quyền của contributor
+      Code khác tài liệu CC
+</pre></div></section>
+</article>
+<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · Bài viết tổng hợp · Không phải tư vấn pháp lý</p>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
