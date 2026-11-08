@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hai loại OCR tài liệu mà thế giới cần: nhanh-rẻ và chính xác bằng VLM — Blog</title>
+<meta name="description" content="Jerry Liu (LlamaIndex) chia OCR tài liệu thành hai loại: công cụ nhanh, rẻ như LiteParse và mô hình VLM chính xác như OCRia-1; kèm cách thiết kế pipeline hai lớp.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Hai loại OCR tài liệu mà thế giới cần: nhanh-rẻ và chính xác bằng VLM</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">Hai loại OCR tài liệu mà thế giới cần: nhanh-rẻ và chính xác bằng VLM</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>Hai loại OCR tài liệu mà thế giới cần: nhanh-rẻ và chính xác bằng VLM</h1>
+<p class="blog-meta">08/11/2026 · Bài viết tổng hợp · AI · Document parsing · OCR</p>
+<section class="blog-tldr"><h2>TL;DR</h2><ul>
+<li>Jerry Liu (<a href="https://x.com/jerryjliu0">@jerryjliu0</a>, đồng sáng lập LlamaIndex) cho rằng thế giới cần <strong>hai loại OCR tài liệu</strong>: loại cực nhanh/rẻ để số hóa lượt đầu, và loại dựa trên VLM thật chính xác cho tài liệu phức tạp, quan trọng.</li>
+<li>Loại 1: công cụ miễn phí/mã nguồn mở như pypdf, pymupdf và <a href="https://github.com/run-llama/liteparse">LiteParse</a> của LlamaIndex (tích hợp 5 công cụ OCR open-weight khác, mới nhất là MiniCPM-OCR của @OpenBMB).</li>
+<li>Loại 2: <a href="https://www.llamaindex.ai/blog/parse-ocria-1">OCRia-1</a>, mô hình VLM 4 tỷ tham số, đạt 87,4 điểm trên ParseBench theo LlamaIndex, đang chạy trong LlamaParse.</li>
+<li>Cả hai đều cần benchmark nghiêm ngặt, pipeline dữ liệu + huấn luyện và đội ngũ mạnh để đẩy biên Pareto giữa độ chính xác và chi phí.</li>
+</ul></section>
+<p class="blog-note">Bài tổng hợp và diễn giải từ <a href="https://x.com/jerryjliu0/status/2118875764066222117">bài đăng của @jerryjliu0</a> (07/11/2026, 08:18 giờ Bangkok, UTC+7), bài blog OCRia-1 và README của LiteParse. Số liệu lấy nguyên từ nguồn của LlamaIndex (bên tự công bố, chưa được kiểm chứng độc lập). Phần thiết kế pipeline là gợi ý của người viết.</p>
+<h2 id="post">Nội dung bài đăng</h2>
+<blockquote>The world needs two types of document OCR</blockquote>
+<h3>1. OCR cực nhanh, cực rẻ</h3>
+<p>Mỗi tổ chức có thể có hàng nghìn tỷ tài liệu. Một lượt quét đầu nhanh và rẻ giúp số hóa toàn bộ để AI agent truy cập được. Độ chính xác không cao nhất nhưng "good enough" cho agentic retrieval và cho một lượt xử lý sâu hơn sau đó.</p>
+<p>Nhóm này gồm pypdf, pymupdf và LiteParse — theo Jerry là "the fastest/most accurate free/OSS parser". Ông cho biết LlamaIndex còn làm thêm nhiều thứ ở mảng này ("stay tuned").</p>
+<h3>2. OCR chính xác dựa trên VLM</h3>
+<p>Dành cho phần tài liệu vừa <em>phức tạp</em>, vừa <em>bắt buộc phải đọc đúng</em> vì dữ liệu dùng trong quy trình trọng yếu ở tài chính, bảo hiểm, y tế… Dù không miễn phí, VLM vẫn phải mở rộng được tới hàng tỷ trang với chi phí hợp lý.</p>
+<p>Hai tuần trước bài đăng, LlamaIndex ra mắt OCRia-1, "the best general purpose model for document parsing": xử lý bố cục văn bản phức tạp, bảng phức tạp, cả sơ đồ và biểu đồ. Nó chạy mọi chế độ của LlamaParse; benchmark mới nhất ở <a href="https://www.parsebench.ai/">ParseBench</a>.</p>
+<h2 id="liteparse">LiteParse: lớp nhanh, chạy cục bộ</h2>
+<p>Theo README, LiteParse là công cụ parse PDF độc lập, mã nguồn mở (Apache 2.0), tập trung "fast and light", chạy hoàn toàn trên máy, không phụ thuộc cloud hay LLM. Có bản trên crates.io, npm, WASM và PyPI.</p>
+<ul>
+<li>Parse văn bản theo không gian bằng PDFium, khoảng 2–5 ms/trang, kèm bounding box.</li>
+<li>OCR linh hoạt: Tesseract tích hợp sẵn; hoặc cắm server OCR qua HTTP (EasyOCR, PaddleOCR, tự viết).</li>
+<li><strong>Complexity Detection</strong>: kiểm tra rẻ xem tài liệu có cần OCR/parse nặng không — để định tuyến, từ chối hoặc ước tính chi phí trước.</li>
+<li>Chụp ảnh trang cho LLM agent; xuất Markdown, JSON, Text.</li>
+</ul>
+<h2 id="ocria">OCRia-1: lớp chính xác</h2>
+<p>Theo blog LlamaIndex: OCRia-1 là VLM 4 tỷ tham số; trên ParseBench đạt <strong>87,4</strong> điểm tổng (văn bản, định dạng, bảng, biểu đồ) — cao nhất trong các mô hình parse dưới 35 tỷ tham số, hơn mô hình kế tiếp 12,1 điểm. Bảng so sánh của họ: LightOnOCR-3-4B 75,3; Chandra-OCR-2 (4B) 74,8; Mistral OCR 4.1 67,5; olmOCR-2 (7B) 43,3. Họ cũng báo dẫn đầu phần bảng ở olmOCR-bench (92,9), PulseBench-Tab (84,1) và fr-bench-pdf2md.</p>
+<p class="blog-callout"><strong>Lưu ý:</strong> ParseBench do chính LlamaIndex vận hành. Hãy chạy thử trên tài liệu thật của bạn trước khi tin bảng xếp hạng.</p>
+<section class="blog-insight" id="insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
+<p><strong>Thiết kế pipeline hai lớp.</strong> Lớp 1 (LiteParse/pymupdf) chạy cho 100% tài liệu → đánh chỉ mục để agent tìm kiếm. Bộ phát hiện độ phức tạp hoặc tín hiệu nghiệp vụ (hóa đơn, báo cáo tài chính, bảng dày) quyết định trang nào đi lớp 2 (VLM). Chi phí VLM chỉ dồn vào phần trăm nhỏ trang thật sự cần.</p>
+<ul>
+<li>Định tuyến theo <em>trang</em>, không theo cả file: một báo cáo 200 trang có thể chỉ 10 trang bảng.</li>
+<li>Lưu bounding box từ lớp 1 để trích dẫn ngược về vị trí gốc khi agent trả lời.</li>
+<li>Lượt sâu có thể "lazy": chỉ parse lại bằng VLM khi agent truy xuất trúng trang đó.</li>
+<li>Tự dựng bộ test nhỏ (50–100 trang thật, có đáp án) để so công cụ; benchmark công khai khó phản ánh tài liệu tiếng Việt, bản scan mờ hay con dấu.</li>
+<li>Với dữ liệu nhạy cảm, lớp cục bộ giúp không phải gửi mọi thứ lên cloud.</li>
+</ul></section>
+<h2 id="sources">Nguồn và ghi công</h2>
+<p>Đối chiếu nguồn ngày 08/11/2026 (giờ Bangkok, UTC+7). Trích dẫn ngắn giữ nguyên tiếng Anh; phần còn lại là tóm lược. Quyền đối với nội dung gốc thuộc tác giả tương ứng.</p>
+<ol><li><a href="https://x.com/jerryjliu0/status/2118875764066222117" target="_blank" rel="noopener">@jerryjliu0 — The world needs two types of document OCR</a></li>
+<li><a href="https://github.com/run-llama/liteparse" target="_blank" rel="noopener">run-llama/liteparse — README</a></li>
+<li><a href="https://www.llamaindex.ai/blog/parse-ocria-1" target="_blank" rel="noopener">LlamaIndex — Introducing OCRia-1</a></li>
+<li><a href="https://www.parsebench.ai/" target="_blank" rel="noopener">ParseBench</a></li></ol>
+<section class="blog-mindmap" id="mindmap" aria-label="Mindmap"><h2>Mindmap</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
+mindmap
+  root((Hai loại OCR tài liệu))
+    Nhanh và rẻ
+      pypdf và pymupdf
+      LiteParse
+      Chạy cục bộ
+      Lượt đầu cho agent
+    Chính xác bằng VLM
+      OCRia-1 4B
+      Bảng và biểu đồ
+      Tài chính bảo hiểm y tế
+      Hàng tỷ trang
+    Điểm chung
+      Benchmark nghiêm ngặt
+      Pipeline dữ liệu
+      Biên Pareto chi phí
+    Thiết kế pipeline
+      Định tuyến theo trang
+      Giữ bounding box
+      Parse sâu khi cần
+      Bộ test riêng
+</pre></div></section>
+</article>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
