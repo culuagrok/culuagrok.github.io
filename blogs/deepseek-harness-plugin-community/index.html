@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeepSeek Harness: từ chatbot đến nền tảng plugin cộng đồng — Blog</title>
+<meta name="description" content="DeepSeek Harness và hệ sinh thái plugin: bốn ví dụ thực tế, số liệu tự công bố, kế hoạch hỗ trợ tác giả và cách đánh giá plugin an toàn.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">DeepSeek Harness: từ chatbot đến nền tảng plugin cộng đồng</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>DeepSeek Harness: từ chatbot đến nền tảng plugin cộng đồng</h1>
+<p class="blog-meta">08/11/2026 · Bài viết tổng hợp và phân tích · DeepSeek Harness · Plugin · Agent</p>
+<section class="blog-tldr"><h2>TL;DR</h2><ul>
+<li>DeepSeek Harness muốn phát triển theo hướng “mọi thứ đều là plugin”: nền tảng cung cấp phần chung, cộng đồng xây quy trình chuyên biệt.</li>
+<li>Nhóm công bố khoảng 35.000 plugin bên thứ ba và 1,54 triệu người dùng hoạt động hằng ngày. Đây là số liệu do nhóm tự công bố, chưa được kiểm chứng độc lập.</li>
+<li>API ổn định hơn, bảo mật plugin, marketplace chính thức và chương trình hỗ trợ tác giả là những hướng sắp làm, không phải tất cả đã hoàn thành.</li>
+<li>Điểm đáng chú ý không chỉ là thêm công cụ cho AI, mà là biến công việc lặp lại thành một không gian làm việc có thể dùng lại và quan sát được.</li>
+</ul></section>
+<p class="blog-note">Bài viết dựa trên <a href="https://x.com/DeepSeekHarness/status/2119431663642153128">bài đăng của @DeepSeekHarness</a> và bài dài <em>Growing Together with Our Plugin Community</em> đính kèm. Đây là bài phân tích bằng tiếng Việt, không phải bản dịch nguyên văn. Các mốc phát triển, số liệu sử dụng và kế hoạch sản phẩm dưới đây được quy về lời công bố của nhóm; phần tài liệu plugin được đối chiếu riêng.</p>
+<h2>Không chỉ một cửa sổ chat</h2>
+<p>Một mô hình trả lời tốt chưa tự tạo ra một quy trình làm việc tốt. Người làm nội dung còn cần chỗ gom ý tưởng, quản lý bản nháp và lưu thành phẩm. Người đọc tài liệu cần đánh dấu, dịch, ghi chú. Người vận hành nhiều agent cần hiểu chúng đã đọc gì và vì sao ngữ cảnh phình lên.</p>
+<p>Đó là khoảng trống mà hướng tiếp cận plugin nhắm tới. Có thể hiểu <em>harness</em> là lớp tổ chức môi trường hoạt động quanh mô hình: nơi kết nối công cụ và quy trình. Trong bài công bố, DeepSeek Harness đặt tham vọng trở thành “hệ điều hành của thời đại agent”. Đây là tầm nhìn sản phẩm, không có nghĩa ứng dụng này đã thay thế hệ điều hành máy tính.</p>
+<h2>Những con số nói gì — và chưa nói gì?</h2>
+<p>Theo nhóm, DeepSeek Harness v0.1 ra mắt ngày 13/8, ứng dụng desktop ra mắt ngày 29/9. Tính đến ngày 4/11, trong phạm vi người dùng sử dụng API chính thức, sản phẩm đạt <strong>1,54 triệu người dùng hoạt động hằng ngày</strong>, tiêu thụ khoảng <strong>92 nghìn tỷ token mỗi ngày</strong>.</p>
+<p>Nhóm cũng cho biết có khoảng <strong>35.000 plugin bên thứ ba</strong> và khoảng <strong>60% người dùng hoạt động đã xây hoặc cài ít nhất một plugin</strong>. Cần giữ nguyên cụm “đã xây hoặc cài”: nó không đồng nghĩa 60% đang dùng plugin hằng ngày. Tương tự, số lượng plugin không cho biết bao nhiêu plugin còn được bảo trì, an toàn hay thực sự có ích.</p>
+<p>Bài công bố không cung cấp đủ phương pháp đo để suy ra chi phí trung bình, doanh thu hoặc chất lượng từ tổng token. Không nên lấy các số này làm bằng chứng rằng nền tảng đã thắng về hiệu quả. Chính nhóm cũng thừa nhận plugin có mức độ trưởng thành và tình huống sử dụng khác nhau.</p>
+<h2>Bốn ví dụ: plugin biến nhu cầu riêng thành sản phẩm</h2>
+<h3>1. dsh-media-desk: bàn làm việc cho người sáng tạo</h3>
+<p>Bài gốc giới thiệu plugin của <a href="https://github.com/woniuniuniu">woniuniuniu</a>, gom ghi ý tưởng, viết kịch bản, làm ảnh bìa và storyboard vào một bàn làm việc. Điểm đáng học là tổ chức cả chuỗi công việc thay vì chỉ thêm một nút “viết giúp tôi”. Mô tả này đến từ bài giới thiệu; bài viết hiện tại không kiểm thử plugin.</p>
+<h3>2. dsh-guizang-design: từ kỹ năng rời rạc đến thành phẩm có thể tái sử dụng</h3>
+<p>Theo bài gốc, <a href="https://github.com/op7418">Guizang</a> kết hợp các kỹ năng thiết kế và chỉnh lời văn để chuyển bài viết thành trang web, thẻ ảnh hoặc ảnh bìa. Thành phẩm được lưu trong “My Work”; “Make a Similar One” cho phép phát triển tiếp từ đó. Giá trị nằm ở tính liên tục: giữ lại kết quả và phong cách để lần sau không bắt đầu từ số không. Tuyên bố chất lượng ổn định trong lời tác giả plugin là lời chứng thực, không phải benchmark.</p>
+<h3>3. dsh-context: nhìn vào phần agent đang mang theo</h3>
+<p><a href="https://github.com/bowenliang123/dsh-context">dsh-context của bowenliang123</a> là ví dụ có thể đối chiếu với README công khai: tài liệu mô tả dashboard về thành phần ngữ cảnh, xu hướng qua từng yêu cầu, sự kiện, hoạt động tệp và lệnh. Tab Fleet hiển thị agent hiện tại, agent cha và các agent con. Lệnh <code>/context</code> cung cấp một lối xem khác ngay trong phiên.</p>
+<p>Đây là lớp quan sát, không phải phép đọc suy nghĩ mô hình. Biết dữ liệu nào đã được đưa vào giúp điều tra một câu trả lời sai hoặc một phiên quá dài; nó không tự chứng minh câu trả lời đúng.</p>
+<p>Nếu đã có DeepSeek Harness phù hợp, README hiện hướng dẫn cài bằng:</p>
+<pre><code>dsh plugin --profile web add dsh-context</code></pre>
+<p>Tài liệu nêu hỗ trợ <code>@deepseek-ai/dsh</code> từ <code>0.2.0-rc.2</code> trở lên theo định dạng nhật ký V4. Hãy kiểm tra lại mục tương thích trước khi cài; câu lệnh trên được trích từ tài liệu, chưa được chạy thử trong bài này.</p>
+<h3>4. agentero-dsh: đọc nghiên cứu trong một luồng</h3>
+<p>Bài công bố giới thiệu plugin của <a href="https://github.com/Phil-Fan">Phil-Fan</a> đưa Agentero vào Harness để đọc paper, đánh dấu, dịch và ghi chú cùng một nơi, đồng thời nhờ agent giải thích ý tưởng. Đây là ví dụ của việc xây từ nhu cầu thật trong nhóm nghiên cứu, thay vì bắt đầu bằng một danh sách tính năng AI chung chung.</p>
+<h2>Chương trình hỗ trợ: đã có định hướng, chưa có đủ thể lệ</h2>
+<p>Nhóm nói sẽ cải thiện độ ổn định và tương thích của API, tăng cường bảo mật plugin và xây marketplace chính thức. Chương trình hỗ trợ tác giả đang được chuẩn bị, với các hướng như cấp token, trao đổi kỹ thuật và quảng bá sản phẩm. Bài gốc cũng mời startup và doanh nghiệp tích hợp sản phẩm, dịch vụ hoặc chuyên môn qua plugin.</p>
+<p><a href="https://trtgsjkv6r.feishu.cn/share/base/form/shrcnkRrxNyri4bOF9n48BIYWbb">Biểu mẫu được liên kết trong thông báo</a> chỉ nhằm thu thập quan tâm ban đầu, ý tưởng và nhu cầu. Nhóm nói quy tắc tham gia và chi tiết hỗ trợ sẽ được công bố khi chương trình chính thức ra mắt. Vì vậy, chưa thể hiểu đây là cam kết tài trợ cho bất kỳ ai điền form, và không có mức cấp token cụ thể được nêu trong bài.</p>
+<h2>“Mọi thứ đều là plugin” đổi vai trò của nền tảng</h2>
+<p>Theo tầm nhìn được mô tả, Harness giữ những năng lực nền tảng và chức năng phổ thông; người hiểu ngành hoặc quy trình cụ thể nhất xây phần chuyên biệt. Nhóm còn nói tính năng tích hợp sẵn cũng có thể được thay thế bằng plugin bên thứ ba.</p>
+<p>Đánh đổi nằm ngay trong sự linh hoạt đó. Khi phần mở rộng có thể thay đổi trải nghiệm sâu hơn, người dùng cần biết ai duy trì nó, nó tương thích phiên bản nào và nó tiếp xúc với dữ liệu nào. Một marketplace giúp tìm kiếm dễ hơn nhưng danh sách niêm yết không tự biến thành kiểm toán bảo mật.</p>
+<section class="blog-insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
+<ul><li><strong>Bắt đầu từ một vòng công việc khép kín.</strong> Chọn một việc lặp lại, xác định đầu vào, thành phẩm và nơi lưu. Một plugin nhỏ phục vụ đúng vòng đó dễ đánh giá hơn một “trợ lý làm mọi thứ”.</li>
+<li><strong>Phân biệt prompt với sản phẩm.</strong> Prompt mô tả cách làm; sản phẩm còn cần giao diện, trạng thái, lưu trữ, xử lý lỗi và khả năng tiếp tục công việc. Đó là lý do ví dụ “My Work” đáng chú ý hơn số lượng kỹ năng được đóng gói.</li>
+<li><strong>Quan sát trước khi tối ưu.</strong> Khi agent thất bại, kiểm tra thông tin thực tế đã được nạp, lịch sử công cụ và thay đổi ngữ cảnh trước khi vội đổi mô hình. Dashboard hỗ trợ điều tra, không thay thế phép thử đầu ra.</li>
+<li><strong>Đừng chọn plugin chỉ bằng lượt phổ biến.</strong> Đọc mã hoặc tài liệu, kiểm tra người bảo trì, quyền truy cập, nơi gửi dữ liệu và tương thích. Thử bằng dữ liệu giả trong môi trường tách biệt trước khi dùng tài liệu nhạy cảm.</li>
+<li><strong>Đo giá trị, không chỉ đếm lượt cài.</strong> Với một plugin nội bộ, nên theo dõi tỷ lệ hoàn thành đúng, thời gian sửa tay và số lần dùng lại thành phẩm. Đó là những phép đo đề xuất của người viết, không phải số liệu DeepSeek đã công bố.</li></ul>
+<p>Những phân tích trên là nhận định bổ sung, không phải phát biểu hay cam kết của nhóm DeepSeek Harness.</p></section>
+<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/DeepSeekHarness/status/2119431663642153128">@DeepSeekHarness trên X</a> · <a href="https://x.com/i/article/2118260976965517312">Growing Together with Our Plugin Community</a> · <a href="https://github.com/bowenliang123/dsh-context#readme">README dsh-context</a>. Đọc nguồn ngày 08/11/2026 (giờ Việt Nam, UTC+7). Không thấy tweet trích dẫn; lần tra cứu chuỗi hội thoại chỉ trả về bài gốc. Không xem video demo hoặc kiểm thử bốn plugin. Không coi việc ghi công là giấy phép sao chép nội dung gốc.</p>
+<section class="blog-mindmap" id="mindmap"><h2>Mindmap — Hệ sinh thái plugin</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
+mindmap
+  root((DeepSeek Harness))
+    Tầm nhìn
+      Mọi thứ là plugin
+      Nền tảng chung
+      Quy trình chuyên biệt
+    Ví dụ cộng đồng
+      Sáng tạo nội dung
+      Thiết kế và lưu thành phẩm
+      Quan sát ngữ cảnh
+      Đọc nghiên cứu
+    Kế hoạch hỗ trợ
+      API ổn định hơn
+      Bảo mật và marketplace
+      Token và trao đổi kỹ thuật
+      Thể lệ chưa công bố
+    Cách đánh giá
+      Phân biệt số liệu tự công bố
+      Kiểm tra tương thích
+      Thử bằng dữ liệu giả
+      Đo chất lượng đầu ra
+</pre></div></section>
+</article>
+<p class="blog-meta"><a href="../index.html">← Danh sách blog</a></p>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
