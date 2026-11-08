@@ -1,0 +1,15 @@
+/* Paired .bi-en/.bi-vi paragraphs; without JS both languages remain readable. */
+.bi-pair{margin:1.2em 0;scroll-margin-top:1rem;overflow-wrap:anywhere}
+.bi-pair>p{margin:.5em 0}
+.bi-pair:focus-visible{outline:2px solid var(--color-link,#2563eb);outline-offset:5px;border-radius:4px}
+.bi-ready .bi-vi{display:none}
+.bi-ready .bi-pair.is-open>.bi-vi,.bi-ready .bi-pair:focus-within>.bi-vi{display:block}
+.bi-ready .bi-vi{padding:12px 14px;border-left:3px solid var(--color-link,#2563eb);background:var(--color-panel,#eff6ff);color:var(--color-fg,#0f172a);border-radius:4px}
+@media(hover:hover){.bi-ready .bi-pair:hover>.bi-vi{display:block}}
+.bi-ready[data-blog-lang="vi"] .bi-en{display:none}
+.bi-ready[data-blog-lang="vi"] .bi-pair>.bi-vi{display:block;background:none;border:0;padding:0;color:inherit}
+.bi-toggle{position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;max-width:calc(100vw - 24px);padding:10px 14px;border:1px solid var(--color-bd2,#94a3b8);border-radius:24px;background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:600 13px/1.4 system-ui;cursor:pointer}
+.bi-toggle:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.bi-toggle){padding-bottom:70px}
+@media(prefers-reduced-motion:reduce){.bi-pair,.bi-toggle{transition:none;animation:none}}
+@media print{.bi-toggle{display:none}.bi-ready .bi-pair>.bi-vi{display:block}}

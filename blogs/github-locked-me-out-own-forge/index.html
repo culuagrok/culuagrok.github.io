@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GitHub khóa tài khoản tôi: mô tả điều muốn, AI dựng forge riêng — Blog</title>
+<meta name="description" content="Bài của Nix về GitHub, Forgejo, Tailscale và cách giao việc cho AI theo kết quả. Đọc song ngữ Anh–Việt: hover hoặc chạm để xem bản dịch.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+<link rel="stylesheet" href="../assets/bilingual.css">
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">GitHub khóa tài khoản tôi: mô tả điều muốn, AI dựng forge riêng</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>GitHub khóa tài khoản tôi: mô tả điều muốn, AI dựng forge riêng</h1>
+<p class="blog-meta"><strong>Tiêu đề gốc:</strong> GitHub Locked Me Out. I Described What I Wanted. AI Built My Own Forge.<br><strong>Tác giả:</strong> Nix (<a href="https://x.com/NixFred">@NixFred</a>)<br><strong>Đăng:</strong> 11:01 ngày 8/11/2026 (UTC+7, giờ Việt Nam)<br>Thẻ: Forgejo · GitHub · Tailscale · backup · AI</p>
+<p class="blog-note">Bản gốc của Nix (<a href="https://x.com/NixFred">@NixFred</a>) trên <a href="https://x.com/NixFred/status/2119279138510962757">X</a>. Bản dịch phục vụ học tập phi thương mại; mọi quyền đối với bài gốc thuộc về tác giả. Ghi công không đồng nghĩa với giấy phép tái sử dụng. Những diễn biến và kết quả triển khai dưới đây là lời kể của tác giả, không phải xác minh độc lập.</p>
+<section class="blog-tldr" aria-label="TL;DR"><h2>TL;DR</h2><ul>
+<li>GitHub đình chỉ rồi khôi phục tài khoản Nix. Anh vẫn dựng forge riêng vì clone mã nguồn chưa đủ để khôi phục toàn bộ dữ liệu dự án.</li>
+<li>Setup được chọn: Forgejo native trên NixOS, truy cập riêng tư qua Tailscale, đăng nhập độc lập với GitHub.</li>
+<li>AI triển khai dựa trên kết quả mong muốn và ranh giới rõ ràng. Tác giả giữ quyền quyết định những việc quan trọng.</li>
+<li>Tại thời điểm viết, di chuyển toàn bộ, backup mã hóa và kiểm thử khôi phục vẫn <strong>chưa hoàn tất</strong>.</li>
+</ul></section>
+<p class="blog-note" id="bilingual-help"><strong>Cách đọc:</strong> Ở chế độ Song ngữ, rê chuột lên từng đoạn để xem tiếng Việt bên dưới. Trên điện thoại, chạm đoạn để mở/đóng bản dịch; chạm liên kết vẫn mở liên kết. Dùng phím Tab để xem bản dịch, Esc để đóng. Nút nổi góc dưới bên trái chuyển sang Toàn bộ tiếng Việt và ghi nhớ lựa chọn. Khi tắt JavaScript, cả hai ngôn ngữ được hiển thị.</p>
+<h2>Bài gốc và bản dịch</h2>
+<div data-bilingual aria-describedby="bilingual-help">
+<div data-source-block="0" data-source-type="unstyled">
+<div class="bi-pair" data-paragraph="0"><p class="bi-en" lang="en">Github locked me out.  Larry told me.  &quot;Looks like your Github account was suspended, i&#x27;ll see what I can find.&quot;  The notification email was 3 sentences offering &quot;contact support for help.&quot; instructions.  NOTHING ELSE. So I emailed support and requested a decision be made.  Not the time to go making demands. </p><p class="bi-vi" lang="vi">GitHub khóa tài khoản tôi. Larry là người báo tin: “Hình như tài khoản GitHub của anh bị đình chỉ rồi, để tôi tìm hiểu xem.” Email thông báo chỉ có ba câu, hướng dẫn “liên hệ bộ phận hỗ trợ để được giúp đỡ”. KHÔNG CÒN GÌ KHÁC. Thế là tôi gửi email cho bộ phận hỗ trợ, đề nghị họ đưa ra quyết định. Lúc đó không phải lúc để đòi hỏi.</p></div>
+<div class="bi-pair" data-paragraph="1"><p class="bi-en" lang="en">GitHub gave me my account back. I found out on X. I’m still building my own forge.</p><p class="bi-vi" lang="vi">GitHub trả lại tài khoản cho tôi. Tôi biết chuyện qua X. Tôi vẫn tiếp tục dựng forge của riêng mình.</p></div>
+<div class="bi-pair" data-paragraph="2"><p class="bi-en" lang="en">I don’t know what I would have done if GitHub hadn’t restored my access.</p><p class="bi-vi" lang="vi">Tôi không biết mình sẽ làm gì nếu GitHub không khôi phục quyền truy cập.</p></div>
+<div class="bi-pair" data-paragraph="3"><p class="bi-en" lang="en">Yes, git is distributed. Local clones exist. But having some projects checked out isn’t the same as knowing you can recover every repository, issue, pull request and release asset you depend on.<br><a href="https://x.com/Grokbot">@Grokbot</a> inventoried 464 repositories in my account. This wasn’t one little project I could casually recreate.</p><p class="bi-vi" lang="vi">Đúng là git phân tán. Có các bản clone trên máy. Nhưng có vài dự án đã checkout khác với việc biết chắc mình khôi phục được mọi repository, issue, pull request và file đính kèm bản release mà mình phụ thuộc vào. <a href="https://x.com/Grokbot">@Grokbot</a> kiểm kê được 464 repository trong tài khoản của tôi. Đây không phải một dự án nhỏ mà tôi có thể thong thả dựng lại.</p></div>
+<div class="bi-pair" data-paragraph="4"><p class="bi-en" lang="en">On November 6, GitHub told me my account had been suspended for a Terms of Service violation. I didn’t know what I’d done. The support email acknowledged my request and warned about long waits. It didn’t explain the suspension.</p><p class="bi-vi" lang="vi">Ngày 6/11, GitHub báo tài khoản tôi bị đình chỉ vì vi phạm Điều khoản Dịch vụ. Tôi không biết mình đã làm gì. Email hỗ trợ xác nhận đã nhận yêu cầu và cảnh báo thời gian chờ lâu. Nó không giải thích lý do đình chỉ.</p></div>
+<div class="bi-pair" data-paragraph="5"><p class="bi-en" lang="en">We’d also been dealing with GitHub downtime. GitHub’s own November 5 incident report described problems with Git operations, Issues, Actions and API access.</p><p class="bi-vi" lang="vi">Chúng tôi còn đang phải đối phó với sự cố GitHub ngừng hoạt động. Báo cáo sự cố ngày 5/11 của chính GitHub mô tả trục trặc ở các thao tác Git, Issues, Actions và truy cập API.</p></div>
+<div class="bi-pair" data-paragraph="6"><p class="bi-en" lang="en">The outage and my suspension were different events. But both made the dependency painfully clear. When access to GitHub stopped, the parts of Larry, Grokbot and my workflow that needed GitHub stopped too. Having AI assistants didn’t fix an unavailable dependency.</p><p class="bi-vi" lang="vi">Sự cố và việc tôi bị đình chỉ là hai sự kiện khác nhau. Nhưng cả hai đều phơi bày mức độ phụ thuộc theo cách rất đau. Khi không truy cập được GitHub, những phần trong quy trình của Larry, Grokbot và tôi cần GitHub cũng dừng theo. Có trợ lý AI không sửa được một thứ mình phụ thuộc đang không hoạt động.</p></div>
+<div class="bi-pair" data-paragraph="7"><p class="bi-en" lang="en">So I posted the suspension screen and asked you whether I should run my own Git server.</p><p class="bi-vi" lang="vi">Thế là tôi đăng ảnh màn hình thông báo đình chỉ và hỏi mọi người liệu tôi có nên tự chạy Git server không.</p></div>
+<div class="bi-pair" data-paragraph="8"><p class="bi-en" lang="en">You guys showed the fuck up.<br><a href="https://x.com/dkfiander">@dkfiander</a> recommended an independent copy with Gitea or Forgejo. <a href="https://x.com/jamesgalang">@jamesgalang</a> described having his agent install Forgejo and copy his repositories. <a href="https://x.com/jeffdavismd">@jeffdavismd</a> had already switched.</p><p class="bi-vi" lang="vi">Mọi người đến giúp đông thật sự. <a href="https://x.com/dkfiander">@dkfiander</a> khuyên giữ một bản sao độc lập bằng Gitea hoặc Forgejo. <a href="https://x.com/jamesgalang">@jamesgalang</a> kể đã nhờ agent cài Forgejo và chép các repository sang. <a href="https://x.com/jeffdavismd">@jeffdavismd</a> thì đã chuyển từ trước.</p></div>
+<div class="bi-pair" data-paragraph="9"><p class="bi-en" lang="en"><a href="https://x.com/spencer450">@spencer450</a> described the arrangement that clicked for me: private Forgejo through Tailscale, with GitHub as a secondary remote. He shared his configuration. <a href="https://x.com/cgranier">@cgranier</a> described his Forgejo-over-Tailscale setup too.</p><p class="bi-vi" lang="vi"><a href="https://x.com/spencer450">@spencer450</a> mô tả cách bố trí khiến tôi hiểu ra: Forgejo riêng tư qua Tailscale, còn GitHub làm remote phụ. Anh ấy chia sẻ cả cấu hình. <a href="https://x.com/cgranier">@cgranier</a> cũng kể về setup Forgejo qua Tailscale của mình.</p></div>
+<div class="bi-pair" data-paragraph="10"><p class="bi-en" lang="en"><a href="https://x.com/LVITDepartment">@LVITDepartment</a> reminded me to disable public signups. <a href="https://x.com/klieber">@klieber</a> warned about depending on GitHub to sign into other services. <a href="https://x.com/jul1anodev">@jul1anodev</a> explained why encrypted backups need the configuration and required secrets alongside the database and repositories.</p><p class="bi-vi" lang="vi"><a href="https://x.com/LVITDepartment">@LVITDepartment</a> nhắc tôi tắt đăng ký công khai. <a href="https://x.com/klieber">@klieber</a> cảnh báo về việc phụ thuộc vào GitHub để đăng nhập các dịch vụ khác. <a href="https://x.com/jul1anodev">@jul1anodev</a> giải thích vì sao bản backup mã hóa phải chứa cả cấu hình và các secret cần thiết, bên cạnh database và repository.</p></div>
+<div class="bi-pair" data-paragraph="11"><p class="bi-en" lang="en">And <a href="https://x.com/_FailSafe">@_FailSafe</a> noticed my GitHub account was back and told me. The people on the internet let me know before I knew myself.</p><p class="bi-vi" lang="vi">Rồi <a href="https://x.com/_FailSafe">@_FailSafe</a> nhận ra tài khoản GitHub của tôi đã được mở lại và báo cho tôi. Người trên mạng cho tôi biết trước cả khi tôi tự biết.</p></div>
+<div class="bi-pair" data-paragraph="12"><p class="bi-en" lang="en">I had access again. But I wasn’t going to forget how that felt.</p><p class="bi-vi" lang="vi">Tôi lại có quyền truy cập. Nhưng tôi sẽ không quên cảm giác đó.</p></div>
+<div class="bi-pair" data-paragraph="13"><p class="bi-en" lang="en">Here’s the part I really want people to understand.</p><p class="bi-vi" lang="vi">Đây là phần tôi thực sự muốn mọi người hiểu.</p></div>
+<div class="bi-pair" data-paragraph="14"><p class="bi-en" lang="en">I know Linux well. I did not know Forgejo. I had never even visited its website. On purpose.</p><p class="bi-vi" lang="vi">Tôi rành Linux. Tôi không biết Forgejo. Thậm chí tôi chưa từng vào trang web của nó. Đó là cố ý.</p></div>
+<div class="bi-pair" data-paragraph="15"><p class="bi-en" lang="en">I read your comments, gave them to Grok Bot and described what I wanted.</p><p class="bi-vi" lang="vi">Tôi đọc bình luận của mọi người, đưa chúng cho Grok Bot rồi mô tả điều mình muốn.</p></div>
+<div class="bi-pair" data-paragraph="16"><p class="bi-en" lang="en">A private forge on my existing Hostinger VPS. Native NixOS, no Docker. Access through Tailscale. My own login, independent of GitHub. Copy everything transferable without deleting the originals. Verify it. Back it up. Prove we can restore it. And give my projects a homepage worth showing off, even though it’s private.</p><p class="bi-vi" lang="vi">Một forge riêng tư trên VPS Hostinger tôi đang có. Chạy native trên NixOS, không Docker. Truy cập qua Tailscale. Tài khoản đăng nhập của riêng tôi, độc lập với GitHub. Chép mọi thứ chuyển được mà không xóa bản gốc. Kiểm tra lại. Backup. Chứng minh khôi phục được. Và làm cho các dự án của tôi một trang chủ đáng khoe, dù nó là riêng tư.</p></div>
+<div class="bi-pair" data-paragraph="17"><p class="bi-en" lang="en">That was the brief.</p><p class="bi-vi" lang="vi">Bản yêu cầu chỉ có vậy.</p></div>
+<div class="bi-pair" data-paragraph="18"><p class="bi-en" lang="en">I didn’t learn Forgejo’s configuration syntax first. I didn’t spend the evening translating a tutorial into commands. I gave the assistant the outcome, the constraints and authorized access to the systems it needed.</p><p class="bi-vi" lang="vi">Tôi không học cú pháp cấu hình Forgejo trước. Tôi không mất cả buổi tối chuyển một bài hướng dẫn thành câu lệnh. Tôi đưa cho trợ lý kết quả mong muốn, các ràng buộc và quyền truy cập đã được cho phép vào những hệ thống nó cần.</p></div>
+<div class="bi-pair" data-paragraph="19"><p class="bi-en" lang="en">It researched the implementation, configured the service and checked the results. When a consequential decision needed me, I made it.</p><p class="bi-vi" lang="vi">Nó tìm hiểu cách triển khai, cấu hình dịch vụ và kiểm tra kết quả. Khi có quyết định quan trọng cần đến tôi, tôi quyết.</p></div>
+<div class="bi-pair" data-paragraph="20"><p class="bi-en" lang="en">Then I asked it to read the support email and your replies, investigate the downtime, and write this story with me.</p><p class="bi-vi" lang="vi">Sau đó tôi nhờ nó đọc email hỗ trợ và các phản hồi của mọi người, tìm hiểu vụ gián đoạn dịch vụ, rồi cùng tôi viết câu chuyện này.</p></div>
+<div class="bi-pair" data-paragraph="21"><p class="bi-en" lang="en">The same assistant helping build the system is helping explain why we’re building it.</p><p class="bi-vi" lang="vi">Cũng chính trợ lý giúp dựng hệ thống ấy đang giúp giải thích vì sao chúng tôi dựng nó.</p></div>
+<div class="bi-pair" data-paragraph="22"><p class="bi-en" lang="en">That’s what I mean when I say we’re entering the era of describing what we want.</p><p class="bi-vi" lang="vi">Đó là điều tôi muốn nói khi bảo rằng chúng ta đang bước vào thời đại mô tả điều mình muốn.</p></div>
+<div class="bi-pair" data-paragraph="23"><p class="bi-en" lang="en">Not that details stopped mattering. Someone still has to get them right. But I don’t have to become a Forgejo specialist before I can have a properly configured Forgejo server.</p><p class="bi-vi" lang="vi">Không phải chi tiết đã hết quan trọng. Vẫn phải có ai đó làm cho đúng. Nhưng tôi không cần trở thành chuyên gia Forgejo trước khi có được một server Forgejo cấu hình đúng cách.</p></div>
+<div class="bi-pair" data-paragraph="24"><p class="bi-en" lang="en">If you want to do this yourself, start by giving your assistant a brief like this:</p><p class="bi-vi" lang="vi">Nếu muốn tự làm, hãy bắt đầu bằng cách đưa cho trợ lý một bản yêu cầu như thế này:</p></div>
+<div class="bi-pair" data-paragraph="25"><p class="bi-en" lang="en">“I want a private Git forge that I control. Inspect the server I choose before changing anything. Compare supported Forgejo deployment options for that machine and recommend the simplest reliable setup. Keep access private through Tailscale, with no public application or administrative ports. Disable public registration and give me a login independent of GitHub. Use my approved secret manager for credentials. Inventory my repositories, explain what can and cannot transfer, and preserve the originals. Start with a small pilot. Verify clone and push over each enabled transport. Create an encrypted backup covering repositories, database, configuration and required secrets, then prove an isolated restore works. Ask before destructive changes, spending money or exposing anything publicly. Report what actually passed and what remains unfinished.”</p><p class="bi-vi" lang="vi">“Tôi muốn một Git forge riêng tư do tôi kiểm soát. Hãy kiểm tra server tôi chọn trước khi thay đổi bất cứ thứ gì. So sánh các phương án triển khai Forgejo được hỗ trợ trên máy đó và đề xuất setup đơn giản, đáng tin cậy nhất. Giữ truy cập riêng tư qua Tailscale, không mở cổng ứng dụng hay cổng quản trị ra công khai. Tắt đăng ký công khai và cho tôi một tài khoản đăng nhập độc lập với GitHub. Dùng trình quản lý secret tôi đã phê duyệt để lưu thông tin đăng nhập. Kiểm kê các repository của tôi, giải thích cái gì chuyển được và cái gì không, giữ nguyên bản gốc. Bắt đầu bằng một bản thử nhỏ. Kiểm tra clone và push qua từng phương thức truyền tải được bật. Tạo bản backup mã hóa chứa repository, database, cấu hình và các secret cần thiết, rồi chứng minh khôi phục được trong môi trường tách biệt. Hỏi trước khi thay đổi mang tính phá hủy, tiêu tiền hoặc công khai bất cứ thứ gì. Báo cáo những gì thực sự kiểm tra đạt và những gì còn dang dở.”</p></div>
+<div class="bi-pair" data-paragraph="26"><p class="bi-en" lang="en">Give it a host you control. Give it appropriately scoped access through a protected credential facility, not a pile of secrets pasted into chat. Tell it your boundaries. Have it bring you the decisions that matter.</p><p class="bi-vi" lang="vi">Hãy đưa cho nó một máy chủ bạn kiểm soát. Cấp quyền truy cập có phạm vi phù hợp qua một công cụ bảo vệ thông tin đăng nhập, chứ đừng dán một đống secret vào chat. Nói rõ giới hạn của bạn. Để nó mang những quyết định quan trọng đến cho bạn.</p></div>
+<div class="bi-pair" data-paragraph="27"><p class="bi-en" lang="en">You can do that without knowing Forgejo. That’s the point.</p><p class="bi-vi" lang="vi">Bạn làm được điều đó mà không cần biết Forgejo. Đó chính là điểm mấu chốt.</p></div>
+<div class="bi-pair" data-paragraph="28"><p class="bi-en" lang="en">For me, Infisical is an important part of making this practical across AI tools. I run it on my own server as a central place to manage credentials used across Grok Bot, Larry and Codex.</p><p class="bi-vi" lang="vi">Với tôi, Infisical là một phần quan trọng giúp chuyện này khả thi trên nhiều công cụ AI. Tôi tự chạy nó trên server của mình, làm nơi tập trung quản lý thông tin đăng nhập dùng chung cho Grok Bot, Larry và Codex.</p></div>
+<div class="bi-pair" data-paragraph="29"><p class="bi-en" lang="en">For this job, we found an existing GitHub token through that setup and verified repository access. I didn’t need to paste a new token into this conversation or create a separate collection of keys just for this assistant.</p><p class="bi-vi" lang="vi">Trong việc này, chúng tôi tìm thấy một GitHub token có sẵn qua hệ thống đó và xác minh được quyền truy cập repository. Tôi không cần dán token mới vào cuộc trò chuyện này hay tạo một bộ khóa riêng chỉ dành cho trợ lý này.</p></div>
+<div class="bi-pair" data-paragraph="30"><p class="bi-en" lang="en">The credentials and permissions belong to my infrastructure, not to whichever AI conversation I opened today.</p><p class="bi-vi" lang="vi">Thông tin đăng nhập và quyền hạn thuộc về hạ tầng của tôi, không thuộc về cuộc trò chuyện AI nào tôi mở hôm nay.</p></div>
+<div class="bi-pair" data-paragraph="31"><p class="bi-en" lang="en">The result so far is a running native Forgejo service on my Hostinger VPS, private HTTPS through Tailscale with a valid certificate, disabled public registration and a working administrator login that doesn’t depend on GitHub. Public IPv4 probes against the checked service ports and administrative SSH timed out.</p><p class="bi-vi" lang="vi">Kết quả đến giờ là dịch vụ Forgejo chạy native trên VPS Hostinger của tôi; HTTPS riêng tư qua Tailscale với chứng chỉ hợp lệ; đăng ký công khai đã tắt; và tài khoản quản trị đăng nhập được mà không phụ thuộc GitHub. Các phép thăm dò từ IPv4 công khai vào những cổng dịch vụ đã kiểm tra và cổng SSH quản trị đều hết thời gian chờ.</p></div>
+<div class="bi-pair" data-paragraph="32"><p class="bi-en" lang="en">Spencer’s private-access advice is implemented. The independent-login advice is implemented. Juliano’s backup advice is part of the backup requirements we’re working through.</p><p class="bi-vi" lang="vi">Lời khuyên của Spencer về truy cập riêng tư đã được áp dụng. Lời khuyên về đăng nhập độc lập đã được áp dụng. Lời khuyên của Juliano về backup nằm trong các yêu cầu backup mà chúng tôi đang thực hiện.</p></div>
+<div class="bi-pair" data-paragraph="33"><p class="bi-en" lang="en">And I’m not calling the whole job finished before it is. The full migration, encrypted backup and isolated restore test are still unfinished. My GitHub originals are being preserved. A running login page is not proof that everything is safely migrated.</p><p class="bi-vi" lang="vi">Và tôi sẽ không gọi toàn bộ công việc là xong khi chưa xong. Việc di chuyển toàn bộ, bản backup mã hóa và bài thử khôi phục trong môi trường tách biệt vẫn còn dang dở. Các bản gốc trên GitHub của tôi vẫn được giữ nguyên. Một trang đăng nhập đang chạy không phải bằng chứng rằng mọi thứ đã được chuyển sang an toàn.</p></div>
+<div class="bi-pair" data-paragraph="34"><p class="bi-en" lang="en">Self-hosting gives me responsibility for operating this system. It doesn’t make failures disappear. And moving repositories doesn’t automatically replace every GitHub-specific integration in our workflow.</p><p class="bi-vi" lang="vi">Tự host nghĩa là tôi phải chịu trách nhiệm vận hành hệ thống này. Nó không làm sự cố biến mất. Và chuyển repository đi cũng không tự động thay thế mọi tích hợp đặc thù GitHub trong quy trình của chúng tôi.</p></div>
+<div class="bi-pair" data-paragraph="35"><p class="bi-en" lang="en">But the direction is clear: my private forge for daily work, GitHub for the things I choose to publish there.</p><p class="bi-vi" lang="vi">Nhưng hướng đi đã rõ: forge riêng dùng cho công việc hằng ngày, GitHub dành cho những thứ tôi chọn công khai ở đó.</p></div>
+<div class="bi-pair" data-paragraph="36"><p class="bi-en" lang="en">I started with a suspension notice and a question.</p><p class="bi-vi" lang="vi">Tôi bắt đầu từ một thông báo đình chỉ và một câu hỏi.</p></div>
+<div class="bi-pair" data-paragraph="37"><p class="bi-en" lang="en">You brought the experience. I chose what I wanted. Grok Bot turned that into a running system and helped write the story you’re reading.</p><p class="bi-vi" lang="vi">Mọi người mang đến kinh nghiệm. Tôi chọn điều mình muốn. Grok Bot biến nó thành một hệ thống đang chạy và giúp viết câu chuyện bạn đang đọc.</p></div>
+<div class="bi-pair" data-paragraph="38"><p class="bi-en" lang="en">I still haven’t been to the <a href="https://x.com/Forgejo">@Forgejo</a> website.</p><p class="bi-vi" lang="vi">Đến giờ tôi vẫn chưa vào trang web của <a href="https://x.com/Forgejo">@Forgejo</a>.</p></div>
+</div></div>
+<section class="blog-insight" id="insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người dịch</p>
+<ul><li><strong>Git phân tán không có nghĩa toàn bộ forge phân tán.</strong> Issue, pull request, file release và tích hợp có thể vẫn nằm ở một điểm phụ thuộc duy nhất. Cần kiểm kê cả dữ liệu ngoài Git, không chỉ đếm repository.</li>
+<li><strong>Forgejo riêng + Tailscale là cách giảm bề mặt công khai, không phải phép màu bảo mật.</strong> GitHub có thể làm remote phụ; tài khoản đăng nhập độc lập tránh mất quyền truy cập dây chuyền. Vẫn cần cập nhật, phân quyền và quản lý thiết bị trong tailnet. Một vài phép thử cổng hết thời gian chờ không chứng minh toàn hệ thống an toàn.</li>
+<li><strong>Backup chỉ đáng tin khi khôi phục được.</strong> Cần mã nguồn, database, cấu hình và các secret cần thiết; mã hóa backup, bảo vệ khóa giải mã riêng và thử restore trong môi trường tách biệt. Migration phải kiểm tra riêng từng loại dữ liệu và tích hợp. Không xóa bản gốc trước khi nghiệm thu.</li>
+<li><strong>Quản lý secret tách khỏi hội thoại AI.</strong> Infisical là ví dụ trong bài, không phải lựa chọn bắt buộc. Cấp quyền tối thiểu qua cơ chế được duyệt, có nhật ký và khả năng thu hồi; không dán token vào prompt hay ghi secret vào repository.</li>
+<li><strong>“Mô tả kết quả” vẫn cần tiêu chí đạt.</strong> Một bản giao việc tốt nói rõ kết quả, hệ thống đích, giới hạn, bước thử nhỏ, bằng chứng kiểm tra và việc nào phải xin phép. AI thực hiện thao tác không thay thế trách nhiệm vận hành của người sở hữu hệ thống.</li></ul>
+<p>Đây là phân tích bổ sung của người dịch, không phải phần nguyên văn hay khuyến nghị đã được tác giả xác nhận.</p></section>
+<section class="blog-mindmap" id="mindmap"><h2>Mindmap — Tự chủ forge, không tự mãn</h2><div class="blog-mindmap-scroll"><pre class="mermaid">
+mindmap
+  root((Forge riêng và AI))
+    Lý do
+      GitHub đình chỉ tài khoản
+      Sự cố dịch vụ là chuyện khác
+      Clone chưa đủ dữ liệu
+    Kiến trúc
+      Forgejo trên NixOS
+      Tailscale riêng tư
+      Đăng nhập độc lập
+      GitHub làm remote phụ
+    Giao việc cho AI
+      Mô tả kết quả
+      Giới hạn quyền truy cập
+      Xin phép quyết định quan trọng
+      Kiểm tra bằng chứng
+    Khôi phục
+      Repository và database
+      Cấu hình và secret
+      Backup mã hóa
+      Thử restore tách biệt
+    Chưa hoàn tất
+      Di chuyển toàn bộ
+      Backup và restore
+      Tích hợp đặc thù GitHub
+</pre></div></section>
+</article>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+<script src="../assets/bilingual.js"></script>
+</body>
+</html>
