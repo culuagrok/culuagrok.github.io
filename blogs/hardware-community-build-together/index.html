@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Học phần cứng cùng nhau: lời mời của David Stålmarck và cách bắt đầu — Blog</title>
+<meta name="description" content="David Stålmarck mời cộng đồng học và làm phần cứng: Discord, ESP32, robotics, phản hồi của người học và lộ trình làm dự án đầu tiên.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">Học phần cứng cùng nhau: lời mời của David Stålmarck và cách bắt đầu</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>Học phần cứng cùng nhau: lời mời của David Stålmarck và cách bắt đầu</h1>
+<p class="blog-meta">08/11/2026 · Bài viết tổng hợp · Hardware · Cộng đồng maker · ESP32</p>
+<section class="blog-tldr"><h2>TL;DR</h2><ul>
+<li>David Stålmarck mời những người muốn học, làm nghề hoặc đơn giản là thích mày mò phần cứng cùng xây dựng một cộng đồng.</li>
+<li>Các trả lời sau đó bổ sung thông tin quan trọng: có Discord, dự định mở kênh riêng cho robotics, chia sẻ dự án và ESP32; David nói không có paywall.</li>
+<li>Phản hồi trải từ người hoàn toàn mới đến người đang làm robot. Giá trị đáng chú ý là có nơi hỏi, chia sẻ tiến độ và cùng gỡ lỗi — không phải một khóa học đã được công bố đầy đủ.</li>
+<li>Phần cuối đề xuất lộ trình dự án đầu tiên và cách đặt câu hỏi kỹ thuật. Đây là gợi ý của người viết, không phải giáo trình của David.</li>
+</ul></section>
+<p class="blog-note">Bài tổng hợp từ bài đăng gốc và một số phản hồi, bài trích dẫn liên quan đã đọc trên X. Không phải bản dịch một bài hướng dẫn dài: bài gốc chỉ là lời mời ngắn. Các nhận xét và hướng dẫn bổ sung được phân biệt với phát biểu của tác giả; không khẳng định đã đọc toàn bộ cuộc thảo luận.</p>
+<nav class="blog-toc"><h2>Mục lục</h2><ol><li><a href="#invitation">David đang mời ai?</a></li><li><a href="#details">Những thông tin trong các tweet tiếp nối</a></li><li><a href="#replies">Người tham gia cần gì?</a></li><li><a href="#context">Atech và bối cảnh công cụ</a></li><li><a href="#insight">Know-how &amp; Insight</a></li><li><a href="#sources">Nguồn và ghi công</a></li><li><a href="#mindmap">Mindmap</a></li></ol></nav>
+<h2 id="invitation">1. Một lời mời cho cả người mới lẫn người đang làm nghề</h2>
+<p>Ngày 07/11/2026, lúc 16:42 theo giờ Bangkok (UTC+7), David Stålmarck đăng ý tưởng mở một cộng đồng cho người muốn học phần cứng, làm việc trong lĩnh vực này hoặc chỉ thích mày mò đồ vật. Anh đề nghị ai quan tâm thì trả lời bài đăng. <a href="https://x.com/DavidStalmarck/status/2119002465672507547" target="_blank" rel="noopener">@DavidStalmarck — lời mời ban đầu</a>.</p>
+<blockquote>“Thinking of starting a community for people who want to learn hardware, work in hardware, or just enjoy tinkering with things in general.”<br>— David Stålmarck, bài đăng gốc</blockquote>
+<p>Dịch ý: “Tôi đang nghĩ đến việc lập một cộng đồng cho những người muốn học phần cứng, làm việc trong ngành phần cứng, hoặc đơn giản là thích mày mò mọi thứ.” Cách diễn đạt không đặt điều kiện phải là kỹ sư hay có sẵn một sản phẩm hoàn chỉnh.</p>
+<p>Điều cần giữ đúng mức: đây không phải thông báo tuyển dụng, không phải cam kết đào tạo nghề và cũng không công bố một bộ thiết kế PCB để tải về. Bài đăng có video đính kèm, nhưng nội dung chữ không giải thích sơ đồ hay cấu tạo thiết bị; không thể suy ra hướng dẫn chế tạo chỉ từ lời mời này.</p>
+<h2 id="details">2. Đọc các trả lời mới thấy cộng đồng sẽ vận hành ra sao</h2>
+<h3>Discord và ba hướng nội dung cụ thể</h3>
+<p>Trong một phản hồi, David mời người đọc vào Discord và nói nhóm đang mở các kênh riêng cho <strong>robotics, chia sẻ dự án và ESP32</strong>. Đây là thông tin cụ thể hơn nhiều so với câu “đang nghĩ đến việc mở cộng đồng” ở bài gốc. <a href="https://x.com/DavidStalmarck/status/2119149852604977609" target="_blank" rel="noopener">@DavidStalmarck — các kênh robotics, dự án và ESP32</a>.</p>
+<p>Muốn tham gia, nên mở lời mời trong tweet của chính David hoặc kiểm tra liên kết từ trang chính thức. Bài viết này không xác nhận tình trạng hoạt động hay quyền truy cập bên trong Discord, cũng không đăng ký thay người đọc.</p>
+<h3>Không có paywall — theo phát biểu của người tổ chức</h3>
+<p>Khi được hỏi có tường phí hay không, David trả lời: <q>Nope! No pay walls.</q> Anh nói phần tốn tiền là nếu người dùng muốn mua phần cứng, và nhóm hy vọng tìm được ưu đãi cho họ. <a href="https://x.com/DavidStalmarck/status/2119151994422333723" target="_blank" rel="noopener">@DavidStalmarck — không có paywall</a>. Cần tách hai ý: không có paywall theo lời anh ở thời điểm đăng, nhưng linh kiện không vì thế mà miễn phí; ưu đãi là mong muốn, không phải mức giảm giá đã được bảo đảm.</p>
+<h3>Không chỉ là một phòng chat trực tuyến</h3>
+<p>Gustav Hugod trích dẫn bài gốc và mời những người muốn bắt đầu chế tạo ghé văn phòng của nhóm. <a href="https://x.com/Gustav_Hugod/status/2119064582253645881" target="_blank" rel="noopener">@Gustav_Hugod — lời mời ghé văn phòng</a>. Bài trích dẫn không ghi địa chỉ hay giờ mở cửa trong phần chữ đã đọc, nên không nên tự suy ra đây là một makerspace mở cửa tự do cho mọi người.</p>
+<h2 id="replies">3. Các tweet liên quan cho thấy người học đang thiếu gì?</h2>
+<p>Những ví dụ dưới đây là lời tự thuật của từng tài khoản, không phải sản phẩm đã được người viết kiểm thử và cũng không đại diện cho toàn bộ cộng đồng.</p>
+<ul>
+<li><strong>Người mới cần một lối vào không đáng sợ.</strong> Anirudh Babu nói mình chưa biết gì về phần cứng nhưng luôn bị cuốn hút bởi lĩnh vực này. <a href="https://x.com/AnirudhBabu09/status/2119314922932703523" target="_blank" rel="noopener">@AnirudhBabu09 — người mới chưa biết phần cứng</a>. Một cộng đồng hữu ích phải có chỗ cho câu hỏi cơ bản, không chỉ ảnh sản phẩm đẹp.</li>
+<li><strong>Người đã làm cần phản hồi kỹ thuật.</strong> @realfxw nói thường mày mò mạch và vi điều khiển về đêm, muốn có nơi chia sẻ bản dựng, xử lý lỗi và tìm cảm hứng. <a href="https://x.com/realfxw/status/2119311587156848803" target="_blank" rel="noopener">@realfxw — chia sẻ sản phẩm và gỡ lỗi</a>. Nhu cầu ở đây không đơn thuần là thêm một danh sách tài liệu.</li>
+<li><strong>Dự án cá nhân tạo động lực học.</strong> Peter L Van Velzer cho biết đang chế tạo một thùng rác robot trong nhà. <a href="https://x.com/vanvelzer9/status/2119309727779766461" target="_blank" rel="noopener">@vanvelzer9 — dự án thùng rác robot</a>. Bài trả lời không cung cấp đủ thông số để tái tạo, nhưng cho thấy điểm xuất phát có thể là một việc rất gần đời sống.</li>
+<li><strong>Người tổ chức có hỏi sâu hơn.</strong> Khi một người nói vừa có vi điều khiển đầu tiên, David hỏi họ đang dùng loại MCU nào rồi mời vào Discord. <a href="https://x.com/DavidStalmarck/status/2119153225550922056" target="_blank" rel="noopener">@DavidStalmarck — hỏi về vi điều khiển đầu tiên</a>. Tên bo mạch cụ thể chính là thông tin đầu tiên cần biết trước khi hỗ trợ đấu dây hay nạp firmware.</li>
+<li><strong>Phần cứng không chỉ có điện tử và code.</strong> David cũng nhận xét việc làm dự án trông đẹp thường chưa được coi trọng đúng mức, trong một trao đổi về sơn và lớp phủ. <a href="https://x.com/DavidStalmarck/status/2119153570796748923" target="_blank" rel="noopener">@DavidStalmarck — coi trọng vẻ ngoài dự án</a>. Vỏ, hoàn thiện bề mặt và trải nghiệm sử dụng cũng có chỗ trong quá trình chế tạo.</li>
+</ul>
+<p>Từ các phản hồi này, có thể rút ra một nhận xét của người viết: cộng đồng hiệu quả nên nối được ba nhóm — người mới cần đường dẫn, người đang làm cần review, và người có kinh nghiệm có thể chỉ ra lỗi trước khi chúng trở thành một lần đặt mạch tốn kém.</p>
+<h2 id="context">4. Bối cảnh Atech: công cụ dễ tiếp cận không thay thế kiến thức nền</h2>
+<p>Hồ sơ David giới thiệu anh là đồng sáng lập Atech; trong các phản hồi anh cũng dẫn người đọc tới @Atech_dev. <a href="https://atech.dev/" target="_blank" rel="noopener">Trang Atech</a> tự giới thiệu các bộ phần cứng mô-đun có thể lập trình với AI, cùng ví dụ như cánh tay robot và tay điều khiển. Đây là mô tả của nhà cung cấp, không phải đánh giá độc lập về độ dễ dùng hay chất lượng sản phẩm.</p>
+<p>Vì vậy, có bối cảnh thương mại cần biết, nhưng không có cơ sở để nói người tham gia bắt buộc mua kit. Không nên đồng nhất “tham gia cộng đồng”, “mua sản phẩm” và “học kiến thức nền” thành một điều kiện duy nhất.</p>
+<p>Nếu muốn bắt đầu độc lập với một bộ kit cụ thể, <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html" target="_blank" rel="noopener">hướng dẫn chính thức ESP-IDF cho ESP32</a> trình bày những thứ cần có: bo ESP32, cáp USB phù hợp, máy tính và môi trường build/nạp firmware. Tài liệu cũng lưu ý có bo dùng USB-C: phải kiểm tra đúng phần cứng, không sao chép hướng dẫn của bo khác một cách máy móc.</p>
+<section class="blog-insight" id="insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết — không phải giáo trình hay lời hứa của David</p>
+<h3>Bắt đầu bằng một vòng lặp nhỏ, không phải một sản phẩm lớn</h3>
+<ol>
+<li><strong>Chọn một kết quả quan sát được.</strong> Ví dụ: nhấn nút để đổi trạng thái LED, hoặc đọc cảm biến và in giá trị ra serial. Đừng bắt đầu đồng thời với robot, app điện thoại, cloud và PCB riêng.</li>
+<li><strong>Làm cho môi trường nạp chạy trước.</strong> Xác định chính xác tên bo và chip, cài công cụ theo tài liệu tương ứng, chạy ví dụ cơ bản. Lưu lại phiên bản SDK, lệnh build và log nạp thành công.</li>
+<li><strong>Chỉ thêm một phần tử mỗi lần.</strong> Sau LED mới tới nút bấm, rồi cảm biến. Kiểm tra điện áp logic, chân nguồn và pinout trong tài liệu của từng mô-đun; không mặc định mọi chân đều chịu được 5 V.</li>
+<li><strong>Chụp và ghi lại bản đang hoạt động.</strong> Giữ sơ đồ đấu dây, ảnh rõ chân nối, mã nguồn và danh sách linh kiện. Khi thay đổi gây lỗi, bạn còn một trạng thái đã biết là chạy được để đối chiếu.</li>
+<li><strong>Chia sẻ một câu hỏi có thể trả lời.</strong> Nêu mong đợi, kết quả thực tế, sơ đồ, log và điều đã thử. “Không chạy” thiếu dữ kiện; “build thành công nhưng không thấy serial sau reset, đây là tên bo và log” giúp người khác khoanh vùng được.</li>
+</ol>
+<h3>Mẫu bài đăng nhờ cộng đồng giúp</h3>
+<pre><code>Mục tiêu: nhấn nút để đổi trạng thái LED
+Bo / chip / phiên bản SDK: ...
+Sơ đồ chân và nguồn cấp: ...
+Mã tối giản tái hiện lỗi: ...
+Mong đợi: ...
+Thực tế và log nguyên văn: ...
+Đã thử và kết quả từng bước: ...</code></pre>
+<p><strong>Dùng AI như người gợi ý, không như thiết bị đo.</strong> AI có thể giúp đọc log hoặc giải thích API; điện áp, dòng điện và chân đấu phải được đối chiếu với datasheet và phép đo thực tế. Người mới nên ở mức mạch điện áp thấp; tránh điện lưới, tự chế sạc pin lithium hoặc cơ cấu có thể gây chấn thương khi chưa có người đủ chuyên môn hướng dẫn.</p>
+<p><strong>Thước đo tiến bộ:</strong> không phải số kit đã mua hay số server Discord đã tham gia, mà là bạn có thể giải thích mạch đang làm gì, tái tạo bản chạy được và đặt một câu hỏi rõ ràng hơn lần trước hay không.</p>
+</section>
+<h2 id="sources">Nguồn và ghi công</h2>
+<p>Bài tổng hợp và diễn giải tiếng Việt, đối chiếu nguồn ngày 08/11/2026 (giờ Bangkok, UTC+7). Các trích dẫn ngắn được giữ nguyên tiếng Anh; phần còn lại là tóm lược và phân tích. Không thấy thông báo cấp giấy phép mở cho các tweet; quyền đối với nội dung gốc thuộc tác giả tương ứng. Không gán giấy phép của blog cho nội dung của họ.</p>
+<ol><li><a href="https://x.com/DavidStalmarck/status/2119002465672507547" target="_blank" rel="noopener">@DavidStalmarck — lời mời ban đầu</a></li><li><a href="https://x.com/DavidStalmarck/status/2119149852604977609" target="_blank" rel="noopener">@DavidStalmarck — các kênh robotics, dự án và ESP32</a></li><li><a href="https://x.com/DavidStalmarck/status/2119151994422333723" target="_blank" rel="noopener">@DavidStalmarck — không có paywall</a></li><li><a href="https://x.com/DavidStalmarck/status/2119153225550922056" target="_blank" rel="noopener">@DavidStalmarck — hỏi về vi điều khiển đầu tiên</a></li><li><a href="https://x.com/Gustav_Hugod/status/2119064582253645881" target="_blank" rel="noopener">@Gustav_Hugod — lời mời ghé văn phòng</a></li><li><a href="https://x.com/AnirudhBabu09/status/2119314922932703523" target="_blank" rel="noopener">@AnirudhBabu09 — người mới chưa biết phần cứng</a></li><li><a href="https://x.com/realfxw/status/2119311587156848803" target="_blank" rel="noopener">@realfxw — chia sẻ sản phẩm và gỡ lỗi</a></li><li><a href="https://x.com/vanvelzer9/status/2119309727779766461" target="_blank" rel="noopener">@vanvelzer9 — dự án thùng rác robot</a></li><li><a href="https://x.com/DavidStalmarck/status/2119153570796748923" target="_blank" rel="noopener">@DavidStalmarck — coi trọng vẻ ngoài dự án</a></li><li><a href="https://atech.dev/">Atech — trang giới thiệu sản phẩm</a>.</li><li><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html">Espressif — Get Started với ESP32 và ESP-IDF</a>.</li></ol>
+<section class="blog-mindmap" id="mindmap" aria-label="Mindmap"><h2>Mindmap</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
+mindmap
+  root((Học phần cứng cùng nhau))
+    Lời mời của David
+      Người mới
+      Người làm nghề
+      Người thích mày mò
+    Thông tin tiếp nối
+      Discord
+      Robotics
+      Chia sẻ dự án
+      ESP32
+      Không paywall theo tác giả
+    Nhu cầu cộng đồng
+      Hỏi kiến thức nền
+      Gỡ lỗi có dữ kiện
+      Chia sẻ tiến độ
+      Hoàn thiện sản phẩm
+    Bắt đầu nhỏ
+      Xác định bo mạch
+      Nạp ví dụ cơ bản
+      Thêm từng linh kiện
+      Ghi lại bản chạy được
+    Kiểm chứng
+      Đọc datasheet
+      Đo thực tế
+      Không tin AI mù quáng
+      Giữ an toàn điện
+</pre></div></section>
+</article>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
