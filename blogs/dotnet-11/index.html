@@ -137,7 +137,7 @@ Console.WriteLine(names.Count);</code></pre>
 
 <h2>Công cụ lập trình: SDK và MSBuild</h2>
 <p>SDK nay bật host CLI Native AOT theo mặc định. Các lệnh như xem trợ giúp và phiên bản có thể chạy mà không khởi động CLI quản lý; việc khởi chạy công cụ cũng có thể tránh đường khởi động đó. Lệnh nào vẫn cần thực thi quản lý thì vẫn dùng đường cũ.</p>
-<p>Máy chủ MSBuild cũng được giữ ấm giữa các lần gọi CLI, nhằm giảm công khởi động lặp lại. Bộ cài SDK trên Linux và macOS nhỏ hơn nhờ khử trùng lặp assembly.</p>
+<p>Máy chủ MSBuild cũng được giữ ấm giữa các lần gọi CLI, nhằm giảm công khởi động lặp lại. Bộ cài SDK trên Linux và macOS nhỏ hơn nhờ loại bỏ các assembly trùng lặp.</p>
 <p>Một số thay đổi khác mà bài thông báo nêu:</p>
 <ul>
 <li>Ứng dụng theo tệp có thể tách nhiều tệp nguồn bằng <code>#:include</code>.</li>
