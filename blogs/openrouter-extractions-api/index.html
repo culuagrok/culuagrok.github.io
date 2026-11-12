@@ -51,6 +51,11 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-table-scroll{overflow-x:auto;max-width:100%;margin:1em 0;-webkit-overflow-scrolling:touch}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
+<style>
+/* Always-on: #theme-classic is disabled under portal themes. */
+.blog-table-scroll{overflow-x:auto;max-width:100%;width:100%;-webkit-overflow-scrolling:touch;margin:1em 0}
+.blog-table-scroll table{margin:0}
+</style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
@@ -111,7 +116,7 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 
 <h2 id="types">Chín kiểu trường và mô hình tin cậy</h2>
 <p>Thông báo liệt kê chín kiểu trường; mỗi kiểu trả về một kiểu JSON có thể lưu mà không phải phân tích lại. Bảng dưới lấy phần “bạn nhận được gì” từ thông báo, kèm vài ràng buộc trong hướng dẫn chính thức:</p>
-<div class="blog-table-scroll" role="region" aria-label="Bảng chín kiểu trường, cuộn ngang" tabindex="0">
+<div class="blog-table-scroll" style="overflow-x:auto;max-width:100%" role="region" aria-label="Bảng chín kiểu trường, cuộn ngang" tabindex="0">
 <table>
 <thead>
 <tr><th>Kiểu</th><th>Bạn nhận được gì</th></tr>
@@ -211,7 +216,7 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 
 <h2 id="models">Các mô hình lúc ra mắt và hiện nay</h2>
 <p>Thông báo ngày 10/11/2026 nói ra mắt với ba mô hình của Cloudflare, Inception và ScaleDown, và cùng một yêu cầu có thể chạy trên cả ba. Cách chọn được gợi ý: dùng Clairic cho ảnh (như ảnh biên lai) và khi cần số, ngày hoặc ước lượng; dùng ScaleDown Extract để lấy chữ từ PDF (như các bên trong hợp đồng); dùng Mercury Decide để lấy tên hoặc cụm từ từ văn bản thuần, như email hay phiếu hỗ trợ.</p>
-<div class="blog-table-scroll" role="region" aria-label="Bảng mô hình lúc ra mắt, cuộn ngang" tabindex="0">
+<div class="blog-table-scroll" style="overflow-x:auto;max-width:100%" role="region" aria-label="Bảng mô hình lúc ra mắt, cuộn ngang" tabindex="0">
 <table>
 <thead>
 <tr><th>Mô hình</th><th>Đọc được</th><th>Kiểu trường</th><th>Giá đầu vào</th><th>Tùy chọn nhà cung cấp</th></tr>
