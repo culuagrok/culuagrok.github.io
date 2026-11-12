@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenRouter ra mắt Extractions API: lấy trường có kiểu từ văn bản, ảnh và PDF — Blog</title>
+<meta name="description" content="Tóm tắt thông báo Extractions API của OpenRouter: kéo trường có kiểu từ văn bản, ảnh và PDF ở bản alpha, chín kiểu trường, mô hình Clairic, Extract, Mercury Decide, và khác biệt với Decisions API.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-prose table{border-collapse:collapse;width:100%;font-size:14px;margin:1em 0}
+.blog-prose th,.blog-prose td{border:1px solid #cbd5e1;padding:6px 10px;text-align:left;vertical-align:top}
+.blog-prose th{background:#e2e8f0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+.blog-table-scroll{overflow-x:auto;max-width:100%;margin:1em 0;-webkit-overflow-scrolling:touch}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">OpenRouter ra mắt Extractions API: lấy trường có kiểu từ văn bản, ảnh và PDF</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>OpenRouter ra mắt Extractions API: lấy trường có kiểu từ văn bản, ảnh và PDF</h1>
+<p class="blog-meta">12/11/2026 · Bài viết tổng hợp · OpenRouter · Extractions API<br>Bài gốc <em>Introducing the Extractions API</em> của William Kofski, đăng ngày 10/11/2026 trên blog OpenRouter.</p>
+
+<section class="blog-tldr" aria-label="TL;DR">
+<h2>TL;DR</h2>
+<ul>
+<li>OpenRouter đã mở <strong>Extractions API</strong> ở bản <strong>alpha</strong>: bạn mô tả các trường cần lấy từ văn bản, ảnh hoặc PDF, rồi nhận về một giá trị có kiểu cho mỗi trường.</li>
+<li>Có chín kiểu trường: <code>text</code>, <code>number</code>, <code>date</code>, <code>time</code>, <code>datetime</code>, <code>list</code>, <code>duration</code>, <code>estimate</code> và <code>forecast</code>. Câu trả lời có thể kèm <code>confidence</code>, <code>p_null</code>, <code>guess</code> và <code>span</code> chỉ vị trí trong văn bản.</li>
+<li>Thông báo ngày 10/11/2026 ra mắt với ba mô hình: Clairic (văn bản và ảnh, đủ mọi kiểu), ScaleDown Extract (PDF hoặc ảnh, chỉ <code>text</code> và <code>list</code>), và Mercury Decide (chỉ văn bản). Đầu ra miễn phí trên cả ba; giá đầu vào theo catalog ngày 6/11/2026 là 0,10 USD, 0,04 USD và 0,02 USD mỗi triệu token.</li>
+<li>Khác Decisions API: Decisions chọn trong tập đáp án bạn viết sẵn; Extractions tìm giá trị mở trong tài liệu. Có thể dùng hai API nối tiếp nhau.</li>
+<li>API chưa ổn định: hình dạng có thể đổi. Hướng dẫn chính thức là nơi thay đổi được công bố trước.</li>
+</ul>
+</section>
+
+<p class="blog-note">Bài viết tổng hợp tiếng Việt, không phải bản dịch nguyên văn, dựa trên <a href="https://openrouter.ai/blog/announcements/extractions-api/" target="_blank" rel="noopener">thông báo <em>Introducing the Extractions API</em></a> (William Kofski, 10/11/2026), đối chiếu với <a href="https://openrouter.ai/docs/guides/community/extractions" target="_blank" rel="noopener">hướng dẫn Extractions API</a>, <a href="https://openrouter.ai/docs/api/api-reference/alphaextractions/submit-an-extractions-request" target="_blank" rel="noopener">tham chiếu API</a>, trang mô hình <a href="https://openrouter.ai/cloudflare/clairic" target="_blank" rel="noopener">Clairic</a>, <a href="https://openrouter.ai/scaledown/extract" target="_blank" rel="noopener">Extract</a>, <a href="https://openrouter.ai/inception/mercury-decide" target="_blank" rel="noopener">Mercury Decide</a>, và <a href="https://openrouter.ai/docs/cookbook/evaluate-and-optimize/extract-invoice-fields-with-scaledown" target="_blank" rel="noopener">cookbook trích hóa đơn bằng ScaleDown Extract</a>. Mọi số liệu, giá và tính năng dưới đây lấy từ các nguồn đó, đọc ngày 12/11/2026 (UTC+7, giờ Việt Nam). Bài không tự chạy API hay tự thêm số đo.</p>
+
+<nav class="blog-toc" aria-label="Mục lục">
+<h2>Mục lục</h2>
+<ol>
+<li><a href="#what">Extractions là gì</a></li>
+<li><a href="#types">Chín kiểu trường và mô hình tin cậy</a></li>
+<li><a href="#examples">Trích từ văn bản, ảnh và PDF</a></li>
+<li><a href="#models">Các mô hình lúc ra mắt và hiện nay</a></li>
+<li><a href="#decisions">Decisions khác Extractions chỗ nào</a></li>
+<li><a href="#start">Bắt đầu và một số lưu ý</a></li>
+<li><a href="#insight">Know-how &amp; Insight</a></li>
+<li><a href="#mindmap">Mindmap</a></li>
+</ol>
+</nav>
+
+<h2 id="what">Extractions là gì</h2>
+<p>Theo thông báo, Extractions API đã sống trên OpenRouter ở bản alpha. Bạn mô tả các trường cần lấy — ví dụ tên trong email hay tổng tiền trên biên lai — rồi API kéo chúng ra khỏi văn bản, ảnh hoặc PDF.</p>
+<p>Một yêu cầu extraction đặt tên các trường muốn lấy từ tài liệu và nhận về một giá trị có kiểu cho mỗi trường. Trường <code>state</code> chứa văn bản, hoặc khóa của một ảnh hay PDF trong <code>assets</code>. Bản đồ <code>fields</code> gắn mỗi tên trường với một đặc tả: một <code>type</code>, và tùy chọn <code>instructions</code> nói trường đó nghĩa là gì.</p>
+<p>Đường gọi là <code>POST /api/alpha/extractions</code>. Hướng dẫn chính thức nêu rõ tuyến này dùng cùng “phong bì” với Decisions API (<code>model</code>, <code>state</code>, <code>assets</code>, <code>provider</code>, <code>user</code>, <code>session_id</code>, <code>trace</code>), nhưng thay <code>questions</code> bằng <code>fields</code>. Đặc tả bên trong không hoán đổi được: một trường extraction không phải câu hỏi Decisions (<code>noul</code>, <code>choice</code>, <code>score</code>, <code>box</code>). Gửi <code>questions</code> lên tuyến này sẽ bị <code>400</code> và được chỉ sang <code>/api/alpha/decisions</code>.</p>
+<p class="blog-callout"><strong>Bản alpha:</strong> hình dạng API có thể đổi. Câu hỏi thường gặp trong thông báo nói hướng dẫn chính thức là nơi thay đổi được công bố trước. Tham chiếu API cũng ghi rõ hình dạng chưa ổn định.</p>
+
+<h2 id="types">Chín kiểu trường và mô hình tin cậy</h2>
+<p>Thông báo liệt kê chín kiểu trường; mỗi kiểu trả về một kiểu JSON có thể lưu mà không phải phân tích lại. Bảng dưới lấy phần “bạn nhận được gì” từ thông báo, kèm vài ràng buộc trong hướng dẫn chính thức:</p>
+<div class="blog-table-scroll" role="region" aria-label="Bảng chín kiểu trường, cuộn ngang" tabindex="0">
+<table>
+<thead>
+<tr><th>Kiểu</th><th>Bạn nhận được gì</th></tr>
+</thead>
+<tbody>
+<tr><td><code>text</code></td><td>Một chuỗi đọc từ tài liệu.</td></tr>
+<tr><td><code>number</code></td><td>Một số, với <code>decimals</code> và <code>unit</code> do bạn chọn. Hướng dẫn ghi <code>decimals</code> giữ từ 0 đến 6 chữ số thập phân trong <code>value</code>.</td></tr>
+<tr><td><code>date</code></td><td>Một ngày ISO, đọc được hoặc được tính ra.</td></tr>
+<tr><td><code>time</code></td><td>Một giờ ISO trong ngày.</td></tr>
+<tr><td><code>datetime</code></td><td>Một ngày giờ ISO.</td></tr>
+<tr><td><code>list</code></td><td>Một mảng các phần tử <code>text</code>, <code>number</code> hoặc <code>date</code> (<code>items</code> chọn kiểu nào).</td></tr>
+<tr><td><code>duration</code></td><td>Một số theo <code>unit</code> bạn chọn, từ giây đến năm. Hướng dẫn cho phép <code>seconds</code>, <code>minutes</code>, <code>hours</code>, <code>days</code>, <code>weeks</code>, <code>months</code> hoặc <code>years</code>.</td></tr>
+<tr><td><code>estimate</code></td><td>Một phân phối cho đại lượng mà tài liệu hàm ý, nằm giữa <code>min</code> và <code>max</code> bạn đặt.</td></tr>
+<tr><td><code>forecast</code></td><td>Cùng dạng phân phối, cho <code>horizon</code> bước tương lai với <code>interval</code> bạn đặt; <code>value</code>, <code>mean</code>, <code>median</code>, <code>p10</code> và <code>p90</code> là mảng, mỗi phần tử một bước. Hướng dẫn giới hạn <code>horizon</code> từ 1 đến 64, và <code>interval</code> là <code>step</code>, <code>minute</code>, <code>hour</code>, <code>day</code>, <code>week</code>, <code>month</code>, <code>quarter</code> hoặc <code>year</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Mọi câu trả lời đều có <code>value</code>; phần còn lại tùy kiểu trường và mô hình. Trên Clairic, giá trị đọc từ văn bản đi kèm <code>span</code> dạng <code>[start, end)</code>, tính theo điểm mã Unicode trong <code>state</code>, để bạn cắt đúng đoạn nguồn (một <code>list</code> có <code>spans</code>, mỗi phần tử một khoảng). Giá trị đơn còn có <code>p_null</code> — xác suất tài liệu không chứa gì cho trường đó. <code>value</code> thành <code>null</code> khi <code>p_null</code> vượt 0,5; đặt <code>null_threshold</code> trên từng trường để dịch ngưỡng đó. Dù đã <code>null</code>, <code>guess</code> vẫn là giá trị mô hình cho là khả dĩ nhất. Các giá trị này cũng có <code>confidence</code>; chuỗi đọc từ ảnh thêm <code>spell_confidence</code> cho chính tả.</p>
+<p>Một <code>estimate</code> hoặc <code>forecast</code> không mang <code>confidence</code>; <code>mean</code>, <code>median</code>, <code>p10</code> và <code>p90</code> mô tả phân phối, và bề rộng từ <code>p10</code> đến <code>p90</code> là độ bất định. ScaleDown Extract trả <code>confidence</code> cho mỗi giá trị nhưng không có <code>p_null</code>; trên văn bản nó cũng trả span, trên PDF thì không.</p>
+<p>Đó là mô hình tin cậy mà thông báo nhấn mạnh: đặt một ngưỡng tin cậy, đưa trường dưới ngưỡng cho người xem, và lưu phần còn lại. Một <code>null</code> là câu trả lời, không phải điểm số thấp: mô hình kết luận trường vắng mặt (<code>p_null</code> đã vượt ngưỡng), còn <code>guess</code> cho biết nó đã suýt lấy giá trị nào. Trường không có <code>confidence</code>, chẳng hạn một ước lượng, được đánh giá theo phân phối.</p>
+<p>Nếu tài liệu viết ngày mà không có năm, hãy gửi <code>reference_date</code> để mô hình neo các ngày đó. Các mô hình không có kiểu <code>date</code> sẽ từ chối trường này; thông báo nêu rõ Mercury Decide và Extract thuộc nhóm đó.</p>
+
+<h2 id="examples">Trích từ văn bản, ảnh và PDF</h2>
+
+<h3>1. Văn bản</h3>
+<p>Đầu vào là tài liệu và danh sách trường có tên, có kiểu. Đầu ra là một giá trị cho mỗi trường, kèm <code>span</code> nếu giá trị được đọc từ văn bản, <code>confidence</code> và <code>p_null</code> trên giá trị đơn, và một phân phối nếu là ước lượng.</p>
+<p>Ví dụ trong thông báo dùng hóa đơn giả <code>INV-4417</code> của Larkspur Studio, phát hành 2026-10-14, điều khoản net 45, tổng 3.850 USD, và hai liên hệ Dana Ruiz cùng Priya Shah. Yêu cầu chạy trên Clairic, thông báo ghi phí 0,00011 USD:</p>
+<pre><code>curl https://openrouter.ai/api/alpha/extractions \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cloudflare/clairic",
+    "state": "Invoice INV-4417 from Larkspur Studio, issued 2026-10-14, payment terms net 45. Bill to: Harbor &amp; Pine LLC. Contacts: Dana Ruiz (dana@harborpine.example), Priya Shah. Line items: brand audit 2,400.00; icon set 1,150.00; rush fee 300.00. Total due $3,850.00. Late payments accrue 1.5% per month.",
+    "fields": {
+      "invoice_number": { "type": "text" },
+      "total": { "type": "number", "decimals": 2, "unit": "USD" },
+      "due_date": { "type": "date", "instructions": "Issue date plus the net payment days" },
+      "contacts": { "type": "list", "items": "text", "instructions": "People named as contacts" },
+      "po_number": { "type": "text", "instructions": "Purchase order number, if any" },
+      "days_to_pay": { "type": "estimate", "min": 0, "max": 120, "step": 1, "instructions": "How many days after issue this invoice will actually be paid" }
+    },
+    "reference_date": "2026-11-06"
+  }'</code></pre>
+<p>Clairic đọc 1.138 token đầu vào và trả về (thông báo lược dòng <code>model</code>):</p>
+<pre><code>{
+  "answers": {
+    "invoice_number": { "type": "text", "value": "INV-4417", "span": [8, 16], "p_null": 4.9e-6, "confidence": 0.9999 },
+    "total": { "type": "number", "value": 3850, "p_null": 1.6e-5, "confidence": 0.9999 },
+    "due_date": { "type": "date", "value": "2026-11-28", "p_null": 4.4e-5, "confidence": 0.9994 },
+    "contacts": { "type": "list", "value": ["Dana Ruiz", "Priya Shah"], "spans": [[118, 127], [155, 165]] },
+    "po_number": { "type": "text", "value": null, "guess": "INV-4417", "p_null": 0.9999 },
+    "days_to_pay": { "type": "estimate", "value": 45, "mean": 44.79, "median": 45, "p10": 42, "p90": 47 }
+  },
+  "truncated": false,
+  "usage": { "input_tokens": 1138, "output_tokens": 0, "cost": 0.0001138, "state_tokens": 118, "schema_tokens": 666, "passes": 4 },
+  "id": "gen-dec-1794000212-JVtrkaQ2JbqaR59u2bjZ",
+  "provider": "Cloudflare"
+}</code></pre>
+<p>Điểm đáng chú ý trong ví dụ này, đúng như thông báo giải thích:</p>
+<ul>
+<li><code>due_date</code> không có sẵn trong văn bản; mô hình tính từ ngày phát hành và điều khoản net 45, ra 2026-11-28.</li>
+<li><code>po_number</code> là <code>null</code>, với <code>guess</code> cho thấy mô hình suýt lấy <code>INV-4417</code>.</li>
+<li><code>days_to_pay</code> là <code>estimate</code>, nên trả phân phối chứ không chỉ một điểm: 80% khối lượng nằm giữa 42 và 47 ngày.</li>
+</ul>
+<p>Cắt <code>state</code> theo từng <code>span</code> để hiện bằng chứng cạnh giá trị. Thông báo nhắc: <code>span</code> đếm theo điểm mã Unicode. Nếu ngôn ngữ lập trình đánh chỉ số chuỗi theo đơn vị UTF-16, đừng dùng <code>state.slice(start, end)</code>; trong JavaScript hãy dùng <code>Array.from(state).slice(start, end).join('')</code>. Trên Clairic, tùy chọn <code>return_state_text: true</code> gửi lại đúng văn bản mà các offset trỏ vào, để bạn đối chiếu lát cắt.</p>
+
+<h3>2. Ảnh</h3>
+<p>Ảnh nằm trong <code>assets</code>, được <code>state</code> tham chiếu bằng khóa, kèm cùng kiểu danh sách trường. Bản ghi trả về có cùng hình dạng; giá trị mô hình đánh dấu là đọc từ ảnh có thể có <code>source: "image"</code> (thông báo nói <code>source</code> là tùy chọn, đừng lấy nó làm khóa bắt buộc) và văn bản có thêm <code>spell_confidence</code>. Các hộp vẽ trên ảnh trong bản demo của thông báo chỉ để minh họa: API trả giá trị, không trả tọa độ trên ảnh.</p>
+<p>Ví dụ biên lai chạy trên Clairic, thông báo ghi phí 0,00025 USD. Clairic đọc 1.064 token ảnh và 2.532 token tổng cộng. Các trường số và ngày khác <code>null</code> đều có độ tin cậy trên 0,99; <code>tip</code> là <code>null</code> tường minh chứ không phải số 0 bị bịa, với <code>p_null</code> 0,9999. Tên cửa hàng thì sai: biên lai viết “NORTH HARBOR CAFE”, mô hình trả <code>"NORTH HAROR C"</code>, và tự báo điều đó bằng <code>spell_confidence</code> 0,73 — thấp hơn rõ phần còn lại của phản hồi. Đó là trường thông báo khuyên chuyển cho người xem.</p>
+<pre><code>{
+  "merchant": { "type": "text", "value": "NORTH HAROR C", "p_null": 8.0e-5, "confidence": 0.733, "source": "image", "spell_confidence": 0.733 },
+  "total": { "type": "number", "value": 29.04, "p_null": 5.3e-8, "confidence": 0.9995, "source": "image" },
+  "paid_on": { "type": "date", "value": "2026-10-24", "p_null": 0.0061, "confidence": 0.9999 },
+  "tax": { "type": "number", "value": 3.79, "p_null": 2.8e-4, "confidence": 0.9982, "source": "image" },
+  "tip": { "type": "number", "value": null, "guess": 0, "p_null": 0.9999, "confidence": 0.8923 }
+}</code></pre>
+<p>Hướng dẫn bổ sung giới hạn của Clairic: tối đa 4 ảnh PNG, JPEG hoặc WebP, mỗi ảnh tối đa 4 MiB sau giải mã, tổng cộng tối đa 8 MiB sau giải mã, trong thân yêu cầu tối đa 16 MiB. Clairic không đọc PDF. Với hai ảnh trở lên, đừng dùng khóa tài sản làm toàn bộ <code>state</code> hay toàn bộ <code>instructions</code> của một trường — yêu cầu sẽ bị <code>400</code> vì mô hình không biết ảnh nào được chỉ; hãy gọi tên từng ảnh trong đoạn văn dài hơn.</p>
+
+<h3>3. Tệp PDF</h3>
+<p>PDF cũng vào <code>assets</code>, với <code>"type": "document"</code> và <code>"format": "pdf"</code>. Vì Clairic chỉ đọc ảnh, thông báo chuyển PDF sang ScaleDown Extract, mô hình đọc một PDF hoặc một ảnh mỗi yêu cầu và trả lời các trường <code>text</code> và <code>list</code>. Extract trả giá trị và độ tin cậy, không trả tọa độ trang.</p>
+<p>Ví dụ đơn hàng <code>PO-20931</code> chạy trên Extract, thông báo ghi phí 0,00016 USD, 3.972 token đầu vào, trả lời sau 2,9 giây. Mọi giá trị trong ví dụ đều đúng, gồm ba dòng hàng trong bảng. Hai khác biệt so với Clairic cần tính trước: Extract không có kiểu <code>number</code> hay <code>date</code>, nên tổng tiền và ngày giao về dưới dạng chuỗi trên trang; nó báo <code>confidence</code> cho mỗi giá trị (và mỗi phần tử danh sách) nhưng không có <code>p_null</code> hay <code>span</code>. Trong ví dụ, tổng tiền có độ tin cậy 0,81 là trường nên nhìn lại; các trường còn lại ở mức 1 hoặc gần 1.</p>
+<pre><code>{
+  "answers": {
+    "po_number": { "type": "text", "value": "PO-20931", "confidence": 1, "source": "document" },
+    "vendor": { "type": "text", "value": "Meridian Office Supply", "confidence": 1, "source": "document" },
+    "total": { "type": "text", "value": "$4,200.00", "confidence": 0.814, "source": "document" },
+    "delivery_date": { "type": "text", "value": "November 18, 2026", "confidence": 0.979, "source": "document" },
+    "items": { "type": "list", "value": ["Standing desk, 60 in, walnut", "Task chair, mesh back", "Monitor arm, dual"], "confidences": [0.994, 0.999, 1], "source": "document" },
+    "approver": { "type": "text", "value": "Priya Shah", "confidence": 1, "source": "document" }
+  },
+  "truncated": false,
+  "usage": { "input_tokens": 3972, "output_tokens": 0, "cost": 0.00015888 },
+  "id": "gen-dec-1794274074-RzjUzkyrf7WfR9LpFUTO",
+  "provider": "ScaleDown"
+}</code></pre>
+<p>Hướng dẫn còn nhấn: ScaleDown Extract đọc một PDF, PNG hoặc JPEG mỗi yêu cầu (WebP bị <code>400</code>), và chỉ đọc văn bản hoặc tài liệu, không đọc cả hai. Hãy gửi dạng <code>state</code> chỉ là khóa tài sản, hoặc bỏ trống / bỏ hẳn <code>state</code>.</p>
+
+<h2 id="models">Các mô hình lúc ra mắt và hiện nay</h2>
+<p>Thông báo ngày 10/11/2026 nói ra mắt với ba mô hình của Cloudflare, Inception và ScaleDown, và cùng một yêu cầu có thể chạy trên cả ba. Cách chọn được gợi ý: dùng Clairic cho ảnh (như ảnh biên lai) và khi cần số, ngày hoặc ước lượng; dùng ScaleDown Extract để lấy chữ từ PDF (như các bên trong hợp đồng); dùng Mercury Decide để lấy tên hoặc cụm từ từ văn bản thuần, như email hay phiếu hỗ trợ.</p>
+<div class="blog-table-scroll" role="region" aria-label="Bảng mô hình lúc ra mắt, cuộn ngang" tabindex="0">
+<table>
+<thead>
+<tr><th>Mô hình</th><th>Đọc được</th><th>Kiểu trường</th><th>Giá đầu vào</th><th>Tùy chọn nhà cung cấp</th></tr>
+</thead>
+<tbody>
+<tr><td>Clairic (<code>cloudflare/clairic</code>)</td><td>Văn bản và tối đa 4 ảnh PNG hoặc JPEG (hướng dẫn còn nêu WebP)</td><td>Mọi kiểu</td><td>0,10 USD/triệu token</td><td><code>include_quantiles</code>, <code>return_state_text</code> dưới <code>provider.options.cloudflare</code></td></tr>
+<tr><td>Extract (<code>scaledown/extract</code>)</td><td>Văn bản, hoặc một PDF hay một ảnh</td><td><code>text</code>, và <code>list</code> các phần tử <code>text</code></td><td>0,04 USD/triệu token</td><td><code>threshold</code>, <code>top_n</code> dưới <code>provider.options.scaledown</code></td></tr>
+<tr><td>Mercury Decide (<code>inception/mercury-decide</code>)</td><td>Chỉ văn bản</td><td><code>text</code>, và <code>list</code> các phần tử <code>text</code></td><td>0,02 USD/triệu token</td><td><code>snap_to_words</code>, <code>threshold</code>, <code>group_fields</code> dưới <code>provider.options.inception</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Đầu ra miễn phí trên cả ba. Thông báo ghi đây là giá catalog ngày 6/11/2026 và bảo xem trang mô hình để lấy giá hiện hành. Ngày 12/11/2026, trang Clairic và Models API vẫn ghi 0,10 USD mỗi triệu token đầu vào, 0 USD đầu ra; trang Extract và Models API vẫn ghi 0,04 USD mỗi triệu token đầu vào, 0 USD đầu ra. Trang Mercury Decide không nêu rõ giá list hiện hành trong lần đọc đó, nên bài này không khẳng định giá 0,02 USD vẫn đúng vào ngày viết; hãy kiểm tra lại trang mô hình trước khi lập chi phí.</p>
+<p>Trường chỉ gồm văn bản chạy được trên cả ba. Thông báo gửi các trường <code>text</code> và <code>list</code> của hóa đơn mục 1 cho Mercury Decide và Extract: cả hai trả cùng giá trị, và trên văn bản cùng span như Clairic, với phí 0,000015 USD và 0,000014 USD. Extract không trả span cho PDF.</p>
+<p>Hướng dẫn chính thức, đọc cùng ngày, còn liệt kê thêm <code>levanto/sage-2</code> (chỉ văn bản; hỗ trợ <code>text</code>, <code>number</code> không có <code>unit</code>, <code>date</code>, <code>time</code>, <code>datetime</code>, <code>duration</code> và <code>list</code> mọi kiểu phần tử; không có <code>reference_date</code>) cùng <code>perplexity/pplx-decider-v1.3</code> và <code>perplexity/pplx-decider-flash-v1.3</code> (chỉ văn bản; <code>text</code> và <code>list</code> các phần tử <code>text</code>; không <code>null_threshold</code> hay <code>reference_date</code>; tối đa 128 trường). Khi gọi Models API với bộ lọc <code>?endpoints=/api/alpha/extractions</code> ngày 12/11/2026, phản hồi chỉ gồm Clairic và Extract. Trang Mercury Decide vẫn tồn tại nhưng danh sách endpoint trả về rỗng; hai nhóm slug còn lại không tìm thấy qua API endpoint. Vì tuyến đang ở bản alpha, hãy lấy danh sách hiện hành bằng chính lệnh lọc đó trước khi gắn một mô hình vào đường chạy:</p>
+<pre><code>curl "https://openrouter.ai/api/v1/models?endpoints=/api/alpha/extractions"</code></pre>
+
+<h3>Cloudflare Clairic</h3>
+<p>Thông báo gọi Clairic là mô hình nên bắt đầu. Nó chạy trên Workers AI, đọc văn bản và tối đa bốn ảnh mỗi yêu cầu, hỗ trợ mọi kiểu trường, và là mô hình ra mắt duy nhất trả <code>p_null</code>, span và phân phối cho <code>estimate</code> cùng <code>forecast</code>. Hai tùy chọn mở rộng phản hồi: <code>include_quantiles: true</code> trả 99 phân vị cho mọi ước lượng và dự báo; <code>return_state_text: true</code> gửi lại đúng văn bản mà các offset span trỏ vào. Trang mô hình ghi cửa sổ ngữ cảnh 65.536 token, phát hành 3/11/2026, và Playground trên trang này nhận <code>state</code> cùng <code>fields</code> rồi hiện các câu trả lời có kiểu.</p>
+
+<h3>ScaleDown Extract</h3>
+<p>Extract đọc văn bản, hoặc một PDF hay một ảnh mỗi yêu cầu, và trả lời trường <code>text</code> cùng <code>list</code> với một <code>confidence</code> cho mỗi giá trị. Đây là mô hình cho PDF “hiện nay” theo thông báo. Nó không báo xác suất null nên từ chối <code>null_threshold</code>. Trang mô hình ghi cửa sổ ngữ cảnh 1.000.000 token. Cùng tác vụ trên Responses API, OpenRouter có <a href="https://openrouter.ai/docs/cookbook/evaluate-and-optimize/extract-invoice-fields-with-scaledown" target="_blank" rel="noopener">cookbook trích trường hóa đơn</a>; đó là một đường gọi khác (<code>/api/v1/responses</code>, mô tả trường trong <code>provider.options.scaledown.entities</code>), không phải chính tuyến Extractions.</p>
+
+<h3>Inception Mercury Decide</h3>
+<p>Mercury Decide chỉ đọc văn bản và trả lời trường <code>text</code> cùng <code>list</code>, với giá đầu vào thấp nhất trong ba mô hình lúc ra mắt theo catalog ngày 6/11/2026. Nó từ chối <code>reference_date</code>. Các tùy chọn nằm dưới <code>provider.options.inception</code>: <code>snap_to_words</code>, <code>threshold</code> và <code>group_fields</code>. Hướng dẫn giải thích <code>group_fields</code> gửi mọi trường trong một câu hỏi (tối đa 26 trường mỗi lượt gọi phía trên) thay vì một câu hỏi cho mỗi trường, nên ít phải sao chép <code>state</code> hơn, nhưng một token chỉ thuộc về một trường.</p>
+
+<h2 id="decisions">Decisions khác Extractions chỗ nào</h2>
+<p>Hai tuyến dùng gần như cùng phong bì yêu cầu, nhưng khác nhau ở thứ bạn đưa cho mô hình và thứ mô hình trả lại.</p>
+<p><strong>Decisions:</strong> bạn viết sẵn các đáp án, mô hình cân chúng. Mỗi câu hỏi mang không gian trả lời: <code>noul</code> là một mệnh đề đúng hoặc sai, <code>choice</code> liệt kê các lựa chọn, <code>score</code> đặt một thang, <code>box</code> hỏi một vùng trên ảnh. Với <code>noul</code>, <code>choice</code> hoặc <code>score</code>, mô hình không sinh ra giá trị bạn chưa viết; nó phân phối xác suất trên các đáp án sẵn có. Thông báo cho đây là công cụ đúng khi việc là một phán đoán: đây có phải hóa đơn không, điều khoản nào trong năm lựa chọn được áp dụng, mức nghiêm trọng ra sao, ảnh có chứa biên lai không.</p>
+<p><strong>Extractions:</strong> bạn đặt tên trường, mô hình tìm giá trị. Không gian trả lời là kiểu dữ liệu, không phải danh sách bạn viết, nên mô hình phải định vị giá trị trong tài liệu (hoặc tính ra, như hạn thanh toán từ ngày phát hành và điều khoản, hoặc ước lượng số ngày sẽ được trả). Vì giá trị là mở, câu trả lời đi kèm bằng chứng: <code>span</code> nơi nó được đọc, <code>p_null</code> cho việc tài liệu có chứa gì cho trường đó hay không, và <code>confidence</code>.</p>
+<p>Quy tắc ngón tay cái trong thông báo: dùng Decisions khi bạn liệt kê được các đáp án trước khi gửi yêu cầu; dùng Extractions khi đáp án là một giá trị viết trong tài liệu. Có thể dùng chúng cùng nhau: Decisions kiểm tra tài liệu có phải hóa đơn không, rồi Extractions kéo trường ra từ những tài liệu đúng là hóa đơn. Để chuyển một yêu cầu từ Decisions sang Extractions, đổi <code>questions</code> thành <code>fields</code> và viết lại từng đặc tả, vì một <code>choice</code> có sẵn lựa chọn khác hẳn một trường <code>text</code>.</p>
+<p>Cùng hóa đơn mục 1, chạy Decisions trên Clef Flash, thông báo được các câu trả lời: điều khoản thanh toán là net 45 với độ tin cậy 0,96; hóa đơn chưa quá hạn tính tới 2026-11-06 (<code>overdue</code> có <code>noul</code> 0,2069); và hóa đơn có nêu phạt chậm trả (<code>has_late_fee</code> có <code>noul</code> 0,9358). Phí ví dụ này là 0,000008854 USD với 466 token đầu vào. Extractions, ở mục 1, thì trả số hóa đơn <code>INV-4417</code> ở ký tự 8 đến 16, và tổng 3850.</p>
+
+<h2 id="start">Bắt đầu và một số lưu ý</h2>
+<p>Thông báo hướng dẫn lấy khóa API, mở Playground trên <a href="https://openrouter.ai/cloudflare/clairic" target="_blank" rel="noopener">trang mô hình Clairic</a>, chạy hóa đơn mẫu với trường của bạn, rồi đọc <a href="https://openrouter.ai/docs/guides/community/extractions" target="_blank" rel="noopener">hướng dẫn Extractions</a> và <a href="https://openrouter.ai/docs/api/api-reference/alphaextractions/submit-an-extractions-request" target="_blank" rel="noopener">tham chiếu API</a>. Phản hồi có thể gửi trong kênh <code>#feedback</code> trên Discord của OpenRouter.</p>
+<p>Vài câu hỏi thường gặp, lấy từ thông báo và hướng dẫn:</p>
+<ul>
+<li><strong>API đã ổn định chưa?</strong> Chưa. Đây là bản alpha; hình dạng có thể đổi.</li>
+<li><strong>Khi yêu cầu sai thì sao?</strong> OpenRouter kiểm tra trước khi gửi tới nhà cung cấp. Khóa lạ, trường <code>date</code> trên Mercury Decide, ảnh thứ năm trên Clairic, PDF trên Clairic, hoặc tài sản không được tham chiếu sẽ bị <code>400</code>, với thông báo chỉ ra vấn đề.</li>
+<li><strong>Khi nào trường thành <code>null</code>?</strong> Trên Clairic, khi <code>p_null</code> vượt 0,5 (hoặc ngưỡng bạn đặt). Extract không có <code>p_null</code>, nên một <code>null</code> từ Extract là câu trả lời thẳng của mô hình, và nó từ chối <code>null_threshold</code>.</li>
+<li><strong>Tài liệu dài thì sao?</strong> <code>truncated: true</code> nghĩa là nhà cung cấp chỉ đọc phần đầu của <code>state</code>. <code>usage.passes</code> đếm số lần gọi phía trên khi các trường không vừa trong một lượt; <code>schema_tokens</code> là chi phí của đặc tả trường trên mọi yêu cầu.</li>
+<li><strong>Khóa lạ có bị bỏ qua không?</strong> Không. Hướng dẫn nói khóa không rõ ở cấp trên hoặc trong một trường bị từ chối bằng <code>400</code>, không bị bỏ qua thầm.</li>
+</ul>
+
+<section class="blog-insight" aria-label="Know-how và Insight" id="insight">
+<h2>Know-how &amp; Insight</h2>
+<p class="blog-insight-label">Ghi chú của người viết</p>
+<ol>
+<li><strong>Đừng thiết kế như thể API đã đóng băng.</strong> Tuyến nằm dưới <code>/api/alpha/</code>, thông báo và tham chiếu đều nói hình dạng có thể đổi. Giữ lớp адап ứng trong mã của bạn, và đọc lại hướng dẫn trước khi nâng phiên bản client.</li>
+<li><strong>Lấy danh sách mô hình từ API, đừng chỉ chép bảng ra mắt.</strong> Thông báo ngày 10/11/2026 nêu ba mô hình. Hướng dẫn vài ngày sau đã liệt kê thêm Sage và hai mô hình Perplexity, trong khi lần gọi Models API ngày 12/11/2026 chỉ trả Clairic và Extract. Với một API alpha, bảng trong bài blog có thể lệch khỏi catalog đang phục vụ. Lệnh lọc theo đường <code>/api/alpha/extractions</code> là cách hướng dẫn khuyên để liệt kê mô hình theo chương trình.</li>
+<li><strong>Chọn mô hình theo kiểu trường và loại tài liệu, không chỉ theo giá.</strong> Nếu cần số, ngày, ước lượng, <code>p_null</code> hoặc span, Clairic là lựa chọn mà thông báo nêu. Nếu đầu vào là PDF, Extract là mô hình “hiện nay”, nhưng tổng tiền và ngày sẽ về dưới dạng chuỗi. Mercury Decide rẻ hơn theo catalog lúc ra mắt, nhưng chỉ ăn văn bản và chỉ trả <code>text</code>/<code>list</code>.</li>
+<li><strong><code>null</code> khác “tin cậy thấp”, và chính tả trên ảnh là tín hiệu riêng.</strong> Ví dụ hóa đơn cho thấy <code>po_number</code> là <code>null</code> dù <code>guess</code> suýt lấy số hóa đơn; ví dụ biên lai cho thấy tiền típ là <code>null</code> chứ không phải 0, trong khi tên cửa hàng sai được báo bằng <code>spell_confidence</code> 0,73. Đặt ngưỡng <code>confidence</code> (và <code>spell_confidence</code> với chữ trên ảnh), chuyển trường dưới ngưỡng cho người xem, và đừng biến <code>null</code> thành giá trị mặc định.</li>
+<li><strong>Cắt span theo điểm mã Unicode.</strong> Tiếng Việt có dấu; <code>String#slice</code> trong JavaScript đếm đơn vị UTF-16, nên có thể cắt sai. Dùng cách thông báo nêu, hoặc bật <code>return_state_text</code> trên Clairic để đối chiếu. Đừng kỳ vọng tọa độ hộp trên ảnh hay trên trang PDF: API không trả chúng.</li>
+<li><strong>Tách Extractions khỏi Decisions, rồi mới nghĩ tới việc ghép chúng.</strong> Nếu bạn liệt kê được đáp án trước (có/không, chọn một trong vài điều khoản), Decisions là đúng chỗ. Nếu đáp án là nội dung trong tài liệu, dùng Extractions. Mẫu “Decisions lọc loại tài liệu, Extractions lấy trường” trong thông báo đáng thử, nhưng đừng gửi <code>questions</code> vào tuyến extraction.</li>
+<li><strong>Giá ví dụ không phải giá trung bình.</strong> Các mức 0,00011 USD, 0,00025 USD và 0,00016 USD là phí từng lần chạy trong thông báo, đi kèm số token cụ thể. Giá catalog ngày 6/11/2026 cần đối chiếu lại trên trang mô hình; bài này chỉ xác nhận được giá list hiện hành của Clairic và Extract vào ngày 12/11/2026.</li>
+</ol>
+</section>
+
+<p class="blog-note" id="sources"><strong>Nguồn và ghi công:</strong> <a href="https://openrouter.ai/blog/announcements/extractions-api/" target="_blank" rel="noopener">William Kofski — Introducing the Extractions API</a> (10/11/2026); <a href="https://openrouter.ai/docs/guides/community/extractions" target="_blank" rel="noopener">Extractions API: Typed Fields from Text, Images, and PDFs</a>; <a href="https://openrouter.ai/docs/api/api-reference/alphaextractions/submit-an-extractions-request" target="_blank" rel="noopener">Submit an Extractions request</a>; trang mô hình <a href="https://openrouter.ai/cloudflare/clairic" target="_blank" rel="noopener">cloudflare/clairic</a>, <a href="https://openrouter.ai/scaledown/extract" target="_blank" rel="noopener">scaledown/extract</a> và <a href="https://openrouter.ai/inception/mercury-decide" target="_blank" rel="noopener">inception/mercury-decide</a>; <a href="https://openrouter.ai/docs/cookbook/evaluate-and-optimize/extract-invoice-fields-with-scaledown" target="_blank" rel="noopener">Extract Invoice Fields with ScaleDown Extract</a>. Đọc nguồn ngày 12/11/2026 (UTC+7, giờ Việt Nam). Bài không tự gọi Extractions API ngoài lệnh liệt kê mô hình; các ví dụ JSON và số phí từng lần chạy lấy nguyên từ thông báo.</p>
+
+<section class="blog-mindmap" aria-label="Mindmap" id="mindmap">
+<h2>Mindmap — Extractions API trên OpenRouter</h2>
+<div class="blog-mindmap-scroll pele">
+<pre class="mermaid">
+mindmap
+  root((Extractions API))
+    Bản alpha
+      Đường gọi extractions
+      Hình dạng còn có thể đổi
+      Kiểm tra 400 trước khi gửi
+    Chín kiểu trường
+      Văn bản số ngày giờ
+      Danh sách và khoảng thời gian
+      Ước lượng và dự báo
+    Mô hình tin cậy
+      Độ tin cậy
+      Xác suất trường vắng
+      Đoán khi đã null
+      Span theo điểm mã Unicode
+    Ba mô hình ra mắt
+      Clairic văn bản và ảnh
+      Extract cho PDF
+      Mercury Decide cho văn bản
+    Quyết định khác trích xuất
+      Liệt kê đáp án thì dùng Decisions
+      Giá trị trong tài liệu thì dùng Extractions
+      Có thể nối hai API
+</pre>
+</div>
+</section>
+</article>
+<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://openrouter.ai/blog/announcements/extractions-api/" target="_blank" rel="noopener">Bài gốc trên OpenRouter</a></p>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+</body>
+</html>
