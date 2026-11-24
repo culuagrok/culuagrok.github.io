@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Không phải lúc nào cũng cần LLM — Blog</title>
+<meta name="description" content="Bài của Jina Yoon (PostHog) về cách dùng mô hình ra quyết định như Jev để chặn lời gọi LLM đắt, định tuyến mô hình, xếp lại kết quả tìm kiếm và chọn biểu đồ. Đọc song ngữ Anh–Việt: hover hoặc chạm để xem bản dịch.">
+<style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
+.blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
+.blog-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #ea580c;padding:12px 14px;margin:12px 0 20px;border-radius:4px;font-size:14px;line-height:1.55}
+.blog-meta{color:#475569;font-size:13px;margin:6px 0 14px;line-height:1.5}
+.blog-prose{font-size:16px;line-height:1.7}
+.blog-prose h1{font-size:1.85rem;margin:0 0 8px}
+.blog-prose h2{font-size:1.35rem;margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75}
+.blog-prose h3{font-size:1.12rem;margin:1.3em 0 .4em}
+.blog-prose img{display:block;max-width:100%;height:auto;margin:1.2em auto;border-radius:8px}
+.blog-prose .cap{text-align:center;font-size:13px;color:#64748b;font-style:italic;margin:-.4em 0 1.2em}
+.blog-prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#e2e8f0;padding:.1em .35em;border-radius:3px}
+.blog-prose pre{overflow-x:auto;background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;margin:1em 0;font-size:13px;line-height:1.5}
+.blog-prose pre code{background:transparent;color:inherit;padding:0}
+.blog-prose blockquote{margin:1em 0;padding:10px 14px;border-left:4px solid #94a3b8;background:#f8fafc;color:#334155;font-size:15px}
+.blog-prose ul,.blog-prose ol{margin:.6em 0 1em 1.3em;padding:0}
+.blog-prose li{margin:.35em 0}
+.blog-toc{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin:0 0 1.4em}
+.blog-toc h2{font-size:14px;margin:0 0 8px;border:0;padding:0;color:#0f3d75}
+.blog-list{list-style:none;margin:0;padding:0}
+.blog-list li{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:16px 18px;margin:0 0 14px;box-shadow:0 2px 8px #0001}
+.blog-list h2{margin:0 0 6px;font-size:1.2rem;border:0}
+.blog-list .d{font-size:13px;color:#64748b;margin:0 0 8px}
+.blog-tldr{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:14px 16px;margin:0 0 1.4em;border-radius:8px}
+.blog-tldr h2{font-size:1rem;margin:0 0 8px;padding:0;border:0;color:#1e40af}
+.blog-tldr ul{margin:.4em 0 0 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-tldr li{margin:.35em 0}
+.blog-insight{background:#fefce8;border:1px solid #fde68a;border-left:4px solid #ca8a04;padding:14px 16px;margin:1.8em 0 0;border-radius:8px}
+.blog-insight h2{font-size:1.05rem;margin:0 0 6px;padding:0;border:0;color:#854d0e}
+.blog-insight .blog-insight-label{font-size:13px;font-weight:600;color:#a16207;margin:0 0 10px}
+.blog-insight ul,.blog-insight ol{margin:.5em 0 .5em 1.2em;padding:0;font-size:15px;line-height:1.55}
+.blog-insight li{margin:.4em 0}
+.blog-insight p{margin:.7em 0;font-size:15px;line-height:1.6}
+.blog-mindmap{margin:1.8em 0 0;padding:14px 16px;border:1px solid #cbd5e1;border-left:4px solid #2563eb;border-radius:8px;background:#f8fafc}
+.blog-mindmap h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:#0f3d75}
+.blog-mindmap-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;padding:4px 0 8px}
+.blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
+.blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
+.blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
+.blog-callout strong{color:#166534}
+footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<style id="page-local">
+.bi-heading .bi-en,.bi-heading .bi-vi{margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75;font-size:1.35rem}
+.bi-ready .bi-heading>.bi-vi{margin-top:.3em}
+.bi-ready[data-blog-lang="vi"] .bi-heading>.bi-vi{margin-top:1.6em;padding-bottom:4px;border-bottom:2px solid #cbd5e1}
+.bi-heading h3.bi-en,.bi-heading h3.bi-vi{font-size:1.12rem;border-bottom:0;padding-bottom:0;margin:1.3em 0 .4em}
+.bi-ready[data-blog-lang="vi"] .bi-heading h3.bi-vi{margin-top:1.3em;border-bottom:0;padding-bottom:0}
+.bi-pair>ul,.bi-pair>ol{margin:.5em 0 .5em 1.3em}
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+</style>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../assets/tailwind.css">
+<script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
+<link rel="stylesheet" href="../assets/bilingual.css">
+</head>
+<body class="pg-blog">
+<div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
+<div class="yj-logo-row"><nav class="yj-svc"><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a><a href="../../viec-lam-chinh.html"><span>💼</span>Việc chính</a><a href="../index.html"><span>📝</span>Blog</a></nav>
+<a class="yj-word" href="../../index.html" aria-label="Bảng việc làm TP.HCM – Trang chủ"><b>VIỆC LÀM!</b><small>TP.HCM</small></a>
+<nav class="yj-svc"><a href="../../viec-lam-phu.html"><span>🛵</span>Việc phụ</a><a href="#" data-theme-open><span>🎨</span>Giao diện</a><a href="../../index.html"><span>🏠</span>Trang chủ</a></nav></div>
+<div class="yj-search"><form class="yj-sin" role="search"><div class="yj-stabs"><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc chính</a><a href="../../viec-lam-phu.html">Việc phụ</a><a href="../index.html" class="on">Blog</a></div>
+<div class="yj-sbox"><input type="search" name="q" placeholder="Tìm trên trang…" aria-label="Tìm"><button type="submit">🔍 Tìm kiếm</button></div></form></div>
+<div class="yj-ticker"><span><em>»</em><a href="../index.html">Blog dịch thuật kỹ thuật</a></span><span><em>»</em>Không bao giờ đóng tiền cọc hay phí khi ứng tuyển</span></div></div>
+<div class="yj-page yj-cols"><aside class="yj yj-left"><div class="yj-box"><h3>Chuyên mục</h3><ul class="yj-nav">
+<li><a href="../../index.html"><span>🏠</span>Trang chủ</a></li><li><a href="../../viec-moi.html"><span>🆕</span>Việc mới</a></li>
+<li><a href="../../viec-lam-chinh.html"><span>💼</span>Việc làm chính</a></li><li><a href="../../viec-lam-phu.html"><span>🛵</span>Việc làm phụ</a></li>
+<li><a href="../index.html" class="on"><span>📝</span>Blog</a></li></ul></div>
+</aside>
+
+<div class="yj-center">
+<header class="bh yj-hide-portal"><div><a href="../index.html">← Blog</a></div><h1 style="margin:8px 0 0;font-size:22px">Không phải lúc nào cũng cần LLM</h1></header>
+<main class="blog-wrap">
+<article class="blog-prose">
+<h1>Không phải lúc nào cũng cần LLM</h1>
+<p class="blog-meta"><strong>Tiêu đề gốc:</strong> Not everything needs an LLM<br><strong>Tên trên X Article:</strong> How we use decision models<br><strong>Tác giả:</strong> Jina Yoon, PostHog (<a href="https://x.com/posthog">@posthog</a>)<br><strong>Hình minh họa:</strong> Daniel Hawkins và Lottie<br><strong>Đăng bài gốc:</strong> 09/11/2026, newsletter <em>build mode</em> của PostHog<br><strong>Chuỗi bài trên X:</strong> 01:18 ngày 20/11/2026 (UTC+7, giờ Việt Nam)<br>Thẻ: PostHog · mô hình ra quyết định · Jev · Jeeves · chi phí LLM</p>
+<p class="blog-note">Bản gốc là bài <a href="https://posthog.com/newsletter/decision-models">“Not everything needs an LLM”</a> của Jina Yoon trên newsletter build mode của PostHog, đồng thời đăng dạng <a href="https://x.com/i/article/2119681272180264960">X Article “How we use decision models”</a>. Ngày 19/11/2026 (01:18 ngày 20/11/2026, UTC+7), tài khoản <a href="https://x.com/posthog/status/2123480928525877375">PostHog (@posthog)</a> đăng chuỗi bài tóm tắt kèm hình. Bản dịch phục vụ học tập phi thương mại; mọi quyền đối với bài gốc và hình minh họa thuộc về tác giả và PostHog. Ghi công không đồng nghĩa với giấy phép tái sử dụng. Hình minh họa được tải về lưu cùng bài, không hotlink. Trên blog này đã có bài liên quan <a href="../dont-call-it-a-decision-model/">“Đừng gọi đó là mô hình ra quyết định”</a> của TypeSafe.</p>
+<img src="img/cover.png" width="1920" height="1080" alt="Ảnh bìa bài Not everything needs an LLM của PostHog: minh họa mô hình ra quyết định đứng giữa dữ liệu sản phẩm và các lời gọi LLM" loading="lazy">
+<section class="blog-tldr" aria-label="TL;DR"><h2>TL;DR</h2><ul>
+<li>Mô hình ra quyết định như Jev trả lời có kiểu, kèm xác suất. Nếu đã hiệu chỉnh, điểm 0.8 nghĩa là đúng khoảng 80% lần; 0.5 thì như tung đồng xu. LLM thì trả lời thành đoạn văn, thường tự tin thái quá.</li>
+<li>Dùng chúng để <strong>chặn lời gọi LLM đắt</strong>: Replay Vision hỏi hai câu yes/no hẹp (“có nêu tên người thật không?”, “có hiện chi tiết liên hệ hoặc giấy tờ không?”). Nếu một trong hai câu đạt từ 0.4 trở lên thì Gemini viết lại; nếu không thì cho qua. Trên production, 98.7% bản tóm tắt bỏ qua hoàn toàn lời gọi LLM.</li>
+<li>Đặt ngưỡng theo lỗi nào đắt hơn. Với PII, bỏ sót (lưu dữ liệu cá nhân như thể đã sạch) đắt hơn gọi thêm một lần LLM, nên ngưỡng thấp 0.4. Bot Slack dùng 0.85+ trên hai lần kiểm tra vì trả lời khi không được hỏi còn phiền hơn.</li>
+<li>Dùng một câu hỏi <code>choice</code> để chọn mô hình rẻ nhất có khả năng làm đúng ngay lần đầu. Ngưỡng không chuyển được giữa việc, mô hình, nhà cung cấp, thậm chí giữa v1 và v2 của cùng một mô hình; hãy để cấu hình được theo từng dự án và hiệu chỉnh lại khi chạy bóng trên dữ liệu gắn nhãn thủ công.</li>
+<li>Chỉ hỏi những gì đang hiện ra trước mặt. Việc xếp hạng “onboarding friction” được làm thành hai bước: embedding lấy danh sách gần, rồi mô hình hỏi “bản tóm tắt này có khớp tìm kiếm không?”. Trên 20 truy vấn thử, chất lượng xếp hạng tăng khoảng 25%.</li>
+<li>Đừng xâu nhiều bước suy luận: job Highlights từng gửi tới 32 phiên, 12–38k token mỗi lần, làm tắc máy chủ mô hình hàng giờ. Việc mở, cần ngữ cảnh dài hoặc nhiều bước thì vẫn để LLM, hoặc mô hình lai như Jeeves (mặc định của PostHog khi không chỉ định mô hình).</li>
+</ul></section>
+<p class="blog-note" id="bilingual-help"><strong>Cách đọc:</strong> Ở chế độ Song ngữ, rê chuột lên từng đoạn để xem tiếng Việt bên dưới. Trên điện thoại, chạm đoạn để mở/đóng bản dịch; chạm liên kết vẫn mở liên kết. Dùng phím Tab để xem bản dịch, Esc để đóng. Nút nổi góc dưới bên trái chuyển sang Toàn bộ tiếng Việt và ghi nhớ lựa chọn. Khi tắt JavaScript, cả hai ngôn ngữ được hiển thị.</p>
+<h2>Bài gốc và bản dịch</h2>
+<div data-bilingual aria-describedby="bilingual-help">
+
+<div class="bi-pair" data-paragraph="1"><p class="bi-en" lang="en">LLMs love to yap. Ask a simple question and you get a few hundred words of “it depends.” It’s annoying as hell.</p><p class="bi-vi" lang="vi">LLM rất thích nói dài. Hỏi một câu đơn giản thì nhận về vài trăm chữ “tùy trường hợp”. Đúng là mệt.</p></div>
+
+<div class="bi-pair" data-paragraph="2"><p class="bi-en" lang="en">This is why we love decision models like Jev for simpler tasks. You ask a structured question and get a typed answer with a probability, which looks something like this:</p><p class="bi-vi" lang="vi">Đó là lý do chúng tôi thích dùng mô hình ra quyết định như Jev cho những việc đơn giản hơn. Bạn đặt một câu hỏi có cấu trúc và nhận về câu trả lời có kiểu, kèm xác suất, đại khái như thế này:</p></div>
+
+<div class="bi-pair" data-paragraph="3"><ul class="bi-en" lang="en"><li>Noul. Are hedgehogs mammals? → Yes, 0.99</li><li>Choice. Which animal family do hedgehogs belong to? → Mammal, 0.99</li><li>Score. What is the current conservation status of hedgehogs? → Least Concern, 0.77</li></ul><ul class="bi-vi" lang="vi"><li>Noul. Nhím có phải động vật có vú không? → Có, 0.99</li><li>Choice. Nhím thuộc họ động vật nào? → Động vật có vú, 0.99</li><li>Score. Tình trạng bảo tồn hiện nay của nhím là gì? → Ít lo ngại, 0.77</li></ul></div>
+
+<div class="bi-pair" data-paragraph="4"><p class="bi-en" lang="en">Whereas LLMs return free-form and overly confident prose, decision models make model uncertainty explicit. In a calibrated model, answers that score 0.8 are right about 80% of the time. That means a score of 0.5 is a coin flip.</p><p class="bi-vi" lang="vi">LLM trả về đoạn văn tự do và thường tự tin thái quá, còn mô hình ra quyết định thì nói thẳng mức không chắc của mình. Với mô hình đã hiệu chỉnh, câu trả lời đạt 0.8 thì đúng khoảng 80% lần. Điểm 0.5 nghĩa là như tung đồng xu.</p></div>
+
+<div class="bi-pair" data-paragraph="5"><p class="bi-en" lang="en">We’ve been experimenting with them at PostHog and several use cases have made it to production. This is everything we’ve learned about using decision models so far: when to use them, how to use them, and mistakes to avoid.</p><p class="bi-vi" lang="vi">Chúng tôi đã thử nghiệm chúng tại PostHog và một số trường hợp đã vào production. Đây là tất cả những gì chúng tôi học được về việc dùng mô hình ra quyết định cho tới nay: khi nào nên dùng, dùng thế nào, và những sai lầm cần tránh.</p></div>
+
+<div class="bi-pair bi-heading" id="gate-expensive-calls" data-paragraph="6"><h2 class="bi-en" lang="en">1. Use them to gate expensive LLM calls</h2><h2 class="bi-vi" lang="vi">1. Dùng chúng để chặn lời gọi LLM đắt</h2></div>
+
+<div class="bi-pair" data-paragraph="7"><p class="bi-en" lang="en">Decision models are up to 444.6x cheaper and 193.6x faster than frontier models,<sup>1</sup> so you can use them to check whether you even need to make an expensive LLM call at all.</p><p class="bi-vi" lang="vi">Mô hình ra quyết định rẻ hơn tới 444.6 lần và nhanh hơn tới 193.6 lần so với mô hình frontier,<sup>1</sup> nên bạn có thể dùng chúng để kiểm tra xem liệu có cần gọi LLM đắt hay không.</p></div>
+
+<div class="bi-pair" data-paragraph="8"><p class="bi-en" lang="en">We do this in a pipeline that scrubs personal info in Replay Vision, our product that watches and summarizes user session recordings for you. Here’s how it works:</p><p class="bi-vi" lang="vi">Chúng tôi làm vậy trong một pipeline làm sạch thông tin cá nhân ở Replay Vision, sản phẩm xem và tóm tắt bản ghi phiên của người dùng. Cách hoạt động như sau:</p></div>
+
+<div class="bi-pair" data-paragraph="9"><ul class="bi-en" lang="en"><li>Each session summary goes through 2 yes/no questions from a decision model. Using narrow questions like this cuts false flags to about a tenth of what a single question produced. “Does this name a real person?” “Does this show contact details or an ID?”</li><li>If either scores 0.4 or above, Gemini rewrites the summary without the personal info and it gets checked again.</li><li>Otherwise, it’s clean and passes through the gate. In production, 98.7% skip the LLM call entirely.</li></ul><ul class="bi-vi" lang="vi"><li>Mỗi bản tóm tắt phiên đi qua 2 câu hỏi có/không của một mô hình ra quyết định. Đặt câu hỏi hẹp như vậy giúp giảm cảnh báo nhầm xuống khoảng một phần mười so với khi chỉ hỏi một câu. “Bản này có nêu tên một người thật không?” “Bản này có hiện chi tiết liên hệ hoặc giấy tờ tùy thân không?”</li><li>Nếu một trong hai câu đạt từ 0.4 trở lên, Gemini viết lại bản tóm tắt, bỏ thông tin cá nhân, rồi bản đó được kiểm tra lại.</li><li>Nếu không, bản tóm tắt được coi là sạch và đi qua cổng. Trên production, 98.7% bỏ qua hoàn toàn lời gọi LLM.</li></ul></div>
+
+<figure><img src="img/tip1-gate.png" width="1920" height="1080" alt="Sơ đồ luồng “Chặn lời gọi đắt sau một mô hình ra quyết định”: bản tóm tắt phiên đi qua hai câu hỏi có/không; nếu cả hai dưới 0.4 thì cho qua, nếu một câu đạt từ 0.4 thì gửi LLM viết lại rồi kiểm tra lại" loading="lazy"><figcaption class="cap">Cổng chặn lời gọi LLM đắt trong Replay Vision. Hình gốc của PostHog, Daniel Hawkins và Lottie.</figcaption></figure>
+
+<div class="bi-pair" data-paragraph="10"><p class="bi-en" lang="en">Without the decision model, we’d have to keep fussing with prompts and regexes that miss things, or sending every summary to Gemini to catch the 1% that need it.</p><p class="bi-vi" lang="vi">Nếu không có mô hình ra quyết định, chúng tôi sẽ phải cứ chỉnh đi chỉnh lại prompt và regex rồi vẫn sót, hoặc gửi mọi bản tóm tắt cho Gemini chỉ để bắt được khoảng 1% bản thực sự cần xử lý.</p></div>
+
+<div class="bi-pair bi-heading" id="they-make-mistakes" data-paragraph="11"><h3 class="bi-en" lang="en">But remember they make mistakes</h3><h3 class="bi-vi" lang="vi">Nhưng hãy nhớ là chúng vẫn sai</h3></div>
+
+<div class="bi-pair" data-paragraph="12"><p class="bi-en" lang="en">A probability score of 0.85 still means ~150 wrong answers per 1,000 checks, so plan ahead for false positives and false negatives.</p><p class="bi-vi" lang="vi">Điểm xác suất 0.85 vẫn nghĩa là khoảng 150 câu sai trên 1.000 lần kiểm tra, nên hãy tính trước cả dương tính giả và âm tính giả.</p></div>
+
+<div class="bi-pair" data-paragraph="13"><p class="bi-en" lang="en">In the PII example, a false positive only costs us an extra LLM call, whereas a false negative stores personal data as clean. That’s why we set the threshold low at 0.4.</p><p class="bi-vi" lang="vi">Trong ví dụ PII, dương tính giả chỉ tốn thêm một lời gọi LLM, còn âm tính giả thì lưu dữ liệu cá nhân như thể đã sạch. Vì thế chúng tôi đặt ngưỡng thấp, ở 0.4.</p></div>
+
+<div class="bi-pair" data-paragraph="14"><p class="bi-en" lang="en">When false positives are the costlier mistake, use higher thresholds. For example, we recently updated the PostHog in Slack bot, so it can answer questions without being tagged. To avoid being annoying, it checks every message in a channel to see (1) whether it’s asking for information, and (2) whether PostHog could answer it. Only messages that pass both at 0.85+ go through.</p><p class="bi-vi" lang="vi">Khi dương tính giả mới là lỗi đắt hơn, hãy dùng ngưỡng cao hơn. Ví dụ, chúng tôi mới cập nhật bot PostHog trên Slack để nó trả lời câu hỏi mà không cần bị gắn thẻ. Để khỏi làm phiền, bot kiểm tra mọi tin trong kênh xem (1) tin đó có đang hỏi thông tin không, và (2) PostHog có thể trả lời được không. Chỉ những tin vượt cả hai mức 0.85 trở lên mới được đi tiếp.</p></div>
+
+<div class="bi-pair" data-paragraph="15"><blockquote class="bi-en" lang="en">Takeaway: Use decision models to filter jobs before they hit an expensive LLM call, and set the threshold based on which mistake costs you more.</blockquote><blockquote class="bi-vi" lang="vi">Điểm rút ra: Dùng mô hình ra quyết định để lọc việc trước khi chúng chạm tới một lời gọi LLM đắt, và đặt ngưỡng dựa trên lỗi nào làm bạn tốn hơn.</blockquote></div>
+
+<div class="bi-pair bi-heading" id="model-routers" data-paragraph="16"><h2 class="bi-en" lang="en">2. Use them as model routers</h2><h2 class="bi-vi" lang="vi">2. Dùng chúng làm bộ định tuyến mô hình</h2></div>
+
+<div class="bi-pair" data-paragraph="17"><p class="bi-en" lang="en">Our PostHog in Slack bot also uses a decision model as a model router.</p><p class="bi-vi" lang="vi">Bot PostHog trên Slack cũng dùng một mô hình ra quyết định làm bộ định tuyến mô hình.</p></div>
+
+<div class="bi-pair" data-paragraph="18"><p class="bi-en" lang="en">When the bot gets tagged, it first checks whether the message asked for a specific model. If not, one <code>choice</code> question picks from the list:</p><p class="bi-vi" lang="vi">Khi bot được gắn thẻ, nó kiểm tra trước xem tin nhắn có yêu cầu một mô hình cụ thể không. Nếu không, một câu hỏi <code>choice</code> sẽ chọn từ danh sách:</p></div>
+
+<div class="bi-pair" data-paragraph="19"><blockquote class="bi-en" lang="en">Pick the cheapest option that will most likely finish the task correctly on the first try. A failed run costs more than a smarter option.</blockquote><blockquote class="bi-vi" lang="vi">Hãy chọn phương án rẻ nhất mà nhiều khả năng sẽ làm xong việc đúng ngay lần đầu. Một lần chạy thất bại tốn hơn một lựa chọn thông minh hơn.</blockquote></div>
+
+<div class="bi-pair" data-paragraph="20"><p class="bi-en" lang="en">Each option in the list carries a short note on what that model is good for. GPT Luna is described as “a light and very cheap model. Good for short answers, lookups, summaries and very small edits.” The decision model then scores the request against each option’s text.</p><p class="bi-vi" lang="vi">Mỗi lựa chọn trong danh sách kèm một ghi chú ngắn về việc mô hình đó giỏi gì. GPT Luna được mô tả là “một mô hình nhẹ và rất rẻ. Phù hợp câu trả lời ngắn, tra cứu, tóm tắt và sửa rất nhỏ.” Mô hình ra quyết định sau đó chấm yêu cầu đối với phần mô tả của từng lựa chọn.</p></div>
+
+<figure><img src="img/tip2-router.png" width="1920" height="1235" alt="Sơ đồ “Dùng mô hình ra quyết định làm bộ định tuyến mô hình”: câu hỏi tự do được đưa vào một câu choice “chọn phương án rẻ nhất có khả năng làm đúng lần đầu”, rồi phân ra các mô hình với chi phí tương đối, Claude Sonnet 5.5 được chọn" loading="lazy"><figcaption class="cap">Bộ định tuyến mô hình của bot Slack. Hình gốc của PostHog, Daniel Hawkins và Lottie.</figcaption></figure>
+
+<div class="bi-pair bi-heading" id="not-interchangeable" data-paragraph="21"><h3 class="bi-en" lang="en">But don’t assume they’re interchangeable</h3><h3 class="bi-vi" lang="vi">Đừng cho rằng chúng thay thế được lẫn nhau</h3></div>
+
+<div class="bi-pair" data-paragraph="22"><p class="bi-en" lang="en">Different tasks, models, and providers all have different thresholds.</p><p class="bi-vi" lang="vi">Từng việc, từng mô hình và từng nhà cung cấp đều có ngưỡng khác nhau.</p></div>
+
+<div class="bi-pair" data-paragraph="23"><p class="bi-en" lang="en">We were experimenting with using them to auto-merge similar logs in Error Tracking and found that thresholds changed between v1 and v2 of the same model. We had to make its thresholds configurable per PostHog project and keep the judge in shadow mode while recalibrating based on hand-labeled data.</p><p class="bi-vi" lang="vi">Khi thử dùng chúng để tự gộp các log giống nhau trong Error Tracking, chúng tôi thấy ngưỡng thay đổi giữa v1 và v2 của cùng một mô hình. Chúng tôi phải cho phép cấu hình ngưỡng theo từng dự án PostHog, và giữ bộ phán xét chạy bóng (chạy song song, chưa áp dụng) trong khi hiệu chỉnh lại trên dữ liệu gắn nhãn thủ công.</p></div>
+
+<div class="bi-pair" data-paragraph="24"><p class="bi-en" lang="en">This is one of the reasons why Fernando on our growth team pushed for a model-agnostic interface early. We now have an internal AI gateway for swapping and testing models, including self-hosted ones.</p><p class="bi-vi" lang="vi">Đây là một lý do Fernando ở đội tăng trưởng đã thúc đẩy sớm một giao diện không phụ thuộc mô hình. Giờ chúng tôi có một cổng AI nội bộ để đổi và thử mô hình, kể cả mô hình tự host.</p></div>
+
+<div class="bi-pair" data-paragraph="25"><blockquote class="bi-en" lang="en">Takeaway: Use a <code>choice</code> question to route free-form LLM requests to the cheapest model that can handle it. Keep in mind that thresholds don’t carry over, so set them per task and per model.</blockquote><blockquote class="bi-vi" lang="vi">Điểm rút ra: Dùng một câu hỏi <code>choice</code> để đưa yêu cầu LLM dạng tự do tới mô hình rẻ nhất còn xử lý được việc đó. Nhớ rằng ngưỡng không mang từ chỗ này sang chỗ khác, nên hãy đặt theo từng việc và từng mô hình.</blockquote></div>
+
+<div class="bi-pair bi-heading" id="face-value-checks" data-paragraph="26"><h2 class="bi-en" lang="en">3. Use them for face-value checks</h2><h2 class="bi-vi" lang="vi">3. Dùng chúng để kiểm tra đúng những gì đang hiện ra</h2></div>
+
+<div class="bi-pair" data-paragraph="27"><p class="bi-en" lang="en">If a question requires more context or chains of reasoning, it’s better to use an LLM. However, you can still use a decision model if you have a way to flatten, or pre-process the input, so it’s checkable at face-value.</p><p class="bi-vi" lang="vi">Nếu câu hỏi cần thêm ngữ cảnh hoặc chuỗi suy luận, tốt hơn hết là dùng LLM. Dù vậy, bạn vẫn dùng được mô hình ra quyết định nếu có cách làm phẳng, hay tiền xử lý đầu vào, để có thể kiểm tra ngay những gì đang hiện ra trước mặt.</p></div>
+
+<div class="bi-pair" data-paragraph="28"><p class="bi-en" lang="en">In Replay Vision, when a user searches for a theme like “onboarding friction,” there’s a chance for the query to return a few unexpected results because of the way embedding distance works.</p><p class="bi-vi" lang="vi">Trong Replay Vision, khi người dùng tìm một chủ đề như “ma sát khi onboarding”, truy vấn vẫn có thể trả về vài kết quả không ngờ, vì khoảng cách embedding hoạt động như vậy.</p></div>
+
+<div class="bi-pair" data-paragraph="29"><p class="bi-en" lang="en">A decision model can’t “Rank the top 10 sessions that contain summaries that match the user’s search query.” It’s too complicated.</p><p class="bi-vi" lang="vi">Một mô hình ra quyết định không làm được việc “Xếp 10 phiên hàng đầu có bản tóm tắt khớp với truy vấn tìm kiếm của người dùng.” Việc đó phức tạp quá.</p></div>
+
+<div class="bi-pair" data-paragraph="30"><p class="bi-en" lang="en">Instead, we use the embeddings first to derive an initial list of session recordings to pass to the decision model. Then, the only task left for the decision model is to look at how closely each result in the list matches the user’s original search term:</p><p class="bi-vi" lang="vi">Thay vào đó, chúng tôi dùng embedding trước để lấy một danh sách phiên ban đầu, rồi mới đưa sang mô hình ra quyết định. Việc còn lại của mô hình chỉ là xem từng kết quả trong danh sách khớp với cụm tìm kiếm gốc của người dùng tới mức nào:</p></div>
+
+<div class="bi-pair" data-paragraph="31"><blockquote class="bi-en" lang="en">Does this summary describe a session that matches what the search looks for?</blockquote><blockquote class="bi-vi" lang="vi">Bản tóm tắt này có mô tả một phiên khớp với điều mà tìm kiếm đang hướng tới không?</blockquote></div>
+
+<div class="bi-pair" data-paragraph="32"><p class="bi-en" lang="en">Results are then reranked by that probability. On 20 test queries, this improved ranking quality by about 25%.</p><p class="bi-vi" lang="vi">Kết quả sau đó được xếp lại theo xác suất đó. Trên 20 truy vấn thử, cách này cải thiện chất lượng xếp hạng khoảng 25%.</p></div>
+
+<figure><img src="img/tip3-rerank.png" width="3840" height="2160" alt="Sơ đồ ba bước xếp lại kết quả tìm kiếm: embedding thu hẹp còn 20 quan sát gần nhất, mô hình ra quyết định hỏi từng quan sát có khớp tìm kiếm không, rồi sắp lại theo xác suất câu có" loading="lazy"><figcaption class="cap">Xếp lại kết quả tìm kiếm bằng mô hình ra quyết định. Hình gốc của PostHog, Daniel Hawkins và Lottie.</figcaption></figure>
+
+<div class="bi-pair bi-heading" id="avoid-multi-step" data-paragraph="33"><h3 class="bi-en" lang="en">But avoid multi-step reasoning</h3><h3 class="bi-vi" lang="vi">Nhưng hãy tránh suy luận nhiều bước</h3></div>
+
+<div class="bi-pair" data-paragraph="34"><p class="bi-en" lang="en">We’ve tried using a decision model for multi-step reasoning before. Before embeddings were ready in Replay Vision, we tried ranking a “Highlights” feed of sessions worth a human’s time. The questions were:</p><p class="bi-vi" lang="vi">Trước đây chúng tôi đã thử dùng mô hình ra quyết định cho suy luận nhiều bước. Trước khi embedding sẵn sàng trong Replay Vision, chúng tôi thử xếp một nguồn “Highlights” gồm những phiên đáng để người xem. Các câu hỏi là:</p></div>
+
+<div class="bi-pair" data-paragraph="35"><ol class="bi-en" lang="en"><li>Is this session worth watching?</li><li>If so, why is it worth watching? (With choices like “error on screen,” “slow or stuck,” “user confused”, “user gave up”, etc.)</li></ol><ol class="bi-vi" lang="vi"><li>Phiên này có đáng xem không?</li><li>Nếu có, vì sao đáng xem? (Với các lựa chọn như “lỗi trên màn hình,” “chậm hoặc bị kẹt,” “người dùng bối rối”, “người dùng bỏ cuộc”, v.v.)</li></ol></div>
+
+<div class="bi-pair" data-paragraph="36"><p class="bi-en" lang="en">Processing these two questions in order required an hourly job that sent large requests – up to 32 sessions and 12-38k tokens each – which flooded the model server and blocked other products’ calls for hours.</p><p class="bi-vi" lang="vi">Xử lý lần lượt hai câu hỏi này đòi hỏi một job chạy từng giờ, gửi các request lớn — tới 32 phiên và 12–38k token mỗi lần — làm ngập máy chủ mô hình và chặn lời gọi của các sản phẩm khác trong nhiều giờ.</p></div>
+
+<div class="bi-pair" data-paragraph="37"><p class="bi-en" lang="en">So yes, technically, you can chain decision models into multi-step judgments, but it’s not operationally worth it. Leave that to LLMs, or do the heavy lifting before the decision model sees the data like in the embedding search example above.</p><p class="bi-vi" lang="vi">Vậy đúng là về kỹ thuật, bạn có thể xâu mô hình ra quyết định thành phán đoán nhiều bước, nhưng về vận hành thì không đáng. Hãy để LLM làm phần đó, hoặc xử lý phần nặng trước khi mô hình ra quyết định nhìn thấy dữ liệu, như ví dụ tìm kiếm bằng embedding ở trên.</p></div>
+
+<div class="bi-pair" data-paragraph="38"><blockquote class="bi-en" lang="en">Takeaway: Decision models judge what’s in front of them in a single pass. Leave multi-step reasoning to LLMs.</blockquote><blockquote class="bi-vi" lang="vi">Điểm rút ra: Mô hình ra quyết định đánh giá những gì đang hiện ra trước mặt, trong một lượt. Hãy để LLM làm phần suy luận nhiều bước.</blockquote></div>
+
+<div class="bi-pair bi-heading" id="overqualified-llms" data-paragraph="39"><h2 class="bi-en" lang="en">4. Use them in place of overqualified LLMs</h2><h2 class="bi-vi" lang="vi">4. Dùng chúng thay cho LLM thừa sức</h2></div>
+
+<div class="bi-pair" data-paragraph="40"><p class="bi-en" lang="en">Decision models can take any job where an LLM is overkill, either because it’s too slow or too expensive.</p><p class="bi-vi" lang="vi">Mô hình ra quyết định có thể nhận mọi việc mà LLM là quá mức, vì quá chậm hoặc quá đắt.</p></div>
+
+<div class="bi-pair" data-paragraph="41"><p class="bi-en" lang="en">One example is our smarter chart picker for SQL queries. PostHog used to pick a visualization using deterministic rules like:</p><p class="bi-vi" lang="vi">Một ví dụ là bộ chọn biểu đồ thông minh hơn cho truy vấn SQL. Trước đây PostHog chọn cách trực quan hóa bằng các quy tắc tất định như:</p></div>
+
+<div class="bi-pair" data-paragraph="42"><ul class="bi-en" lang="en"><li>A date column, a number column and multiple rows → Line chart</li><li>Two or more text columns plus a number → Heatmap</li><li>Any number column → Bar chart</li></ul><ul class="bi-vi" lang="vi"><li>Một cột ngày, một cột số và nhiều hàng → Biểu đồ đường</li><li>Hai cột chữ trở lên cộng một cột số → Heatmap</li><li>Bất kỳ cột số nào → Biểu đồ cột</li></ul></div>
+
+<div class="bi-pair" data-paragraph="43"><p class="bi-en" lang="en">Now, a decision model looks at both the SQL itself if your org opts in, and the first three rows of the results to suggest a better chart.</p><p class="bi-vi" lang="vi">Giờ đây, một mô hình ra quyết định nhìn cả câu SQL nếu tổ chức của bạn bật tùy chọn này, lẫn ba hàng đầu của kết quả, để đề xuất biểu đồ phù hợp hơn.</p></div>
+
+<div class="bi-pair" data-paragraph="44"><p class="bi-en" lang="en">The example below is based on a simple query about pageviews by browser. The original rules picked a basic aggregate line chart; with Jev, it chose a bar chart split by browser:</p><p class="bi-vi" lang="vi">Ví dụ dưới đây dựa trên một truy vấn đơn giản về lượt xem trang theo trình duyệt. Các quy tắc cũ chọn một biểu đồ đường gộp; với Jev, nó chọn biểu đồ cột tách theo trình duyệt:</p></div>
+
+<figure><img src="img/tip4-chart.png" width="1920" height="1184" alt="So sánh trước và sau: bên trái là biểu đồ đường gộp theo quy tắc tất định, bên phải là biểu đồ cột nhóm do Jev chọn, tách thành nhiều chuỗi để dễ so sánh theo ngày" loading="lazy"><figcaption class="cap">Trước và sau khi Jev chọn biểu đồ cho truy vấn lượt xem trang theo trình duyệt. Hình gốc của PostHog, Daniel Hawkins và Lottie.</figcaption></figure>
+
+<div class="bi-pair bi-heading" id="keep-llms-open-ended" data-paragraph="45"><h3 class="bi-en" lang="en">But keep LLMs for open-ended jobs</h3><h3 class="bi-vi" lang="vi">Nhưng hãy giữ LLM cho những việc mở</h3></div>
+
+<div class="bi-pair" data-paragraph="46"><p class="bi-en" lang="en">Anything more open-ended should still go to an LLM.</p><p class="bi-vi" lang="vi">Mọi việc mang tính mở hơn vẫn nên để LLM làm.</p></div>
+
+<div class="bi-pair" data-paragraph="47"><p class="bi-en" lang="en">Still, out of curiosity, we tried Jev on ranking our internal PR review agent’s findings with five noul questions that roughly asked if the change is worth a developer’s attention. The results were inconclusive with an AUC of 0.52.</p><p class="bi-vi" lang="vi">Dù vậy, vì tò mò, chúng tôi đã thử dùng Jev để xếp các phát hiện của agent duyệt pull request nội bộ, với năm câu hỏi noul đại khái hỏi thay đổi đó có đáng để lập trình viên để ý không. Kết quả không thuyết phục, AUC đạt 0.52.</p></div>
+
+<div class="bi-pair" data-paragraph="48"><p class="bi-en" lang="en">If Jev were an LLM, we’d solve this by sending more context, but Jev can’t handle large requests. Its long-context mode is also slower and less accurate.<sup>2</sup> Typical decision models just aren’t built for this kind of reasoning.</p><p class="bi-vi" lang="vi">Nếu Jev là một LLM, chúng tôi sẽ xử lý bằng cách gửi thêm ngữ cảnh, nhưng Jev không chịu được các request lớn. Chế độ ngữ cảnh dài của nó cũng chậm hơn và kém chính xác hơn.<sup>2</sup> Các mô hình ra quyết định thông thường vốn không được làm cho kiểu suy luận này.</p></div>
+
+<div class="bi-pair" data-paragraph="49"><p class="bi-en" lang="en">Hybrid decision models like Jeeves can help bridge this gap, though. Developed by our in-house AI research team, Jeeves is a decision model that reasons before deciding when it’s unsure.</p><p class="bi-vi" lang="vi">Dù vậy, các mô hình ra quyết định lai như Jeeves có thể giúp lấp khoảng trống này. Do đội nghiên cứu AI nội bộ phát triển, Jeeves là mô hình ra quyết định biết suy luận trước khi quyết khi nó chưa chắc.</p></div>
+
+<div class="bi-pair" data-paragraph="50"><p class="bi-en" lang="en">It’s now our default for any decision call at PostHog that doesn’t name a model, and there are similar variations by other developers, like Kev.</p><p class="bi-vi" lang="vi">Đây hiện là lựa chọn mặc định cho mọi lời gọi ra quyết định tại PostHog khi không chỉ định mô hình, và cũng có các biến thể tương tự của nhóm khác, như Kev.</p></div>
+
+<div class="bi-pair" data-paragraph="51"><blockquote class="bi-en" lang="en">Takeaway: Use decision models as evaluators for inputs that are too simple for a language model, yet too fuzzy for a regex. Anything more complex is still too much to hand over to a decision model. For now, at least.</blockquote><blockquote class="bi-vi" lang="vi">Điểm rút ra: Hãy dùng mô hình ra quyết định như bộ đánh giá cho đầu vào quá đơn giản với mô hình ngôn ngữ, nhưng lại quá mơ hồ với regex. Mọi thứ phức tạp hơn thì vẫn quá sức để giao cho một mô hình ra quyết định. Ít nhất là với hiện tại.</blockquote></div>
+
+<div class="bi-pair" data-paragraph="52"><p class="bi-en" lang="en"><sup>1</sup> According to TypeSafe AI.<br><sup>2</sup> Jev takes 64k tokens per request and 32k per question by default. And even though TypeSafe added an opt-in header that raises both to 262k, they still warn that the long-context mode is slower and less accurate. Source: TypeSafe Docs</p><p class="bi-vi" lang="vi"><sup>1</sup> Theo TypeSafe AI.<br><sup>2</sup> Jev mặc định nhận 64k token mỗi request và 32k mỗi câu hỏi. Dù TypeSafe đã thêm một header tùy chọn để nâng cả hai lên 262k, họ vẫn cảnh báo chế độ ngữ cảnh dài chậm hơn và kém chính xác hơn. Nguồn: tài liệu TypeSafe.</p></div>
+
+<div class="bi-pair" data-paragraph="53"><p class="bi-en" lang="en">Words by Jina Yoon, who expects this article to be obsolete in two months. Graphics by Daniel Hawkins and Lottie. Originally published in build mode, a free newsletter by PostHog.</p><p class="bi-vi" lang="vi">Lời viết của Jina Yoon, người cho rằng bài này sẽ lỗi thời trong hai tháng. Hình của Daniel Hawkins và Lottie. Đăng lần đầu trên build mode, newsletter miễn phí của PostHog.</p></div>
+
+</div>
+
+<section class="blog-insight" id="insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người dịch</p>
+<ul>
+<li><strong>Câu trả lời có kiểu kèm xác suất là điểm khác cốt lõi so với LLM.</strong> Ba kiểu câu hỏi được nêu là Noul (có/không), Choice (chọn một) và Score (chọn hạng kèm điểm). Với mô hình đã hiệu chỉnh, 0.8 ≈ đúng 80% lần; 0.5 là tung đồng xu. Đừng đọc 0.85 như “gần chắc chắn”: vẫn còn khoảng 150 lỗi trên 1.000 lần kiểm tra.</li>
+<li><strong>Số 444.6 lần rẻ hơn và 193.6 lần nhanh hơn là số liệu của TypeSafe AI</strong>, không phải số PostHog đo trên production. TypeSafe đo Jev và các LLM trên cùng một harness workflow, rồi nói đây thiên về mức cao trong thực tế. Số liệu production của PostHog là tỷ lệ 98.7% bản tóm tắt Replay Vision bỏ qua lời gọi LLM.</li>
+<li><strong>Câu hỏi hẹp hơn một câu rộng.</strong> Hai câu yes/no riêng (“có nêu tên người thật?”, “có hiện liên hệ hoặc giấy tờ?”) giảm cảnh báo nhầm xuống khoảng một phần mười so với một câu duy nhất. Đây đúng tinh thần tách nhận định trong bài <a href="../dont-call-it-a-decision-model/">“Đừng gọi đó là mô hình ra quyết định”</a> của TypeSafe đã đăng trên blog này: mô hình nhận định, mã nguồn ghép các nhận định thành quyết định.</li>
+<li><strong>Đặt ngưỡng theo lỗi nào đắt hơn, không theo “cảm giác đẹp”.</strong> PII: âm tính giả (lưu dữ liệu cá nhân như thể đã sạch) đắt hơn dương tính giả (thêm một lời gọi Gemini) → ngưỡng thấp 0.4, rồi viết lại và kiểm tra lại. Bot Slack trả lời khi không được gắn thẻ: dương tính giả (trả lời làm phiền) đắt hơn → cả hai lần kiểm tra phải đạt 0.85+.</li>
+<li><strong>Lưu ý lệch lời trong chuỗi bài X.</strong> Bài gốc và sơ đồ nói rõ: nếu một trong hai câu đạt <em>từ 0.4 trở lên</em> thì gửi Gemini viết lại; nếu cả hai <em>dưới 0.4</em> thì cho qua. Một bài trong chuỗi của @posthog viết “only the ones that score below 0.4 for PII get rewritten by Gemini”, ngược với bài và hình. Nên lấy bài viết và sơ đồ làm chuẩn.</li>
+<li><strong>Định tuyến mô hình bằng một câu choice có tính chi phí.</strong> Prompt là “chọn phương án rẻ nhất có khả năng làm đúng ngay lần đầu; chạy sai tốn hơn chọn mô hình giỏi hơn.” Mỗi lựa chọn có ghi chú ngắn (ví dụ GPT Luna cho câu ngắn, tra cứu, tóm tắt; trong chuỗi bài, GPT Sol được ghi là mô hình lập trình phổ thông, hợp sửa mã và gỡ lỗi). Bot còn tôn trọng khi người dùng chỉ định sẵn một mô hình.</li>
+<li><strong>Ngưỡng không mang đi được.</strong> Việc, mô hình, nhà cung cấp, thậm chí v1 và v2 của cùng một mô hình, đều có ngưỡng khác nhau. PostHog đã phải cho cấu hình theo từng dự án khi tự gộp log ở Error Tracking, và giữ bộ phán xét chạy bóng trong lúc hiệu chỉnh lại trên dữ liệu gắn nhãn thủ công. Fernando (đội tăng trưởng) thúc đẩy sớm một cổng AI không phụ thuộc mô hình, kể cả mô hình tự host, chính vì lý do này.</li>
+<li><strong>Làm phẳng đầu vào trước, đừng hỏi việc xếp hạng phức tạp.</strong> “Xếp 10 phiên khớp truy vấn” thì mô hình ra quyết định không làm nổi. Embedding lấy danh sách gần trước, rồi chỉ còn một câu face-value: “bản tóm tắt này có khớp điều đang tìm không?” Kết quả xếp lại theo xác suất; trên 20 truy vấn thử, chất lượng tăng khoảng 25%. Gần về nghĩa trên không gian embedding chưa chắc đã là một kết quả khớp.</li>
+<li><strong>Xâu nhiều bước thì vận hành không chịu nổi.</strong> Trước khi có embedding, job Highlights hỏi lần lượt “phiên này đáng xem không?” rồi “vì sao?”, gửi tới 32 phiên và 12–38k token mỗi request, làm ngập máy chủ mô hình và chặn sản phẩm khác hàng giờ. Về kỹ thuật thì xâu được, nhưng không đáng. Hãy để LLM làm phần nhiều bước, hoặc xử lý phần nặng trước khi mô hình nhìn thấy dữ liệu.</li>
+<li><strong>Chỗ vừa tầm: quá mơ hồ cho regex, quá đơn giản cho LLM.</strong> Bộ chọn biểu đồ SQL là ví dụ rõ: quy tắc tất định (cột ngày + cột số + nhiều hàng → biểu đồ đường) đã chọn nhầm biểu đồ đường gộp cho lượt xem trang theo trình duyệt; Jev nhìn câu SQL (nếu tổ chức bật) và ba hàng đầu, rồi chọn biểu đồ cột tách theo trình duyệt.</li>
+<li><strong>Việc mở vẫn để LLM.</strong> Thử dùng Jev xếp phát hiện của agent duyệt pull request nội bộ (năm câu noul kiểu “thay đổi này có đáng để lập trình viên để ý?”) cho AUC 0.52, tức gần như đoán ngẫu nhiên. Không giải được bằng cách nhồi thêm ngữ cảnh: Jev mặc định 64k token mỗi request và 32k mỗi câu hỏi; header tùy chọn lên 262k vẫn bị TypeSafe cảnh báo là chậm hơn và kém chính xác hơn.</li>
+<li><strong>Khoảng giữa đang được lấp bằng mô hình lai.</strong> Jeeves do đội nghiên cứu AI nội bộ của PostHog làm: suy luận trước khi quyết khi chưa chắc, và là mặc định cho mọi lời gọi ra quyết định khi không chỉ định mô hình. Chuỗi bài X có liên kết <a href="https://github.com/PostHog/jeeves">github.com/PostHog/jeeves</a>. Các nhóm khác có biến thể tương tự, như Kev.</li>
+<li><strong>Tác giả chủ động nói bài sẽ lỗi thời.</strong> Jina Yoon viết rằng bà kỳ vọng bài này lỗi thời trong hai tháng. Đây là kinh nghiệm production tại một thời điểm, không phải một công thức đóng.</li>
+</ul>
+<p>Đây là phân tích bổ sung của người dịch, không phải phần nguyên văn hay khuyến nghị đã được tác giả xác nhận.</p></section>
+<section class="blog-mindmap" id="mindmap"><h2>Mindmap — Không phải lúc nào cũng cần LLM</h2><div class="blog-mindmap-scroll"><pre class="mermaid">
+mindmap
+  root((Không phải lúc nào cũng cần LLM))
+    Câu trả lời có kiểu
+      Noul có hoặc không
+      Choice chọn một
+      Score kèm xác suất
+      0.8 nghĩa là đúng khoảng 80 phần trăm
+    Chặn lời gọi LLM đắt
+      Hai câu hẹp hơn một câu rộng
+      Ngưỡng 0.4 vì sót PII đắt hơn
+      98.7 phần trăm bỏ qua LLM
+    Định tuyến mô hình
+      Chọn cái rẻ nhất làm đúng lần đầu
+      Ghi chú ngắn cho từng mô hình
+      Ngưỡng không mang sang chỗ khác
+    Kiểm tra đúng mặt chữ
+      Làm phẳng dữ liệu trước
+      Embedding rồi hỏi có khớp không
+      Xếp lại tăng khoảng 25 phần trăm
+    Tránh suy luận nhiều bước
+      Job Highlights làm ngập server
+      Để LLM làm phần nhiều bước
+    Thay LLM thừa sức
+      Chọn biểu đồ từ SQL và 3 hàng
+      Việc mở thì vẫn dùng LLM
+      AUC 0.52 khi chấm pull request
+    Mô hình lai
+      Jeeves suy nghĩ khi chưa chắc
+      Mặc định khi không chỉ định mô hình
+</pre></div></section>
+<p class="credits">Nguồn gốc: bài <a href="https://posthog.com/newsletter/decision-models">“Not everything needs an LLM”</a> của Jina Yoon trên newsletter build mode của PostHog; X Article <a href="https://x.com/i/article/2119681272180264960">“How we use decision models”</a>; và <a href="https://x.com/posthog/status/2123480928525877375">chuỗi bài của @posthog</a>. Nội dung và hình minh họa thuộc về tác giả và PostHog; bản dịch tiếng Việt đăng trên blog này vì mục đích học tập.</p>
+</article>
+</main>
+</div>
+</div>
+<footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
+<script type="module" src="../assets/mindmap.js"></script>
+<script src="../../theme.js"></script>
+<script src="../assets/bilingual.js"></script>
+</body>
+</html>
