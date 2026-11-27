@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Đừng gọi đó là mô hình ra quyết định — Blog</title>
-<meta name="description" content="Bản dịch tiếng Việt bài Don’t Call It a Decision Model của Allie Laabs (TypeSafe): Jev đưa ra nhận định, mã nguồn đưa ra quyết định.">
+<meta name="description" content="Bản dịch tiếng Việt bài Don’t Call It a Decision Model của Allie Laabs (TypeSafe): Jev đưa ra nhận định, mã nguồn đưa ra quyết định. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -48,6 +64,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-callout strong{color:#166534}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
+</style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
@@ -78,14 +137,38 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li>Đừng nhồi cả quy trình nghiệp vụ vào một câu hỏi <code>choice</code>. Hãy tách các nhận định cần hiểu ngữ nghĩa khỏi dữ kiện và quy tắc có thể tính chính xác bằng mã.</li>
 <li>Kết hợp nhận định của mô hình với logic tường minh giúp hiểu thiết kế, truy vết nguyên nhân và mở rộng quy trình mà không phải sửa một prompt khổng lồ.</li>
 </ul></section>
-<p><strong>Jev đưa ra nhận định, mã nguồn đưa ra quyết định.</strong></p>
-<p>Chúng tôi rất vui khi mọi người nhận ra tầm quan trọng của nhóm mô hình mới mà Jev đã tiên phong. Không có gì ngạc nhiên khi thuật ngữ “mô hình ra quyết định” trở nên phổ biến để gọi nhóm này. Lần đầu thấy Jev chọn một phương án từ một danh sách, bạn rất dễ nghĩ rằng nó đang ra quyết định. Và quả thực, chính chúng tôi cũng đã dùng từ “quyết định” trong tài liệu hướng dẫn của mình! Vậy tại sao TypeSafe vẫn kiên định gọi Jev là mô hình System One thay vì mô hình ra quyết định? Hãy cùng bàn về điều đó.</p>
-<h2>Vấn đề nằm ở vị trí của Jev trong một hệ thống</h2>
-<p>Hãy phân tích một hệ thống điển hình bằng phép so sánh với mạch điện: đầu vào ở bên trái (dữ liệu, trạng thái ứng dụng, v.v.), chảy qua phần logic rồi tạo ra đầu ra ở bên phải. Lấy một phiên bản đơn giản hóa của quy trình Chăm sóc khách hàng trên trang đánh giá của chúng tôi làm ví dụ. Cách tiếp cận sơ khai khi dùng Jev trong quy trình này là đưa toàn bộ quyết định vào một câu hỏi Jev duy nhất:</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản dịch tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản tiếng Anh, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 36 cụm · 24 đoạn &amp; mục</span></div>
+<div class="art-modes" aria-describedby="how-to">
+
+<p class="m-vi" lang="vi"><strong>Jev đưa ra nhận định, mã nguồn đưa ra quyết định.</strong></p>
+<p class="m-en" lang="en"><strong>Jev makes judgments; code makes decisions.</strong></p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Jev đưa ra nhận định; mã nguồn đưa ra quyết định."><strong>Jev makes judgments; code makes decisions.</strong></span></p>
+
+<p class="m-vi" lang="vi">Chúng tôi rất vui khi mọi người nhận ra tầm quan trọng của nhóm mô hình mới mà Jev đã tiên phong. Không có gì ngạc nhiên khi thuật ngữ “mô hình ra quyết định” trở nên phổ biến để gọi nhóm này. Lần đầu thấy Jev chọn một phương án từ danh sách, bạn rất dễ nghĩ rằng nó đang ra quyết định — và quả thực chính chúng tôi cũng từng dùng từ “decision” trong tài liệu hướng dẫn! Vậy tại sao TypeSafe vẫn kiên định gọi Jev là mô hình System One thay vì mô hình ra quyết định? Hãy cùng bàn về điều đó.</p>
+<p class="m-en" lang="en">We’re thrilled that people are recognizing the new category of models Jev pioneered. It’s no surprise that “decision model” caught on—the first time you see Jev pick an option from a list, it looks like it’s making a decision, and we even used “decision” in our own docs! So why does TypeSafe insist on calling Jev a System One model instead? Let’s talk about it.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Chúng tôi rất vui khi mọi người nhận ra nhóm mô hình mới mà Jev tiên phong; gọi là “mô hình ra quyết định” cũng dễ hiểu vì mới nhìn tưởng nó tự chọn đáp án.">We’re thrilled that people are recognizing the new category of models Jev pioneered. It’s no surprise that “decision model” caught on—the first time you see Jev pick an option from a list, it looks like it’s making a decision, and we even used “decision” in our own docs!</span> <span class="ph" data-vi="Vậy tại sao TypeSafe vẫn kiên định gọi Jev là mô hình System One thay vì mô hình ra quyết định?">So why does TypeSafe insist on calling Jev a System One model instead? Let’s talk about it.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Vấn đề nằm ở vị trí của Jev trong một hệ thống</h2><h2 class="m-en" lang="en">The problem is where Jev sits in a system</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Vấn đề nằm ở vị trí của Jev trong một hệ thống">The problem is where Jev sits in a system</span></h2></div>
+
+<p class="m-vi" lang="vi">Hãy phân tích một hệ thống điển hình bằng phép so sánh với mạch điện: đầu vào ở bên trái (dữ liệu, trạng thái ứng dụng, v.v.), chảy qua phần logic rồi tạo ra đầu ra ở bên phải. Lấy một phiên bản đơn giản hóa của quy trình Chăm sóc khách hàng trên trang đánh giá của chúng tôi làm ví dụ. Cách tiếp cận sơ khai khi dùng Jev trong quy trình này là đưa toàn bộ quyết định vào một câu hỏi Jev duy nhất:</p>
+<p class="m-en" lang="en">Think of a typical system like a circuit: inputs enter on the left (data, app state, etc.), flow through logic, and produce outputs on the right. Take a simplified version of the Customer Support workflow from our evals page. The naive way to use Jev here is to cram the entire decision into one Jev question:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hãy hình dung hệ thống như một mạch điện: đầu vào ở bên trái, chảy qua logic rồi ra kết quả ở bên phải.">Think of a typical system like a circuit: inputs enter on the left (data, app state, etc.), flow through logic, and produce outputs on the right.</span> <span class="ph" data-vi="Lấy quy trình Chăm sóc khách hàng làm ví dụ: cách sơ khai là nhồi toàn bộ quyết định vào một câu hỏi Jev duy nhất.">Take a simplified version of the Customer Support workflow from our evals page. The naive way to use Jev here is to cram the entire decision into one Jev question:</span></p>
+
 <figure><picture><source media="(max-width: 480px)" srcset="figure-1-mobile.webp"><source media="(max-width: 900px)" srcset="figure-1-tablet.webp"><img src="figure-1-desktop.webp" alt="Hình 1: khối quyết định khi chưa mở nắp, với đầu vào và các nhánh đầu ra" loading="lazy" width="1440" height="776"></picture><figcaption class="cap">Hình 1: khối quyết định khi vẫn còn đậy nắp. Hình gốc của TypeSafe.</figcaption></figure>
-<p>Khi lần đầu nhìn thấy Jev, mọi người thường hình dung nó sẽ nằm trong hệ thống như thế này: cung cấp toàn bộ trạng thái và để nó quyết định điều gì nên xảy ra. Thường thì cách làm này trông giống một câu hỏi Choice lớn, với rất nhiều mô tả bằng ngôn ngữ tự nhiên về logic nghiệp vụ và các điều kiện ngoại lệ được nhồi vào trường <code>criteria</code>.</p>
-<p>Dù có thể hoạt động, cách này sẽ sớm khiến bạn phải làm điều chúng tôi gọi là “nhào lộn với prompt”: sửa đi sửa lại các phần giải thích điều kiện dài dòng để xử lý từng trường hợp biên. Rồi hôm sau, một đầu vào mà bạn chưa nghĩ tới xuất hiện, hệ thống thất bại, và bạn lại quay về nhồi thêm ngoại lệ cùng những lời làm rõ vào phần văn xuôi trong <code>criteria</code>.</p>
-<p>Điều đang diễn ra ở đây là đặt trí thông minh vào sai tầng trừu tượng. Hệ thống của bạn vốn đã biết tiêu chí cho từng kết quả dự kiến, và chỉ một phần trong số đó thực sự cần đến nhận định. Phần còn lại là logic chính xác, rành mạch:</p>
+
+<p class="m-vi" lang="vi">Khi lần đầu nhìn thấy Jev, mọi người thường hình dung nó sẽ nằm trong hệ thống như thế này: cung cấp toàn bộ trạng thái và để nó quyết định điều gì nên xảy ra. Thường thì cách làm này trông giống một câu hỏi Choice lớn, với rất nhiều mô tả bằng ngôn ngữ tự nhiên về logic nghiệp vụ và các điều kiện ngoại lệ được nhồi vào trường <code>criteria</code>.</p>
+<p class="m-en" lang="en">When people first see Jev, they often picture it sitting like this: hand it the entire state and let it decide what happens. Usually that turns into one giant Choice question packed with natural-language business logic and exceptions inside <code>criteria</code>.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Mới nhìn Jev, người ta hay hình dung ném toàn bộ trạng thái cho nó tự quyết — biến thành một câu hỏi Choice khổng lồ nhồi đầy logic nghiệp vụ và ngoại lệ vào criteria.">When people first see Jev, they often picture it sitting like this: hand it the entire state and let it decide what happens. Usually that turns into one giant Choice question packed with natural-language business logic and exceptions inside <code>criteria</code>.</span></p>
+
+<p class="m-vi" lang="vi">Dù có thể hoạt động, cách này sẽ sớm khiến bạn phải làm điều chúng tôi gọi là “nhào lộn với prompt”: sửa đi sửa lại các phần giải thích điều kiện dài dòng để xử lý từng trường hợp biên. Rồi hôm sau, một đầu vào bạn chưa nghĩ tới xuất hiện, hệ thống thất bại, và bạn lại quay về nhồi thêm ngoại lệ cùng những lời làm rõ vào phần văn xuôi trong <code>criteria</code>.</p>
+<p class="m-en" lang="en">It can work for a while, yet soon forces you into “prompt gymnastics”—constantly tweaking wordy conditional prose for edge cases. Tomorrow an unforeseen input breaks it, and you are right back to stuffing more exceptions into <code>criteria</code>.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Cách này chạy được lúc đầu nhưng sớm đẩy bạn vào “nhào lộn prompt”: sửa mãi phần văn xuôi dài dòng cho từng trường hợp biên rồi lại hỏng khi gặp đầu vào lạ.">It can work for a while, yet soon forces you into “prompt gymnastics”—constantly tweaking wordy conditional prose for edge cases. Tomorrow an unforeseen input breaks it, and you are right back to stuffing more exceptions into <code>criteria</code>.</span></p>
+
+<p class="m-vi" lang="vi">Điều đang diễn ra ở đây là đặt trí thông minh vào sai tầng trừu tượng. Hệ thống của bạn vốn đã biết tiêu chí cho từng kết quả dự kiến, và chỉ một phần trong số đó thực sự cần đến nhận định. Phần còn lại là logic chính xác, rành mạch:</p>
+<p class="m-en" lang="en">That puts intelligence at the wrong layer of abstraction. Your system already knows the criteria for each outcome, and only part of them truly requires judgment; the rest is crisp, deterministic logic:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Làm vậy là đặt trí thông minh sai tầng trừu tượng: hệ thống vốn đã biết tiêu chí từng đầu ra, chỉ một phần cần nhận định còn lại là logic rành mạch:">That puts intelligence at the wrong layer of abstraction. Your system already knows the criteria for each outcome, and only part of them truly requires judgment; the rest is crisp, deterministic logic:</span></p>
+
 <div style="overflow-x:auto"><table><thead><tr><th>Khi</th><th>Nhánh đầu ra</th></tr></thead><tbody>
 <tr><td>Báo có khoản thu chưa được cho phép</td><td>Nhóm chống gian lận: phong tỏa và khiếu nại giao dịch</td></tr>
 <tr><td>Yêu cầu gặp người thật hoặc đe dọa thực hiện hành động pháp lý</td><td>Chuyển cho người thật</td></tr>
@@ -94,16 +177,37 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <tr><td>Muốn hủy, gói đăng ký đang hoạt động, sẵn sàng cân nhắc ưu đãi</td><td>Đưa ra đề nghị giữ chân</td></tr>
 <tr><td>Các trường hợp còn lại</td><td>Trả lời và tiếp tục</td></tr>
 </tbody></table></div>
-<p>Vậy Jev nằm ở đâu trong kiểu hệ thống này? Để hiểu câu trả lời, chúng ta cần nhìn vào bên trong xem một quyết định thực sự được tạo nên từ những gì:</p>
-<h2>Mở nắp ra</h2>
-<p>Quyết định trong hệ thống hiếm khi là một lựa chọn nguyên tử duy nhất. Mở nắp ra, ta thấy những đường dây đi từ đầu vào qua các nút mã nguồn và các nút nhận định. Quyết định trong phần mềm, quy trình và hoạt động kinh doanh được xây dựng theo cách đó. Kiểm tra “yêu cầu đủ điều kiện, chưa được thanh toán” là chuyện tính toán. Trả lời “người dùng có muốn lấy lại tiền không?” cần đến nhận định. Đó là nơi Jev thuộc về, và cũng chính là điều chúng tôi muốn nói khi dùng tên System One: những nhận định nhanh, mang tính trực giác mà một người am hiểu đưa ra trong vài giây.</p>
+
+<p class="m-vi" lang="vi">Vậy Jev nằm ở đâu trong kiểu hệ thống này? Để hiểu câu trả lời, chúng ta cần nhìn vào bên trong xem một quyết định thực sự được tạo nên từ những gì:</p>
+<p class="m-en" lang="en">So where does Jev fit? To see the answer, we have to look inside what a decision is actually made of:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Vậy Jev nằm ở đâu trong hệ thống? Ta cần mở vào bên trong xem một quyết định được tạo nên từ những gì:">So where does Jev fit? To see the answer, we have to look inside what a decision is actually made of:</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Mở nắp ra</h2><h2 class="m-en" lang="en">Popping the hood</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Mở nắp ra">Popping the hood</span></h2></div>
+
+<p class="m-vi" lang="vi">Quyết định trong hệ thống hiếm khi là một lựa chọn nguyên tử duy nhất. Mở nắp ra, ta thấy những đường dây đi từ đầu vào qua các nút mã nguồn và các nút nhận định. Quyết định trong phần mềm, quy trình và hoạt động kinh doanh được xây dựng theo cách đó. Kiểm tra “yêu cầu đủ điều kiện, chưa được thanh toán” là chuyện tính toán. Trả lời “người dùng có muốn lấy lại tiền không?” cần đến nhận định. Đó là nơi Jev thuộc về, và cũng chính là điều chúng tôi muốn nói khi dùng tên System One: những nhận định nhanh, mang tính trực giác mà một người am hiểu đưa ra trong vài giây.</p>
+<p class="m-en" lang="en">System decisions are rarely a single atomic choice. Pop the hood and you see wires routing inputs through code nodes and judgment nodes—just how software, processes, and business rules are built. Checking “eligible, not yet refunded” is computation; answering “does the user want money back?” requires judgment. That is where Jev belongs—what we mean by System One: fast, intuitive judgments a knowledgeable person makes in seconds.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Quyết định hiếm khi là một lựa chọn đơn lẻ: mở nắp ra là các đường dây đi qua nút mã nguồn (tính điều kiện) và nút nhận định (hiểu ý người dùng).">System decisions are rarely a single atomic choice. Pop the hood and you see wires routing inputs through code nodes and judgment nodes—just how software, processes, and business rules are built.</span> <span class="ph" data-vi="Đó chính là nơi Jev thuộc về — những nhận định nhanh, trực giác kiểu System One.">Checking “eligible, not yet refunded” is computation; answering “does the user want money back?” requires judgment. That is where Jev belongs—what we mean by System One: fast, intuitive judgments a knowledgeable person makes in seconds.</span></p>
+
 <figure><picture><source media="(max-width: 480px)" srcset="figure-2-mobile.webp"><source media="(max-width: 900px)" srcset="figure-2-tablet.webp"><img src="figure-2-desktop.webp" alt="Hình 2: mở nắp khối quyết định để thấy các nút nhận định và các nút logic trong mã nguồn" loading="lazy" width="1440" height="779"></picture><figcaption class="cap">Hình 2: khối quyết định sau khi mở nắp. Hình gốc của TypeSafe.</figcaption></figure>
-<p>Mã nguồn rất giỏi trả lời những điều nó có thể trả lời chính xác. Jev chỉ trả lời những câu hỏi nhỏ mà mã nguồn không thể. Sau đó, logic kết hợp những câu trả lời ấy thành quyết định. Chính sự kết hợp giữa nhận định và mã nguồn cho phép hệ thống đưa ra những quyết định đáng tin cậy, có thể quan sát và truy vết.</p>
-<h2>Vì sao nên xây dựng theo cách này</h2>
-<h3>1. Thiết kế rõ ràng</h3>
-<p>Hệ thống đáng tin cậy đòi hỏi phải hiểu rõ cách các quyết định được đưa ra. Bằng cách phân rã quyết định thành những nhận định nguyên tử và các đường đi logic, chúng ta hiểu rõ hơn điều gì thực sự đi qua hệ thống, cũng như những trường hợp biên cần xử lý.</p>
-<h3>2. Khả năng quan sát</h3>
-<p>Trong ví dụ gộp mọi thứ vào một nhận định ở trên, bạn sẽ viết một câu hỏi Choice duy nhất, nhồi đầy tiêu chí:</p>
+
+<p class="m-vi" lang="vi">Mã nguồn rất giỏi trả lời những điều nó có thể trả lời chính xác. Jev chỉ trả lời những câu hỏi nhỏ mà mã nguồn không thể. Sau đó, logic kết hợp những câu trả lời ấy thành quyết định. Chính sự kết hợp giữa nhận định và mã nguồn cho phép hệ thống đưa ra những quyết định đáng tin cậy, có thể quan sát và truy vết.</p>
+<p class="m-en" lang="en">Code excels at what it can answer deterministically; Jev answers only the small questions code cannot. Logic then combines those answers into a decision—producing reliable, observable, and traceable outcomes.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Mã nguồn làm phần tính toán chính xác, Jev trả lời những câu hỏi nhỏ mà code không làm được, rồi logic ghép lại thành quyết định đáng tin cậy và truy vết được.">Code excels at what it can answer deterministically; Jev answers only the small questions code cannot. Logic then combines those answers into a decision—producing reliable, observable, and traceable outcomes.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Vì sao nên xây dựng theo cách này</h2><h2 class="m-en" lang="en">Why build this way</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Vì sao nên xây dựng theo cách này">Why build this way</span></h2></div>
+
+<div class="hd"><h3 class="m-vi" lang="vi">1. Thiết kế rõ ràng</h3><h3 class="m-en" lang="en">1. Clear design</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="1. Thiết kế rõ ràng">1. Clear design</span></h3></div>
+
+<p class="m-vi" lang="vi">Hệ thống đáng tin cậy đòi hỏi phải hiểu rõ cách các quyết định được đưa ra. Bằng cách phân rã quyết định thành những nhận định nguyên tử và các đường đi logic, chúng ta hiểu rõ hơn điều gì thực sự đi qua hệ thống, cũng như những trường hợp biên cần xử lý.</p>
+<p class="m-en" lang="en">Reliable systems demand clarity on how decisions are made. Decomposing decisions into atomic judgments and explicit logic paths reveals what actually flows through your system and which edge cases need handling.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Phân rã quyết định thành nhận định nguyên tử và đường đi logic giúp hiểu rõ dữ liệu đi qua hệ thống và các trường hợp biên cần xử lý.">Reliable systems demand clarity on how decisions are made. Decomposing decisions into atomic judgments and explicit logic paths reveals what actually flows through your system and which edge cases need handling.</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">2. Khả năng quan sát</h3><h3 class="m-en" lang="en">2. Observability</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="2. Khả năng quan sát">2. Observability</span></h3></div>
+
+<p class="m-vi" lang="vi">Trong ví dụ gộp mọi thứ vào một nhận định ở trên, bạn sẽ viết một câu hỏi Choice duy nhất, nhồi đầy tiêu chí:</p>
+<p class="m-en" lang="en">In the single-judgment approach above, you write one Choice question stuffed with criteria:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Trong cách gộp mọi thứ vào một nhận định ở trên, bạn viết một câu hỏi Choice duy nhất nhồi đầy tiêu chí:">In the single-judgment approach above, you write one Choice question stuffed with criteria:</span></p>
+
 <pre><code>{
   &quot;model&quot;: &quot;jev-latest&quot;,
   &quot;state&quot;: {
@@ -125,8 +229,15 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
     }
   }
 }</code></pre>
-<p>Khi một trường hợp bị chuyển đến nơi không mong đợi, dữ liệu duy nhất bạn có về nguyên nhân chỉ là một con số xác suất. Nhận định nào có vai trò quyết định? Quy tắc nào? Không có gì bên trong để đọc.</p>
-<p>Nhưng khi mở nắp ra, ta có các bản ghi như sau:</p>
+
+<p class="m-vi" lang="vi">Khi một trường hợp bị chuyển đến nơi không mong đợi, dữ liệu duy nhất bạn có về nguyên nhân chỉ là một con số xác suất. Nhận định nào có vai trò quyết định? Quy tắc nào? Không có gì bên trong để đọc.</p>
+<p class="m-en" lang="en">When a case gets routed unexpectedly, all you have is a single probability score—no clue which judgment or which rule tipped the scale.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Khi có ca định tuyến sai, thứ duy nhất bạn có chỉ là một con số xác suất — không biết nhận định hay quy tắc nào đã quyết định.">When a case gets routed unexpectedly, all you have is a single probability score—no clue which judgment or which rule tipped the scale.</span></p>
+
+<p class="m-vi" lang="vi">Nhưng khi mở nắp ra, ta có các bản ghi như sau:</p>
+<p class="m-en" lang="en">Pop the hood, and you get traces like this:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nhưng khi mở nắp ra, ta có bản ghi chi tiết như sau:">Pop the hood, and you get traces like this:</span></p>
+
 <pre><code>exit  fraud_team
   ├─ g_fraud    reports an unauthorized charge (p &gt; 0.6)        true   ← decided
   ├─ g_person   asks for a person, or threatens legal action …  –
@@ -145,14 +256,37 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
        refund_eligible       false
        small_refund          false
        subscription_active   false</code></pre>
-<p>Thay vì “mô hình đã chọn <code>fraud_team</code>”, bạn nhận được “mô hình đã đưa ra sáu nhận định này, và đây là đường đi logic tiếp theo”. Dấu vết cho thấy <code>reports_unauthorized</code> đã đưa trường hợp đó tới nhóm chống gian lận. Giờ đây, chúng ta có dữ liệu quan sát thực sự để dựa vào mà hành động. Nhận định sai, hay quy tắc sai? Dấu vết giúp bạn phân biệt, và cách sửa có thể tập trung hơn nhiều.</p>
-<h3>3. Khả năng mở rộng</h3>
-<p>Giả sử đột nhiên bạn có thêm hai nhánh đầu ra mới, hoặc ba mươi nhánh! Khi hệ thống được thiết kế với cách phân rã tốt, bạn chỉ cần vạch ra logic dẫn tới những nhánh mới đó, thêm bất kỳ nhận định mới nào chúng cần, và tất cả các nhận định hiện có đã được lựa chọn cẩn thận vẫn giữ nguyên.</p>
+
+<p class="m-vi" lang="vi">Thay vì “mô hình đã chọn <code>fraud_team</code>”, bạn nhận được “mô hình đã đưa ra sáu nhận định này, và đây là đường đi logic tiếp theo”. Dấu vết cho thấy <code>reports_unauthorized</code> đã đưa trường hợp đó tới nhóm chống gian lận. Giờ đây, chúng ta có dữ liệu quan sát thực sự để dựa vào mà hành động. Nhận định sai, hay quy tắc sai? Dấu vết giúp bạn phân biệt, và cách sửa có thể tập trung hơn nhiều.</p>
+<p class="m-en" lang="en">Instead of “the model picked <code>fraud_team</code>,” you get “the model made these six judgments, and here is the logic path that followed.” You can tell whether a judgment misfired or a rule was wrong—making fixes surgical.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Thay vì “mô hình chọn fraud_team”, bạn thấy rõ sáu nhận định của Jev, ba dữ kiện từ code và đường đi logic — biết ngay lỗi do nhận định hay do quy tắc để sửa trúng đích.">Instead of “the model picked <code>fraud_team</code>,” you get “the model made these six judgments, and here is the logic path that followed.” You can tell whether a judgment misfired or a rule was wrong—making fixes surgical.</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">3. Khả năng mở rộng</h3><h3 class="m-en" lang="en">3. Scalability</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="3. Khả năng mở rộng">3. Scalability</span></h3></div>
+
+<p class="m-vi" lang="vi">Giả sử đột nhiên bạn có thêm hai nhánh đầu ra mới, hoặc ba mươi nhánh! Khi hệ thống được thiết kế với cách phân rã tốt, bạn chỉ cần vạch ra logic dẫn tới những nhánh mới đó, thêm bất kỳ nhận định mới nào chúng cần, và tất cả các nhận định hiện có đã được lựa chọn cẩn thận vẫn giữ nguyên.</p>
+<p class="m-en" lang="en">Suppose you suddenly add two—or thirty—new outcomes! With clean decomposition, you simply wire the new logic, add any new judgments needed, and leave all existing calibrated judgments untouched.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Khi cần thêm 2 hay 30 nhánh đầu ra mới, bạn chỉ việc viết logic mới và thêm nhận định mới nếu cần, giữ nguyên toàn bộ các nhận định cũ đã kiểm chứng.">Suppose you suddenly add two—or thirty—new outcomes! With clean decomposition, you simply wire the new logic, add any new judgments needed, and leave all existing calibrated judgments untouched.</span></p>
+
 <figure><picture><source media="(max-width: 480px)" srcset="figure-3-mobile.webp"><source media="(max-width: 900px)" srcset="figure-3-tablet.webp"><img src="figure-3-desktop.webp" alt="Hình 3: thêm nhánh miễn phí với một nhận định mới và một dữ kiện được tính bằng mã nguồn" loading="lazy" width="1440" height="759"></picture><figcaption class="cap">Hình 3: thêm một nhánh đầu ra mới vào khối quyết định. Hình gốc của TypeSafe.</figcaption></figure>
-<p>Ở đây, ta thấy phần mở rộng “Miễn khoản phí”: một nhận định mới, một dữ kiện mới được tính bằng mã nguồn, còn phần còn lại của hệ thống vẫn giữ nguyên. Vì tất cả nhận định của Jev được đánh giá độc lập với nhau, chúng ta không phải lo những nhận định mới ảnh hưởng đến các nhận định đã được kiểm chứng.</p>
-<p>Chúng tôi mời bạn thử phác họa phần bên trong của một quyết định trong ứng dụng của mình. Đánh dấu những chỗ tra cứu và tính toán, rồi viết một câu hỏi bên cạnh mỗi chỗ cần đến nhận định. <a href="https://docs.typesafe.ai/concepts/how-to-build-with-system-one">How to build with TypeSafe</a> trình bày cách phân rã câu hỏi và kết hợp câu trả lời bằng mã nguồn; các <a href="https://docs.typesafe.ai/patterns">mẫu thiết kế</a> giới thiệu thêm những cách kết nối chúng.</p>
-<p>Bạn gặp khó khăn khi tìm cách phân rã các nhận định trong hệ thống của mình? Các coding agent thường đặc biệt giỏi hiểu những kiểu hệ thống này! Hãy thử chỉ cho agent của bạn bài viết này và yêu cầu nó tìm những vị trí trong hệ thống hoặc mã nguồn phù hợp với các nhận định nguyên tử. Nếu thích trao đổi trực tiếp với con người hơn, hãy ghé <a href="https://discord.gg/typesafe">Discord của chúng tôi</a>, nơi cả đội ngũ lẫn cộng đồng những người xây dựng sản phẩm đều sẵn lòng giúp đỡ!</p>
-<p><strong>Jev đưa ra nhận định, mã nguồn đưa ra quyết định.</strong></p>
+
+<p class="m-vi" lang="vi">Ở đây, ta thấy phần mở rộng “Miễn khoản phí”: một nhận định mới, một dữ kiện mới được tính bằng mã nguồn, còn phần còn lại của hệ thống vẫn giữ nguyên. Vì tất cả nhận định của Jev được đánh giá độc lập với nhau, chúng ta không phải lo những nhận định mới ảnh hưởng đến các nhận định đã được kiểm chứng.</p>
+<p class="m-en" lang="en">Here, adding a “Fee waiver” branch requires one new judgment and one new code-computed fact while leaving the rest intact. Because Jev evaluates judgments independently, new ones do not perturb already-tested ones.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Ví dụ mở rộng nhánh “Miễn khoản phí” chỉ cần thêm một nhận định và một dữ kiện từ code; vì các nhận định được đánh giá độc lập nên không làm xáo trộn phần cũ.">Here, adding a “Fee waiver” branch requires one new judgment and one new code-computed fact while leaving the rest intact. Because Jev evaluates judgments independently, new ones do not perturb already-tested ones.</span></p>
+
+<p class="m-vi" lang="vi">Chúng tôi mời bạn thử phác họa phần bên trong của một quyết định trong ứng dụng của mình. Đánh dấu những chỗ tra cứu và tính toán, rồi viết một câu hỏi bên cạnh mỗi chỗ cần đến nhận định. <a href="https://docs.typesafe.ai/concepts/how-to-build-with-system-one">How to build with TypeSafe</a> trình bày cách phân rã câu hỏi và kết hợp câu trả lời bằng mã nguồn; các <a href="https://docs.typesafe.ai/patterns">mẫu thiết kế</a> giới thiệu thêm những cách kết nối chúng.</p>
+<p class="m-en" lang="en">Try sketching the inside of one decision in your own app: mark lookups and computations, and jot down a question wherever judgment is needed. <a href="https://docs.typesafe.ai/concepts/how-to-build-with-system-one">How to build with TypeSafe</a> and our <a href="https://docs.typesafe.ai/patterns">design patterns</a> show how to decompose questions and wire them with code.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hãy thử phác họa bên trong một quyết định trong app của bạn: tách phần tra cứu/tính toán khỏi phần cần nhận định, tham khảo tài liệu How to build with TypeSafe và các mẫu thiết kế.">Try sketching the inside of one decision in your own app: mark lookups and computations, and jot down a question wherever judgment is needed. <a href="https://docs.typesafe.ai/concepts/how-to-build-with-system-one">How to build with TypeSafe</a> and our <a href="https://docs.typesafe.ai/patterns">design patterns</a> show how to decompose questions and wire them with code.</span></p>
+
+<p class="m-vi" lang="vi">Bạn gặp khó khăn khi tìm cách phân rã các nhận định trong hệ thống của mình? Các coding agent thường đặc biệt giỏi hiểu những kiểu hệ thống này! Hãy thử chỉ cho agent của bạn bài viết này và yêu cầu nó tìm những vị trí trong hệ thống hoặc mã nguồn phù hợp với các nhận định nguyên tử. Nếu thích trao đổi trực tiếp với con người hơn, hãy ghé <a href="https://discord.gg/typesafe">Discord của chúng tôi</a>, nơi cả đội ngũ lẫn cộng đồng những người xây dựng sản phẩm đều sẵn lòng giúp đỡ!</p>
+<p class="m-en" lang="en">Struggling to break down judgments in your codebase? Coding agents are surprisingly good at spotting where atomic judgments belong—point yours at this post, or drop into our <a href="https://discord.gg/typesafe">Discord</a> to chat with the team and community!</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nếu khó tự phân rã, bạn có thể đưa bài này cho coding agent tìm chỗ đặt nhận định nguyên tử, hoặc ghé Discord của TypeSafe để trao đổi.">Struggling to break down judgments in your codebase? Coding agents are surprisingly good at spotting where atomic judgments belong—point yours at this post, or drop into our <a href="https://discord.gg/typesafe">Discord</a> to chat with the team and community!</span></p>
+
+<p class="m-vi" lang="vi"><strong>Jev đưa ra nhận định, mã nguồn đưa ra quyết định.</strong></p>
+<p class="m-en" lang="en"><strong>Jev makes judgments; code makes decisions.</strong></p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Jev đưa ra nhận định; mã nguồn đưa ra quyết định."><strong>Jev makes judgments; code makes decisions.</strong></span></p>
+
+</div>
+
 <section class="blog-insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người dịch — không thuộc nguyên văn bài gốc</p><ul>
 <li><strong>Tách “hiểu ý” khỏi “kiểm tra điều kiện”.</strong> Trong ví dụ của bài, xác định khách có muốn hoàn tiền là nhận định ngữ nghĩa; kiểm tra số tiền ≤ 25 USD và trạng thái đăng ký thuộc phần logic mã nguồn. Lập danh sách hai nhóm này trước khi thiết kế câu hỏi cho mô hình.</li>
 <li><strong>Ghi cả nhận định lẫn đường đi quy tắc.</strong> Bản ghi minh họa có sáu nhận định, ba dữ kiện và nhánh được chọn. Nhờ vậy, người vận hành có thể kiểm tra sai ở bước hiểu nội dung hay ở điều kiện định tuyến, thay vì chỉ biết nhãn đầu ra cuối cùng.</li>
@@ -181,12 +315,65 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
       Giữ phần đã kiểm chứng
 </pre></div></section>
 </article>
-<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://typesafe.ai/blog/dont-call-it-a-decision-model" target="_blank" rel="noopener">Bài gốc trên typesafe.ai</a> · © Allie Laabs / TypeSafe AI</p>
+<p class="blog-meta" style="margin-top:2em"><a href="../index.html">← Danh sách blog</a> · <a href="https://typesafe.ai/blog/dont-call-it-a-decision-model" target="_blank" rel="noopener">Bài gốc trên typesafe.ai</a> · © Allie Laabs / TypeSafe AI · Cập nhật ba chế độ đọc</p>
 </main>
 </div>
 </div>
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
