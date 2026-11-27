@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Docker Sandboxes vs. Docker containers — Bản dịch — Blog</title>
-<meta name="description" content="Bản dịch trang Docker so sánh Sandboxes (microVM) và containers: ranh giới hypervisor, FAQ và lệnh cài đặt. Song ngữ Anh–Việt.">
+<meta name="description" content="Bản dịch trang Docker so sánh Sandboxes (microVM) và containers: ranh giới hypervisor, FAQ và lệnh cài đặt. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -55,11 +71,7 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 .docker-main{min-width:0;max-width:100%;overflow-x:clip}
 .cmp-wrap{max-width:100%;width:100%}
 .docker-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center;margin:0 0 1.4em;padding:18px 18px 8px;border:1px solid #cbd5e1;border-radius:12px;background:linear-gradient(180deg,#fff,#f8fafc)}
-.docker-hero .hero-copy h1{font-size:clamp(1.45rem,3vw,1.95rem);line-height:1.25;margin:0 0 .55em;border:0;padding:0;color:#0f172a}
-.docker-hero .hero-copy .hero-title,.docker-hero .hero-copy .hero-title-pair .bi-en,.docker-hero .hero-copy .hero-title-pair .bi-vi{font-size:clamp(1.45rem,3vw,1.95rem);line-height:1.25;margin:0 0 .55em;border:0;padding:0;color:#0f172a;font-weight:700}
-.docker-hero .hero-copy .bi-heading.hero-title-pair{margin:0 0 .55em}
-.docker-hero .hero-copy .hero-title-pair .bi-en,.docker-hero .hero-copy .hero-title-pair .bi-vi{border:0;padding:0;margin:0;color:#0f172a;font-size:clamp(1.45rem,3vw,1.95rem)}
-.docker-hero .hero-copy .bi-pair{margin:.45em 0}
+.docker-hero .hero-copy h1,.docker-hero .hero-copy .hero-title{font-size:clamp(1.45rem,3vw,1.95rem);line-height:1.25;margin:0 0 .55em;border:0;padding:0;color:#0f172a;font-weight:700}
 .docker-hero .hero-art{margin:0;text-align:center}
 .docker-hero .hero-art img{max-width:min(280px,100%);margin:0 auto;border-radius:0}
 .docker-cta{display:inline-block;margin:.7em 0 .35em;padding:10px 16px;border-radius:8px;background:#2563eb;color:#fff!important;font-weight:600;text-decoration:none;font-size:14px}
@@ -81,30 +93,61 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 .cmp .row-label{font-weight:600;color:#334155;white-space:nowrap;width:18%}
 .cmp .sub{display:block;font-weight:500;font-size:12px;color:#64748b;margin-top:2px}
 .cmp code{font-size:.85em}
-.cmp .bi-pair{margin:.15em 0}
-.cmp .bi-cell{display:block}
 .docker-callout{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;border-radius:8px;padding:12px 14px;margin:1em 0 1.4em;font-size:15px}
 .plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:1em 0 1.4em}
 .plat-card{border:1px solid #e2e8f0;border-radius:10px;padding:14px;background:#fff}
 .plat-card .os{font-weight:700;color:#0f3d75;margin:0 0 6px;font-size:15px}
-.plat-card .bi-pair{margin:.2em 0;font-size:14px}
 .feature-grid{display:grid;grid-template-columns:1fr;gap:12px;margin:1em 0 1.4em}
 .feature-card{border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;background:#fff}
 .feature-card h3{margin:0 0 6px;font-size:1.05rem;border:0;padding:0;color:#0f3d75}
-.feature-card .bi-pair{margin:.35em 0}
 .faq details{border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;margin:0 0 10px;background:#fff}
 .faq summary{cursor:pointer;font-weight:600;color:#0f3d75;list-style:none}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::before{content:"+ ";color:#64748b;font-weight:700}
 .faq details[open] summary::before{content:"− "}
-.faq .bi-pair{margin:.55em 0 .2em}
+.faq details p{margin:.55em 0 .2em}
 .install-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1em 0}
 .install-card{border:1px solid #e2e8f0;border-radius:10px;padding:14px;background:#0f172a;color:#e2e8f0}
 .install-card .os{font-weight:700;color:#93c5fd;margin:0 0 8px;font-size:14px}
 .install-card pre{margin:0;background:transparent;padding:0;color:inherit;font-size:13px}
 .credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
-.bi-heading .bi-en,.bi-heading .bi-vi{margin:1.6em 0 .55em;padding-bottom:4px;border-bottom:2px solid #cbd5e1;color:#0f3d75;font-size:1.35rem}
-.bi-heading h3.bi-en,.bi-heading h3.bi-vi{font-size:1.12rem;border:0;padding:0;margin:1.1em 0 .35em}
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk,
+summary>.m-vi,summary>.m-en,summary>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en,
+html[data-art-mode="chunk"] summary>.m-vi,html[data-art-mode="chunk"] summary>.m-en,
+html[data-art-mode="en"] summary>.m-vi,html[data-art-mode="en"] summary>.m-chunk,
+html[data-art-mode="vi"] summary>.m-en,html[data-art-mode="vi"] summary>.m-chunk,
+html:not([data-art-mode]) summary>.m-vi,html:not([data-art-mode]) summary>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
 @media(max-width:900px){
   .docker-layout-grid{grid-template-columns:1fr}
   .docker-toc{position:static}
@@ -117,11 +160,17 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
   .docker-toc ol{font-size:12px;word-break:break-word}
   .yj-center,.blog-wrap{overflow-x:clip;max-width:100%}
 }
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
 </style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
-<link rel="stylesheet" href="../assets/bilingual.css">
 </head>
 <body class="pg-blog">
 <div class="yj yj-page yj-mast"><div class="yj-util"><span class="yj-tick"><b>Blog</b><a href="../index.html">Bài dịch kỹ thuật</a></span><span class="yj-ulinks"><a href="../../index.html">Trang chủ</a><i>|</i><a href="../../viec-moi.html">Việc mới</a><i>|</i><a href="../index.html">Blog</a><i>|</i><button type="button" class="yj-linkbtn" data-theme-open>Giao diện (<span data-kbd>Ctrl+K</span>)</button></span></div>
@@ -150,17 +199,28 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li>Cài độc lập: <code>brew install docker/tap/sbx</code> (macOS) hoặc <code>winget install Docker.sbx</code> (Windows); không cần giấy phép Docker Desktop.</li>
 </ul></section>
 <p class="blog-note">Đây là bản dịch tiếng Việt của trang sản phẩm Docker. Nội dung thuộc về Docker, Inc. Bản dịch phục vụ học tập phi thương mại; mọi quyền đối với bài gốc thuộc về Docker. Ghi công không đồng nghĩa với giấy phép tái sử dụng. Giá, tín dụng ($250) và chính sách thanh toán có thể đổi theo thời điểm trên trang gốc.</p>
-<p class="blog-note" id="bilingual-help"><strong>Cách đọc:</strong> Ở chế độ Song ngữ, rê chuột lên từng đoạn để xem tiếng Việt bên dưới. Trên điện thoại, chạm đoạn để mở/đóng bản dịch; chạm liên kết vẫn mở liên kết. Dùng phím Tab để xem bản dịch, Esc để đóng. Nút nổi góc dưới bên trái chuyển sang Toàn bộ tiếng Việt và ghi nhớ lựa chọn. Khi tắt JavaScript, cả hai ngôn ngữ được hiển thị. Lệnh cài đặt và tên kỹ thuật giữ nguyên tiếng Anh.</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản dịch tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — nguyên văn tiếng Anh, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 102 cụm · 72 đoạn &amp; mục</span></div>
 
-<div data-bilingual aria-describedby="bilingual-help">
+<div class="art-modes" aria-describedby="how-to">
 
 <section class="docker-hero" aria-label="Hero">
 <div class="hero-copy">
-<div class="bi-pair bi-heading hero-title-pair"><p class="bi-en hero-title" lang="en">Docker Sandboxes vs. Docker containers</p><p class="bi-vi hero-title" lang="vi">Docker Sandboxes so với Docker containers</p></div>
-<div class="bi-pair" data-paragraph="0"><p class="bi-en" lang="en">A container shares the kernel of the machine it runs on. A Docker Sandbox is a microVM with a kernel of its own. Containers package the software your team ships. Sandboxes keep an agent away from your files, your credentials and your network.</p><p class="bi-vi" lang="vi">Container dùng chung kernel của máy nó chạy trên. Docker Sandbox là một microVM với kernel riêng. Container đóng gói phần mềm đội bạn giao. Sandbox giữ agent cách xa file, credential và mạng của bạn.</p></div>
+<p class="hero-title m-vi" lang="vi">Docker Sandboxes so với Docker containers</p>
+<p class="hero-title m-en" lang="en">Docker Sandboxes vs. Docker containers</p>
+<p class="hero-title m-chunk" lang="en"><span class="ph" data-vi="Docker Sandboxes so với Docker containers">Docker Sandboxes vs. Docker containers</span></p>
+
+<p class="m-vi" lang="vi">Container dùng chung kernel của máy mà nó chạy trên. Docker Sandbox là một microVM có kernel riêng. Container đóng gói phần mềm đội bạn giao. Sandbox giữ agent cách xa file, credential và mạng của bạn.</p>
+<p class="m-en" lang="en">A container shares the kernel of the machine it runs on. A Docker Sandbox is a microVM with a kernel of its own. Containers package the software your team ships. Sandboxes keep an agent away from your files, your credentials and your network.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Container dùng chung kernel của máy mà nó chạy trên.">A container shares the kernel of the machine it runs on.</span> <span class="ph" data-vi="Docker Sandbox là một microVM có kernel riêng.">A Docker Sandbox is a microVM with a kernel of its own.</span> <span class="ph" data-vi="Container đóng gói phần mềm đội bạn giao.">Containers package the software your team ships.</span> <span class="ph" data-vi="Sandbox giữ agent cách xa file, credential và mạng của bạn.">Sandboxes keep an agent away from your files, your credentials and your network.</span></p>
+
 <p><a class="docker-cta" href="https://www.docker.com/products/docker-sandboxes/">Try Sandboxes with $250 credit</a></p>
-<div class="bi-pair" data-paragraph="1"><p class="bi-en" lang="en">No charge today. Billing starts when the credit runs out. Expires in six months.</p><p class="bi-vi" lang="vi">Hôm nay chưa tính phí. Thanh toán bắt đầu khi hết tín dụng. Hết hạn sau sáu tháng.</p></div>
-<p class="docker-cta-note bi-pair" style="margin:0"><span class="bi-en" lang="en">CTA links to Docker’s product page; this translation does not process payments.</span><span class="bi-vi" lang="vi">Nút dẫn tới trang sản phẩm Docker; bản dịch này không xử lý thanh toán.</span></p>
+
+<p class="m-vi" lang="vi">Hôm nay chưa tính phí. Thanh toán bắt đầu khi hết tín dụng. Hết hạn sau sáu tháng.</p>
+<p class="m-en" lang="en">No charge today. Billing starts when the credit runs out. Expires in six months.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hôm nay chưa tính phí.">No charge today.</span> <span class="ph" data-vi="Thanh toán bắt đầu khi hết tín dụng. Hết hạn sau sáu tháng.">Billing starts when the credit runs out. Expires in six months.</span></p>
+
+<p class="docker-cta-note"><span class="m-vi" lang="vi">Nút dẫn tới trang sản phẩm Docker; bản dịch này không xử lý thanh toán.</span><span class="m-en" lang="en">CTA links to Docker’s product page; this translation does not process payments.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Nút dẫn tới trang sản phẩm Docker; bản dịch này không xử lý thanh toán.">CTA links to Docker’s product page; this translation does not process payments.</span></span></p>
 </div>
 <figure class="hero-art"><img src="sbx-vs-container-hero.svg" width="280" height="244" alt="Docker Sandboxes vs containers hero illustration"></figure>
 </section>
@@ -182,118 +242,171 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 </nav>
 <div class="docker-main">
 
-<div class="bi-pair bi-heading" id="differences"><h2 class="bi-en" lang="en">The differences</h2><h2 class="bi-vi" lang="vi">Những khác biệt</h2></div>
+<div class="hd" id="differences"><h2 class="m-vi" lang="vi">Những khác biệt</h2><h2 class="m-en" lang="en">The differences</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Những khác biệt">The differences</span></h2></div>
 
 <div class="cmp-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table class="cmp">
 <thead>
 <tr>
 <th class="row-label"></th>
-<th><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Docker container<span class="sub">Built to ship your application</span></span><span class="bi-vi" lang="vi">Docker container<span class="sub">Dùng để giao ứng dụng</span></span></div></th>
-<th class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Docker Sandbox<span class="sub">Built to keep an agent off your machine</span></span><span class="bi-vi" lang="vi">Docker Sandbox<span class="sub">Giữ agent cách xa máy của bạn</span></span></div></th>
+<th><span class="m-vi" lang="vi">Docker container<span class="sub">Dùng để đóng gói và giao ứng dụng</span></span><span class="m-en" lang="en">Docker container<span class="sub">Built to ship your application</span></span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker container — Dùng để đóng gói và giao ứng dụng">Docker container<span class="sub">Built to ship your application</span></span></span></th>
+<th class="sbx"><span class="m-vi" lang="vi">Docker Sandbox<span class="sub">Giữ agent cách xa máy của bạn</span></span><span class="m-en" lang="en">Docker Sandbox<span class="sub">Built to keep an agent off your machine</span></span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker Sandbox — Giữ agent cách xa máy của bạn">Docker Sandbox<span class="sub">Built to keep an agent off your machine</span></span></span></th>
 </tr>
 </thead>
 <tbody>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Boundary</span><span class="bi-vi" lang="vi">Ranh giới</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Namespaces and cgroups, inside the shared kernel</span><span class="bi-vi" lang="vi">Namespaces và cgroups, trong kernel dùng chung</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">The hypervisor. A hardware boundary per sandbox</span><span class="bi-vi" lang="vi">Hypervisor. Ranh giới phần cứng cho mỗi sandbox</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Kernel</span><span class="bi-vi" lang="vi">Kernel</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">One, shared by every container on the machine</span><span class="bi-vi" lang="vi">Một, dùng chung bởi mọi container trên máy</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">One per sandbox, dedicated to that session</span><span class="bi-vi" lang="vi">Một cho mỗi sandbox, dành riêng cho phiên đó</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">An escape targets</span><span class="bi-vi" lang="vi">Lối thoát nhắm tới</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">The kernel your other work runs on</span><span class="bi-vi" lang="vi">Kernel mà công việc khác của bạn đang chạy</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">The hypervisor your OS already hardens</span><span class="bi-vi" lang="vi">Hypervisor mà hệ điều hành đã củng cố</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Docker inside</span><span class="bi-vi" lang="vi">Docker bên trong</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Docker-in-Docker or a mounted host socket. Both need elevated privileges</span><span class="bi-vi" lang="vi">Docker-in-Docker hoặc mount socket host. Cả hai cần quyền nâng cao</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">A private daemon inside the microVM. No socket mount, no host privileges</span><span class="bi-vi" lang="vi">Daemon riêng trong microVM. Không mount socket, không cần quyền host</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Agent build commands</span><span class="bi-vi" lang="vi">Lệnh build của agent</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en"><code>docker build</code> works once you grant those privileges</span><span class="bi-vi" lang="vi"><code>docker build</code> chạy được sau khi cấp các quyền đó</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en"><code>docker build</code> and <code>docker compose</code> work as they are</span><span class="bi-vi" lang="vi"><code>docker build</code> và <code>docker compose</code> chạy được như vốn có</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Who sets the limits</span><span class="bi-vi" lang="vi">Ai đặt giới hạn</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Your Dockerfile and run flags</span><span class="bi-vi" lang="vi">Dockerfile và các cờ run của bạn</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Files, network and secrets, defined before the agent starts</span><span class="bi-vi" lang="vi">File, mạng và secret, định nghĩa trước khi agent khởi động</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Credentials</span><span class="bi-vi" lang="vi">Credentials</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Environment variables and mounts inside the container</span><span class="bi-vi" lang="vi">Biến môi trường và mount bên trong container</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Injected into network requests as it leaves the boundary</span><span class="bi-vi" lang="vi">Được gắn vào yêu cầu mạng khi ra khỏi ranh giới</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Lifetime</span><span class="bi-vi" lang="vi">Vòng đời</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">As long as the service runs</span><span class="bi-vi" lang="vi">Miễn là dịch vụ còn chạy</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">One agent session. Delete it and start fresh</span><span class="bi-vi" lang="vi">Một phiên agent. Xóa đi và bắt đầu lại</span></div></td></tr>
-<tr><td class="row-label"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Install</span><span class="bi-vi" lang="vi">Cài đặt</span></div></td>
-<td><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Docker Desktop on macOS and Windows. Docker Engine on Linux</span><span class="bi-vi" lang="vi">Docker Desktop trên macOS và Windows. Docker Engine trên Linux</span></div></td>
-<td class="sbx"><div class="bi-pair bi-cell"><span class="bi-en" lang="en">One command, standalone. No Docker Desktop license<br><code>brew install docker/tap/sbx</code></span><span class="bi-vi" lang="vi">Một lệnh, độc lập. Không cần giấy phép Docker Desktop<br><code>brew install docker/tap/sbx</code></span></div></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Ranh giới</span><span class="m-en" lang="en">Boundary</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Ranh giới">Boundary</span></span></td>
+<td><span class="m-vi" lang="vi">Namespaces và cgroups, bên trong kernel dùng chung</span><span class="m-en" lang="en">Namespaces and cgroups, inside the shared kernel</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Namespaces và cgroups, bên trong kernel dùng chung">Namespaces and cgroups, inside the shared kernel</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Hypervisor. Ranh giới phần cứng cho mỗi sandbox</span><span class="m-en" lang="en">The hypervisor. A hardware boundary per sandbox</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Hypervisor. Ranh giới phần cứng cho mỗi sandbox">The hypervisor. A hardware boundary per sandbox</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Kernel</span><span class="m-en" lang="en">Kernel</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Kernel">Kernel</span></span></td>
+<td><span class="m-vi" lang="vi">Một, dùng chung cho mọi container trên máy</span><span class="m-en" lang="en">One, shared by every container on the machine</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Một, dùng chung cho mọi container trên máy">One, shared by every container on the machine</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Một cho mỗi sandbox, dành riêng cho phiên đó</span><span class="m-en" lang="en">One per sandbox, dedicated to that session</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Một cho mỗi sandbox, dành riêng cho phiên đó">One per sandbox, dedicated to that session</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Lối thoát nhắm tới</span><span class="m-en" lang="en">An escape targets</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Lối thoát nhắm tới">An escape targets</span></span></td>
+<td><span class="m-vi" lang="vi">Kernel mà các công việc khác của bạn đang chạy trên đó</span><span class="m-en" lang="en">The kernel your other work runs on</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Kernel mà các công việc khác của bạn đang chạy trên đó">The kernel your other work runs on</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Hypervisor mà hệ điều hành của bạn đã củng cố sẵn</span><span class="m-en" lang="en">The hypervisor your OS already hardens</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Hypervisor mà hệ điều hành của bạn đã củng cố sẵn">The hypervisor your OS already hardens</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Docker bên trong</span><span class="m-en" lang="en">Docker inside</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker bên trong">Docker inside</span></span></td>
+<td><span class="m-vi" lang="vi">Docker-in-Docker hoặc mount socket host. Cả hai đều cần quyền nâng cao</span><span class="m-en" lang="en">Docker-in-Docker or a mounted host socket. Both need elevated privileges</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker-in-Docker hoặc mount socket host. Cả hai đều cần quyền nâng cao">Docker-in-Docker or a mounted host socket. Both need elevated privileges</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Daemon riêng trong microVM. Không mount socket, không cần quyền host</span><span class="m-en" lang="en">A private daemon inside the microVM. No socket mount, no host privileges</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Daemon riêng trong microVM. Không mount socket, không cần quyền host">A private daemon inside the microVM. No socket mount, no host privileges</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Lệnh build của agent</span><span class="m-en" lang="en">Agent build commands</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Lệnh build của agent">Agent build commands</span></span></td>
+<td><span class="m-vi" lang="vi"><code>docker build</code> chạy được sau khi bạn cấp các quyền đó</span><span class="m-en" lang="en"><code>docker build</code> works once you grant those privileges</span><span class="m-chunk" lang="en"><span class="ph" data-vi="docker build chạy được sau khi bạn cấp các quyền đó"><code>docker build</code> works once you grant those privileges</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi"><code>docker build</code> và <code>docker compose</code> chạy được như vốn có</span><span class="m-en" lang="en"><code>docker build</code> and <code>docker compose</code> work as they are</span><span class="m-chunk" lang="en"><span class="ph" data-vi="docker build và docker compose chạy được như vốn có"><code>docker build</code> and <code>docker compose</code> work as they are</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Ai đặt giới hạn</span><span class="m-en" lang="en">Who sets the limits</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Ai đặt giới hạn">Who sets the limits</span></span></td>
+<td><span class="m-vi" lang="vi">Dockerfile và các cờ run của bạn</span><span class="m-en" lang="en">Your Dockerfile and run flags</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Dockerfile và các cờ run của bạn">Your Dockerfile and run flags</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">File, mạng và secret, định nghĩa trước khi agent khởi động</span><span class="m-en" lang="en">Files, network and secrets, defined before the agent starts</span><span class="m-chunk" lang="en"><span class="ph" data-vi="File, mạng và secret, định nghĩa trước khi agent khởi động">Files, network and secrets, defined before the agent starts</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Credentials</span><span class="m-en" lang="en">Credentials</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Credentials">Credentials</span></span></td>
+<td><span class="m-vi" lang="vi">Biến môi trường và mount bên trong container</span><span class="m-en" lang="en">Environment variables and mounts inside the container</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Biến môi trường và mount bên trong container">Environment variables and mounts inside the container</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Được gắn vào yêu cầu mạng khi ra khỏi ranh giới</span><span class="m-en" lang="en">Injected into network requests as it leaves the boundary</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Được gắn vào yêu cầu mạng khi ra khỏi ranh giới">Injected into network requests as it leaves the boundary</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Vòng đời</span><span class="m-en" lang="en">Lifetime</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Vòng đời">Lifetime</span></span></td>
+<td><span class="m-vi" lang="vi">Miễn là dịch vụ còn chạy</span><span class="m-en" lang="en">As long as the service runs</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Miễn là dịch vụ còn chạy">As long as the service runs</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Một phiên agent. Xóa đi và bắt đầu lại từ đầu</span><span class="m-en" lang="en">One agent session. Delete it and start fresh</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Một phiên agent. Xóa đi và bắt đầu lại từ đầu">One agent session. Delete it and start fresh</span></span></td></tr>
+<tr><td class="row-label"><span class="m-vi" lang="vi">Cài đặt</span><span class="m-en" lang="en">Install</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Cài đặt">Install</span></span></td>
+<td><span class="m-vi" lang="vi">Docker Desktop trên macOS và Windows. Docker Engine trên Linux</span><span class="m-en" lang="en">Docker Desktop on macOS and Windows. Docker Engine on Linux</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker Desktop trên macOS và Windows. Docker Engine trên Linux">Docker Desktop on macOS and Windows. Docker Engine on Linux</span></span></td>
+<td class="sbx"><span class="m-vi" lang="vi">Một lệnh, độc lập. Không cần giấy phép Docker Desktop<br><code>brew install docker/tap/sbx</code></span><span class="m-en" lang="en">One command, standalone. No Docker Desktop license<br><code>brew install docker/tap/sbx</code></span><span class="m-chunk" lang="en"><span class="ph" data-vi="Một lệnh, độc lập. Không cần giấy phép Docker Desktop">One command, standalone. No Docker Desktop license</span><br><code>brew install docker/tap/sbx</code></span></td></tr>
 </tbody>
 </table>
 </div>
 
-<div class="bi-pair bi-heading" id="confused"><h2 class="bi-en" lang="en">Why the two get confused</h2><h2 class="bi-vi" lang="vi">Vì sao hai thứ dễ bị nhầm</h2></div>
-<div class="bi-pair" data-paragraph="2"><p class="bi-en" lang="en">Docker has meant containers for more than a decade. A new product with Docker on the front reads, reasonably, as a container with a new name. Sandboxes share a vendor and a workflow with containers. They do not share a boundary.</p><p class="bi-vi" lang="vi">Docker gắn với container hơn một thập kỷ. Sản phẩm mới mang tên Docker dễ bị hiểu, một cách hợp lý, là container đổi tên. Sandbox chung nhà cung cấp và quy trình với container. Chúng không chung ranh giới.</p></div>
-<div class="docker-callout"><div class="bi-pair" data-paragraph="3"><p class="bi-en" lang="en">Containers isolate your software so it runs the same anywhere. Sandboxes isolate the agent so it cannot reach your files, your credentials or your network.</p><p class="bi-vi" lang="vi">Container cô lập phần mềm để chạy giống nhau ở mọi nơi. Sandbox cô lập agent để nó không chạm được file, credential hay mạng của bạn.</p></div></div>
+<div class="hd" id="confused"><h2 class="m-vi" lang="vi">Vì sao hai thứ dễ bị nhầm</h2><h2 class="m-en" lang="en">Why the two get confused</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Vì sao hai thứ dễ bị nhầm">Why the two get confused</span></h2></div>
 
-<div class="bi-pair bi-heading" id="boundary"><h2 class="bi-en" lang="en">Where the boundary sits</h2><h2 class="bi-vi" lang="vi">Ranh giới nằm ở đâu</h2></div>
-<div class="bi-pair" data-paragraph="4"><p class="bi-en" lang="en">We wrote a new virtual machine monitor for this. Firecracker, the best known microVM runtime, runs on Linux and KVM only. Agents run on laptops, so Sandboxes call each platform’s own hypervisor from a single codebase.</p><p class="bi-vi" lang="vi">Chúng tôi viết một virtual machine monitor mới cho việc này. Firecracker, runtime microVM nổi tiếng nhất, chỉ chạy trên Linux và KVM. Agent chạy trên laptop, nên Sandbox gọi hypervisor riêng của từng nền tảng từ một codebase duy nhất.</p></div>
-<div class="plat-grid">
-<div class="plat-card"><p class="os">macOS</p><div class="bi-pair" data-paragraph="5"><p class="bi-en" lang="en">Apple Hypervisor.framework, called directly</p><p class="bi-vi" lang="vi">Apple Hypervisor.framework, gọi trực tiếp</p></div></div>
-<div class="plat-card"><p class="os">Windows</p><div class="bi-pair" data-paragraph="6"><p class="bi-en" lang="en">Windows Hypervisor Platform, called directly. No compatibility layer.</p><p class="bi-vi" lang="vi">Windows Hypervisor Platform, gọi trực tiếp. Không lớp tương thích.</p></div></div>
-<div class="plat-card"><p class="os">Linux</p><div class="bi-pair" data-paragraph="7"><p class="bi-en" lang="en">KVM, the same boundary a server workload gets</p><p class="bi-vi" lang="vi">KVM, cùng ranh giới mà workload server nhận được</p></div></div>
+<p class="m-vi" lang="vi">Docker gắn liền với container hơn một thập kỷ. Một sản phẩm mới mang tên Docker dễ bị hiểu — một cách hợp lý — là container đổi tên. Sandbox dùng chung nhà cung cấp và quy trình với container. Nhưng chúng không dùng chung ranh giới.</p>
+<p class="m-en" lang="en">Docker has meant containers for more than a decade. A new product with Docker on the front reads, reasonably, as a container with a new name. Sandboxes share a vendor and a workflow with containers. They do not share a boundary.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Docker gắn liền với container hơn một thập kỷ.">Docker has meant containers for more than a decade.</span> <span class="ph" data-vi="Một sản phẩm mới mang tên Docker dễ bị hiểu — một cách hợp lý — là container đổi tên.">A new product with Docker on the front reads, reasonably, as a container with a new name.</span> <span class="ph" data-vi="Sandbox dùng chung nhà cung cấp và quy trình với container. Nhưng chúng không dùng chung ranh giới.">Sandboxes share a vendor and a workflow with containers. They do not share a boundary.</span></p>
+
+<div class="docker-callout">
+<p class="m-vi" lang="vi">Container cô lập phần mềm để chạy giống nhau ở mọi nơi. Sandbox cô lập agent để nó không chạm được vào file, credential hay mạng của bạn.</p>
+<p class="m-en" lang="en">Containers isolate your software so it runs the same anywhere. Sandboxes isolate the agent so it cannot reach your files, your credentials or your network.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Container cô lập phần mềm để chạy giống nhau ở mọi nơi.">Containers isolate your software so it runs the same anywhere.</span> <span class="ph" data-vi="Sandbox cô lập agent để nó không chạm được vào file, credential hay mạng của bạn.">Sandboxes isolate the agent so it cannot reach your files, your credentials or your network.</span></p>
 </div>
+
+<div class="hd" id="boundary"><h2 class="m-vi" lang="vi">Ranh giới nằm ở đâu</h2><h2 class="m-en" lang="en">Where the boundary sits</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Ranh giới nằm ở đâu">Where the boundary sits</span></h2></div>
+
+<p class="m-vi" lang="vi">Chúng tôi viết một virtual machine monitor mới cho việc này. Firecracker, runtime microVM nổi tiếng nhất, chỉ chạy trên Linux và KVM. Agent chạy trên laptop, nên Sandbox gọi hypervisor riêng của từng nền tảng từ một codebase duy nhất.</p>
+<p class="m-en" lang="en">We wrote a new virtual machine monitor for this. Firecracker, the best known microVM runtime, runs on Linux and KVM only. Agents run on laptops, so Sandboxes call each platform’s own hypervisor from a single codebase.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Chúng tôi viết một virtual machine monitor mới cho việc này.">We wrote a new virtual machine monitor for this.</span> <span class="ph" data-vi="Firecracker, runtime microVM nổi tiếng nhất, chỉ chạy trên Linux và KVM.">Firecracker, the best known microVM runtime, runs on Linux and KVM only.</span> <span class="ph" data-vi="Agent chạy trên laptop, nên Sandbox gọi hypervisor riêng của từng nền tảng từ một codebase duy nhất.">Agents run on laptops, so Sandboxes call each platform’s own hypervisor from a single codebase.</span></p>
+
+<div class="plat-grid">
+<div class="plat-card"><p class="os">macOS</p><p class="m-vi" lang="vi">Apple Hypervisor.framework, gọi trực tiếp</p><p class="m-en" lang="en">Apple Hypervisor.framework, called directly</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Apple Hypervisor.framework, gọi trực tiếp">Apple Hypervisor.framework, called directly</span></p></div>
+<div class="plat-card"><p class="os">Windows</p><p class="m-vi" lang="vi">Windows Hypervisor Platform, gọi trực tiếp. Không lớp tương thích.</p><p class="m-en" lang="en">Windows Hypervisor Platform, called directly. No compatibility layer.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Windows Hypervisor Platform, gọi trực tiếp. Không lớp tương thích.">Windows Hypervisor Platform, called directly. No compatibility layer.</span></p></div>
+<div class="plat-card"><p class="os">Linux</p><p class="m-vi" lang="vi">KVM, cùng ranh giới mà workload server nhận được</p><p class="m-en" lang="en">KVM, the same boundary a server workload gets</p><p class="m-chunk" lang="en"><span class="ph" data-vi="KVM, cùng ranh giới mà workload server nhận được">KVM, the same boundary a server workload gets</span></p></div>
+</div>
+
 <figure>
 <img src="sbx-vs-container-boundary.png" width="930" height="603" alt="Diagram: where the sandbox boundary sits relative to host files, network and credentials">
-<div class="bi-pair" data-paragraph="8"><figcaption class="bi-en" lang="en">Where the boundary sits: the hypervisor separates the agent environment from your files, network and credentials.</figcaption><figcaption class="bi-vi" lang="vi">Ranh giới nằm ở đâu: hypervisor tách môi trường agent khỏi file, mạng và credential của bạn.</figcaption></div>
+<figcaption class="m-vi" lang="vi">Ranh giới nằm ở đâu: hypervisor tách môi trường agent khỏi file, mạng và credential của bạn.</figcaption><figcaption class="m-en" lang="en">Where the boundary sits: the hypervisor separates the agent environment from your files, network and credentials.</figcaption><figcaption class="m-chunk" lang="en"><span class="ph" data-vi="Ranh giới nằm ở đâu: hypervisor tách môi trường agent khỏi file, mạng và credential của bạn.">Where the boundary sits: the hypervisor separates the agent environment from your files, network and credentials.</span></figcaption>
 </figure>
 
-<div class="bi-pair bi-heading" id="inside"><h2 class="bi-en" lang="en">Inside a sandbox</h2><h2 class="bi-vi" lang="vi">Bên trong một sandbox</h2></div>
-<div class="bi-pair" data-paragraph="9"><p class="bi-en" lang="en">The diagram above shows where the boundary sits. This shows what sits inside it. Drag to rotate, open it up, and select a layer to read what it does.</p><p class="bi-vi" lang="vi">Hình trên cho thấy ranh giới nằm ở đâu. Phần này cho thấy những gì nằm bên trong. Kéo để xoay, mở ra và chọn một lớp để đọc nó làm gì.</p></div>
+<div class="hd" id="inside"><h2 class="m-vi" lang="vi">Bên trong một sandbox</h2><h2 class="m-en" lang="en">Inside a sandbox</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Bên trong một sandbox">Inside a sandbox</span></h2></div>
+
+<p class="m-vi" lang="vi">Hình trên cho thấy ranh giới nằm ở đâu. Phần này cho thấy những gì nằm bên trong. Kéo để xoay, mở ra và chọn một lớp để đọc xem nó làm gì.</p>
+<p class="m-en" lang="en">The diagram above shows where the boundary sits. This shows what sits inside it. Drag to rotate, open it up, and select a layer to read what it does.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hình trên cho thấy ranh giới nằm ở đâu. Phần này cho thấy những gì nằm bên trong.">The diagram above shows where the boundary sits. This shows what sits inside it.</span> <span class="ph" data-vi="Kéo để xoay, mở ra và chọn một lớp để đọc xem nó làm gì.">Drag to rotate, open it up, and select a layer to read what it does.</span></p>
+
 <p class="blog-note">Trên trang gốc có sơ đồ 3D tương tác; bản dịch chỉ giữ ảnh tĩnh <code>sbx-vs-container-boundary.png</code> đã tải cục bộ, không nhúng script Docker.</p>
 
-<div class="bi-pair bi-heading" id="cannot"><h2 class="bi-en" lang="en">What a container cannot give an agent</h2><h2 class="bi-vi" lang="vi">Những gì container không thể cho agent</h2></div>
-<div class="bi-pair" data-paragraph="10"><p class="bi-en" lang="en">An agent writes code, runs it, and installs what it wants, while you are not watching. Three things follow.</p><p class="bi-vi" lang="vi">Agent viết mã, chạy mã và cài những gì nó muốn khi bạn không theo dõi. Ba hệ quả sau đây.</p></div>
+<div class="hd" id="cannot"><h2 class="m-vi" lang="vi">Những gì container không thể cho agent</h2><h2 class="m-en" lang="en">What a container cannot give an agent</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Những gì container không thể cho agent">What a container cannot give an agent</span></h2></div>
+
+<p class="m-vi" lang="vi">Agent viết mã, chạy mã và cài những gì nó muốn khi bạn không theo dõi. Ba hệ quả kéo theo từ đó.</p>
+<p class="m-en" lang="en">An agent writes code, runs it, and installs what it wants, while you are not watching. Three things follow.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Agent viết mã, chạy mã và cài những gì nó muốn khi bạn không theo dõi.">An agent writes code, runs it, and installs what it wants, while you are not watching.</span> <span class="ph" data-vi="Ba hệ quả kéo theo từ đó.">Three things follow.</span></p>
+
 <div class="feature-grid">
-<div class="feature-card"><div class="bi-pair bi-heading"><h3 class="bi-en" lang="en">The kernel is the shared part</h3><h3 class="bi-vi" lang="vi">Kernel là phần dùng chung</h3></div><div class="bi-pair" data-paragraph="11"><p class="bi-en" lang="en">An escape targets a kernel. In a container, that kernel is yours, and every container on the machine shares it.</p><p class="bi-vi" lang="vi">Một lối thoát nhắm vào kernel. Trong container, đó là kernel của bạn, và mọi container trên máy đều dùng chung nó.</p></div></div>
-<div class="feature-card"><div class="bi-pair bi-heading"><h3 class="bi-en" lang="en">Docker-in-Docker undoes the boundary</h3><h3 class="bi-vi" lang="vi">Docker-in-Docker phá vỡ ranh giới</h3></div><div class="bi-pair" data-paragraph="12"><p class="bi-en" lang="en">Agents build images and run compose files. In a container that means Docker-in-Docker, and its elevated privileges reach the host you were isolating.</p><p class="bi-vi" lang="vi">Agent build image và chạy file compose. Trong container điều đó nghĩa là Docker-in-Docker, và quyền nâng cao của nó chạm tới host mà bạn đang cố cô lập.</p></div></div>
-<div class="feature-card"><div class="bi-pair bi-heading"><h3 class="bi-en" lang="en">A prompt is not a boundary</h3><h3 class="bi-vi" lang="vi">Prompt không phải ranh giới</h3></div><div class="bi-pair" data-paragraph="13"><p class="bi-en" lang="en">Tell an agent to avoid a directory and you have a request. Deny in the prompt and it reaches for the API instead.</p><p class="bi-vi" lang="vi">Bảo agent tránh một thư mục chỉ là một yêu cầu. Từ chối trong prompt thì nó vẫn có thể gọi API thay thế.</p></div></div>
+<div class="feature-card">
+<div class="hd"><h3 class="m-vi" lang="vi">Kernel là phần dùng chung</h3><h3 class="m-en" lang="en">The kernel is the shared part</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Kernel là phần dùng chung">The kernel is the shared part</span></h3></div>
+<p class="m-vi" lang="vi">Một lối thoát nhắm vào kernel. Trong container, đó là kernel của bạn, và mọi container trên máy đều dùng chung nó.</p><p class="m-en" lang="en">An escape targets a kernel. In a container, that kernel is yours, and every container on the machine shares it.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Một lối thoát nhắm vào kernel.">An escape targets a kernel.</span> <span class="ph" data-vi="Trong container, đó là kernel của bạn, và mọi container trên máy đều dùng chung nó.">In a container, that kernel is yours, and every container on the machine shares it.</span></p>
+</div>
+<div class="feature-card">
+<div class="hd"><h3 class="m-vi" lang="vi">Docker-in-Docker phá vỡ ranh giới</h3><h3 class="m-en" lang="en">Docker-in-Docker undoes the boundary</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Docker-in-Docker phá vỡ ranh giới">Docker-in-Docker undoes the boundary</span></h3></div>
+<p class="m-vi" lang="vi">Agent build image và chạy file compose. Trong container điều đó nghĩa là Docker-in-Docker, và quyền nâng cao của nó chạm tới host mà bạn đang cố cô lập.</p><p class="m-en" lang="en">Agents build images and run compose files. In a container that means Docker-in-Docker, and its elevated privileges reach the host you were isolating.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Agent build image và chạy file compose.">Agents build images and run compose files.</span> <span class="ph" data-vi="Trong container điều đó nghĩa là Docker-in-Docker, và quyền nâng cao của nó chạm tới host mà bạn đang cố cô lập.">In a container that means Docker-in-Docker, and its elevated privileges reach the host you were isolating.</span></p>
+</div>
+<div class="feature-card">
+<div class="hd"><h3 class="m-vi" lang="vi">Prompt không phải ranh giới</h3><h3 class="m-en" lang="en">A prompt is not a boundary</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Prompt không phải ranh giới">A prompt is not a boundary</span></h3></div>
+<p class="m-vi" lang="vi">Bảo agent tránh một thư mục chỉ là một yêu cầu. Từ chối trong prompt thì nó vẫn có thể gọi API thay thế.</p><p class="m-en" lang="en">Tell an agent to avoid a directory and you have a request. Deny in the prompt and it reaches for the API instead.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Bảo agent tránh một thư mục chỉ là một yêu cầu.">Tell an agent to avoid a directory and you have a request.</span> <span class="ph" data-vi="Từ chối trong prompt thì nó vẫn có thể gọi API thay thế.">Deny in the prompt and it reaches for the API instead.</span></p>
+</div>
 </div>
 
-<div class="bi-pair bi-heading" id="unchanged"><h2 class="bi-en" lang="en">What Sandboxes do not change</h2><h2 class="bi-vi" lang="vi">Những gì Sandboxes không thay đổi</h2></div>
+<div class="hd" id="unchanged"><h2 class="m-vi" lang="vi">Những gì Sandboxes không thay đổi</h2><h2 class="m-en" lang="en">What Sandboxes do not change</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Những gì Sandboxes không thay đổi">What Sandboxes do not change</span></h2></div>
+
 <div class="feature-grid">
-<div class="feature-card"><div class="bi-pair bi-heading"><h3 class="bi-en" lang="en">Nothing here changes how you package software</h3><h3 class="bi-vi" lang="vi">Không gì ở đây đổi cách bạn đóng gói phần mềm</h3></div><div class="bi-pair" data-paragraph="14"><p class="bi-en" lang="en">Your service still builds and deploys as a container, and it should. Sandboxes hold agent sessions on a developer machine.</p><p class="bi-vi" lang="vi">Dịch vụ của bạn vẫn build và deploy dạng container, và nên như vậy. Sandbox giữ các phiên agent trên máy của lập trình viên.</p></div></div>
-<div class="feature-card"><div class="bi-pair bi-heading"><h3 class="bi-en" lang="en">A sandbox boots a kernel, so it holds more memory than a container</h3><h3 class="bi-vi" lang="vi">Sandbox khởi động một kernel nên chiếm nhiều bộ nhớ hơn container</h3></div><div class="bi-pair" data-paragraph="15"><p class="bi-en" lang="en">You run one per agent session, not one per service. Size it for the session, not for the fleet.</p><p class="bi-vi" lang="vi">Bạn chạy một sandbox cho mỗi phiên agent, không phải một cho mỗi dịch vụ. Cấp kích thước theo phiên, không theo cả cụm.</p></div></div>
-<div class="feature-card"><div class="bi-pair bi-heading"><h3 class="bi-en" lang="en">Central policy needs the enterprise deployment</h3><h3 class="bi-vi" lang="vi">Chính sách tập trung cần bản triển khai enterprise</h3></div><div class="bi-pair" data-paragraph="16"><p class="bi-en" lang="en">On your own machine you set the boundary per sandbox. Policy enforced across an organization comes with enterprise deployment.</p><p class="bi-vi" lang="vi">Trên máy riêng bạn đặt ranh giới theo từng sandbox. Chính sách áp dụng toàn tổ chức đi kèm bản triển khai enterprise.</p></div></div>
+<div class="feature-card">
+<div class="hd"><h3 class="m-vi" lang="vi">Không gì ở đây đổi cách bạn đóng gói phần mềm</h3><h3 class="m-en" lang="en">Nothing here changes how you package software</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Không gì ở đây đổi cách bạn đóng gói phần mềm">Nothing here changes how you package software</span></h3></div>
+<p class="m-vi" lang="vi">Dịch vụ của bạn vẫn build và deploy dạng container, và nên như vậy. Sandbox giữ các phiên agent trên máy của lập trình viên.</p><p class="m-en" lang="en">Your service still builds and deploys as a container, and it should. Sandboxes hold agent sessions on a developer machine.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Dịch vụ của bạn vẫn build và deploy dạng container, và nên như vậy.">Your service still builds and deploys as a container, and it should.</span> <span class="ph" data-vi="Sandbox giữ các phiên agent trên máy của lập trình viên.">Sandboxes hold agent sessions on a developer machine.</span></p>
+</div>
+<div class="feature-card">
+<div class="hd"><h3 class="m-vi" lang="vi">Sandbox khởi động một kernel nên chiếm nhiều bộ nhớ hơn container</h3><h3 class="m-en" lang="en">A sandbox boots a kernel, so it holds more memory than a container</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Sandbox khởi động một kernel nên chiếm nhiều bộ nhớ hơn container">A sandbox boots a kernel, so it holds more memory than a container</span></h3></div>
+<p class="m-vi" lang="vi">Bạn chạy một sandbox cho mỗi phiên agent, không phải một cho mỗi dịch vụ. Cấp kích thước theo phiên, không theo cả cụm.</p><p class="m-en" lang="en">You run one per agent session, not one per service. Size it for the session, not for the fleet.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Bạn chạy một sandbox cho mỗi phiên agent, không phải một cho mỗi dịch vụ.">You run one per agent session, not one per service.</span> <span class="ph" data-vi="Cấp kích thước theo phiên, không theo cả cụm.">Size it for the session, not for the fleet.</span></p>
+</div>
+<div class="feature-card">
+<div class="hd"><h3 class="m-vi" lang="vi">Chính sách tập trung cần bản triển khai enterprise</h3><h3 class="m-en" lang="en">Central policy needs the enterprise deployment</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Chính sách tập trung cần bản triển khai enterprise">Central policy needs the enterprise deployment</span></h3></div>
+<p class="m-vi" lang="vi">Trên máy riêng bạn đặt ranh giới theo từng sandbox. Chính sách áp dụng toàn tổ chức đi kèm bản triển khai enterprise.</p><p class="m-en" lang="en">On your own machine you set the boundary per sandbox. Policy enforced across an organization comes with enterprise deployment.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Trên máy riêng bạn đặt ranh giới theo từng sandbox.">On your own machine you set the boundary per sandbox.</span> <span class="ph" data-vi="Chính sách áp dụng toàn tổ chức đi kèm bản triển khai enterprise.">Policy enforced across an organization comes with enterprise deployment.</span></p>
+</div>
 </div>
 
-<div class="bi-pair bi-heading" id="faq"><h2 class="bi-en" lang="en">Common questions</h2><h2 class="bi-vi" lang="vi">Câu hỏi thường gặp</h2></div>
+<div class="hd" id="faq"><h2 class="m-vi" lang="vi">Câu hỏi thường gặp</h2><h2 class="m-en" lang="en">Common questions</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Câu hỏi thường gặp">Common questions</span></h2></div>
+
 <section class="faq">
-<details open><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Is a Docker Sandbox just a container?</span><span class="bi-vi" lang="vi">Docker Sandbox có chỉ là một container không?</span></div></summary>
-<div class="bi-pair" data-paragraph="17"><p class="bi-en" lang="en">No. A container is a process isolated by namespaces and cgroups in the kernel it shares with the machine. A sandbox is a microVM, a virtual machine stripped to what one workload needs, with a kernel of its own. No flag on <code>docker run</code> produces a second kernel.</p><p class="bi-vi" lang="vi">Không. Container là một tiến trình được cô lập bằng namespaces và cgroups trong kernel dùng chung với máy. Sandbox là microVM — máy ảo rút gọn theo nhu cầu một workload — với kernel riêng. Không có cờ nào của <code>docker run</code> tạo ra kernel thứ hai.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Do Docker Sandboxes share the host kernel?</span><span class="bi-vi" lang="vi">Docker Sandboxes có dùng chung kernel host không?</span></div></summary>
-<div class="bi-pair" data-paragraph="18"><p class="bi-en" lang="en">No. Each sandbox boots its own kernel. The host kernel sits on the other side of a hardware boundary, and so does every other sandbox.</p><p class="bi-vi" lang="vi">Không. Mỗi sandbox khởi động kernel riêng. Kernel host nằm phía bên kia của ranh giới phần cứng, và mọi sandbox khác cũng vậy.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Can an agent escape a Docker Sandbox?</span><span class="bi-vi" lang="vi">Agent có thể thoát khỏi Docker Sandbox không?</span></div></summary>
-<div class="bi-pair" data-paragraph="19"><p class="bi-en" lang="en">An escape would have to cross the hypervisor rather than the kernel, which is the boundary a virtual machine gives you. Files, network and secrets are set before the session starts, so nothing the agent decides can widen them.</p><p class="bi-vi" lang="vi">Muốn thoát phải vượt qua hypervisor chứ không phải kernel — đó là ranh giới mà máy ảo mang lại. File, mạng và secret được đặt trước khi phiên bắt đầu, nên không gì agent quyết định có thể nới rộng chúng.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">On macOS my containers already run in a Linux VM. Is that the same thing?</span><span class="bi-vi" lang="vi">Trên macOS container của tôi đã chạy trong Linux VM. Có giống nhau không?</span></div></summary>
-<div class="bi-pair" data-paragraph="20"><p class="bi-en" lang="en">No. That is one Linux VM with one kernel, shared by every container on the machine, and Docker-in-Docker inside it still needs elevated privileges. A sandbox is one microVM per agent session, on Apple’s Hypervisor.framework directly.</p><p class="bi-vi" lang="vi">Không. Đó là một Linux VM với một kernel, dùng chung bởi mọi container trên máy, và Docker-in-Docker bên trong vẫn cần quyền nâng cao. Sandbox là một microVM cho mỗi phiên agent, gọi trực tiếp Hypervisor.framework của Apple.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Can my agent run docker build and docker compose?</span><span class="bi-vi" lang="vi">Agent của tôi có chạy được docker build và docker compose không?</span></div></summary>
-<div class="bi-pair" data-paragraph="21"><p class="bi-en" lang="en">Yes. Each sandbox has a private Docker daemon inside the microVM, so build and compose work without a host socket mount and without host privileges.</p><p class="bi-vi" lang="vi">Có. Mỗi sandbox có Docker daemon riêng trong microVM, nên build và compose chạy được mà không cần mount socket host và không cần quyền host.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Are sandboxes slower to start than containers?</span><span class="bi-vi" lang="vi">Sandbox khởi động chậm hơn container không?</span></div></summary>
-<div class="bi-pair" data-paragraph="22"><p class="bi-en" lang="en">A sandbox boots a kernel, so it does more work at start than a container does. The VMM calls each platform’s hypervisor directly, with no translation layer to pay for.</p><p class="bi-vi" lang="vi">Sandbox khởi động một kernel nên lúc start làm nhiều việc hơn container. VMM gọi trực tiếp hypervisor của từng nền tảng, không phải trả giá cho lớp dịch.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Do I need Docker Desktop?</span><span class="bi-vi" lang="vi">Tôi có cần Docker Desktop không?</span></div></summary>
-<div class="bi-pair" data-paragraph="23"><p class="bi-en" lang="en">No. Sandboxes install standalone, with no Docker Desktop license. They work with Claude Code, Codex, OpenCode, GitHub Copilot, Gemini CLI, Kiro and Docker Agent.</p><p class="bi-vi" lang="vi">Không. Sandbox cài độc lập, không cần giấy phép Docker Desktop. Chúng hoạt động với Claude Code, Codex, OpenCode, GitHub Copilot, Gemini CLI, Kiro và Docker Agent.</p></div></details>
-<details><summary><div class="bi-pair bi-cell"><span class="bi-en" lang="en">Should my team use containers or sandboxes?</span><span class="bi-vi" lang="vi">Đội tôi nên dùng containers hay sandboxes?</span></div></summary>
-<div class="bi-pair" data-paragraph="24"><p class="bi-en" lang="en">Both, for different jobs. Containers build, ship and run the software your team writes. Sandboxes keep the agent that writes it away from your files and credentials.</p><p class="bi-vi" lang="vi">Cả hai, cho việc khác nhau. Container build, giao và chạy phần mềm đội bạn viết. Sandbox giữ agent viết mã đó cách xa file và credential của bạn.</p></div></details>
+<details open><summary><span class="m-vi" lang="vi">Docker Sandbox có chỉ là một container không?</span><span class="m-en" lang="en">Is a Docker Sandbox just a container?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker Sandbox có chỉ là một container không?">Is a Docker Sandbox just a container?</span></span></summary>
+<p class="m-vi" lang="vi">Không. Container là một tiến trình được cô lập bằng namespaces và cgroups trong kernel dùng chung với máy. Sandbox là microVM — máy ảo rút gọn theo nhu cầu một workload — với kernel riêng. Không có cờ nào của <code>docker run</code> tạo ra kernel thứ hai.</p><p class="m-en" lang="en">No. A container is a process isolated by namespaces and cgroups in the kernel it shares with the machine. A sandbox is a microVM, a virtual machine stripped to what one workload needs, with a kernel of its own. No flag on <code>docker run</code> produces a second kernel.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Không. Container là một tiến trình được cô lập bằng namespaces và cgroups trong kernel dùng chung với máy.">No. A container is a process isolated by namespaces and cgroups in the kernel it shares with the machine.</span> <span class="ph" data-vi="Sandbox là microVM — máy ảo rút gọn theo nhu cầu một workload — với kernel riêng.">A sandbox is a microVM, a virtual machine stripped to what one workload needs, with a kernel of its own.</span> <span class="ph" data-vi="Không có cờ nào của docker run tạo ra kernel thứ hai.">No flag on <code>docker run</code> produces a second kernel.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Docker Sandboxes có dùng chung kernel host không?</span><span class="m-en" lang="en">Do Docker Sandboxes share the host kernel?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Docker Sandboxes có dùng chung kernel host không?">Do Docker Sandboxes share the host kernel?</span></span></summary>
+<p class="m-vi" lang="vi">Không. Mỗi sandbox khởi động kernel riêng. Kernel host nằm phía bên kia của ranh giới phần cứng, và mọi sandbox khác cũng vậy.</p><p class="m-en" lang="en">No. Each sandbox boots its own kernel. The host kernel sits on the other side of a hardware boundary, and so does every other sandbox.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Không. Mỗi sandbox khởi động kernel riêng.">No. Each sandbox boots its own kernel.</span> <span class="ph" data-vi="Kernel host nằm phía bên kia của ranh giới phần cứng, và mọi sandbox khác cũng vậy.">The host kernel sits on the other side of a hardware boundary, and so does every other sandbox.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Agent có thể thoát khỏi Docker Sandbox không?</span><span class="m-en" lang="en">Can an agent escape a Docker Sandbox?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Agent có thể thoát khỏi Docker Sandbox không?">Can an agent escape a Docker Sandbox?</span></span></summary>
+<p class="m-vi" lang="vi">Muốn thoát phải vượt qua hypervisor chứ không phải kernel — đó là ranh giới mà máy ảo mang lại. File, mạng và secret được đặt trước khi phiên bắt đầu, nên không gì agent quyết định có thể nới rộng chúng.</p><p class="m-en" lang="en">An escape would have to cross the hypervisor rather than the kernel, which is the boundary a virtual machine gives you. Files, network and secrets are set before the session starts, so nothing the agent decides can widen them.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Muốn thoát phải vượt qua hypervisor chứ không phải kernel — đó là ranh giới mà máy ảo mang lại.">An escape would have to cross the hypervisor rather than the kernel, which is the boundary a virtual machine gives you.</span> <span class="ph" data-vi="File, mạng và secret được đặt trước khi phiên bắt đầu, nên không gì agent quyết định có thể nới rộng chúng.">Files, network and secrets are set before the session starts, so nothing the agent decides can widen them.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Trên macOS container của tôi đã chạy trong Linux VM. Có giống nhau không?</span><span class="m-en" lang="en">On macOS my containers already run in a Linux VM. Is that the same thing?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Trên macOS container của tôi đã chạy trong Linux VM. Có giống nhau không?">On macOS my containers already run in a Linux VM. Is that the same thing?</span></span></summary>
+<p class="m-vi" lang="vi">Không. Đó là một Linux VM với một kernel, dùng chung bởi mọi container trên máy, và Docker-in-Docker bên trong vẫn cần quyền nâng cao. Sandbox là một microVM cho mỗi phiên agent, gọi trực tiếp Hypervisor.framework của Apple.</p><p class="m-en" lang="en">No. That is one Linux VM with one kernel, shared by every container on the machine, and Docker-in-Docker inside it still needs elevated privileges. A sandbox is one microVM per agent session, on Apple’s Hypervisor.framework directly.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Không. Đó là một Linux VM với một kernel, dùng chung bởi mọi container trên máy, và Docker-in-Docker bên trong vẫn cần quyền nâng cao.">No. That is one Linux VM with one kernel, shared by every container on the machine, and Docker-in-Docker inside it still needs elevated privileges.</span> <span class="ph" data-vi="Sandbox là một microVM cho mỗi phiên agent, gọi trực tiếp Hypervisor.framework của Apple.">A sandbox is one microVM per agent session, on Apple’s Hypervisor.framework directly.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Agent của tôi có chạy được docker build và docker compose không?</span><span class="m-en" lang="en">Can my agent run docker build and docker compose?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Agent của tôi có chạy được docker build và docker compose không?">Can my agent run docker build and docker compose?</span></span></summary>
+<p class="m-vi" lang="vi">Có. Mỗi sandbox có Docker daemon riêng trong microVM, nên build và compose chạy được mà không cần mount socket host và không cần quyền host.</p><p class="m-en" lang="en">Yes. Each sandbox has a private Docker daemon inside the microVM, so build and compose work without a host socket mount and without host privileges.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Có. Mỗi sandbox có Docker daemon riêng trong microVM,">Yes. Each sandbox has a private Docker daemon inside the microVM,</span> <span class="ph" data-vi="nên build và compose chạy được mà không cần mount socket host và không cần quyền host.">so build and compose work without a host socket mount and without host privileges.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Sandbox khởi động chậm hơn container không?</span><span class="m-en" lang="en">Are sandboxes slower to start than containers?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Sandbox khởi động chậm hơn container không?">Are sandboxes slower to start than containers?</span></span></summary>
+<p class="m-vi" lang="vi">Sandbox khởi động một kernel nên lúc start làm nhiều việc hơn container. VMM gọi trực tiếp hypervisor của từng nền tảng, không phải trả giá cho lớp dịch.</p><p class="m-en" lang="en">A sandbox boots a kernel, so it does more work at start than a container does. The VMM calls each platform’s hypervisor directly, with no translation layer to pay for.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Sandbox khởi động một kernel nên lúc start làm nhiều việc hơn container.">A sandbox boots a kernel, so it does more work at start than a container does.</span> <span class="ph" data-vi="VMM gọi trực tiếp hypervisor của từng nền tảng, không phải trả giá cho lớp dịch.">The VMM calls each platform’s hypervisor directly, with no translation layer to pay for.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Tôi có cần Docker Desktop không?</span><span class="m-en" lang="en">Do I need Docker Desktop?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Tôi có cần Docker Desktop không?">Do I need Docker Desktop?</span></span></summary>
+<p class="m-vi" lang="vi">Không. Sandbox cài độc lập, không cần giấy phép Docker Desktop. Chúng hoạt động với Claude Code, Codex, OpenCode, GitHub Copilot, Gemini CLI, Kiro và Docker Agent.</p><p class="m-en" lang="en">No. Sandboxes install standalone, with no Docker Desktop license. They work with Claude Code, Codex, OpenCode, GitHub Copilot, Gemini CLI, Kiro and Docker Agent.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Không. Sandbox cài độc lập, không cần giấy phép Docker Desktop.">No. Sandboxes install standalone, with no Docker Desktop license.</span> <span class="ph" data-vi="Chúng hoạt động với Claude Code, Codex, OpenCode, GitHub Copilot, Gemini CLI, Kiro và Docker Agent.">They work with Claude Code, Codex, OpenCode, GitHub Copilot, Gemini CLI, Kiro and Docker Agent.</span></p></details>
+
+<details><summary><span class="m-vi" lang="vi">Đội tôi nên dùng containers hay sandboxes?</span><span class="m-en" lang="en">Should my team use containers or sandboxes?</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Đội tôi nên dùng containers hay sandboxes?">Should my team use containers or sandboxes?</span></span></summary>
+<p class="m-vi" lang="vi">Cả hai, cho việc khác nhau. Container build, giao và chạy phần mềm đội bạn viết. Sandbox giữ agent viết mã đó cách xa file và credential của bạn.</p><p class="m-en" lang="en">Both, for different jobs. Containers build, ship and run the software your team writes. Sandboxes keep the agent that writes it away from your files and credentials.</p><p class="m-chunk" lang="en"><span class="ph" data-vi="Cả hai, cho việc khác nhau. Container build, giao và chạy phần mềm đội bạn viết.">Both, for different jobs. Containers build, ship and run the software your team writes.</span> <span class="ph" data-vi="Sandbox giữ agent viết mã đó cách xa file và credential của bạn.">Sandboxes keep the agent that writes it away from your files and credentials.</span></p></details>
 </section>
 
-<div class="bi-pair bi-heading" id="install"><h2 class="bi-en" lang="en">Install</h2><h2 class="bi-vi" lang="vi">Cài đặt</h2></div>
+<div class="hd" id="install"><h2 class="m-vi" lang="vi">Cài đặt</h2><h2 class="m-en" lang="en">Install</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Cài đặt">Install</span></h2></div>
+
 <p><a href="https://docs.docker.com/">Read the docs</a> · <a href="https://www.docker.com/products/docker-sandboxes/">Why microVM: the architecture</a></p>
 <div class="install-grid">
 <div class="install-card"><p class="os">macOS</p><pre><code>brew install docker/tap/sbx</code></pre></div>
 <div class="install-card"><p class="os">Windows</p><pre><code>winget install Docker.sbx</code></pre></div>
 </div>
 
-<div class="bi-pair bi-heading" id="try"><h2 class="bi-en" lang="en">Try Docker Sandboxes today</h2><h2 class="bi-vi" lang="vi">Thử Docker Sandboxes hôm nay</h2></div>
+<div class="hd" id="try"><h2 class="m-vi" lang="vi">Thử Docker Sandboxes hôm nay</h2><h2 class="m-en" lang="en">Try Docker Sandboxes today</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Thử Docker Sandboxes hôm nay">Try Docker Sandboxes today</span></h2></div>
+
 <p><a class="docker-cta" href="https://www.docker.com/products/docker-sandboxes/">Claim my $250 credit</a></p>
-<div class="bi-pair" data-paragraph="25"><p class="bi-en" lang="en">Estimates cover sandbox compute only. Model API usage and agent subscriptions are billed separately. Hours per day are assumed workloads, not limits. Billed time includes setup, idle time, and retries. Rates current as of September 2026.</p><p class="bi-vi" lang="vi">Ước tính chỉ gồm compute của sandbox. Phí dùng Model API và gói agent tính riêng. Số giờ mỗi ngày là workload giả định, không phải giới hạn. Thời gian tính phí gồm setup, thời gian chờ và lần thử lại. Đơn giá cập nhật tới tháng 9/2026.</p></div>
+
+<p class="m-vi" lang="vi">Ước tính chỉ gồm compute của sandbox. Phí dùng Model API và gói agent tính riêng. Số giờ mỗi ngày là workload giả định, không phải giới hạn. Thời gian tính phí gồm setup, thời gian chờ và lần thử lại. Đơn giá cập nhật tới tháng 9/2026.</p>
+<p class="m-en" lang="en">Estimates cover sandbox compute only. Model API usage and agent subscriptions are billed separately. Hours per day are assumed workloads, not limits. Billed time includes setup, idle time, and retries. Rates current as of September 2026.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Ước tính chỉ gồm compute của sandbox. Phí dùng Model API và gói agent tính riêng.">Estimates cover sandbox compute only. Model API usage and agent subscriptions are billed separately.</span> <span class="ph" data-vi="Số giờ mỗi ngày là workload giả định, không phải giới hạn. Thời gian tính phí gồm setup, thời gian chờ và lần thử lại. Đơn giá cập nhật tới tháng 9/2026.">Hours per day are assumed workloads, not limits. Billed time includes setup, idle time, and retries. Rates current as of September 2026.</span></p>
 
 </div><!-- .docker-main -->
 </div><!-- .docker-layout-grid -->
-</div><!-- data-bilingual -->
+</div><!-- .art-modes -->
 
 <section class="blog-insight" id="insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người dịch</p>
 <ul>
@@ -329,7 +442,7 @@ mindmap
       brew install docker/tap/sbx
       winget install Docker.sbx
 </pre></div></section>
-<p class="credits">Nguồn gốc: <a href="https://www.docker.com/products/docker-sandboxes/vs-containers/">Docker Sandboxes vs. Docker containers</a> trên docker.com. Nội dung thuộc về Docker, Inc. Ảnh minh họa hero và boundary được tải cục bộ từ CDN của Docker để giữ bố cục; không hotlink script của Docker. Bản dịch tiếng Việt đăng trên blog này vì mục đích học tập.</p>
+<p class="credits">Nguồn gốc: <a href="https://www.docker.com/products/docker-sandboxes/vs-containers/">Docker Sandboxes vs. Docker containers</a> trên docker.com. Nội dung thuộc về Docker, Inc. Ảnh minh họa hero và boundary được tải cục bộ từ CDN của Docker để giữ bố cục; không hotlink script của Docker. Bản dịch tiếng Việt đăng trên blog này vì mục đích học tập. Cập nhật ba chế độ đọc.</p>
 </article>
 </main>
 </div>
@@ -337,6 +450,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
-<script src="../assets/bilingual.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
