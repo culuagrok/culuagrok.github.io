@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>.NET 11 ra mắt: C# 15 union type, công cụ nhanh hơn và ứng dụng AI — Blog</title>
-<meta name="description" content="Tóm tắt thông báo .NET 11: C# 15 union type, SDK và MSBuild nhanh hơn, ASP.NET Core, MAUI, thư viện AI; kèm lịch hỗ trợ STS/LTS và gợi ý nâng cấp.">
+<meta name="description" content="Tóm tắt thông báo .NET 11: C# 15 union type, SDK và MSBuild nhanh hơn, ASP.NET Core, MAUI, thư viện AI; kèm lịch hỗ trợ STS/LTS và gợi ý nâng cấp. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -47,6 +63,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-callout strong{color:#166534}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
+</style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
@@ -79,29 +138,55 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li>.NET 8 và .NET 9 đã hết hỗ trợ ngày 10/11/2026. Ứng dụng trên hai bản này cần chuyển sang một bản còn được hỗ trợ.</li>
 </ul></section>
 <p class="blog-note">Bài viết dựa trên <a href="https://x.com/dotnet/status/2120185345950052648">thông báo của tài khoản @dotnet</a> và <a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/">bài <em>Announcing .NET 11</em> trên .NET Blog</a> (liên kết rút gọn <code>msft.it</code> trong bài đăng trỏ về đây). Các mục “điểm mới” được đối chiếu với tài liệu Microsoft Learn về C# 15, tổng quan .NET 11, ASP.NET Core và .NET MAUI, cùng <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">chính sách hỗ trợ chính thức</a>. Đây là bài tổng hợp tiếng Việt, không phải bản dịch nguyên văn. Mọi tính năng, mốc hỗ trợ và đoạn mã dưới đây lấy từ các nguồn đó; bài không tự thêm số liệu benchmark.</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản tiếng Anh tương ứng, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 134 cụm · 82 đoạn &amp; mục</span></div>
+<div class="art-modes" aria-describedby="how-to">
 
-<h2>.NET 11 là gì, STS khác LTS chỗ nào</h2>
-<p>Theo bài thông báo, .NET 11 giúp xây ứng dụng hiện đại nhanh hơn, với cải tiến trên C# 15, ASP.NET Core, .NET MAUI và phát triển Windows, kèm hàng trăm tối ưu runtime và công cụ SDK phản hồi nhanh hơn. Phát hành này cũng nhấn mạnh khả năng mới cho ứng dụng web, di động, máy tính để bàn và AI.</p>
-<p>.NET 11 là bản <strong>Standard Term Support (STS)</strong>, tức hỗ trợ tiêu chuẩn trong hai năm theo chính sách hỗ trợ của .NET. STS và Long Term Support (LTS) cùng chất lượng và cùng chính sách sửa lỗi; khác nhau ở độ dài hỗ trợ. <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">Bảng phiên bản còn hỗ trợ</a>, cập nhật ngày 10/11/2026, ghi rõ:</p>
-<ul>
-<li>.NET 11: phát hành 10/11/2026, bản vá hiện tại 11.0.0, loại STS, giai đoạn Active, hết hỗ trợ <strong>14/11/2028</strong>.</li>
-<li>.NET 10: phát hành 11/11/2025, bản vá hiện tại 10.0.15, loại LTS, giai đoạn Active, hết hỗ trợ <strong>14/11/2028</strong>.</li>
-</ul>
-<p>Nói cách khác, nếu so đúng hai bản đang được hỗ trợ, chọn LTS (.NET 10) không kéo dài thêm lịch hỗ trợ so với STS (.NET 11): cả hai cùng kết thúc ngày 14/11/2028. .NET 10 vẫn là lựa chọn LTS nếu bạn chưa cần tính năng mới của bản 11. Chính sách cũng nêu: bản chẵn là LTS (ba năm), bản lẻ là STS (hai năm).</p>
-<p class="blog-callout"><strong>Lịch cần nhớ:</strong> .NET 8 và .NET 9 đã hết hỗ trợ ngày 10/11/2026. Microsoft khuyên chuyển sang bản còn hỗ trợ để tiếp tục nhận bản sửa. Chọn .NET 11 nếu muốn tính năng mới nhất, hoặc .NET 10 nếu vòng đời LTS phù hợp hơn với yêu cầu của đội ngũ.</p>
+<div class="hd"><h2 class="m-vi" lang="vi">.NET 11 là gì, STS khác LTS chỗ nào</h2><h2 class="m-en" lang="en">What .NET 11 is, and how STS differs from LTS</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi=".NET 11 là gì, STS khác LTS chỗ nào">What .NET 11 is, and how STS differs from LTS</span></h2></div>
 
-<h2>C# 15: kiểu union và phân cấp đóng</h2>
-<p>C# 15 là phiên bản ngôn ngữ mặc định cho dự án nhắm .NET 11. Theo tài liệu C# 15, các tính năng sau (trừ an toàn bộ nhớ) không cần bật ngôn ngữ xem trước:</p>
+<p class="m-vi" lang="vi">Theo bài thông báo, .NET 11 giúp xây dựng ứng dụng hiện đại nhanh hơn, với cải tiến trên C# 15, ASP.NET Core, .NET MAUI và phát triển Windows, kèm hàng trăm tối ưu runtime và công cụ SDK phản hồi nhanh hơn. Bản phát hành này cũng nhấn mạnh khả năng mới cho ứng dụng web, di động, máy tính để bàn và AI.</p>
+<p class="m-en" lang="en">According to the announcement, .NET 11 helps you build modern applications faster with improvements across C# 15, ASP.NET Core, .NET MAUI, and Windows development, alongside hundreds of runtime optimizations and snappier SDK tooling. The release also highlights new capabilities for web, mobile, desktop, and AI apps.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo bài thông báo, .NET 11 giúp xây dựng ứng dụng hiện đại nhanh hơn với cải tiến trên C# 15, ASP.NET Core, .NET MAUI và Windows,">According to the announcement, .NET 11 helps you build modern applications faster with improvements across C# 15, ASP.NET Core, .NET MAUI, and Windows development,</span> <span class="ph" data-vi="kèm hàng trăm tối ưu runtime, công cụ SDK phản hồi nhanh hơn và nhiều khả năng mới cho web, di động, desktop và AI.">alongside hundreds of runtime optimizations and snappier SDK tooling. The release also highlights new capabilities for web, mobile, desktop, and AI apps.</span></p>
+
+<p class="m-vi" lang="vi">.NET 11 là bản <strong>Standard Term Support (STS)</strong>, tức hỗ trợ tiêu chuẩn trong hai năm theo chính sách hỗ trợ của .NET. STS và Long Term Support (LTS) cùng chất lượng và cùng chính sách sửa lỗi; khác nhau ở thời hạn hỗ trợ. <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">Bảng phiên bản còn hỗ trợ</a>, cập nhật ngày 10/11/2026, ghi rõ:</p>
+<p class="m-en" lang="en">.NET 11 is a <strong>Standard Term Support (STS)</strong> release—two years of support under the .NET support policy. STS and Long Term Support (LTS) share the same quality bar and servicing policy; they differ only in support duration. The <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">supported versions table</a>, updated November 10, 2026, lists:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi=".NET 11 là bản Standard Term Support (STS), tức hỗ trợ hai năm theo chính sách .NET.">.NET 11 is a <strong>Standard Term Support (STS)</strong> release—two years of support under the .NET support policy.</span> <span class="ph" data-vi="STS và LTS có cùng chất lượng và chính sách sửa lỗi, chỉ khác nhau ở thời hạn hỗ trợ.">STS and Long Term Support (LTS) share the same quality bar and servicing policy; they differ only in support duration.</span> <span class="ph" data-vi="Bảng phiên bản còn hỗ trợ cập nhật ngày 10/11/2026 ghi rõ:">The <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">supported versions table</a>, updated November 10, 2026, lists:</span></p>
+
 <ul>
-<li>Kiểu union (union types)</li>
-<li>Phân cấp đóng (closed hierarchies)</li>
-<li>Đối số trong collection expression</li>
-<li>Extension indexer</li>
-<li><code>break</code> và <code>continue</code> có nhãn</li>
-<li>Thành viên tĩnh không ảo của interface trên runtime cũ hơn</li>
-<li>An toàn bộ nhớ (tính năng xem trước)</li>
+<li><span class="m-vi" lang="vi">.NET 11: phát hành 10/11/2026, bản vá hiện tại 11.0.0, loại STS, giai đoạn Active, hết hỗ trợ <strong>14/11/2028</strong>.</span><span class="m-en" lang="en">.NET 11: released November 10, 2026, current patch 11.0.0, STS, Active phase, end of support <strong>November 14, 2028</strong>.</span><span class="m-chunk" lang="en"><span class="ph" data-vi=".NET 11: phát hành 10/11/2026, bản vá 11.0.0, loại STS, hết hỗ trợ 14/11/2028.">.NET 11: released November 10, 2026, current patch 11.0.0, STS, Active phase, end of support <strong>November 14, 2028</strong>.</span></span></li>
+<li><span class="m-vi" lang="vi">.NET 10: phát hành 11/11/2025, bản vá hiện tại 10.0.15, loại LTS, giai đoạn Active, hết hỗ trợ <strong>14/11/2028</strong>.</span><span class="m-en" lang="en">.NET 10: released November 11, 2025, current patch 10.0.15, LTS, Active phase, end of support <strong>November 14, 2028</strong>.</span><span class="m-chunk" lang="en"><span class="ph" data-vi=".NET 10: phát hành 11/11/2025, bản vá 10.0.15, loại LTS, hết hỗ trợ 14/11/2028.">.NET 10: released November 11, 2025, current patch 10.0.15, LTS, Active phase, end of support <strong>November 14, 2028</strong>.</span></span></li>
 </ul>
-<p>Kiểu union là điểm Microsoft nhấn mạnh nhất. Một giá trị thuộc một trong các kiểu case đã khai báo, có chuyển đổi từ các kiểu đó, và biểu thức <code>switch</code> được trình biên dịch kiểm tra tính đầy đủ (exhaustiveness). Ví dụ trong bài thông báo mô tả tra cứu sản phẩm: tìm thấy sản phẩm, hoặc báo không tìm thấy, mà không phải nhét hai kết quả vào <code>object</code> hay một lớp cơ sở không liên quan:</p>
+
+<p class="m-vi" lang="vi">Nói cách khác, nếu so đúng hai bản đang được hỗ trợ, chọn LTS (.NET 10) không kéo dài thêm lịch hỗ trợ so với STS (.NET 11): cả hai cùng kết thúc ngày 14/11/2028. .NET 10 vẫn là lựa chọn LTS nếu bạn chưa cần tính năng mới của bản 11. Chính sách cũng nêu: bản chẵn là LTS (ba năm), bản lẻ là STS (hai năm).</p>
+<p class="m-en" lang="en">In other words, between the two currently supported releases, choosing LTS (.NET 10) buys no extra calendar time over STS (.NET 11): both reach end of support on November 14, 2028. .NET 10 remains the LTS option if you do not yet need 11's new features. Even-numbered releases are LTS (three years); odd-numbered releases are STS (two years).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nói cách khác, chọn LTS (.NET 10) không kéo dài thêm thời gian hỗ trợ so với STS (.NET 11) vì cả hai đều kết thúc ngày 14/11/2028.">In other words, between the two currently supported releases, choosing LTS (.NET 10) buys no extra calendar time over STS (.NET 11): both reach end of support on November 14, 2028.</span> <span class="ph" data-vi=".NET 10 vẫn là lựa chọn LTS nếu bạn chưa cần tính năng mới của 11; bản chẵn là LTS (3 năm), bản lẻ là STS (2 năm).">.NET 10 remains the LTS option if you do not yet need 11's new features. Even-numbered releases are LTS (three years); odd-numbered releases are STS (two years).</span></p>
+
+<div class="blog-callout">
+<p class="m-vi" lang="vi"><strong>Lịch cần nhớ:</strong> .NET 8 và .NET 9 đã hết hỗ trợ ngày 10/11/2026. Microsoft khuyên chuyển sang bản còn hỗ trợ để tiếp tục nhận bản sửa. Chọn .NET 11 nếu muốn tính năng mới nhất, hoặc .NET 10 nếu vòng đời LTS phù hợp hơn với yêu cầu của đội ngũ.</p>
+<p class="m-en" lang="en"><strong>Dates to remember:</strong> .NET 8 and .NET 9 reached end of support on November 10, 2026. Microsoft recommends moving to a supported release to keep receiving fixes—pick .NET 11 for the latest features, or .NET 10 if the LTS lifecycle fits your team better.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Lịch cần nhớ: .NET 8 và .NET 9 đã hết hỗ trợ ngày 10/11/2026."><strong>Dates to remember:</strong> .NET 8 and .NET 9 reached end of support on November 10, 2026.</span> <span class="ph" data-vi="Microsoft khuyên chuyển sang bản còn hỗ trợ: chọn .NET 11 để có tính năng mới nhất, hoặc .NET 10 nếu hợp vòng đời LTS.">Microsoft recommends moving to a supported release to keep receiving fixes—pick .NET 11 for the latest features, or .NET 10 if the LTS lifecycle fits your team better.</span></p>
+</div>
+
+<div class="hd"><h2 class="m-vi" lang="vi">C# 15: kiểu union và phân cấp đóng</h2><h2 class="m-en" lang="en">C# 15: union types and closed hierarchies</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="C# 15: kiểu union và phân cấp đóng">C# 15: union types and closed hierarchies</span></h2></div>
+
+<p class="m-vi" lang="vi">C# 15 là phiên bản ngôn ngữ mặc định cho dự án nhắm <code>net11.0</code>. Theo tài liệu C# 15, các tính năng sau (trừ an toàn bộ nhớ) không cần bật ngôn ngữ xem trước:</p>
+<p class="m-en" lang="en">C# 15 is the default language version for projects targeting <code>net11.0</code>. Per the C# 15 docs, the following features (except memory safety) do not require preview language mode:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="C# 15 là phiên bản ngôn ngữ mặc định cho dự án nhắm net11.0; các tính năng sau (trừ an toàn bộ nhớ) không cần bật preview:">C# 15 is the default language version for projects targeting <code>net11.0</code>. Per the C# 15 docs, the following features (except memory safety) do not require preview language mode:</span></p>
+
+<ul>
+<li><span class="m-vi" lang="vi">Kiểu union (union types)</span><span class="m-en" lang="en">Union types</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Kiểu union">Union types</span></span></li>
+<li><span class="m-vi" lang="vi">Phân cấp đóng (closed hierarchies)</span><span class="m-en" lang="en">Closed hierarchies</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Phân cấp đóng">Closed hierarchies</span></span></li>
+<li><span class="m-vi" lang="vi">Đối số trong collection expression</span><span class="m-en" lang="en">Collection expression arguments</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Đối số trong collection expression">Collection expression arguments</span></span></li>
+<li><span class="m-vi" lang="vi">Extension indexer</span><span class="m-en" lang="en">Extension indexers</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Extension indexer">Extension indexers</span></span></li>
+<li><span class="m-vi" lang="vi"><code>break</code> và <code>continue</code> có nhãn</span><span class="m-en" lang="en">Labeled <code>break</code> and <code>continue</code></span><span class="m-chunk" lang="en"><span class="ph" data-vi="break và continue có nhãn">Labeled <code>break</code> and <code>continue</code></span></span></li>
+<li><span class="m-vi" lang="vi">Thành viên tĩnh không ảo của interface trên runtime cũ hơn</span><span class="m-en" lang="en">Non-virtual static interface members on older runtimes</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Thành viên tĩnh không ảo của interface trên runtime cũ hơn">Non-virtual static interface members on older runtimes</span></span></li>
+<li><span class="m-vi" lang="vi">An toàn bộ nhớ (tính năng xem trước)</span><span class="m-en" lang="en">Memory safety (preview feature)</span><span class="m-chunk" lang="en"><span class="ph" data-vi="An toàn bộ nhớ (tính năng xem trước)">Memory safety (preview feature)</span></span></li>
+</ul>
+
+<p class="m-vi" lang="vi">Kiểu union là điểm Microsoft nhấn mạnh nhất. Một giá trị thuộc một trong các kiểu case đã khai báo, có chuyển đổi từ các kiểu đó, và biểu thức <code>switch</code> được trình biên dịch kiểm tra tính đầy đủ (exhaustiveness). Ví dụ trong bài thông báo mô tả tra cứu sản phẩm: tìm thấy sản phẩm, hoặc báo không tìm thấy, mà không phải nhét hai kết quả vào <code>object</code> hay một lớp cơ sở không liên quan:</p>
+<p class="m-en" lang="en">Union types are the headline feature. A value holds one of the declared case types, accepts conversions from those types, and the compiler checks <code>switch</code> expressions for exhaustiveness. The announcement example models a product lookup—returning a product or a not-found record without stuffing both into <code>object</code> or an unrelated base class:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Kiểu union là điểm nhấn lớn nhất: giá trị thuộc một trong các kiểu case đã khai báo và biểu thức switch được kiểm tra tính đầy đủ.">Union types are the headline feature. A value holds one of the declared case types, accepts conversions from those types, and the compiler checks <code>switch</code> expressions for exhaustiveness.</span> <span class="ph" data-vi="Ví dụ tra cứu sản phẩm trả về Product hoặc ProductNotFound mà không cần nhét vào object hay lớp cơ sở gượng ép:">The announcement example models a product lookup—returning a product or a not-found record without stuffing both into <code>object</code> or an unrelated base class:</span></p>
+
 <pre><code>ProductLookup result = new Product(42, "Mechanical keyboard");
 
 string message = result switch
@@ -115,7 +200,11 @@ Console.WriteLine(message);
 public sealed record Product(int Id, string Name);
 public sealed record ProductNotFound(int Id);
 public union ProductLookup(Product, ProductNotFound);</code></pre>
-<p>Phân cấp đóng dùng modifier <code>closed</code> trên lớp, giới hạn việc kế thừa trực tiếp trong cùng assembly khai báo. Nhờ vậy trình biên dịch biết đủ tập hợp lớp con trực tiếp để kiểm tra mẫu. Tài liệu C# 15 dùng ví dụ trạng thái cổng:</p>
+
+<p class="m-vi" lang="vi">Phân cấp đóng dùng modifier <code>closed</code> trên lớp, giới hạn việc kế thừa trực tiếp trong cùng assembly khai báo. Nhờ vậy trình biên dịch biết đủ tập hợp lớp con trực tiếp để kiểm tra mẫu. Tài liệu C# 15 dùng ví dụ trạng thái cổng:</p>
+<p class="m-en" lang="en">Closed hierarchies place the <code>closed</code> modifier on a class, restricting direct inheritance to the declaring assembly so the compiler knows the full set of direct subclasses for pattern matching. The C# 15 docs use a gate state example:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Phân cấp đóng dùng modifier closed trên lớp, giới hạn kế thừa trực tiếp trong cùng assembly để trình biên dịch kiểm tra đủ các nhánh.">Closed hierarchies place the <code>closed</code> modifier on a class, restricting direct inheritance to the declaring assembly so the compiler knows the full set of direct subclasses for pattern matching.</span> <span class="ph" data-vi="Tài liệu C# 15 dùng ví dụ trạng thái cổng:">The C# 15 docs use a gate state example:</span></p>
+
 <pre><code>public closed record class GateState;
 public record class Closed : GateState;
 public record class Open(float Percent) : GateState;
@@ -126,104 +215,227 @@ string Describe(GateState state) =&gt; state switch
     Open(var percent) =&gt; $"{percent}% open",
     // Không cảnh báo: mọi lớp con trực tiếp của GateState đều đã được xử lý.
 };</code></pre>
-<p>Microsoft phân biệt rõ hai công cụ: union hợp khi bạn muốn ghép các kiểu đã có; phân cấp đóng hợp khi bạn sở hữu quan hệ kế thừa. Lớp <code>closed</code> mặc định là abstract, không kết hợp với <code>sealed</code>, <code>static</code> hay <code>abstract</code> tường minh. Việc kế thừa không lan truyền: lớp con không đánh dấu <code>closed</code> vẫn có thể được kế thừa từ assembly khác.</p>
-<p>Tính năng nhỏ hơn nhưng dùng hàng ngày là đối số trong collection expression: truyền tham số constructor hoặc factory mà vẫn giữ cú pháp collection. Ví dụ trong bài thông báo:</p>
+
+<p class="m-vi" lang="vi">Microsoft phân biệt rõ hai công cụ: union hợp khi bạn muốn ghép các kiểu đã có; phân cấp đóng hợp khi bạn sở hữu quan hệ kế thừa. Lớp <code>closed</code> mặc định là abstract, không kết hợp với <code>sealed</code>, <code>static</code> hay <code>abstract</code> tường minh. Việc kế thừa không lan truyền: lớp con không đánh dấu <code>closed</code> vẫn có thể được kế thừa từ assembly khác.</p>
+<p class="m-en" lang="en">Microsoft distinguishes the two: unions fit when combining existing types; closed hierarchies fit when you own the inheritance hierarchy. A <code>closed</code> class is implicitly abstract and cannot combine with <code>sealed</code>, <code>static</code>, or explicit <code>abstract</code>. Closedness does not propagate: subclasses not marked <code>closed</code> can still be inherited from other assemblies.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Microsoft phân biệt rõ: union hợp khi ghép các kiểu sẵn có; phân cấp đóng hợp khi bạn sở hữu quan hệ kế thừa.">Microsoft distinguishes the two: unions fit when combining existing types; closed hierarchies fit when you own the inheritance hierarchy.</span> <span class="ph" data-vi="Lớp closed mặc định là abstract, không kết hợp với sealed/static/abstract tường minh, và tính đóng không tự lan truyền sang lớp con.">A <code>closed</code> class is implicitly abstract and cannot combine with <code>sealed</code>, <code>static</code>, or explicit <code>abstract</code>. Closedness does not propagate: subclasses not marked <code>closed</code> can still be inherited from other assemblies.</span></p>
+
+<p class="m-vi" lang="vi">Tính năng nhỏ hơn nhưng dùng hằng ngày là đối số trong collection expression: truyền tham số constructor hoặc factory mà vẫn giữ cú pháp collection. Ví dụ trong bài thông báo:</p>
+<p class="m-en" lang="en">A smaller everyday addition is collection expression arguments: passing constructor or factory parameters while keeping collection expression syntax. From the announcement:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Tính năng nhỏ hơn nhưng dùng hằng ngày là đối số trong collection expression: truyền tham số constructor hoặc factory mà vẫn giữ cú pháp gọn:">A smaller everyday addition is collection expression arguments: passing constructor or factory parameters while keeping collection expression syntax. From the announcement:</span></p>
+
 <pre><code>HashSet&lt;string&gt; names =
     [with(StringComparer.OrdinalIgnoreCase), "Alice", "ALICE", "Bob"];
 
 Console.WriteLine(names.Count);</code></pre>
-<p>Đoạn này in ra <code>2</code>, vì bộ so sánh không phân biệt hoa thường nên <code>"Alice"</code> và <code>"ALICE"</code> chỉ là một phần tử.</p>
-<p>Phần an toàn bộ nhớ vẫn ở chế độ xem trước: mục tiêu là gắn ngữ cảnh <code>unsafe</code> với thao tác thực sự truy cập bộ nhớ không quản lý, chứ không chỉ vì tồn tại kiểu con trỏ. Cần bật phiên bản ngôn ngữ <code>preview</code> và, nếu muốn quy tắc mới, cờ <code>updated-memory-safety-rules</code>. Chi tiết nằm trong tài liệu C# 15, không phải tính năng mặc định.</p>
 
-<h2>Công cụ lập trình: SDK và MSBuild</h2>
-<p>SDK nay bật host CLI Native AOT theo mặc định. Các lệnh như xem trợ giúp và phiên bản có thể chạy mà không khởi động CLI quản lý; việc khởi chạy công cụ cũng có thể tránh đường khởi động đó. Lệnh nào vẫn cần thực thi quản lý thì vẫn dùng đường cũ.</p>
-<p>Máy chủ MSBuild cũng được giữ ấm giữa các lần gọi CLI, nhằm giảm công khởi động lặp lại. Bộ cài SDK trên Linux và macOS nhỏ hơn nhờ loại bỏ các assembly trùng lặp.</p>
-<p>Một số thay đổi khác mà bài thông báo nêu:</p>
+<p class="m-vi" lang="vi">Đoạn này in ra <code>2</code>, vì bộ so sánh không phân biệt hoa thường nên <code>"Alice"</code> và <code>"ALICE"</code> chỉ tính là một phần tử.</p>
+<p class="m-en" lang="en">This prints <code>2</code>, because the case-insensitive comparer treats <code>"Alice"</code> and <code>"ALICE"</code> as one element.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Đoạn này in ra 2 vì bộ so sánh không phân biệt hoa thường coi Alice và ALICE là một phần tử.">This prints <code>2</code>, because the case-insensitive comparer treats <code>"Alice"</code> and <code>"ALICE"</code> as one element.</span></p>
+
+<p class="m-vi" lang="vi">Phần an toàn bộ nhớ vẫn ở chế độ xem trước: mục tiêu là gắn ngữ cảnh <code>unsafe</code> với thao tác thực sự truy cập bộ nhớ không quản lý, chứ không chỉ vì tồn tại kiểu con trỏ. Cần bật phiên bản ngôn ngữ <code>preview</code> và, nếu muốn quy tắc mới, cờ <code>updated-memory-safety-rules</code>. Chi tiết nằm trong tài liệu C# 15, không phải tính năng mặc định.</p>
+<p class="m-en" lang="en">Memory safety remains in preview: it aims to tie <code>unsafe</code> context to operations that actually touch unmanaged memory rather than the mere presence of pointer types. It requires language version <code>preview</code> and, for the new rules, the <code>updated-memory-safety-rules</code> flag—not enabled by default.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Phần an toàn bộ nhớ vẫn ở chế độ xem trước: gắn ngữ cảnh unsafe với thao tác thực sự chạm bộ nhớ không quản lý chứ không chỉ vì có kiểu con trỏ.">Memory safety remains in preview: it aims to tie <code>unsafe</code> context to operations that actually touch unmanaged memory rather than the mere presence of pointer types.</span> <span class="ph" data-vi="Cần bật ngôn ngữ preview và cờ updated-memory-safety-rules, không mặc định.">It requires language version <code>preview</code> and, for the new rules, the <code>updated-memory-safety-rules</code> flag—not enabled by default.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Công cụ lập trình: SDK và MSBuild</h2><h2 class="m-en" lang="en">Developer tooling: SDK and MSBuild</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Công cụ lập trình: SDK và MSBuild">Developer tooling: SDK and MSBuild</span></h2></div>
+
+<p class="m-vi" lang="vi">SDK nay bật host CLI Native AOT theo mặc định. Các lệnh như xem trợ giúp và phiên bản có thể chạy mà không cần khởi động CLI quản lý; việc khởi chạy công cụ cũng tránh được đường khởi động đó. Lệnh nào vẫn cần thực thi quản lý thì vẫn dùng đường cũ.</p>
+<p class="m-en" lang="en">The SDK now enables a Native AOT CLI host by default. Commands like help and version can run without booting the managed CLI, and tool launches can also bypass that startup path; commands that still need managed execution fall back to the old path.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="SDK nay bật host CLI Native AOT theo mặc định: các lệnh như help, version và khởi chạy công cụ tránh được đường khởi động CLI quản lý.">The SDK now enables a Native AOT CLI host by default. Commands like help and version can run without booting the managed CLI, and tool launches can also bypass that startup path;</span> <span class="ph" data-vi="lệnh nào vẫn cần thực thi quản lý thì vẫn dùng đường cũ.">commands that still need managed execution fall back to the old path.</span></p>
+
+<p class="m-vi" lang="vi">Máy chủ MSBuild cũng được giữ ấm giữa các lần gọi CLI, nhằm giảm công khởi động lặp lại. Bộ cài SDK trên Linux và macOS nhỏ hơn nhờ loại bỏ các assembly trùng lặp.</p>
+<p class="m-en" lang="en">The MSBuild server also stays warm between CLI invocations to cut repeated startup overhead, and Linux/macOS SDK installers shrink by deduplicating assemblies.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Máy chủ MSBuild được giữ ấm giữa các lần gọi CLI để giảm công khởi động lặp lại, còn bộ cài Linux/macOS nhỏ hơn nhờ bỏ assembly trùng.">The MSBuild server also stays warm between CLI invocations to cut repeated startup overhead, and Linux/macOS SDK installers shrink by deduplicating assemblies.</span></p>
+
+<p class="m-vi" lang="vi">Một số thay đổi khác mà bài thông báo nêu:</p>
+<p class="m-en" lang="en">Other tooling changes noted in the announcement:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Một số thay đổi khác mà bài thông báo nêu:">Other tooling changes noted in the announcement:</span></p>
+
 <ul>
-<li>Ứng dụng theo tệp có thể tách nhiều tệp nguồn bằng <code>#:include</code>.</li>
-<li>Bộ lọc solution có thể tạo và sửa từ CLI.</li>
-<li><code>dotnet watch</code> thêm tích hợp Aspire app-host, phục hồi khi sự cố và chọn thiết bị cho dự án di động.</li>
-<li>Với Microsoft.Testing.Platform, <code>dotnet test</code> thêm thời gian chờ cấp lần chạy, giới hạn số lần thất bại, báo cáo tiến độ rõ hơn và thư mục kết quả theo từng module. Các công tắc này không hoán đổi với tùy chọn dòng lệnh của VSTest.</li>
-<li>Xuất bản container có digest ảnh tái lập được nhờ <code>SOURCE_DATE_EPOCH</code>, và bỏ tải lớp trùng khi manifest đích đã tồn tại.</li>
-<li>Cấu hình nguồn NuGet thêm tuổi phát hành tối thiểu của gói: đội ngũ có thể chờ trước khi phiên bản mới đủ điều kiện được chọn. Đây là thêm một lớp chính sách, không thay cho kiểm tra lỗ hổng hay rà soát phụ thuộc.</li>
+<li><span class="m-vi" lang="vi">Ứng dụng theo tệp có thể tách nhiều tệp nguồn bằng <code>#:include</code>.</span><span class="m-en" lang="en">File-based apps can span multiple source files with <code>#:include</code>.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Ứng dụng theo tệp có thể tách nhiều tệp nguồn bằng #:include.">File-based apps can span multiple source files with <code>#:include</code>.</span></span></li>
+<li><span class="m-vi" lang="vi">Bộ lọc solution có thể tạo và sửa từ CLI.</span><span class="m-en" lang="en">Solution filters can be created and edited from the CLI.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Bộ lọc solution có thể tạo và sửa từ CLI.">Solution filters can be created and edited from the CLI.</span></span></li>
+<li><span class="m-vi" lang="vi"><code>dotnet watch</code> thêm tích hợp Aspire app-host, phục hồi khi sự cố và chọn thiết bị cho dự án di động.</span><span class="m-en" lang="en"><code>dotnet watch</code> adds Aspire app-host integration, crash recovery, and device selection for mobile projects.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="dotnet watch thêm tích hợp Aspire app-host, phục hồi khi sự cố và chọn thiết bị cho dự án di động."><code>dotnet watch</code> adds Aspire app-host integration, crash recovery, and device selection for mobile projects.</span></span></li>
+<li><span class="m-vi" lang="vi">Với Microsoft.Testing.Platform, <code>dotnet test</code> thêm thời gian chờ cấp lần chạy, giới hạn số lần thất bại, báo cáo tiến độ rõ hơn và thư mục kết quả theo từng module. Các công tắc này không hoán đổi với tùy chọn dòng lệnh của VSTest.</span><span class="m-en" lang="en">With Microsoft.Testing.Platform, <code>dotnet test</code> adds run-level timeouts, failure caps, clearer progress reporting, and per-module output directories (not interchangeable with VSTest flags).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Với Microsoft.Testing.Platform, dotnet test thêm timeout cấp lần chạy, giới hạn thất bại, báo cáo tiến độ rõ hơn và thư mục kết quả theo module.">With Microsoft.Testing.Platform, <code>dotnet test</code> adds run-level timeouts, failure caps, clearer progress reporting, and per-module output directories (not interchangeable with VSTest flags).</span></span></li>
+<li><span class="m-vi" lang="vi">Xuất bản container có digest ảnh tái lập được nhờ <code>SOURCE_DATE_EPOCH</code>, và bỏ tải lớp trùng khi manifest đích đã tồn tại.</span><span class="m-en" lang="en">Container publishing produces reproducible image digests via <code>SOURCE_DATE_EPOCH</code> and skips duplicate layer uploads when the target manifest already exists.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Xuất bản container có digest tái lập nhờ SOURCE_DATE_EPOCH và bỏ tải lớp trùng khi manifest đích đã có.">Container publishing produces reproducible image digests via <code>SOURCE_DATE_EPOCH</code> and skips duplicate layer uploads when the target manifest already exists.</span></span></li>
+<li><span class="m-vi" lang="vi">Cấu hình nguồn NuGet thêm tuổi phát hành tối thiểu của gói: đội ngũ có thể chờ trước khi phiên bản mới đủ điều kiện được chọn. Đây là thêm một lớp chính sách, không thay cho kiểm tra lỗ hổng hay rà soát phụ thuộc.</span><span class="m-en" lang="en">NuGet source configuration adds a minimum package age so teams can wait before newly published versions become eligible—an extra policy layer, not a substitute for vulnerability scanning.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Nguồn NuGet thêm tuổi phát hành tối thiểu để chờ trước khi chọn bản mới — một lớp chính sách bổ sung chứ không thay kiểm tra lỗ hổng.">NuGet source configuration adds a minimum package age so teams can wait before newly published versions become eligible—an extra policy layer, not a substitute for vulnerability scanning.</span></span></li>
 </ul>
-<p>Công cụ <code>dotnetup</code> dùng để cài và cập nhật SDK cùng runtime trong tài khoản người dùng, hiện đang ở bản xem trước công khai. Visual Studio 2026 (bản tương thích, cập nhật) hoặc Visual Studio Code kèm C# Dev Kit là môi trường được nêu để bắt đầu với .NET 11.</p>
 
-<h2>Runtime, hiệu năng và Runtime Async</h2>
-<p>Bài thông báo nói hiệu năng .NET 11 chạm cả mã bạn triển khai lẫn công cụ bạn dùng khi phát triển. Bài chi tiết của Stephen Toub, <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/"><em>Performance Improvements in .NET 11</em></a>, đi qua hàng trăm tối ưu runtime và thư viện, kèm benchmark và ví dụ mã. Bài này không trích số đo từng micro-benchmark, vì kết quả phụ thuộc phần cứng, cấu hình và khối lượng công việc.</p>
-<p>Các hướng JIT được nêu gồm: bỏ thêm kiểm tra biên và nhánh dư, cải thiện devirtualization, và gấp thêm phép toán thành hằng. Ví dụ, JIT có thể tối ưu thêm lời gọi <code>SequenceEqual</code> khi đã biết đầu vào lúc biên dịch. Những thay đổi này cải thiện mã sinh ra mà không bắt bạn viết lại logic ứng dụng.</p>
-<p>Phân phối interface của Native AOT dùng helper dùng chung, giảm mã tại điểm gọi và cải thiện thông lượng với khối lượng dùng nhiều interface. Hỗ trợ phần cứng được mở rộng, gồm lệnh FP16 cho kiểu <code>Half</code> trên phần cứng x64 và Arm64 được hỗ trợ, cùng API dựng và kết hợp vector mới.</p>
-<p>Phần chẩn đoán: nhật ký báo cáo sự cố trong tiến trình có thể ghi stack trace quản lý, thông tin module và trạng thái runtime trước khi tiến trình thoát. Trước đây có trên nền tảng di động; nay thêm Linux và macOS.</p>
-<p>Runtime Async chuyển việc tạm dừng và tiếp tục bất đồng bộ vào runtime, thay vì dựa vào máy trạng thái do trình biên dịch sinh ra. Một kết quả được nhấn mạnh là ngăn xếp lời gọi trực tiếp rõ hơn: profiler và debugger có thể hiện các phương thức bất đồng bộ, thay vì hạ tầng dùng để thực thi chúng. Điều này khác với stack trace ngoại lệ, vốn đã ẩn phần lớn hạ tầng đó.</p>
-<p>Runtime Async <strong>vẫn là tính năng xem trước</strong>. Để thử trong dự án nhắm <code>net11.0</code>, thêm:</p>
+<p class="m-vi" lang="vi">Công cụ <code>dotnetup</code> dùng để cài và cập nhật SDK cùng runtime trong tài khoản người dùng, hiện đang ở bản xem trước công khai. Visual Studio 2026 (bản tương thích, cập nhật) hoặc Visual Studio Code kèm C# Dev Kit là môi trường được nêu để bắt đầu với .NET 11.</p>
+<p class="m-en" lang="en">The <code>dotnetup</code> tool for installing and updating user-scoped SDKs and runtimes is in public preview. Updated Visual Studio 2026 or Visual Studio Code with C# Dev Kit are the recommended starting environments for .NET 11.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Công cụ dotnetup cài và cập nhật SDK/runtime theo người dùng đang ở bản preview công khai; môi trường gợi ý là Visual Studio 2026 hoặc VS Code kèm C# Dev Kit.">The <code>dotnetup</code> tool for installing and updating user-scoped SDKs and runtimes is in public preview. Updated Visual Studio 2026 or Visual Studio Code with C# Dev Kit are the recommended starting environments for .NET 11.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Runtime, hiệu năng và Runtime Async</h2><h2 class="m-en" lang="en">Runtime, performance, and Runtime Async</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Runtime, hiệu năng và Runtime Async">Runtime, performance, and Runtime Async</span></h2></div>
+
+<p class="m-vi" lang="vi">Bài thông báo nói hiệu năng .NET 11 chạm cả mã bạn triển khai lẫn công cụ bạn dùng khi phát triển. Bài chi tiết của Stephen Toub, <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/"><em>Performance Improvements in .NET 11</em></a>, đi qua hàng trăm tối ưu runtime và thư viện, kèm benchmark và ví dụ mã. Bài này không trích số đo từng micro-benchmark, vì kết quả phụ thuộc phần cứng, cấu hình và khối lượng công việc.</p>
+<p class="m-en" lang="en">The post notes that .NET 11 performance spans both deployed code and developer tooling. Stephen Toub's deep dive, <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/"><em>Performance Improvements in .NET 11</em></a>, walks through hundreds of runtime and library optimizations with benchmarks and code samples. This summary avoids quoting isolated micro-benchmarks, as real gains depend on hardware, configuration, and workload.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hiệu năng .NET 11 cải thiện cả mã triển khai lẫn công cụ phát triển; bài viết của Stephen Toub liệt kê hàng trăm tối ưu runtime và thư viện.">The post notes that .NET 11 performance spans both deployed code and developer tooling. Stephen Toub's deep dive, <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/"><em>Performance Improvements in .NET 11</em></a>, walks through hundreds of runtime and library optimizations with benchmarks and code samples.</span> <span class="ph" data-vi="Bài này không trích số đo micro-benchmark vì kết quả phụ thuộc phần cứng, cấu hình và workload.">This summary avoids quoting isolated micro-benchmarks, as real gains depend on hardware, configuration, and workload.</span></p>
+
+<p class="m-vi" lang="vi">Các hướng JIT được nêu gồm: bỏ thêm kiểm tra biên và nhánh dư, cải thiện devirtualization, và gấp thêm phép toán thành hằng. Ví dụ, JIT có thể tối ưu thêm lời gọi <code>SequenceEqual</code> khi đã biết đầu vào lúc biên dịch. Những thay đổi này cải thiện mã sinh ra mà không bắt bạn viết lại logic ứng dụng.</p>
+<p class="m-en" lang="en">Highlighted JIT improvements include additional bounds-check and dead-branch elimination, stronger devirtualization, and more constant folding—for instance, optimizing <code>SequenceEqual</code> calls when inputs are known at compile time—improving generated code without rewriting app logic.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Các hướng JIT gồm bỏ thêm kiểm tra biên và nhánh dư, cải thiện devirtualization và gấp hằng nhiều hơn (ví dụ tối ưu SequenceEqual khi biết đầu vào lúc biên dịch) mà không cần viết lại logic.">Highlighted JIT improvements include additional bounds-check and dead-branch elimination, stronger devirtualization, and more constant folding—for instance, optimizing <code>SequenceEqual</code> calls when inputs are known at compile time—improving generated code without rewriting app logic.</span></p>
+
+<p class="m-vi" lang="vi">Phân phối interface của Native AOT dùng helper dùng chung, giảm mã tại điểm gọi và cải thiện thông lượng với khối lượng dùng nhiều interface. Hỗ trợ phần cứng được mở rộng, gồm lệnh FP16 cho kiểu <code>Half</code> trên phần cứng x64 và Arm64 được hỗ trợ, cùng API dựng và kết hợp vector mới.</p>
+<p class="m-en" lang="en">Native AOT interface dispatch uses shared helpers, shrinking call-site code and lifting throughput on interface-heavy workloads. Hardware intrinsics expand with FP16 instructions for <code>Half</code> on supported x64 and Arm64 chips plus new vector construction and shuffle APIs.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Native AOT dùng helper dùng chung cho phân phối interface giúp giảm mã tại điểm gọi; phần cứng mở rộng thêm lệnh FP16 cho Half và API vector mới.">Native AOT interface dispatch uses shared helpers, shrinking call-site code and lifting throughput on interface-heavy workloads. Hardware intrinsics expand with FP16 instructions for <code>Half</code> on supported x64 and Arm64 chips plus new vector construction and shuffle APIs.</span></p>
+
+<p class="m-vi" lang="vi">Phần chẩn đoán: nhật ký báo cáo sự cố trong tiến trình có thể ghi stack trace quản lý, thông tin module và trạng thái runtime trước khi tiến trình thoát. Trước đây có trên nền tảng di động; nay thêm Linux và macOS.</p>
+<p class="m-en" lang="en">For diagnostics, in-process crash reporting can record managed stack traces, module info, and runtime state before exit—previously available on mobile, now added on Linux and macOS.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Về chẩn đoán, báo cáo sự cố trong tiến trình ghi lại stack trace quản lý, thông tin module và trạng thái runtime trước khi thoát — nay có thêm trên Linux và macOS.">For diagnostics, in-process crash reporting can record managed stack traces, module info, and runtime state before exit—previously available on mobile, now added on Linux and macOS.</span></p>
+
+<p class="m-vi" lang="vi">Runtime Async chuyển việc tạm dừng và tiếp tục bất đồng bộ vào runtime, thay vì dựa vào máy trạng thái do trình biên dịch sinh ra. Một kết quả được nhấn mạnh là ngăn xếp lời gọi trực tiếp rõ hơn: profiler và debugger có thể hiện các phương thức bất đồng bộ, thay vì hạ tầng dùng để thực thi chúng. Điều này khác với stack trace ngoại lệ, vốn đã ẩn phần lớn hạ tầng đó.</p>
+<p class="m-en" lang="en">Runtime Async moves async suspension and resumption into the runtime itself instead of relying on compiler-generated state machines. A key payoff is cleaner live call stacks: profilers and debuggers can display async methods directly rather than execution machinery (unlike exception stack traces, which already hid much of it).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Runtime Async chuyển việc tạm dừng và tiếp tục bất đồng bộ vào runtime thay vì máy trạng thái do trình biên dịch sinh ra.">Runtime Async moves async suspension and resumption into the runtime itself instead of relying on compiler-generated state machines.</span> <span class="ph" data-vi="Nhờ đó profiler và debugger thấy ngăn xếp lời gọi trực tiếp rõ hơn thay vì hạ tầng thực thi bên dưới.">A key payoff is cleaner live call stacks: profilers and debuggers can display async methods directly rather than execution machinery (unlike exception stack traces, which already hid much of it).</span></p>
+
+<p class="m-vi" lang="vi">Runtime Async <strong>vẫn là tính năng xem trước</strong>. Để thử trong dự án nhắm <code>net11.0</code>, thêm:</p>
+<p class="m-en" lang="en">Runtime Async <strong>remains a preview feature</strong>. To try it in a project targeting <code>net11.0</code>, add:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Runtime Async vẫn là tính năng xem trước; để thử trong dự án nhắm net11.0, thêm:">Runtime Async <strong>remains a preview feature</strong>. To try it in a project targeting <code>net11.0</code>, add:</span></p>
+
 <pre><code>&lt;PropertyGroup&gt;
   &lt;Features&gt;runtime-async=on&lt;/Features&gt;
 &lt;/PropertyGroup&gt;</code></pre>
-<p>Bạn không cần bật <code>EnablePreviewFeatures</code> cho trường hợp này. Thư viện runtime của .NET được biên dịch với Runtime Async, nhưng cho mã ứng dụng dùng mô hình biên dịch mới là một lựa chọn riêng. Microsoft khuyên đọc tài liệu, rồi kiểm tra phụ thuộc và công cụ chẩn đoán trước khi áp dụng.</p>
 
-<h2>Thư viện, JSON và EF Core 11</h2>
-<p>Thư viện bổ sung những khả năng trước đây thường cần thiết lập thêm, bộ đệm trung gian hoặc helper tự viết:</p>
+<p class="m-vi" lang="vi">Bạn không cần bật <code>EnablePreviewFeatures</code> cho trường hợp này. Thư viện runtime của .NET được biên dịch với Runtime Async, nhưng cho mã ứng dụng dùng mô hình biên dịch mới là một lựa chọn riêng. Microsoft khuyên đọc tài liệu, rồi kiểm tra phụ thuộc và công cụ chẩn đoán trước khi áp dụng.</p>
+<p class="m-en" lang="en">You do not need <code>EnablePreviewFeatures</code> for this flag. The .NET runtime libraries themselves are compiled with Runtime Async, while opting your application code in is separate; Microsoft recommends reviewing docs, dependencies, and diagnostics tools before enabling it.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Không cần bật EnablePreviewFeatures cho cờ này; các thư viện runtime của .NET đã biên dịch với Runtime Async, còn mã ứng dụng là lựa chọn riêng cần kiểm tra kỹ trước khi bật.">You do not need <code>EnablePreviewFeatures</code> for this flag. The .NET runtime libraries themselves are compiled with Runtime Async, while opting your application code in is separate; Microsoft recommends reviewing docs, dependencies, and diagnostics tools before enabling it.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Thư viện, JSON và EF Core 11</h2><h2 class="m-en" lang="en">Libraries, JSON, and EF Core 11</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Thư viện, JSON và EF Core 11">Libraries, JSON, and EF Core 11</span></h2></div>
+
+<p class="m-vi" lang="vi">Thư viện bổ sung những khả năng trước đây thường cần thiết lập thêm, bộ đệm trung gian hoặc helper tự viết:</p>
+<p class="m-en" lang="en">Base libraries add capabilities that previously required extra boilerplate, intermediate buffers, or custom helpers:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Thư viện bổ sung những khả năng trước đây thường cần thiết lập thêm, bộ đệm trung gian hoặc helper tự viết:">Base libraries add capabilities that previously required extra boilerplate, intermediate buffers, or custom helpers:</span></p>
+
 <ul>
-<li>API <code>Process</code> có phương thức chạy một lần, thu output và trạng thái thoát; các API nâng cao kiểm soát handle kế thừa, khởi động ở trạng thái treo và gửi tín hiệu tiến trình.</li>
-<li>Nén Zstandard có sẵn trong <code>System.IO.Compression</code>, cùng API nén theo span và kiểm tra CRC32 khi đọc mục ZIP.</li>
-<li>Bốn bộ chuyển luồng trong bộ nhớ: <code>ReadOnlyMemoryStream</code>, <code>WritableMemoryStream</code>, <code>ReadOnlySequenceStream</code> và <code>StringStream</code>. Ví dụ, một <code>ReadOnlySequence</code> đã phân đoạn có thể được đọc như <code>Stream</code> mà không phải gom thành một bộ đệm liền trước.</li>
-<li><code>System.Text.Json</code> hỗ trợ union của C#, discriminated union của F# và xuất JSON Lines từ chuỗi bất đồng bộ. Hỗ trợ union F# dùng reflection, không hỗ trợ source generation, trimming hay Native AOT; cần xem giới hạn trong tài liệu trước khi dùng cho ứng dụng đã cắt tỉa.</li>
-<li>LINQ thêm <code>FullJoin</code>, giữ phần tử không khớp từ cả hai phía, hữu ích khi đối chiếu hai tập dữ liệu.</li>
+<li><span class="m-vi" lang="vi">API <code>Process</code> có phương thức chạy một lần, thu output và trạng thái thoát; các API nâng cao kiểm soát handle kế thừa, khởi động ở trạng thái treo và gửi tín hiệu tiến trình.</span><span class="m-en" lang="en">The <code>Process</code> API adds one-shot execution capturing output and exit status, plus advanced APIs for inherited handles, suspended startup, and process signaling.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="API Process thêm chạy một lần thu output/exit code và kiểm soát handle kế thừa, khởi động treo, gửi tín hiệu.">The <code>Process</code> API adds one-shot execution capturing output and exit status, plus advanced APIs for inherited handles, suspended startup, and process signaling.</span></span></li>
+<li><span class="m-vi" lang="vi">Nén Zstandard có sẵn trong <code>System.IO.Compression</code>, cùng API nén theo span và kiểm tra CRC32 khi đọc mục ZIP.</span><span class="m-en" lang="en">Zstandard compression lands in <code>System.IO.Compression</code>, alongside span-based compression APIs and CRC32 checks when reading ZIP entries.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Nén Zstandard có sẵn trong System.IO.Compression, cùng API theo span và kiểm tra CRC32 khi đọc ZIP.">Zstandard compression lands in <code>System.IO.Compression</code>, alongside span-based compression APIs and CRC32 checks when reading ZIP entries.</span></span></li>
+<li><span class="m-vi" lang="vi">Bốn bộ chuyển luồng trong bộ nhớ: <code>ReadOnlyMemoryStream</code>, <code>WritableMemoryStream</code>, <code>ReadOnlySequenceStream</code> và <code>StringStream</code>. Ví dụ, một <code>ReadOnlySequence</code> đã phân đoạn có thể được đọc như <code>Stream</code> mà không phải gom thành một bộ đệm liền trước.</span><span class="m-en" lang="en">Four in-memory stream adapters: <code>ReadOnlyMemoryStream</code>, <code>WritableMemoryStream</code>, <code>ReadOnlySequenceStream</code>, and <code>StringStream</code>—letting segmented <code>ReadOnlySequence</code> data stream without copying into one contiguous buffer.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Bốn bộ chuyển luồng trong bộ nhớ giúp đọc ReadOnlySequence phân đoạn như Stream mà không cần gom thành bộ đệm liền.">Four in-memory stream adapters: <code>ReadOnlyMemoryStream</code>, <code>WritableMemoryStream</code>, <code>ReadOnlySequenceStream</code>, and <code>StringStream</code>—letting segmented <code>ReadOnlySequence</code> data stream without copying into one contiguous buffer.</span></span></li>
+<li><span class="m-vi" lang="vi"><code>System.Text.Json</code> hỗ trợ union của C#, discriminated union của F# và xuất JSON Lines từ chuỗi bất đồng bộ. Hỗ trợ union F# dùng reflection, không hỗ trợ source generation, trimming hay Native AOT; cần xem giới hạn trong tài liệu trước khi dùng cho ứng dụng đã cắt tỉa.</span><span class="m-en" lang="en"><code>System.Text.Json</code> supports C# unions, F# discriminated unions, and JSON Lines streaming from async sequences. F# union support uses reflection and does not support source generation, trimming, or Native AOT.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="System.Text.Json hỗ trợ C# union, F# discriminated union (dùng reflection, chưa hỗ trợ AOT/trimming) và xuất JSON Lines từ async stream."><code>System.Text.Json</code> supports C# union, F# discriminated unions, and JSON Lines streaming from async sequences. F# union support uses reflection and does not support source generation, trimming, or Native AOT.</span></span></li>
+<li><span class="m-vi" lang="vi">LINQ thêm <code>FullJoin</code>, giữ phần tử không khớp từ cả hai phía, hữu ích khi đối chiếu hai tập dữ liệu.</span><span class="m-en" lang="en">LINQ adds <code>FullJoin</code>, preserving unmatched items from both sides when reconciling two datasets.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="LINQ thêm FullJoin giữ phần tử không khớp từ cả hai phía khi đối chiếu hai tập dữ liệu.">LINQ adds <code>FullJoin</code>, preserving unmatched items from both sides when reconciling two datasets.</span></span></li>
 </ul>
-<p>EF Core 11 bỏ thêm join không cần thiết trong một số tình huống reference navigation và split query, cải thiện dịch <code>GroupBy</code>, và dịch toán tử LINQ <code>FullJoin</code> mới trên nhà cung cấp quan hệ hỗ trợ nó. Kiểu phức và cột JSON dùng được trên thực thể ánh xạ table-per-type hoặc table-per-concrete-type. Với SQL Server, EF Core thêm chỉ mục vector và tìm kiếm vector gần đúng; các tính năng này và API tương ứng <strong>vẫn thử nghiệm</strong>. EF Core 11 yêu cầu .NET 11; khi nâng cấp cần kiểm tra tương thích nhà cung cấp cơ sở dữ liệu và các thay đổi phá vỡ của cả EF Core 11 lẫn runtime.</p>
-<p>F# 11, theo bài thông báo, cải thiện mức dùng bộ nhớ của trình biên dịch, giảm cấp phát trong thao tác tập hợp của FSharp.Core, và thêm cách giới hạn khối lượng công việc bất đồng bộ chạy đồng thời. Ghi chú phát hành F# tách phần cập nhật ngôn ngữ mặc định khỏi khả năng xem trước, gồm hỗ trợ Runtime Async cho bộ dựng biểu thức tính toán tùy chỉnh.</p>
 
-<h2>Web: ASP.NET Core và Blazor</h2>
-<p>ASP.NET Core hỗ trợ kiểu union C# ở mọi nơi dùng <code>System.Text.Json</code>, gồm thân yêu cầu và phản hồi JSON trong Minimal APIs và MVC. Tài liệu OpenAPI sinh ra mô tả các nhánh của union bằng schema <code>anyOf</code>. Hỗ trợ này áp dụng cho thân JSON, không áp dụng cho liên kết route, query, header hay form. Nếu nhiều nhánh union có cùng hình dạng JSON, cần cấu hình bộ phân loại để giải tuần tự hóa phân biệt được chúng.</p>
-<p>Validation bất đồng bộ đi cùng API DataAnnotations bất đồng bộ mới: bộ kiểm tra có thể <code>await</code> truy vấn cơ sở dữ liệu hoặc lời gọi từ xa thay vì chặn luồng. Minimal APIs và form Blazor dùng được hỗ trợ này.</p>
-<p>OpenAPI 3.2 là mặc định cho tài liệu sinh ra. Một cải tiến được nêu là mô tả được payload theo từng sự kiện của luồng server-sent events. Nếu bộ sinh client hoặc công cụ khác chưa hỗ trợ 3.2, bạn có thể chọn tường minh một phiên bản tài liệu cũ hơn.</p>
-<p>SignalR có thể làm mới xác thực trên kết nối đang mở mà không phải kết nối lại. Thành phần Blazor Interactive Server nhận được danh tính đã cập nhật và phản ứng khi claim thay đổi.</p>
-<p>Blazor thêm khả năng cho cả trang render tĩnh lẫn ứng dụng tương tác:</p>
+<p class="m-vi" lang="vi">EF Core 11 bỏ thêm join không cần thiết trong một số tình huống reference navigation và split query, cải thiện dịch <code>GroupBy</code>, và dịch toán tử LINQ <code>FullJoin</code> mới trên nhà cung cấp quan hệ hỗ trợ nó. Kiểu phức và cột JSON dùng được trên thực thể ánh xạ table-per-type hoặc table-per-concrete-type. Với SQL Server, EF Core thêm chỉ mục vector và tìm kiếm vector gần đúng; các tính năng này và API tương ứng <strong>vẫn thử nghiệm</strong>. EF Core 11 yêu cầu .NET 11; khi nâng cấp cần kiểm tra tương thích nhà cung cấp cơ sở dữ liệu và các thay đổi phá vỡ của cả EF Core 11 lẫn runtime.</p>
+<p class="m-en" lang="en">EF Core 11 eliminates more unnecessary joins in reference navigations and split queries, improves <code>GroupBy</code> translation, and translates the new <code>FullJoin</code> LINQ operator on supporting relational providers. Complex types and JSON columns work on TPT and TPC mappings. For SQL Server, EF Core adds vector indexes and approximate vector search—both still <strong>experimental</strong>. EF Core 11 requires .NET 11; check database provider compatibility and breaking changes before upgrading.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="EF Core 11 bỏ thêm join thừa, cải thiện dịch GroupBy và dịch FullJoin, hỗ trợ kiểu phức/JSON trên TPT và TPC.">EF Core 11 eliminates more unnecessary joins in reference navigations and split queries, improves <code>GroupBy</code> translation, and translates the new <code>FullJoin</code> LINQ operator on supporting relational providers. Complex types and JSON columns work on TPT and TPC mappings.</span> <span class="ph" data-vi="Với SQL Server có thêm chỉ mục và tìm kiếm vector gần đúng (vẫn thử nghiệm); EF Core 11 yêu cầu .NET 11.">For SQL Server, EF Core adds vector indexes and approximate vector search—both still <strong>experimental</strong>. EF Core 11 requires .NET 11; check database provider compatibility and breaking changes before upgrading.</span></p>
+
+<p class="m-vi" lang="vi">F# 11, theo bài thông báo, cải thiện mức dùng bộ nhớ của trình biên dịch, giảm cấp phát trong thao tác tập hợp của FSharp.Core, và thêm cách giới hạn khối lượng công việc bất đồng bộ chạy đồng thời. Ghi chú phát hành F# tách phần cập nhật ngôn ngữ mặc định khỏi khả năng xem trước, gồm hỗ trợ Runtime Async cho bộ dựng biểu thức tính toán tùy chỉnh.</p>
+<p class="m-en" lang="en">F# 11 reduces compiler memory usage, cuts allocations in FSharp.Core collection operations, and adds concurrency throttling for async workloads. Its release notes separate default language updates from preview features such as Runtime Async support for custom computation expression builders.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="F# 11 giảm bộ nhớ trình biên dịch, giảm cấp phát trong FSharp.Core và thêm giới hạn đồng thời cho async, tách cập nhật mặc định khỏi tính năng preview.">F# 11 reduces compiler memory usage, cuts allocations in FSharp.Core collection operations, and adds concurrency throttling for async workloads. Its release notes separate default language updates from preview features such as Runtime Async support for custom computation expression builders.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Web: ASP.NET Core và Blazor</h2><h2 class="m-en" lang="en">Web: ASP.NET Core and Blazor</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Web: ASP.NET Core và Blazor">Web: ASP.NET Core and Blazor</span></h2></div>
+
+<p class="m-vi" lang="vi">ASP.NET Core hỗ trợ kiểu union C# ở mọi nơi dùng <code>System.Text.Json</code>, gồm thân yêu cầu và phản hồi JSON trong Minimal APIs và MVC. Tài liệu OpenAPI sinh ra mô tả các nhánh của union bằng schema <code>anyOf</code>. Hỗ trợ này áp dụng cho thân JSON, không áp dụng cho liên kết route, query, header hay form. Nếu nhiều nhánh union có cùng hình dạng JSON, cần cấu hình bộ phân loại để giải tuần tự hóa phân biệt được chúng.</p>
+<p class="m-en" lang="en">ASP.NET Core supports C# union types wherever <code>System.Text.Json</code> is used, including JSON request and response bodies in Minimal APIs and MVC. Generated OpenAPI docs describe union cases with <code>anyOf</code> schemas. This applies to JSON bodies—not route, query, header, or form binding—and cases with identical JSON shapes need a discriminator configured.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="ASP.NET Core hỗ trợ C# union trong thân JSON của Minimal APIs và MVC, sinh schema OpenAPI dạng anyOf.">ASP.NET Core supports C# union types wherever <code>System.Text.Json</code> is used, including JSON request and response bodies in Minimal APIs and MVC. Generated OpenAPI docs describe union cases with <code>anyOf</code> schemas.</span> <span class="ph" data-vi="Hỗ trợ này không áp dụng cho route, query, header hay form, và cần bộ phân loại nếu các nhánh trùng hình dạng JSON.">This applies to JSON bodies—not route, query, header, or form binding—and cases with identical JSON shapes need a discriminator configured.</span></p>
+
+<p class="m-vi" lang="vi">Validation bất đồng bộ đi cùng API DataAnnotations bất đồng bộ mới: bộ kiểm tra có thể <code>await</code> truy vấn cơ sở dữ liệu hoặc lời gọi từ xa thay vì chặn luồng. Minimal APIs và form Blazor dùng được hỗ trợ này.</p>
+<p class="m-en" lang="en">Async validation arrives with new asynchronous DataAnnotations APIs: validators can <code>await</code> database queries or remote calls instead of blocking threads, usable in both Minimal APIs and Blazor forms.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Validation bất đồng bộ đi cùng API DataAnnotations mới cho phép await truy vấn DB hoặc lời gọi từ xa trong Minimal APIs và form Blazor.">Async validation arrives with new asynchronous DataAnnotations APIs: validators can <code>await</code> database queries or remote calls instead of blocking threads, usable in both Minimal APIs and Blazor forms.</span></p>
+
+<p class="m-vi" lang="vi">OpenAPI 3.2 là mặc định cho tài liệu sinh ra. Một cải tiến được nêu là mô tả được payload theo từng sự kiện của luồng server-sent events. Nếu bộ sinh client hoặc công cụ khác chưa hỗ trợ 3.2, bạn có thể chọn tường minh một phiên bản tài liệu cũ hơn.</p>
+<p class="m-en" lang="en">OpenAPI 3.2 becomes the default for generated documents, adding support for per-event payloads in server-sent event streams. If client generators or downstream tools are not ready for 3.2, you can explicitly target an older spec version.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="OpenAPI 3.2 là mặc định cho tài liệu sinh ra, mô tả được payload theo từng sự kiện của server-sent events (và có thể chọn phiên bản cũ hơn nếu công cụ chưa hỗ trợ).">OpenAPI 3.2 becomes the default for generated documents, adding support for per-event payloads in server-sent event streams. If client generators or downstream tools are not ready for 3.2, you can explicitly target an older spec version.</span></p>
+
+<p class="m-vi" lang="vi">SignalR có thể làm mới xác thực trên kết nối đang mở mà không phải kết nối lại. Thành phần Blazor Interactive Server nhận được danh tính đã cập nhật và phản ứng khi claim thay đổi.</p>
+<p class="m-en" lang="en">SignalR can refresh authentication on an open connection without reconnecting, and Blazor Interactive Server components receive the updated identity and react to claim changes.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="SignalR làm mới được xác thực trên kết nối đang mở mà không cần nối lại, giúp Blazor Interactive Server nhận danh tính và claim mới.">SignalR can refresh authentication on an open connection without reconnecting, and Blazor Interactive Server components receive the updated identity and react to claim changes.</span></p>
+
+<p class="m-vi" lang="vi">Blazor thêm khả năng cho cả trang render tĩnh lẫn ứng dụng tương tác:</p>
+<p class="m-en" lang="en">Blazor adds capabilities for both static server rendering and interactive apps:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Blazor thêm khả năng cho cả trang render tĩnh lẫn ứng dụng tương tác:">Blazor adds capabilities for both static server rendering and interactive apps:</span></p>
+
 <ul>
-<li>Thành phần <code>CacheView</code> lưu cache đầu ra đã render của một cây thành phần con khi render tĩnh phía máy chủ. Khi trúng cache, Blazor phát lại markup mà không tạo các thành phần con hay chạy vòng đời của chúng.</li>
-<li>Ứng dụng Interactive Server có thể chọn tạm dừng circuit tự động khi thẻ trình duyệt không còn hoạt động. Sau một khoảng chờ cấu hình được, việc tạm dừng giải phóng bộ nhớ máy chủ và kết nối SignalR. Tính năng này cần gói bổ sung và cấu hình tường minh; nâng cấp không tự đổi hành vi circuit.</li>
-<li>Form có validation phía client cho render tĩnh phía máy chủ và hỗ trợ validation bất đồng bộ. <code>QuickGrid</code> và <code>Virtualize</code> thêm cách nhảy tới một mục cụ thể.</li>
+<li><span class="m-vi" lang="vi">Thành phần <code>CacheView</code> lưu cache đầu ra đã render của một cây thành phần con khi render tĩnh phía máy chủ. Khi trúng cache, Blazor phát lại markup mà không tạo các thành phần con hay chạy vòng đời của chúng.</span><span class="m-en" lang="en"><code>CacheView</code> caches the rendered output of a child component tree in static SSR, replaying markup on cache hits without instantiating children or running their lifecycle.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="CacheView cache đầu ra render tĩnh của cây thành phần con và phát lại markup khi trúng cache."><code>CacheView</code> caches the rendered output of a child component tree in static SSR, replaying markup on cache hits without instantiating children or running their lifecycle.</span></span></li>
+<li><span class="m-vi" lang="vi">Ứng dụng Interactive Server có thể chọn tạm dừng circuit tự động khi thẻ trình duyệt không còn hoạt động. Sau một khoảng chờ cấu hình được, việc tạm dừng giải phóng bộ nhớ máy chủ và kết nối SignalR. Tính năng này cần gói bổ sung và cấu hình tường minh; nâng cấp không tự đổi hành vi circuit.</span><span class="m-en" lang="en">Interactive Server apps can opt into automatic circuit pausing when browser tabs go inactive, freeing server memory and SignalR connections after a configurable timeout (requires an extra package and explicit config).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Interactive Server có thể bật tạm dừng circuit tự động khi tab trình duyệt không hoạt động để giải phóng RAM và kết nối SignalR.">Interactive Server apps can opt into automatic circuit pausing when browser tabs go inactive, freeing server memory and SignalR connections after a configurable timeout (requires an extra package and explicit config).</span></span></li>
+<li><span class="m-vi" lang="vi">Form có validation phía client cho render tĩnh phía máy chủ và hỗ trợ validation bất đồng bộ. <code>QuickGrid</code> và <code>Virtualize</code> thêm cách nhảy tới một mục cụ thể.</span><span class="m-en" lang="en">Forms gain client-side validation for static SSR and async validation support; <code>QuickGrid</code> and <code>Virtualize</code> add methods to jump to a specific item.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Form có validation phía client cho static SSR và hỗ trợ async; QuickGrid và Virtualize thêm cách nhảy tới mục cụ thể.">Forms gain client-side validation for static SSR and async validation support; <code>QuickGrid</code> and <code>Virtualize</code> add methods to jump to a specific item.</span></span></li>
 </ul>
-<p>Gói <code>Microsoft.AspNetCore.Components.AI</code> cung cấp thành phần cho chat streaming, render công cụ, luồng phê duyệt và trạng thái giao diện dùng chung. Chat cơ bản hoạt động với mọi <code>IChatClient</code>. Trải nghiệm nâng cao với agent từ xa dùng tích hợp AG-UI. Gói thành phần Blazor AI <strong>vẫn thử nghiệm và giữ trạng thái prerelease suốt vòng đời .NET 11</strong>: đó là hướng để thử và góp ý, không phải phần ổn định của khung dùng chung ASP.NET Core.</p>
 
-<h2>Ứng dụng AI và công cụ agent</h2>
-<p>SDK .NET 11 có mẫu máy chủ MCP. MCP cho ứng dụng AI một cách chung để khám phá và gọi công cụ cùng dịch vụ. Mẫu dùng SDK C# chính thức của MCP và kèm một công cụ mẫu:</p>
+<p class="m-vi" lang="vi">Gói <code>Microsoft.AspNetCore.Components.AI</code> cung cấp thành phần cho chat streaming, render công cụ, luồng phê duyệt và trạng thái giao diện dùng chung. Chat cơ bản hoạt động với mọi <code>IChatClient</code>. Trải nghiệm nâng cao với agent từ xa dùng tích hợp AG-UI. Gói thành phần Blazor AI <strong>vẫn thử nghiệm và giữ trạng thái prerelease suốt vòng đời .NET 11</strong>: đó là hướng để thử và góp ý, không phải phần ổn định của khung dùng chung ASP.NET Core.</p>
+<p class="m-en" lang="en"><code>Microsoft.AspNetCore.Components.AI</code> provides components for streaming chat, tool rendering, approval flows, and shared UI state. Basic chat works with any <code>IChatClient</code>, while richer remote agent flows use AG-UI integration. This package <strong>remains experimental and prerelease throughout .NET 11</strong>—built for feedback, not as part of the stable shared framework.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Gói Microsoft.AspNetCore.Components.AI cung cấp thành phần chat streaming, render công cụ và luồng phê duyệt cho mọi IChatClient hoặc agent qua AG-UI,"><code>Microsoft.AspNetCore.Components.AI</code> provides components for streaming chat, tool rendering, approval flows, and shared UI state. Basic chat works with any <code>IChatClient</code>, while richer remote agent flows use AG-UI integration.</span> <span class="ph" data-vi="nhưng vẫn thử nghiệm và giữ trạng thái prerelease suốt vòng đời .NET 11.">This package <strong>remains experimental and prerelease throughout .NET 11</strong>—built for feedback, not as part of the stable shared framework.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Ứng dụng AI và công cụ agent</h2><h2 class="m-en" lang="en">AI apps and agent tooling</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Ứng dụng AI và công cụ agent">AI apps and agent tooling</span></h2></div>
+
+<p class="m-vi" lang="vi">SDK .NET 11 có mẫu máy chủ MCP. MCP cho ứng dụng AI một cách chung để khám phá và gọi công cụ cùng dịch vụ. Mẫu dùng SDK C# chính thức của MCP và kèm một công cụ mẫu:</p>
+<p class="m-en" lang="en">The .NET 11 SDK includes an MCP server template, giving AI apps a standard way to discover and invoke tools and services using the official MCP C# SDK:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="SDK .NET 11 có sẵn mẫu máy chủ MCP dùng SDK C# chính thức để ứng dụng AI khám phá và gọi công cụ:">The .NET 11 SDK includes an MCP server template, giving AI apps a standard way to discover and invoke tools and services using the official MCP C# SDK:</span></p>
+
 <pre><code>dotnet new mcpserver -o MyMcpServer</code></pre>
-<p>Microsoft.Extensions.AI (MEAI) cung cấp trừu tượng như <code>IChatClient</code> và <code>IEmbeddingGenerator</code>, để ghép truy cập mô hình với dependency injection, cache và OpenTelemetry theo kiểu .NET quen thuộc. Các thư viện này phát hành dưới dạng gói NuGet; không bắt buộc chuyển toàn bộ mã ứng dụng sang phiên bản khung mới.</p>
-<p>Microsoft Agent Framework (MAF) xây trên các trừu tượng đó: agent gọi công cụ và giữ trạng thái hội thoại, cộng workflow điều phối agent với mã ứng dụng. Có thể nối agent với công cụ MCP, rồi mở agent qua điểm cuối AG-UI của ASP.NET Core để làm giao diện Blazor tương tác. Tích hợp máy chủ AG-UI hiện vẫn prerelease.</p>
-<p>Về phía công cụ phát triển có agent:</p>
+
+<p class="m-vi" lang="vi">Microsoft.Extensions.AI (MEAI) cung cấp trừu tượng như <code>IChatClient</code> và <code>IEmbeddingGenerator</code>, để ghép truy cập mô hình với dependency injection, cache và OpenTelemetry theo kiểu .NET quen thuộc. Các thư viện này phát hành dưới dạng gói NuGet; không bắt buộc chuyển toàn bộ mã ứng dụng sang phiên bản khung mới.</p>
+<p class="m-en" lang="en">Microsoft.Extensions.AI (MEAI) offers abstractions like <code>IChatClient</code> and <code>IEmbeddingGenerator</code> to wire model access into dependency injection, caching, and OpenTelemetry in idiomatic .NET style—shipped as NuGet packages without forcing a full framework upgrade.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Microsoft.Extensions.AI (MEAI) cung cấp IChatClient và IEmbeddingGenerator để ghép mô hình với DI, cache và OpenTelemetry dưới dạng gói NuGet.">Microsoft.Extensions.AI (MEAI) offers abstractions like <code>IChatClient</code> and <code>IEmbeddingGenerator</code> to wire model access into dependency injection, caching, and OpenTelemetry in idiomatic .NET style—shipped as NuGet packages without forcing a full framework upgrade.</span></p>
+
+<p class="m-vi" lang="vi">Microsoft Agent Framework (MAF) xây trên các trừu tượng đó: agent gọi công cụ và giữ trạng thái hội thoại, cộng workflow điều phối agent với mã ứng dụng. Có thể nối agent với công cụ MCP, rồi mở agent qua điểm cuối AG-UI của ASP.NET Core để làm giao diện Blazor tương tác. Tích hợp máy chủ AG-UI hiện vẫn prerelease.</p>
+<p class="m-en" lang="en">Microsoft Agent Framework (MAF) builds on those abstractions with tool-calling agents, conversation state, and workflows orchestrating agents alongside app code. You can connect agents to MCP tools and expose them over ASP.NET Core AG-UI endpoints for interactive Blazor UIs (AG-UI server integration remains prerelease).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Microsoft Agent Framework (MAF) xây trên đó với agent gọi công cụ, giữ trạng thái và workflow điều phối, có thể nối MCP và mở qua AG-UI (vẫn prerelease).">Microsoft Agent Framework (MAF) builds on those abstractions with tool-calling agents, conversation state, and workflows orchestrating agents alongside app code. You can connect agents to MCP tools and expose them over ASP.NET Core AG-UI endpoints for interactive Blazor UIs (AG-UI server integration remains prerelease).</span></p>
+
+<p class="m-vi" lang="vi">Về phía công cụ phát triển có agent:</p>
+<p class="m-en" lang="en">On the agent-assisted developer tooling side:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Về phía công cụ phát triển có agent:">On the agent-assisted developer tooling side:</span></p>
+
 <ul>
-<li>.NET Skills cung cấp hướng dẫn theo từng tác vụ từ nhóm .NET cho coding agent.</li>
-<li>Bộ công cụ .NET MAUI DevFlow (thử nghiệm) mở cây giao diện, ảnh chụp màn hình và công cụ tương tác của ứng dụng đang chạy, để agent kiểm tra giao diện thay vì chỉ đọc mã nguồn.</li>
-<li>.NET Upgrade canvas cho cái nhìn trực quan về một phiên nâng cấp GitHub Copilot: xem kết quả đánh giá, tương thích phụ thuộc, theo dõi tác vụ và lỗi khi agent nâng cấp chạy.</li>
+<li><span class="m-vi" lang="vi">.NET Skills cung cấp hướng dẫn theo từng tác vụ từ nhóm .NET cho coding agent.</span><span class="m-en" lang="en">.NET Skills provides task-specific guidance from the .NET team for coding agents.</span><span class="m-chunk" lang="en"><span class="ph" data-vi=".NET Skills cung cấp hướng dẫn theo từng tác vụ từ nhóm .NET cho coding agent.">.NET Skills provides task-specific guidance from the .NET team for coding agents.</span></span></li>
+<li><span class="m-vi" lang="vi">Bộ công cụ .NET MAUI DevFlow (thử nghiệm) mở cây giao diện, ảnh chụp màn hình và công cụ tương tác của ứng dụng đang chạy, để agent kiểm tra giao diện thay vì chỉ đọc mã nguồn.</span><span class="m-en" lang="en">.NET MAUI DevFlow (experimental) exposes the live UI tree, screenshots, and interaction hooks of a running app so agents can inspect UI rather than only reading source code.</span><span class="m-chunk" lang="en"><span class="ph" data-vi=".NET MAUI DevFlow (thử nghiệm) mở cây giao diện, ảnh chụp màn hình và tương tác trực tiếp để agent kiểm tra app đang chạy.">.NET MAUI DevFlow (experimental) exposes the live UI tree, screenshots, and interaction hooks of a running app so agents can inspect UI rather than only reading source code.</span></span></li>
+<li><span class="m-vi" lang="vi">.NET Upgrade canvas cho cái nhìn trực quan về một phiên nâng cấp GitHub Copilot: xem kết quả đánh giá, tương thích phụ thuộc, theo dõi tác vụ và lỗi khi agent nâng cấp chạy.</span><span class="m-en" lang="en">The .NET Upgrade canvas visualizes a GitHub Copilot upgrade session: assessments, dependency compatibility, task progress, and errors as the upgrade agent runs.</span><span class="m-chunk" lang="en"><span class="ph" data-vi=".NET Upgrade canvas trực quan hóa phiên nâng cấp GitHub Copilot với đánh giá, tương thích phụ thuộc, tiến độ và lỗi.">The .NET Upgrade canvas visualizes a GitHub Copilot upgrade session: assessments, dependency compatibility, task progress, and errors as the upgrade agent runs.</span></span></li>
 </ul>
 
-<h2>MAUI và ứng dụng Windows</h2>
-<p>.NET MAUI trong .NET 11 lấy CoreCLR làm runtime mặc định trên các nền tảng của nó, để ứng dụng di động và máy tính để bàn dùng cùng nền runtime với các khối lượng .NET khác. Trên nền tảng Apple không cho phép JIT, runtime dùng mã biên dịch sẵn và interpreter, không sinh mã gốc lúc chạy. Native AOT là lựa chọn xuất bản tùy chọn; hỗ trợ Android của Native AOT vẫn thử nghiệm.</p>
-<p>Vòng lặp phát triển giao diện cũng được nêu:</p>
-<ul>
-<li>XAML Incremental Hot Reload là tính năng xem trước, bật mặc định trong bản dựng Debug. Nó cập nhật các trang và điều khiển đang sống, kể cả một số sửa cấu trúc được hỗ trợ, mà không bắt bạn điều hướng đi rồi quay lại.</li>
-<li>Khai báo không gian tên XAML ẩn giúp khỏi lặp các khai báo chuẩn ở gốc mỗi tệp.</li>
-<li>Windows mặc định dùng handler <code>CollectionView2</code> mới; Android Shell chuyển sang kiến trúc dựa trên handler.</li>
-<li>Mẫu kiểm thử di động mới và việc chọn thiết bị trong <code>dotnet test</code> đưa kiểm thử vào quy trình CLI.</li>
-</ul>
-<p>Đây là thay đổi runtime và handler đáng kể, nên khi nâng cấp cần kiểm tra điều hướng, handler tùy chỉnh và xuất bản đã cắt tỉa. Gói tùy chọn <code>Microsoft.Maui.Controls.Compatibility</code> không còn được phân phối; ứng dụng còn tham chiếu gói này cần chuyển ra. .NET MAUI theo chính sách hỗ trợ riêng, tách khỏi vòng đời STS/LTS của runtime .NET.</p>
-<p>Với ứng dụng máy tính để bàn Windows mới, WinUI 3 được nêu là khung giao diện gốc được khuyến nghị, đi cùng Windows App SDK; bộ SDK này cũng mở API Windows hiện đại cho ứng dụng WPF và Windows Forms sẵn có. Windows Forms thêm chế độ kiểu nhìn hiện đại tùy chọn, chọn được ở cấp ứng dụng hoặc điều khiển, cùng cách phản ứng với thiết lập hình ảnh và trợ năng của hệ thống, trì hoãn hiện form cho đến khi sẵn sàng, và tạm dừng vẽ khi cập nhật hàng loạt. Cập nhật WPF tập trung vào độ tin cậy, gồm sửa backdrop Fluent, lỗi window manager và dọn sự kiện yếu. Xuất bản Windows tự chứa cũng gồm một phụ thuộc gốc cần cho ứng dụng tải assembly WPF hỗn hợp.</p>
+<div class="hd"><h2 class="m-vi" lang="vi">MAUI và ứng dụng Windows</h2><h2 class="m-en" lang="en">MAUI and Windows apps</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="MAUI và ứng dụng Windows">MAUI and Windows apps</span></h2></div>
 
-<h2>Cách bắt đầu và nâng cấp</h2>
-<p>Cài <a href="https://dotnet.microsoft.com/download/dotnet/11.0">SDK .NET 11</a>. Dùng Visual Studio 2026 tương thích, đã cập nhật, hoặc Visual Studio Code với C# Dev Kit. Tạo và chạy ứng dụng console:</p>
+<p class="m-vi" lang="vi">.NET MAUI trong .NET 11 lấy CoreCLR làm runtime mặc định trên các nền tảng của nó, để ứng dụng di động và máy tính để bàn dùng cùng nền runtime với các khối lượng .NET khác. Trên nền tảng Apple không cho phép JIT, runtime dùng mã biên dịch sẵn và interpreter, không sinh mã gốc lúc chạy. Native AOT là lựa chọn xuất bản tùy chọn; hỗ trợ Android của Native AOT vẫn thử nghiệm.</p>
+<p class="m-en" lang="en">.NET MAUI in .NET 11 adopts CoreCLR as its default runtime across platforms, unifying mobile and desktop apps with the rest of .NET. On Apple platforms where JIT is disallowed, it uses ahead-of-time compiled code plus an interpreter. Native AOT is an optional publish mode (Android Native AOT remains experimental).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi=".NET MAUI trong .NET 11 dùng CoreCLR làm runtime mặc định (trên Apple dùng mã AOT kèm interpreter thay JIT), còn xuất bản Native AOT là tùy chọn (Android vẫn thử nghiệm).">.NET MAUI in .NET 11 adopts CoreCLR as its default runtime across platforms, unifying mobile and desktop apps with the rest of .NET. On Apple platforms where JIT is disallowed, it uses ahead-of-time compiled code plus an interpreter. Native AOT is an optional publish mode (Android Native AOT remains experimental).</span></p>
+
+<p class="m-vi" lang="vi">Vòng lặp phát triển giao diện cũng được nêu:</p>
+<p class="m-en" lang="en">UI inner-loop improvements include:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Vòng lặp phát triển giao diện cũng được nêu:">UI inner-loop improvements include:</span></p>
+
+<ul>
+<li><span class="m-vi" lang="vi">XAML Incremental Hot Reload là tính năng xem trước, bật mặc định trong bản dựng Debug. Nó cập nhật các trang và điều khiển đang sống, kể cả một số sửa cấu trúc được hỗ trợ, mà không bắt bạn điều hướng đi rồi quay lại.</span><span class="m-en" lang="en">XAML Incremental Hot Reload (preview, on by default in Debug builds) updates live pages and controls—including supported structural edits—without navigating away and back.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="XAML Incremental Hot Reload (xem trước, bật mặc định ở Debug) cập nhật trực tiếp trang đang sống mà không cần điều hướng lại.">XAML Incremental Hot Reload (preview, on by default in Debug builds) updates live pages and controls—including supported structural edits—without navigating away and back.</span></span></li>
+<li><span class="m-vi" lang="vi">Khai báo không gian tên XAML ẩn giúp khỏi lặp các khai báo chuẩn ở gốc mỗi tệp.</span><span class="m-en" lang="en">Implicit XAML namespace declarations remove boilerplate namespace attributes at the root of every file.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Khai báo namespace XAML ẩn giúp bỏ lặp lại ở gốc mỗi tệp.">Implicit XAML namespace declarations remove boilerplate namespace attributes at the root of every file.</span></span></li>
+<li><span class="m-vi" lang="vi">Windows mặc định dùng handler <code>CollectionView2</code> mới; Android Shell chuyển sang kiến trúc dựa trên handler.</span><span class="m-en" lang="en">Windows defaults to the new <code>CollectionView2</code> handler, and Android Shell moves to a handler-based architecture.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Windows mặc định dùng handler CollectionView2 mới; Android Shell chuyển sang kiến trúc handler.">Windows defaults to the new <code>CollectionView2</code> handler, and Android Shell moves to a handler-based architecture.</span></span></li>
+<li><span class="m-vi" lang="vi">Mẫu kiểm thử di động mới và việc chọn thiết bị trong <code>dotnet test</code> đưa kiểm thử vào quy trình CLI.</span><span class="m-en" lang="en">New mobile test templates and device selection in <code>dotnet test</code> bring mobile testing into the CLI workflow.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Mẫu kiểm thử di động mới và chọn thiết bị trong dotnet test đưa kiểm thử vào CLI.">New mobile test templates and device selection in <code>dotnet test</code> bring mobile testing into the CLI workflow.</span></span></li>
+</ul>
+
+<p class="m-vi" lang="vi">Đây là thay đổi runtime và handler đáng kể, nên khi nâng cấp cần kiểm tra điều hướng, handler tùy chỉnh và xuất bản đã cắt tỉa. Gói tùy chọn <code>Microsoft.Maui.Controls.Compatibility</code> không còn được phân phối; ứng dụng còn tham chiếu gói này cần chuyển ra. .NET MAUI theo chính sách hỗ trợ riêng, tách khỏi vòng đời STS/LTS của runtime .NET.</p>
+<p class="m-en" lang="en">Because these are significant runtime and handler shifts, test navigation, custom handlers, and trimmed builds when upgrading. The optional <code>Microsoft.Maui.Controls.Compatibility</code> package is no longer shipped, so apps referencing it must migrate off. .NET MAUI follows its own support policy separate from .NET runtime STS/LTS.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Vì thay đổi runtime và handler lớn, khi nâng cấp cần kiểm tra kỹ điều hướng, handler tùy chỉnh và bản cắt tỉa; gói Compatibility không còn được phân phối và MAUI có lịch hỗ trợ riêng.">Because these are significant runtime and handler shifts, test navigation, custom handlers, and trimmed builds when upgrading. The optional <code>Microsoft.Maui.Controls.Compatibility</code> package is no longer shipped, so apps referencing it must migrate off. .NET MAUI follows its own support policy separate from .NET runtime STS/LTS.</span></p>
+
+<p class="m-vi" lang="vi">Với ứng dụng máy tính để bàn Windows mới, WinUI 3 được nêu là khung giao diện gốc được khuyến nghị, đi cùng Windows App SDK; bộ SDK này cũng mở API Windows hiện đại cho ứng dụng WPF và Windows Forms sẵn có. Windows Forms thêm chế độ kiểu nhìn hiện đại tùy chọn, chọn được ở cấp ứng dụng hoặc điều khiển, cùng cách phản ứng với thiết lập hình ảnh và trợ năng của hệ thống, trì hoãn hiện form cho đến khi sẵn sàng, và tạm dừng vẽ khi cập nhật hàng loạt. Cập nhật WPF tập trung vào độ tin cậy, gồm sửa backdrop Fluent, lỗi window manager và dọn sự kiện yếu. Xuất bản Windows tự chứa cũng gồm một phụ thuộc gốc cần cho ứng dụng tải assembly WPF hỗn hợp.</p>
+<p class="m-en" lang="en">For new Windows desktop apps, WinUI 3 with the Windows App SDK is the recommended native UI framework, while also exposing modern Windows APIs to existing WPF and Windows Forms apps. Windows Forms adds an opt-in modern visual style mode at app or control level, better system theme/accessibility reactions, deferred form display until ready, and painting suspension during bulk updates. WPF focuses on reliability—Fluent backdrop fixes, window manager bugs, and weak-event cleanup—plus a native dependency in self-contained Windows publishes for mixed WPF assemblies.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Với desktop Windows mới, WinUI 3 cùng Windows App SDK là lựa chọn khuyến nghị (cũng mở API hiện đại cho WPF và WinForms).">For new Windows desktop apps, WinUI 3 with the Windows App SDK is the recommended native UI framework, while also exposing modern Windows APIs to existing WPF and Windows Forms apps.</span> <span class="ph" data-vi="WinForms thêm kiểu nhìn hiện đại tùy chọn và tối ưu hiển thị/vẽ; WPF tập trung vào độ tin cậy (Fluent backdrop, window manager, sự kiện yếu).">Windows Forms adds an opt-in modern visual style mode at app or control level, better system theme/accessibility reactions, deferred form display until ready, and painting suspension during bulk updates. WPF focuses on reliability—Fluent backdrop fixes, window manager bugs, and weak-event cleanup—plus a native dependency in self-contained Windows publishes for mixed WPF assemblies.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Cách bắt đầu và nâng cấp</h2><h2 class="m-en" lang="en">Getting started and upgrading</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Cách bắt đầu và nâng cấp">Getting started and upgrading</span></h2></div>
+
+<p class="m-vi" lang="vi">Cài <a href="https://dotnet.microsoft.com/download/dotnet/11.0">SDK .NET 11</a>. Dùng Visual Studio 2026 tương thích, đã cập nhật, hoặc Visual Studio Code với C# Dev Kit. Tạo và chạy ứng dụng console:</p>
+<p class="m-en" lang="en">Install the <a href="https://dotnet.microsoft.com/download/dotnet/11.0">.NET 11 SDK</a>, use an updated Visual Studio 2026 or VS Code with C# Dev Kit, and create and run a console app:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Cài SDK .NET 11, dùng Visual Studio 2026 hoặc VS Code với C# Dev Kit rồi tạo và chạy ứng dụng console:">Install the <a href="https://dotnet.microsoft.com/download/dotnet/11.0">.NET 11 SDK</a>, use an updated Visual Studio 2026 or VS Code with C# Dev Kit, and create and run a console app:</span></p>
+
 <pre><code>dotnet new console -n HelloDotnet11 -f net11.0
 dotnet run --project HelloDotnet11</code></pre>
-<p>Bạn có thể thay chương trình được sinh ra bằng một trong các ví dụ C# ở trên để thử tính năng ngôn ngữ mới.</p>
-<p>Với ứng dụng có sẵn, bài thông báo nêu bốn bước trên cả môi trường phát triển và triển khai:</p>
+
+<p class="m-vi" lang="vi">Bạn có thể thay chương trình được sinh ra bằng một trong các ví dụ C# ở trên để thử tính năng ngôn ngữ mới.</p>
+<p class="m-en" lang="en">You can swap the generated program for any of the C# examples above to try the new language features.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bạn có thể thay chương trình được sinh ra bằng các ví dụ C# ở trên để thử tính năng mới.">You can swap the generated program for any of the C# examples above to try the new language features.</span></p>
+
+<p class="m-vi" lang="vi">Với ứng dụng có sẵn, bài thông báo nêu bốn bước trên cả môi trường phát triển và triển khai:</p>
+<p class="m-en" lang="en">For existing applications, the announcement outlines four steps across development and deployment:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Với ứng dụng có sẵn, bài thông báo nêu bốn bước trên cả môi trường phát triển và triển khai:">For existing applications, the announcement outlines four steps across development and deployment:</span></p>
+
 <ol>
-<li>Cập nhật chọn SDK trong <code>global.json</code> nếu kho đã ghim phiên bản, rồi cài SDK tương ứng trên máy phát triển và máy dựng.</li>
-<li>Cập nhật target framework lên .NET 11, giữ hậu tố khung theo nền tảng nếu có. Cập nhật gói và workload lên bản tương thích.</li>
-<li>Đọc các thay đổi phá vỡ của .NET 11, gồm yêu cầu CPU tối thiểu đã cập nhật. Chỉ cài SDK mới không tự đổi đích của ứng dụng.</li>
-<li>Chạy kiểm thử và đo ứng dụng với khối lượng đại diện. Kiểm tra đúng chế độ xuất bản, ảnh nền container, phụ thuộc gốc và máy chủ triển khai.</li>
+<li><span class="m-vi" lang="vi">Cập nhật chọn SDK trong <code>global.json</code> nếu kho đã ghim phiên bản, rồi cài SDK tương ứng trên máy phát triển và máy dựng.</span><span class="m-en" lang="en">Update the SDK version in <code>global.json</code> if pinned, and install the matching SDK on dev and build machines.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Cập nhật SDK trong global.json (nếu có ghim) và cài trên máy dev lẫn máy build.">Update the SDK version in <code>global.json</code> if pinned, and install the matching SDK on dev and build machines.</span></span></li>
+<li><span class="m-vi" lang="vi">Cập nhật target framework lên .NET 11, giữ hậu tố khung theo nền tảng nếu có. Cập nhật gói và workload lên bản tương thích.</span><span class="m-en" lang="en">Update target frameworks to .NET 11 (preserving platform suffixes) along with compatible packages and workloads.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Đổi target framework lên .NET 11, cập nhật gói và workload tương thích.">Update target frameworks to .NET 11 (preserving platform suffixes) along with compatible packages and workloads.</span></span></li>
+<li><span class="m-vi" lang="vi">Đọc các thay đổi phá vỡ của .NET 11, gồm yêu cầu CPU tối thiểu đã cập nhật. Chỉ cài SDK mới không tự đổi đích của ứng dụng.</span><span class="m-en" lang="en">Review .NET 11 breaking changes, including updated minimum CPU requirements; installing the SDK alone does not retarget your app.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Đọc các thay đổi phá vỡ (gồm yêu cầu CPU tối thiểu); chỉ cài SDK không tự đổi đích ứng dụng.">Review .NET 11 breaking changes, including updated minimum CPU requirements; installing the SDK alone does not retarget your app.</span></span></li>
+<li><span class="m-vi" lang="vi">Chạy kiểm thử và đo ứng dụng với khối lượng đại diện. Kiểm tra đúng chế độ xuất bản, ảnh nền container, phụ thuộc gốc và máy chủ triển khai.</span><span class="m-en" lang="en">Run tests and benchmark representative workloads under your actual publish mode, base container images, native dependencies, and hosts.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Chạy kiểm thử và đo với workload đại diện trên đúng chế độ xuất bản, container và máy chủ thực tế.">Run tests and benchmark representative workloads under your actual publish mode, base container images, native dependencies, and hosts.</span></span></li>
 </ol>
-<p>Nếu đang nâng cấp từ bản ứng viên phát hành của .NET 11, hãy cập nhật lên SDK, runtime cùng gói và workload tương thích bản chính thức, đừng ở lại bản prerelease. .NET Conf 2026 diễn ra từ 10 đến 13/11, gồm hai ngày phiên của nhóm sản phẩm rồi hai ngày phiên cộng đồng.</p>
-<p>Bài thông báo ghi .NET 11 là công sức của hơn 7.000 người đóng góp, và hệ sinh thái có hơn 589.000 gói riêng trên NuGet cùng hơn 1,1 nghìn tỷ lượt tải gói. Đây là số liệu Microsoft công bố trong bài, không được kiểm chứng độc lập trong bài viết này.</p>
+
+<p class="m-vi" lang="vi">Nếu đang nâng cấp từ bản ứng viên phát hành của .NET 11, hãy cập nhật lên SDK, runtime cùng gói và workload tương thích bản chính thức, đừng ở lại bản prerelease. .NET Conf 2026 diễn ra từ 10 đến 13/11, gồm hai ngày phiên của nhóm sản phẩm rồi hai ngày phiên cộng đồng.</p>
+<p class="m-en" lang="en">If upgrading from a .NET 11 release candidate, move to the GA SDK, runtime, packages, and workloads rather than staying on prerelease bits. .NET Conf 2026 runs November 10–13, with two days of product-team sessions followed by two community days.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nếu nâng cấp từ bản RC, hãy lên hẳn SDK, runtime và gói bản chính thức; .NET Conf 2026 diễn ra từ 10 đến 13/11.">If upgrading from a .NET 11 release candidate, move to the GA SDK, runtime, packages, and workloads rather than staying on prerelease bits. .NET Conf 2026 runs November 10–13, with two days of product-team sessions followed by two community days.</span></p>
+
+<p class="m-vi" lang="vi">Bài thông báo ghi .NET 11 là công sức của hơn 7.000 người đóng góp, và hệ sinh thái có hơn 589.000 gói riêng trên NuGet cùng hơn 1,1 nghìn tỷ lượt tải gói. Đây là số liệu Microsoft công bố trong bài, không được kiểm chứng độc lập trong bài viết này.</p>
+<p class="m-en" lang="en">The announcement credits over 7,000 contributors for .NET 11 and cites more than 589,000 unique NuGet packages with over 1.1 trillion downloads—figures reported by Microsoft rather than independently verified here.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bài thông báo ghi nhận hơn 7.000 người đóng góp cho .NET 11 và hơn 589.000 gói NuGet với hơn 1,1 nghìn tỷ lượt tải (số liệu do Microsoft công bố).">The announcement credits over 7,000 contributors for .NET 11 and cites more than 589,000 unique NuGet packages with over 1.1 trillion downloads—figures reported by Microsoft rather than independently verified here.</span></p>
+
+</div>
 
 <section class="blog-insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
 <ol>
@@ -236,7 +448,7 @@ dotnet run --project HelloDotnet11</code></pre>
 <li><strong>Đừng sao chép benchmark.</strong> Bài của Stephen Toub là nơi xem từng tối ưu và số đo micro-benchmark. Hiệu năng thực tế phụ thuộc khối lượng của bạn. Microsoft cũng nhắc đo trên ứng dụng của chính mình.</li>
 </ol>
 <p>Tóm lại: .NET 11 đáng thử sớm nếu bạn cần ngôn ngữ và ngăn xếp web/AI mới, và gần như bắt buộc nếu bạn vừa rơi khỏi vòng hỗ trợ của .NET 8 hoặc 9. Hãy nâng cấp có kế hoạch, và giữ các tính năng xem trước ở vòng thử nghiệm cho đến khi tài liệu chính thức gọi chúng là ổn định.</p></section>
-<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/dotnet/status/2120185345950052648">@dotnet — Announcing .NET 11</a> (23:02 ngày 10/11/2026, giờ Việt Nam, UTC+7); <a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/">Announcing .NET 11</a> trên .NET Blog; <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15">What's new in C# 15</a>; <a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/overview">What's new in .NET 11</a>; <a href="https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-11">What's new in ASP.NET Core in .NET 11</a>; <a href="https://learn.microsoft.com/en-us/dotnet/maui/whats-new/dotnet-11">What's new in .NET MAUI for .NET 11</a>; <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/">Performance Improvements in .NET 11</a> (Stephen Toub); <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">chính sách hỗ trợ .NET và .NET Core</a>. Đọc nguồn ngày 11/11/2026 (UTC+7, giờ Việt Nam). Trang tổng quan Learn từng ghi chú bản RC trong phần đầu; bài này lấy trạng thái phát hành và mốc hỗ trợ từ bài thông báo ngày 10/11 và bảng chính sách cùng ngày, không lấy dòng “đang ở bản ứng viên” trên trang tổng quan. Không tự đo hiệu năng hay chạy SDK .NET 11 trong bài này.</p>
+<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/dotnet/status/2120185345950052648">@dotnet — Announcing .NET 11</a> (23:02 ngày 10/11/2026, giờ Việt Nam, UTC+7); <a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/">Announcing .NET 11</a> trên .NET Blog; <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15">What's new in C# 15</a>; <a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/overview">What's new in .NET 11</a>; <a href="https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-11">What's new in ASP.NET Core in .NET 11</a>; <a href="https://learn.microsoft.com/en-us/dotnet/maui/whats-new/dotnet-11">What's new in .NET MAUI for .NET 11</a>; <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/">Performance Improvements in .NET 11</a> (Stephen Toub); <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">chính sách hỗ trợ .NET và .NET Core</a>. Đọc nguồn ngày 11/11/2026 (UTC+7, giờ Việt Nam). Trang tổng quan Learn từng ghi chú bản RC trong phần đầu; bài này lấy trạng thái phát hành và mốc hỗ trợ từ bài thông báo ngày 10/11 và bảng chính sách cùng ngày, không lấy dòng “đang ở bản ứng viên” trên trang tổng quan. Không tự đo hiệu năng hay chạy SDK .NET 11 trong bài này. Cập nhật ba chế độ đọc.</p>
 <section class="blog-mindmap" id="mindmap"><h2>Mindmap — Điểm mới trong .NET 11</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
 mindmap
   root((.NET 11 STS))
@@ -275,5 +487,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
