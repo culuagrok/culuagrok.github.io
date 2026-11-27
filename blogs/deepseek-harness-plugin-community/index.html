@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DeepSeek Harness: từ chatbot đến nền tảng plugin cộng đồng — Blog</title>
-<meta name="description" content="DeepSeek Harness và hệ sinh thái plugin: bốn ví dụ thực tế, số liệu tự công bố, kế hoạch hỗ trợ tác giả và cách đánh giá plugin an toàn.">
+<meta name="description" content="DeepSeek Harness và hệ sinh thái plugin: bốn ví dụ thực tế, số liệu tự công bố, kế hoạch hỗ trợ tác giả và cách đánh giá plugin an toàn. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -47,6 +63,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-callout strong{color:#166534}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
+</style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
@@ -78,32 +137,96 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li>Điểm đáng chú ý không chỉ là thêm công cụ cho AI, mà là biến công việc lặp lại thành một không gian làm việc có thể dùng lại và quan sát được.</li>
 </ul></section>
 <p class="blog-note">Bài viết dựa trên <a href="https://x.com/DeepSeekHarness/status/2119431663642153128">bài đăng của @DeepSeekHarness</a> và bài dài <em>Growing Together with Our Plugin Community</em> đính kèm. Đây là bài phân tích bằng tiếng Việt, không phải bản dịch nguyên văn. Các mốc phát triển, số liệu sử dụng và kế hoạch sản phẩm dưới đây được quy về lời công bố của nhóm; phần tài liệu plugin được đối chiếu riêng.</p>
-<h2>Không chỉ một cửa sổ chat</h2>
-<p>Một mô hình trả lời tốt chưa tự tạo ra một quy trình làm việc tốt. Người làm nội dung còn cần chỗ gom ý tưởng, quản lý bản nháp và lưu thành phẩm. Người đọc tài liệu cần đánh dấu, dịch, ghi chú. Người vận hành nhiều agent cần hiểu chúng đã đọc gì và vì sao ngữ cảnh phình lên.</p>
-<p>Đó là khoảng trống mà hướng tiếp cận plugin nhắm tới. Có thể hiểu <em>harness</em> là lớp tổ chức môi trường hoạt động quanh mô hình: nơi kết nối công cụ và quy trình. Trong bài công bố, DeepSeek Harness đặt tham vọng trở thành “hệ điều hành của thời đại agent”. Đây là tầm nhìn sản phẩm, không có nghĩa ứng dụng này đã thay thế hệ điều hành máy tính.</p>
-<h2>Những con số nói gì — và chưa nói gì?</h2>
-<p>Theo nhóm, DeepSeek Harness v0.1 ra mắt ngày 13/8, ứng dụng desktop ra mắt ngày 29/9. Tính đến ngày 4/11, trong phạm vi người dùng sử dụng API chính thức, sản phẩm đạt <strong>1,54 triệu người dùng hoạt động hằng ngày</strong>, tiêu thụ khoảng <strong>92 nghìn tỷ token mỗi ngày</strong>.</p>
-<p>Nhóm cũng cho biết có khoảng <strong>35.000 plugin bên thứ ba</strong> và khoảng <strong>60% người dùng hoạt động đã xây hoặc cài ít nhất một plugin</strong>. Cần giữ nguyên cụm “đã xây hoặc cài”: nó không đồng nghĩa 60% đang dùng plugin hằng ngày. Tương tự, số lượng plugin không cho biết bao nhiêu plugin còn được bảo trì, an toàn hay thực sự có ích.</p>
-<p>Bài công bố không cung cấp đủ phương pháp đo để suy ra chi phí trung bình, doanh thu hoặc chất lượng từ tổng token. Không nên lấy các số này làm bằng chứng rằng nền tảng đã thắng về hiệu quả. Chính nhóm cũng thừa nhận plugin có mức độ trưởng thành và tình huống sử dụng khác nhau.</p>
-<h2>Bốn ví dụ: plugin biến nhu cầu riêng thành sản phẩm</h2>
-<h3>1. dsh-media-desk: bàn làm việc cho người sáng tạo</h3>
-<p>Bài gốc giới thiệu plugin của <a href="https://github.com/woniuniuniu">woniuniuniu</a>, gom ghi ý tưởng, viết kịch bản, làm ảnh bìa và storyboard vào một bàn làm việc. Điểm đáng học là tổ chức cả chuỗi công việc thay vì chỉ thêm một nút “viết giúp tôi”. Mô tả này đến từ bài giới thiệu; bài viết hiện tại không kiểm thử plugin.</p>
-<h3>2. dsh-guizang-design: từ kỹ năng rời rạc đến thành phẩm có thể tái sử dụng</h3>
-<p>Theo bài gốc, <a href="https://github.com/op7418">Guizang</a> kết hợp các kỹ năng thiết kế và chỉnh lời văn để chuyển bài viết thành trang web, thẻ ảnh hoặc ảnh bìa. Thành phẩm được lưu trong “My Work”; “Make a Similar One” cho phép phát triển tiếp từ đó. Giá trị nằm ở tính liên tục: giữ lại kết quả và phong cách để lần sau không bắt đầu từ số không. Tuyên bố chất lượng ổn định trong lời tác giả plugin là lời chứng thực, không phải benchmark.</p>
-<h3>3. dsh-context: nhìn vào phần agent đang mang theo</h3>
-<p><a href="https://github.com/bowenliang123/dsh-context">dsh-context của bowenliang123</a> là ví dụ có thể đối chiếu với README công khai: tài liệu mô tả dashboard về thành phần ngữ cảnh, xu hướng qua từng yêu cầu, sự kiện, hoạt động tệp và lệnh. Tab Fleet hiển thị agent hiện tại, agent cha và các agent con. Lệnh <code>/context</code> cung cấp một lối xem khác ngay trong phiên.</p>
-<p>Đây là lớp quan sát, không phải phép đọc suy nghĩ mô hình. Biết dữ liệu nào đã được đưa vào giúp điều tra một câu trả lời sai hoặc một phiên quá dài; nó không tự chứng minh câu trả lời đúng.</p>
-<p>Nếu đã có DeepSeek Harness phù hợp, README hiện hướng dẫn cài bằng:</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản tiếng Anh tương ứng, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 50 cụm · 28 đoạn &amp; mục</span></div>
+<div class="art-modes" aria-describedby="how-to">
+
+<div class="hd"><h2 class="m-vi" lang="vi">Không chỉ một cửa sổ chat</h2><h2 class="m-en" lang="en">More than a chat window</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Không chỉ một cửa sổ chat">More than a chat window</span></h2></div>
+
+<p class="m-vi" lang="vi">Một mô hình trả lời tốt chưa tự tạo ra một quy trình làm việc tốt. Người làm nội dung còn cần chỗ gom ý tưởng, quản lý bản nháp và lưu thành phẩm. Người đọc tài liệu cần đánh dấu, dịch, ghi chú. Người vận hành nhiều agent cần hiểu chúng đã đọc gì và vì sao ngữ cảnh phình lên.</p>
+<p class="m-en" lang="en">A model that answers well does not automatically create a good workflow. Content creators still need a place to gather ideas, manage drafts, and store finished work. Readers need highlighting, translation, and notes. Operators running multiple agents need to see what they read and why context grew.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Một mô hình trả lời tốt chưa tự tạo ra quy trình làm việc tốt:">A model that answers well does not automatically create a good workflow.</span> <span class="ph" data-vi="người làm nội dung cần chỗ gom ý tưởng, người đọc cần đánh dấu/dịch/ghi chú, người chạy nhiều agent cần hiểu ngữ cảnh phình lên vì đâu.">Content creators still need a place to gather ideas, manage drafts, and store finished work. Readers need highlighting, translation, and notes. Operators running multiple agents need to see what they read and why context grew.</span></p>
+
+<p class="m-vi" lang="vi">Đó là khoảng trống mà hướng tiếp cận plugin nhắm tới. Có thể hiểu <em>harness</em> là lớp tổ chức môi trường hoạt động quanh mô hình: nơi kết nối công cụ và quy trình. Trong bài công bố, DeepSeek Harness đặt tham vọng trở thành “hệ điều hành của thời đại agent”. Đây là tầm nhìn sản phẩm, không có nghĩa ứng dụng này đã thay thế hệ điều hành máy tính.</p>
+<p class="m-en" lang="en">That is the gap a plugin architecture targets. Think of a <em>harness</em> as the orchestration layer around the model—connecting tools and workflows. DeepSeek Harness states an ambition to become the “OS of the agent era,” which is a product vision rather than a claim that it replaces desktop operating systems.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Đó là khoảng trống hướng plugin nhắm tới: harness là lớp tổ chức quanh mô hình để nối công cụ và quy trình,">That is the gap a plugin architecture targets. Think of a <em>harness</em> as the orchestration layer around the model—connecting tools and workflows.</span> <span class="ph" data-vi="với tầm nhìn làm “hệ điều hành của thời đại agent” (chứ chưa phải thay thế OS máy tính).">DeepSeek Harness states an ambition to become the “OS of the agent era,” which is a product vision rather than a claim that it replaces desktop operating systems.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Những con số nói gì — và chưa nói gì?</h2><h2 class="m-en" lang="en">What the numbers say—and what they leave out</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Những con số nói gì — và chưa nói gì?">What the numbers say—and what they leave out</span></h2></div>
+
+<p class="m-vi" lang="vi">Theo nhóm, DeepSeek Harness v0.1 ra mắt ngày 13/8, ứng dụng desktop ra mắt ngày 29/9. Tính đến ngày 4/11, trong phạm vi người dùng sử dụng API chính thức, sản phẩm đạt <strong>1,54 triệu người dùng hoạt động hằng ngày</strong>, tiêu thụ khoảng <strong>92 nghìn tỷ token mỗi ngày</strong>.</p>
+<p class="m-en" lang="en">According to the team, DeepSeek Harness v0.1 launched August 13 and the desktop app September 29. By November 4, among users on the official API, they report <strong>1.54 million daily active users</strong> consuming roughly <strong>92 trillion tokens per day</strong>.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo nhóm, v0.1 ra mắt ngày 13/8 và bản desktop ngày 29/9;">According to the team, DeepSeek Harness v0.1 launched August 13 and the desktop app September 29.</span> <span class="ph" data-vi="tới 4/11 đạt 1,54 triệu người dùng hoạt động hằng ngày và tiêu thụ khoảng 92 nghìn tỷ token/ngày (trên API chính thức).">By November 4, they report <strong>1.54 million daily active users</strong> consuming roughly <strong>92 trillion tokens per day</strong>.</span></p>
+
+<p class="m-vi" lang="vi">Nhóm cũng cho biết có khoảng <strong>35.000 plugin bên thứ ba</strong> và khoảng <strong>60% người dùng hoạt động đã xây hoặc cài ít nhất một plugin</strong>. Cần giữ nguyên cụm “đã xây hoặc cài”: nó không đồng nghĩa 60% đang dùng plugin hằng ngày. Tương tự, số lượng plugin không cho biết bao nhiêu plugin còn được bảo trì, an toàn hay thực sự có ích.</p>
+<p class="m-en" lang="en">They also report roughly <strong>35,000 third-party plugins</strong> and around <strong>60% of active users having built or installed at least one plugin</strong>. Keep the phrasing exact: “built or installed” does not mean 60% use plugins daily, nor does plugin count tell you how many are maintained, safe, or genuinely useful.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nhóm cho biết có khoảng 35.000 plugin bên thứ ba và khoảng 60% người dùng đã xây hoặc cài ít nhất một plugin;">They also report roughly <strong>35,000 third-party plugins</strong> and around <strong>60% of active users having built or installed at least one plugin</strong>.</span> <span class="ph" data-vi="nhưng điều đó không đồng nghĩa 60% dùng hằng ngày hay mọi plugin đều an toàn và còn được bảo trì.">Keep the phrasing exact: “built or installed” does not mean 60% use plugins daily, nor does plugin count tell you how many are maintained, safe, or genuinely useful.</span></p>
+
+<p class="m-vi" lang="vi">Bài công bố không cung cấp đủ phương pháp đo để suy ra chi phí trung bình, doanh thu hoặc chất lượng từ tổng token. Không nên lấy các số này làm bằng chứng rằng nền tảng đã thắng về hiệu quả. Chính nhóm cũng thừa nhận plugin có mức độ trưởng thành và tình huống sử dụng khác nhau.</p>
+<p class="m-en" lang="en">The post does not disclose enough methodology to derive average cost, revenue, or output quality from total tokens—so those figures do not prove efficiency by themselves. The team itself notes that plugins vary widely in maturity and use cases.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bài công bố không đủ dữ liệu để suy ra chi phí trung bình, doanh thu hay chất lượng từ tổng token, và chính nhóm cũng thừa nhận plugin có độ trưởng thành rất khác nhau.">The post does not disclose enough methodology to derive average cost, revenue, or output quality from total tokens—so those figures do not prove efficiency by themselves. The team itself notes that plugins vary widely in maturity and use cases.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Bốn ví dụ: plugin biến nhu cầu riêng thành sản phẩm</h2><h2 class="m-en" lang="en">Four examples: plugins turning personal workflows into products</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Bốn ví dụ: plugin biến nhu cầu riêng thành sản phẩm">Four examples: plugins turning personal workflows into products</span></h2></div>
+
+<div class="hd"><h3 class="m-vi" lang="vi">1. dsh-media-desk: bàn làm việc cho người sáng tạo</h3><h3 class="m-en" lang="en">1. dsh-media-desk: a creator workbench</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="1. dsh-media-desk: bàn làm việc cho người sáng tạo">1. dsh-media-desk: a creator workbench</span></h3></div>
+
+<p class="m-vi" lang="vi">Bài gốc giới thiệu plugin của <a href="https://github.com/woniuniuniu">woniuniuniu</a>, gom ghi ý tưởng, viết kịch bản, làm ảnh bìa và storyboard vào một bàn làm việc. Điểm đáng học là tổ chức cả chuỗi công việc thay vì chỉ thêm một nút “viết giúp tôi”. Mô tả này đến từ bài giới thiệu; bài viết hiện tại không kiểm thử plugin.</p>
+<p class="m-en" lang="en">The post highlights a plugin by <a href="https://github.com/woniuniuniu">woniuniuniu</a> that bundles idea capture, scripting, cover images, and storyboarding into one workbench—organizing the full pipeline rather than adding a single “write for me” button (described from the announcement, not tested here).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Plugin của woniuniuniu gom ghi ý tưởng, viết kịch bản, ảnh bìa và storyboard vào một bàn làm việc — tổ chức cả chuỗi công việc thay vì một nút bấm đơn lẻ.">The post highlights a plugin by <a href="https://github.com/woniuniuniu">woniuniuniu</a> that bundles idea capture, scripting, cover images, and storyboarding into one workbench—organizing the full pipeline rather than adding a single “write for me” button (described from the announcement, not tested here).</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">2. dsh-guizang-design: từ kỹ năng rời rạc đến thành phẩm có thể tái sử dụng</h3><h3 class="m-en" lang="en">2. dsh-guizang-design: from scattered skills to reusable artifacts</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="2. dsh-guizang-design: từ kỹ năng rời rạc đến thành phẩm có thể tái sử dụng">2. dsh-guizang-design: from scattered skills to reusable artifacts</span></h3></div>
+
+<p class="m-vi" lang="vi">Theo bài gốc, <a href="https://github.com/op7418">Guizang</a> kết hợp các kỹ năng thiết kế và chỉnh lời văn để chuyển bài viết thành trang web, thẻ ảnh hoặc ảnh bìa. Thành phẩm được lưu trong “My Work”; “Make a Similar One” cho phép phát triển tiếp từ đó. Giá trị nằm ở tính liên tục: giữ lại kết quả và phong cách để lần sau không bắt đầu từ số không. Tuyên bố chất lượng ổn định trong lời tác giả plugin là lời chứng thực, không phải benchmark.</p>
+<p class="m-en" lang="en">Per the post, <a href="https://github.com/op7418">Guizang</a> combines design and copywriting skills to turn articles into web pages, image cards, or covers. Outputs live in “My Work,” with “Make a Similar One” to iterate—preserving style and continuity instead of starting from scratch (quality claims are author testimonials, not benchmarks).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Guizang kết hợp kỹ năng thiết kế và biên tập để biến bài viết thành web, thẻ ảnh hay ảnh bìa, lưu trong My Work để phát triển tiếp thay vì làm lại từ đầu.">Per the post, <a href="https://github.com/op7418">Guizang</a> combines design and copywriting skills to turn articles into web pages, image cards, or covers. Outputs live in “My Work,” with “Make a Similar One” to iterate—preserving style and continuity instead of starting from scratch (quality claims are author testimonials, not benchmarks).</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">3. dsh-context: nhìn vào phần agent đang mang theo</h3><h3 class="m-en" lang="en">3. dsh-context: inspecting what the agent carries</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="3. dsh-context: nhìn vào phần agent đang mang theo">3. dsh-context: inspecting what the agent carries</span></h3></div>
+
+<p class="m-vi" lang="vi"><a href="https://github.com/bowenliang123/dsh-context">dsh-context của bowenliang123</a> là ví dụ có thể đối chiếu với README công khai: tài liệu mô tả dashboard về thành phần ngữ cảnh, xu hướng qua từng yêu cầu, sự kiện, hoạt động tệp và lệnh. Tab Fleet hiển thị agent hiện tại, agent cha và các agent con. Lệnh <code>/context</code> cung cấp một lối xem khác ngay trong phiên.</p>
+<p class="m-en" lang="en"><a href="https://github.com/bowenliang123/dsh-context">bowenliang123's dsh-context</a> can be checked against its public README: it describes a dashboard showing context composition, per-request trends, events, file operations, and commands. A Fleet tab shows the current, parent, and child agents, while <code>/context</code> offers an inline view.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="dsh-context của bowenliang123 có README công khai mô tả dashboard xem thành phần ngữ cảnh, xu hướng qua từng request, sự kiện, tệp và lệnh; tab Fleet hiện cây agent và /context xem ngay trong phiên."> <a href="https://github.com/bowenliang123/dsh-context">bowenliang123's dsh-context</a> can be checked against its public README: it describes a dashboard showing context composition, per-request trends, events, file operations, and commands. A Fleet tab shows the current, parent, and child agents, while <code>/context</code> offers an inline view.</span></p>
+
+<p class="m-vi" lang="vi">Đây là lớp quan sát, không phải phép đọc suy nghĩ mô hình. Biết dữ liệu nào đã được đưa vào giúp điều tra một câu trả lời sai hoặc một phiên quá dài; nó không tự chứng minh câu trả lời đúng.</p>
+<p class="m-en" lang="en">This is observability, not mind-reading. Seeing what entered the prompt helps debug a wrong answer or a bloated session, though it does not prove the answer is right.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Đây là lớp quan sát chứ không phải đọc suy nghĩ mô hình: biết dữ liệu đã nạp giúp gỡ lỗi câu trả lời sai hoặc phiên quá dài.">This is observability, not mind-reading. Seeing what entered the prompt helps debug a wrong answer or a bloated session, though it does not prove the answer is right.</span></p>
+
+<p class="m-vi" lang="vi">Nếu đã có DeepSeek Harness phù hợp, README hiện hướng dẫn cài bằng:</p>
+<p class="m-en" lang="en">With a compatible DeepSeek Harness install, the README currently documents installing via:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nếu đã có bản DeepSeek Harness tương thích, README hướng dẫn cài bằng lệnh:">With a compatible DeepSeek Harness install, the README currently documents installing via:</span></p>
+
 <pre><code>dsh plugin --profile web add dsh-context</code></pre>
-<p>Tài liệu nêu hỗ trợ <code>@deepseek-ai/dsh</code> từ <code>0.2.0-rc.2</code> trở lên theo định dạng nhật ký V4. Hãy kiểm tra lại mục tương thích trước khi cài; câu lệnh trên được trích từ tài liệu, chưa được chạy thử trong bài này.</p>
-<h3>4. agentero-dsh: đọc nghiên cứu trong một luồng</h3>
-<p>Bài công bố giới thiệu plugin của <a href="https://github.com/Phil-Fan">Phil-Fan</a> đưa Agentero vào Harness để đọc paper, đánh dấu, dịch và ghi chú cùng một nơi, đồng thời nhờ agent giải thích ý tưởng. Đây là ví dụ của việc xây từ nhu cầu thật trong nhóm nghiên cứu, thay vì bắt đầu bằng một danh sách tính năng AI chung chung.</p>
-<h2>Chương trình hỗ trợ: đã có định hướng, chưa có đủ thể lệ</h2>
-<p>Nhóm nói sẽ cải thiện độ ổn định và tương thích của API, tăng cường bảo mật plugin và xây marketplace chính thức. Chương trình hỗ trợ tác giả đang được chuẩn bị, với các hướng như cấp token, trao đổi kỹ thuật và quảng bá sản phẩm. Bài gốc cũng mời startup và doanh nghiệp tích hợp sản phẩm, dịch vụ hoặc chuyên môn qua plugin.</p>
-<p><a href="https://trtgsjkv6r.feishu.cn/share/base/form/shrcnkRrxNyri4bOF9n48BIYWbb">Biểu mẫu được liên kết trong thông báo</a> chỉ nhằm thu thập quan tâm ban đầu, ý tưởng và nhu cầu. Nhóm nói quy tắc tham gia và chi tiết hỗ trợ sẽ được công bố khi chương trình chính thức ra mắt. Vì vậy, chưa thể hiểu đây là cam kết tài trợ cho bất kỳ ai điền form, và không có mức cấp token cụ thể được nêu trong bài.</p>
-<h2>“Mọi thứ đều là plugin” đổi vai trò của nền tảng</h2>
-<p>Theo tầm nhìn được mô tả, Harness giữ những năng lực nền tảng và chức năng phổ thông; người hiểu ngành hoặc quy trình cụ thể nhất xây phần chuyên biệt. Nhóm còn nói tính năng tích hợp sẵn cũng có thể được thay thế bằng plugin bên thứ ba.</p>
-<p>Đánh đổi nằm ngay trong sự linh hoạt đó. Khi phần mở rộng có thể thay đổi trải nghiệm sâu hơn, người dùng cần biết ai duy trì nó, nó tương thích phiên bản nào và nó tiếp xúc với dữ liệu nào. Một marketplace giúp tìm kiếm dễ hơn nhưng danh sách niêm yết không tự biến thành kiểm toán bảo mật.</p>
+
+<p class="m-vi" lang="vi">Tài liệu nêu hỗ trợ <code>@deepseek-ai/dsh</code> từ <code>0.2.0-rc.2</code> trở lên theo định dạng nhật ký V4. Hãy kiểm tra lại mục tương thích trước khi cài; câu lệnh trên được trích từ tài liệu, chưa được chạy thử trong bài này.</p>
+<p class="m-en" lang="en">The docs state support for <code>@deepseek-ai/dsh</code> <code>0.2.0-rc.2</code> and above using the V4 log format—verify compatibility before installing, as this command was not run here.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Tài liệu ghi hỗ trợ @deepseek-ai/dsh từ 0.2.0-rc.2 trở lên với định dạng log V4; nên kiểm tra lại trước khi cài.">The docs state support for <code>@deepseek-ai/dsh</code> <code>0.2.0-rc.2</code> and above using the V4 log format—verify compatibility before installing, as this command was not run here.</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">4. agentero-dsh: đọc nghiên cứu trong một luồng</h3><h3 class="m-en" lang="en">4. agentero-dsh: reading research in one flow</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="4. agentero-dsh: đọc nghiên cứu trong một luồng">4. agentero-dsh: reading research in one flow</span></h3></div>
+
+<p class="m-vi" lang="vi">Bài công bố giới thiệu plugin của <a href="https://github.com/Phil-Fan">Phil-Fan</a> đưa Agentero vào Harness để đọc paper, đánh dấu, dịch và ghi chú cùng một nơi, đồng thời nhờ agent giải thích ý tưởng. Đây là ví dụ của việc xây từ nhu cầu thật trong nhóm nghiên cứu, thay vì bắt đầu bằng một danh sách tính năng AI chung chung.</p>
+<p class="m-en" lang="en">The post introduces <a href="https://github.com/Phil-Fan">Phil-Fan's</a> plugin bringing Agentero into Harness to read papers, highlight, translate, and take notes in one place while asking an agent to explain concepts—built around a real research workflow rather than a generic AI feature checklist.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Plugin của Phil-Fan đưa Agentero vào Harness để đọc paper, đánh dấu, dịch, ghi chú và hỏi agent giải thích ngay trong một luồng — xuất phát từ nhu cầu nghiên cứu thật.">The post introduces <a href="https://github.com/Phil-Fan">Phil-Fan's</a> plugin bringing Agentero into Harness to read papers, highlight, translate, and take notes in one place while asking an agent to explain concepts—built around a real research workflow rather than a generic AI feature checklist.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Chương trình hỗ trợ: đã có định hướng, chưa có đủ thể lệ</h2><h2 class="m-en" lang="en">Creator support program: direction set, rules pending</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Chương trình hỗ trợ: đã có định hướng, chưa có đủ thể lệ">Creator support program: direction set, rules pending</span></h2></div>
+
+<p class="m-vi" lang="vi">Nhóm nói sẽ cải thiện độ ổn định và tương thích của API, tăng cường bảo mật plugin và xây marketplace chính thức. Chương trình hỗ trợ tác giả đang được chuẩn bị, với các hướng như cấp token, trao đổi kỹ thuật và quảng bá sản phẩm. Bài gốc cũng mời startup và doanh nghiệp tích hợp sản phẩm, dịch vụ hoặc chuyên môn qua plugin.</p>
+<p class="m-en" lang="en">The team plans to improve API stability and compatibility, strengthen plugin security, and launch an official marketplace. An author support program is in preparation—spanning token grants, technical exchange, and promotion—alongside invitations for startups and businesses to integrate via plugins.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nhóm dự kiến cải thiện độ ổn định API, bảo mật plugin, mở marketplace chính thức và chuẩn bị chương trình hỗ trợ tác giả (cấp token, trao đổi kỹ thuật, quảng bá).">The team plans to improve API stability and compatibility, strengthen plugin security, and launch an official marketplace. An author support program is in preparation—spanning token grants, technical exchange, and promotion—alongside invitations for startups and businesses to integrate via plugins.</span></p>
+
+<p class="m-vi" lang="vi"><a href="https://trtgsjkv6r.feishu.cn/share/base/form/shrcnkRrxNyri4bOF9n48BIYWbb">Biểu mẫu được liên kết trong thông báo</a> chỉ nhằm thu thập quan tâm ban đầu, ý tưởng và nhu cầu. Nhóm nói quy tắc tham gia và chi tiết hỗ trợ sẽ được công bố khi chương trình chính thức ra mắt. Vì vậy, chưa thể hiểu đây là cam kết tài trợ cho bất kỳ ai điền form, và không có mức cấp token cụ thể được nêu trong bài.</p>
+<p class="m-en" lang="en">The <a href="https://trtgsjkv6r.feishu.cn/share/base/form/shrcnkRrxNyri4bOF9n48BIYWbb">linked form</a> only collects initial interest, ideas, and needs; participation rules and grant details will follow at launch. Filling out the form is not a funding guarantee, and no specific token quota is stated.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Biểu mẫu đính kèm chỉ để thu thập quan tâm ban đầu; thể lệ và mức hỗ trợ sẽ công bố khi ra mắt chính thức, chưa phải cam kết tài trợ.">The <a href="https://trtgsjkv6r.feishu.cn/share/base/form/shrcnkRrxNyri4bOF9n48BIYWbb">linked form</a> only collects initial interest, ideas, and needs; participation rules and grant details will follow at launch. Filling out the form is not a funding guarantee, and no specific token quota is stated.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">“Mọi thứ đều là plugin” đổi vai trò của nền tảng</h2><h2 class="m-en" lang="en">“Everything is a plugin” shifts the platform's role</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="“Mọi thứ đều là plugin” đổi vai trò của nền tảng">“Everything is a plugin” shifts the platform's role</span></h2></div>
+
+<p class="m-vi" lang="vi">Theo tầm nhìn được mô tả, Harness giữ những năng lực nền tảng và chức năng phổ thông; người hiểu ngành hoặc quy trình cụ thể nhất xây phần chuyên biệt. Nhóm còn nói tính năng tích hợp sẵn cũng có thể được thay thế bằng plugin bên thứ ba.</p>
+<p class="m-en" lang="en">In this vision, Harness handles core runtime capabilities and common plumbing while domain experts build specialized workflows—even allowing built-in features to be swapped out for third-party plugins.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo tầm nhìn này, Harness giữ phần nền tảng phổ thông còn người hiểu nghiệp vụ xây phần chuyên biệt, thậm chí thay được cả tính năng tích hợp sẵn.">In this vision, Harness handles core runtime capabilities and common plumbing while domain experts build specialized workflows—even allowing built-in features to be swapped out for third-party plugins.</span></p>
+
+<p class="m-vi" lang="vi">Đánh đổi nằm ngay trong sự linh hoạt đó. Khi phần mở rộng có thể thay đổi trải nghiệm sâu hơn, người dùng cần biết ai duy trì nó, nó tương thích phiên bản nào và nó tiếp xúc với dữ liệu nào. Một marketplace giúp tìm kiếm dễ hơn nhưng danh sách niêm yết không tự biến thành kiểm toán bảo mật.</p>
+<p class="m-en" lang="en">The trade-off sits inside that flexibility: as extensions reshape more of the experience, users must know who maintains them, which version they target, and what data they touch. A marketplace aids discovery, but a listing is not a security audit.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Đánh đổi nằm ở sự linh hoạt: khi plugin can thiệp sâu, người dùng cần biết ai bảo trì, tương thích ra sao và chạm dữ liệu nào — marketplace không thay được kiểm toán bảo mật.">The trade-off sits inside that flexibility: as extensions reshape more of the experience, users must know who maintains them, which version they target, and what data they touch. A marketplace aids discovery, but a listing is not a security audit.</span></p>
+
+</div>
+
 <section class="blog-insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
 <ul><li><strong>Bắt đầu từ một vòng công việc khép kín.</strong> Chọn một việc lặp lại, xác định đầu vào, thành phẩm và nơi lưu. Một plugin nhỏ phục vụ đúng vòng đó dễ đánh giá hơn một “trợ lý làm mọi thứ”.</li>
 <li><strong>Phân biệt prompt với sản phẩm.</strong> Prompt mô tả cách làm; sản phẩm còn cần giao diện, trạng thái, lưu trữ, xử lý lỗi và khả năng tiếp tục công việc. Đó là lý do ví dụ “My Work” đáng chú ý hơn số lượng kỹ năng được đóng gói.</li>
@@ -111,7 +234,7 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li><strong>Đừng chọn plugin chỉ bằng lượt phổ biến.</strong> Đọc mã hoặc tài liệu, kiểm tra người bảo trì, quyền truy cập, nơi gửi dữ liệu và tương thích. Thử bằng dữ liệu giả trong môi trường tách biệt trước khi dùng tài liệu nhạy cảm.</li>
 <li><strong>Đo giá trị, không chỉ đếm lượt cài.</strong> Với một plugin nội bộ, nên theo dõi tỷ lệ hoàn thành đúng, thời gian sửa tay và số lần dùng lại thành phẩm. Đó là những phép đo đề xuất của người viết, không phải số liệu DeepSeek đã công bố.</li></ul>
 <p>Những phân tích trên là nhận định bổ sung, không phải phát biểu hay cam kết của nhóm DeepSeek Harness.</p></section>
-<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/DeepSeekHarness/status/2119431663642153128">@DeepSeekHarness trên X</a> · <a href="https://x.com/i/article/2118260976965517312">Growing Together with Our Plugin Community</a> · <a href="https://github.com/bowenliang123/dsh-context#readme">README dsh-context</a>. Đọc nguồn ngày 08/11/2026 (giờ Việt Nam, UTC+7). Không thấy tweet trích dẫn; lần tra cứu chuỗi hội thoại chỉ trả về bài gốc. Không xem video demo hoặc kiểm thử bốn plugin. Không coi việc ghi công là giấy phép sao chép nội dung gốc.</p>
+<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/DeepSeekHarness/status/2119431663642153128">@DeepSeekHarness trên X</a> · <a href="https://x.com/i/article/2118260976965517312">Growing Together with Our Plugin Community</a> · <a href="https://github.com/bowenliang123/dsh-context#readme">README dsh-context</a>. Đọc nguồn ngày 08/11/2026 (giờ Việt Nam, UTC+7). Không thấy tweet trích dẫn; lần tra cứu chuỗi hội thoại chỉ trả về bài gốc. Không xem video demo hoặc kiểm thử bốn plugin. Không coi việc ghi công là giấy phép sao chép nội dung gốc. Cập nhật ba chế độ đọc.</p>
 <section class="blog-mindmap" id="mindmap"><h2>Mindmap — Hệ sinh thái plugin</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
 mindmap
   root((DeepSeek Harness))
@@ -143,5 +266,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
