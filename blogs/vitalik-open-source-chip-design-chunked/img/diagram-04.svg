@@ -1,0 +1,1044 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="383" viewBox="0 0 660 383" style="letter-spacing:normal">
+<rect width="660" height="383" fill="#ffffff"/>
+<text x="26.0" y="17.0" font-family="DejaVu Sans, sans-serif" font-size="9.5" fill="#24262b" text-anchor="start" font-weight="bold" xml:space="preserve">GDS
+bytes 51,704 – 54,759</text>
+<text x="179.0" y="17.0" font-family="DejaVu Sans, sans-serif" font-size="9.5" fill="#6a6c74" text-anchor="start" font-weight="normal" xml:space="preserve">The
+actual gf180mcu_fd_sc_mcu7t5v0__oai21_1 cell definition</text>
+<rect x="172.0" y="146.0" width="296.8" height="6.4" fill="#e8ebf2"/>
+<g transform="translate(26.0,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6e7581" xml:space="preserve">001c</text></g>
+<g transform="translate(35.2,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">05</text></g>
+<g transform="translate(39.8,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#646b79" xml:space="preserve">02</text></g>
+<g transform="translate(44.4,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">004600010001000000000000007e000b00170003000a002e</text></g>
+<g transform="translate(154.8,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6e7581" xml:space="preserve">0024</text></g>
+<g transform="translate(164.0,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">06</text></g>
+<g transform="translate(168.6,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#646b79" xml:space="preserve">06</text></g>
+<g transform="translate(173.2,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">67663138306d63755f66645f73635f6d637537743576305f5f6f616932315f31</text></g>
+<g transform="translate(320.4,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(338.8,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(348.0,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(352.6,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(357.2,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0070</text></g>
+<g transform="translate(366.4,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(375.6,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(380.2,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(384.8,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0001</text></g>
+<g transform="translate(394.0,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(403.2,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(407.8,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(412.4,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000000000000000</text></g>
+<g transform="translate(449.2,34.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000000000000f50</text></g>
+<g transform="translate(26.0,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000118000000f50</text></g>
+<g transform="translate(62.8,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000118000000000</text></g>
+<g transform="translate(99.6,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000000000000000</text></g>
+<g transform="translate(136.4,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(154.8,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(173.2,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(182.4,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(187.0,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(191.6,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0015</text></g>
+<g transform="translate(200.8,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(210.0,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(214.6,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(219.2,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(228.4,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(237.6,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(242.2,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(246.8,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">fffffe52000006e0</text></g>
+<g transform="translate(283.6,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">fffffe52000010fe</text></g>
+<g transform="translate(320.4,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000132e000010fe</text></g>
+<g transform="translate(357.2,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000132e000006e0</text></g>
+<g transform="translate(394.0,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">fffffe52000006e0</text></g>
+<g transform="translate(430.8,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(449.2,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(467.6,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(476.8,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(481.4,39.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(26.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">00cc</text></g>
+<g transform="translate(35.2,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(44.4,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(49.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(53.6,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(62.8,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(72.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(76.6,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(81.2,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">fffffe52fffffe52</text></g>
+<g transform="translate(118.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">fffffe52000006e0</text></g>
+<g transform="translate(154.8,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000132e000006e0</text></g>
+<g transform="translate(191.6,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000132efffffe52</text></g>
+<g transform="translate(228.4,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">fffffe52fffffe52</text></g>
+<g transform="translate(265.2,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(283.6,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(302.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(311.2,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(315.8,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(320.4,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0037</text></g>
+<g transform="translate(329.6,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(338.8,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(343.4,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(348.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(357.2,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(366.4,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(371.0,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(375.6,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">fffffee8fffffee8</text></g>
+<g transform="translate(412.4,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">fffffee800001068</text></g>
+<g transform="translate(449.2,45.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000129800001068</text></g>
+<g transform="translate(26.0,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00001298fffffee8</text></g>
+<g transform="translate(62.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">fffffee8fffffee8</text></g>
+<g transform="translate(99.6,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(118.0,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(136.4,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(145.6,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(150.2,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(154.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0020</text></g>
+<g transform="translate(164.0,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(173.2,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(177.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(182.4,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(191.6,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(200.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(205.4,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(210.0,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">ffffff38ffffff38</text></g>
+<g transform="translate(246.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">ffffff38000006e0</text></g>
+<g transform="translate(283.6,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00001248000006e0</text></g>
+<g transform="translate(320.4,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00001248ffffff38</text></g>
+<g transform="translate(357.2,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">ffffff38ffffff38</text></g>
+<g transform="translate(394.0,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(412.4,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(430.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(440.0,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(444.6,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(449.2,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">001f</text></g>
+<g transform="translate(458.4,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(467.6,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(472.2,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(476.8,51.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(26.0,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(35.2,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(39.8,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(44.4,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">ffffff38000006e0</text></g>
+<g transform="translate(81.2,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">ffffff3800001018</text></g>
+<g transform="translate(118.0,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000124800001018</text></g>
+<g transform="translate(154.8,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00001248000006e0</text></g>
+<g transform="translate(191.6,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">ffffff38000006e0</text></g>
+<g transform="translate(228.4,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(246.8,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(265.2,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(274.4,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(279.0,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(283.6,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0016</text></g>
+<g transform="translate(292.8,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(302.0,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(306.6,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(311.2,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(320.4,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">003c</text></g>
+<g transform="translate(329.6,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(334.2,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(338.8,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000000e600000938</text></g>
+<g transform="translate(375.6,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000000e600000dfc</text></g>
+<g transform="translate(412.4,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000f3c00000dfc</text></g>
+<g transform="translate(449.2,57.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000f3c00000992</text></g>
+<g transform="translate(26.0,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000a5000000992</text></g>
+<g transform="translate(62.8,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">00000a5000000938000000e600000938</text></g>
+<g transform="translate(136.4,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(154.8,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(173.2,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(182.4,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(187.0,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(191.6,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0016</text></g>
+<g transform="translate(200.8,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(210.0,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(214.6,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(219.2,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(228.4,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(237.6,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(242.2,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(246.8,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000000b400000154</text></g>
+<g transform="translate(283.6,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000000b400000488</text></g>
+<g transform="translate(320.4,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000f3c00000488</text></g>
+<g transform="translate(357.2,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000f3c00000154</text></g>
+<g transform="translate(394.0,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000000b400000154</text></g>
+<g transform="translate(430.8,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(449.2,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(467.6,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(476.8,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(481.4,63.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(26.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">001e</text></g>
+<g transform="translate(35.2,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(44.4,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(49.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(53.6,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(62.8,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">003c</text></g>
+<g transform="translate(72.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(76.6,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(81.2,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000026c00000078</text></g>
+<g transform="translate(118.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000026c000007da</text></g>
+<g transform="translate(154.8,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000002d0000007da</text></g>
+<g transform="translate(191.6,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000002d000000ed8</text></g>
+<g transform="translate(228.4,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000004c400000ed8</text></g>
+<g transform="translate(265.2,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">000004c4000000780000026c00000078</text></g>
+<g transform="translate(338.8,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(357.2,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(375.6,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(384.8,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(389.4,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(394.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">001e</text></g>
+<g transform="translate(403.2,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(412.4,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(417.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(421.6,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(430.8,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">003c</text></g>
+<g transform="translate(440.0,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(444.6,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(449.2,68.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000006cc00000078</text></g>
+<g transform="translate(26.0,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000006cc00000ed8</text></g>
+<g transform="translate(62.8,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000008c000000ed8</text></g>
+<g transform="translate(99.6,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000008c0000007da</text></g>
+<g transform="translate(136.4,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000924000007da</text></g>
+<g transform="translate(173.2,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">0000092400000078000006cc00000078</text></g>
+<g transform="translate(246.8,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(265.2,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(283.6,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(292.8,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(297.4,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(302.0,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">001e</text></g>
+<g transform="translate(311.2,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(320.4,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(325.0,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(329.6,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(338.8,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">003c</text></g>
+<g transform="translate(348.0,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(352.6,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(357.2,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000b2c00000078</text></g>
+<g transform="translate(394.0,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">00000b2c000007da</text></g>
+<g transform="translate(430.8,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000b90000007da</text></g>
+<g transform="translate(467.6,74.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000b90</text></g>
+<g transform="translate(26.0,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000ed8</text></g>
+<g transform="translate(44.4,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000d8400000ed8</text></g>
+<g transform="translate(81.2,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">00000d840000007800000b2c00000078</text></g>
+<g transform="translate(154.8,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(173.2,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(191.6,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(200.8,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(205.4,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(210.0,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(219.2,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(228.4,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(233.0,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(237.6,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(246.8,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(256.0,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(260.6,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(265.2,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000000fa00000262</text></g>
+<g transform="translate(302.0,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000000fa0000033e</text></g>
+<g transform="translate(338.8,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000001d60000033e</text></g>
+<g transform="translate(375.6,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000001d600000262</text></g>
+<g transform="translate(412.4,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000000fa00000262</text></g>
+<g transform="translate(449.2,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(467.6,80.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(26.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(35.2,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(39.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(44.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(53.6,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(62.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(67.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(72.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(81.2,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(90.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(95.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(99.6,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000012c00000ba4</text></g>
+<g transform="translate(136.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000012c00000c80</text></g>
+<g transform="translate(173.2,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000020800000c80</text></g>
+<g transform="translate(210.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000020800000ba4</text></g>
+<g transform="translate(246.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000012c00000ba4</text></g>
+<g transform="translate(283.6,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(302.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(320.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(329.6,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(334.2,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(338.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(348.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(357.2,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(361.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(366.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(375.6,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(384.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(389.4,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(394.0,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000002e40000064f</text></g>
+<g transform="translate(430.8,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000002e40000072b</text></g>
+<g transform="translate(467.6,86.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000003c0</text></g>
+<g transform="translate(26.0,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000072b</text></g>
+<g transform="translate(44.4,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000003c00000064f</text></g>
+<g transform="translate(81.2,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000002e40000064f</text></g>
+<g transform="translate(118.0,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(136.4,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(154.8,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(164.0,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(168.6,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(173.2,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(182.4,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(191.6,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(196.2,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(200.8,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(210.0,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(219.2,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(223.8,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(228.4,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000055a00000262</text></g>
+<g transform="translate(265.2,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000055a0000033e</text></g>
+<g transform="translate(302.0,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000006360000033e</text></g>
+<g transform="translate(338.8,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000063600000262</text></g>
+<g transform="translate(375.6,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000055a00000262</text></g>
+<g transform="translate(412.4,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(430.8,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(449.2,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(458.4,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(463.0,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(467.6,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(476.8,92.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(26.0,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(30.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(35.2,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(44.4,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(53.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(58.2,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(62.8,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000078a0000064f</text></g>
+<g transform="translate(99.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000078a0000072b</text></g>
+<g transform="translate(136.4,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000008660000072b</text></g>
+<g transform="translate(173.2,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000008660000064f</text></g>
+<g transform="translate(210.0,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000078a0000064f</text></g>
+<g transform="translate(246.8,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(265.2,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(283.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(292.8,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(297.4,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(302.0,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(311.2,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(320.4,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(325.0,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(329.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(338.8,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(348.0,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(352.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(357.2,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000095600000a5a</text></g>
+<g transform="translate(394.0,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000095600000b36</text></g>
+<g transform="translate(430.8,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000a3200000b36</text></g>
+<g transform="translate(467.6,97.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000a32</text></g>
+<g transform="translate(26.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000a5a</text></g>
+<g transform="translate(44.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000095600000a5a</text></g>
+<g transform="translate(81.2,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(99.6,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(118.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(127.2,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(131.8,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(136.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(145.6,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(154.8,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(159.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(164.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(173.2,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(182.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(187.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(191.6,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000009ba00000262</text></g>
+<g transform="translate(228.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000009ba0000033e</text></g>
+<g transform="translate(265.2,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000a960000033e</text></g>
+<g transform="translate(302.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000a9600000262</text></g>
+<g transform="translate(338.8,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000009ba00000262</text></g>
+<g transform="translate(375.6,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(394.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(412.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(421.6,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(426.2,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(430.8,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(440.0,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(449.2,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(453.8,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(458.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(467.6,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(476.8,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(481.4,103.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(26.0,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000bea0000064f</text></g>
+<g transform="translate(62.8,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">00000bea0000072b</text></g>
+<g transform="translate(99.6,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000cc60000072b</text></g>
+<g transform="translate(136.4,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000cc60000064f</text></g>
+<g transform="translate(173.2,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000bea0000064f</text></g>
+<g transform="translate(210.0,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(228.4,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(246.8,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(256.0,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(260.6,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(265.2,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(274.4,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(283.6,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(288.2,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(292.8,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(302.0,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(311.2,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(315.8,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(320.4,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000e1a00000262</text></g>
+<g transform="translate(357.2,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">00000e1a0000033e</text></g>
+<g transform="translate(394.0,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000ef60000033e</text></g>
+<g transform="translate(430.8,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000ef600000262</text></g>
+<g transform="translate(467.6,109.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000e1a</text></g>
+<g transform="translate(26.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000262</text></g>
+<g transform="translate(44.4,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(62.8,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(81.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(90.4,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(95.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(99.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0021</text></g>
+<g transform="translate(108.8,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(118.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(122.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(127.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(136.4,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(145.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(150.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(154.8,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000e1a00000ba4</text></g>
+<g transform="translate(191.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">00000e1a00000c80</text></g>
+<g transform="translate(228.4,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000ef600000c80</text></g>
+<g transform="translate(265.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000ef600000ba4</text></g>
+<g transform="translate(302.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000e1a00000ba4</text></g>
+<g transform="translate(338.8,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(357.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(375.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(384.8,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(389.4,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(394.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(403.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(412.4,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(417.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(421.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(430.8,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">003c</text></g>
+<g transform="translate(440.0,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(444.6,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(449.2,115.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000004ce00000226</text></g>
+<g transform="translate(26.0,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000004ce00000b72</text></g>
+<g transform="translate(62.8,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000a3700000b72</text></g>
+<g transform="translate(99.6,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000a3700000a1e</text></g>
+<g transform="translate(136.4,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000063b00000a1e</text></g>
+<g transform="translate(173.2,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">0000063b00000226000004ce00000226</text></g>
+<g transform="translate(246.8,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(265.2,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(283.6,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(292.8,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(297.4,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(302.0,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(311.2,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(320.4,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(325.0,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(329.6,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(338.8,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">008c</text></g>
+<g transform="translate(348.0,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(352.6,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(357.2,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000000f500000226</text></g>
+<g transform="translate(394.0,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000000f500000a82</text></g>
+<g transform="translate(430.8,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000002f300000a82</text></g>
+<g transform="translate(467.6,121.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000002f3</text></g>
+<g transform="translate(26.0,126.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000d3e</text></g>
+<g transform="translate(44.4,126.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000c0300000d3e</text></g>
+<g transform="translate(81.2,126.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">00000c030000085200000a9b0000085200000a9b00000226000009b500000226000009b50000093800000b1d0000093800000b1d00000c58000003d900000c58000003d90000099c000001db0000099c000001db00000226</text></g>
+<g transform="translate(26.0,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">000000f500000226</text></g>
+<g transform="translate(62.8,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(81.2,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(99.6,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(108.8,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(113.4,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(118.0,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(127.2,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(136.4,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(141.0,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(145.6,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(154.8,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">004c</text></g>
+<g transform="translate(164.0,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(168.6,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(173.2,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000b8100000226</text></g>
+<g transform="translate(210.0,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">00000b810000076c</text></g>
+<g transform="translate(246.8,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000d2f0000076c</text></g>
+<g transform="translate(283.6,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000d2f00000866</text></g>
+<g transform="translate(320.4,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000010fe00000866</text></g>
+<g transform="translate(357.2,132.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">000010fe0000064000000cd00000064000000cd00000022600000b81</text></g>
+<g transform="translate(26.0,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">00000226</text></g>
+<g transform="translate(44.4,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(62.8,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(81.2,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(90.4,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(95.0,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(99.6,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(108.8,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(118.0,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(122.6,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(127.2,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(136.4,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">004c</text></g>
+<g transform="translate(145.6,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(150.2,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(154.8,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000000fffffed4</text></g>
+<g transform="translate(191.6,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000000000000012c</text></g>
+<g transform="translate(228.4,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">00000e150000012c</text></g>
+<g transform="translate(265.2,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">00000e15000003a2</text></g>
+<g transform="translate(302.0,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">00000efb000003a2</text></g>
+<g transform="translate(338.8,138.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">00000efb0000012c000011800000012c00001180fffffed400000000fffffed4</text></g>
+<g transform="translate(26.0,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(44.4,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(62.8,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(72.0,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(76.6,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(81.2,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(90.4,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(99.6,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(104.2,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(108.8,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(118.0,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">006c</text></g>
+<g transform="translate(127.2,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(131.8,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(136.4,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000012700000b68</text></g>
+<g transform="translate(173.2,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000012700000e24</text></g>
+<g transform="translate(210.0,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000000000000e24</text></g>
+<g transform="translate(246.8,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000000000000107c</text></g>
+<g transform="translate(283.6,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000011800000107c</text></g>
+<g transform="translate(320.4,144.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">0000118000000e2400000efb00000e2400000efb00000b6800000e1500000b6800000e15</text></g>
+<g transform="translate(26.0,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#900d23" xml:space="preserve">00000e240000020d00000e240000020d00000b680000012700000b68</text></g>
+<g transform="translate(154.8,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(173.2,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(191.6,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(200.8,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(205.4,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(210.0,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(219.2,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(228.4,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(233.0,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(237.6,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(246.8,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(256.0,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(260.6,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(265.2,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000002c100000226</text></g>
+<g transform="translate(302.0,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">000002c1000008b6</text></g>
+<g transform="translate(338.8,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">000003e8000008b6</text></g>
+<g transform="translate(375.6,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">000003e800000226</text></g>
+<g transform="translate(412.4,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">000002c100000226</text></g>
+<g transform="translate(449.2,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(467.6,150.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(26.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(35.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(39.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(44.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(53.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(62.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(67.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(72.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(81.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(90.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(95.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(99.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000072100000226</text></g>
+<g transform="translate(136.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000072100000910</text></g>
+<g transform="translate(173.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000087000000910</text></g>
+<g transform="translate(210.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000087000000226</text></g>
+<g transform="translate(246.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000072100000226</text></g>
+<g transform="translate(283.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(302.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(320.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(329.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(334.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(338.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(348.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(357.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(361.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(366.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(375.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(384.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(389.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(394.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(403.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(412.4,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(417.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(421.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(430.8,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(440.0,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(444.6,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(449.2,155.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333333334</text></g>
+<g transform="translate(26.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(35.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(39.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(44.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000008c000000f50</text></g>
+<g transform="translate(81.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0008</text></g>
+<g transform="translate(90.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(95.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(99.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">56444400</text></g>
+<g transform="translate(118.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(136.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(154.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(164.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(168.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(173.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(182.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(191.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(196.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(200.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(210.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(219.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(223.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(228.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(237.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(246.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(251.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(256.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(265.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(274.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(279.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(283.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333333334</text></g>
+<g transform="translate(320.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(329.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(334.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(338.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000c0800000578</text></g>
+<g transform="translate(375.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0006</text></g>
+<g transform="translate(384.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(389.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(394.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">4200</text></g>
+<g transform="translate(403.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(421.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(440.0,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(449.2,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(453.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(458.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(467.6,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(476.8,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(481.4,161.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(26.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(35.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(44.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(49.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(53.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(62.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(72.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(76.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(81.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(90.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(99.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(104.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(108.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333333334</text></g>
+<g transform="translate(145.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(154.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(159.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(164.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000034800000578</text></g>
+<g transform="translate(200.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0006</text></g>
+<g transform="translate(210.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(214.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(219.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">4132</text></g>
+<g transform="translate(228.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(246.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(265.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(274.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(279.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(283.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(292.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(302.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(306.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(311.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(320.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(329.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(334.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(338.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(348.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(357.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(361.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(366.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(375.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(384.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(389.4,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(394.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333333334</text></g>
+<g transform="translate(430.8,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(440.0,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(444.6,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(449.2,167.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000578000007a8</text></g>
+<g transform="translate(26.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0006</text></g>
+<g transform="translate(35.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(39.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(44.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">5a4e</text></g>
+<g transform="translate(53.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(72.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(90.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(99.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(104.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(108.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(118.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(127.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(131.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(136.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(145.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(154.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(159.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(164.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(173.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(182.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(187.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(191.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(200.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(210.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(214.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(219.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333333334</text></g>
+<g transform="translate(256.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(265.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(269.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(274.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000007a800000578</text></g>
+<g transform="translate(311.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0006</text></g>
+<g transform="translate(320.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(325.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(329.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">4131</text></g>
+<g transform="translate(338.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(357.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(375.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(384.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(389.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(394.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0022</text></g>
+<g transform="translate(403.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(412.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(417.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(421.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(430.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(440.0,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(444.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(449.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(458.4,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(467.6,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(472.2,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(476.8,173.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(26.0,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(35.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(39.8,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(44.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333333334</text></g>
+<g transform="translate(81.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(90.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(95.0,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(99.6,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000008c000000000</text></g>
+<g transform="translate(136.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0008</text></g>
+<g transform="translate(145.6,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(150.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(154.8,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">56535300</text></g>
+<g transform="translate(173.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(191.6,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040800</text></g>
+<g transform="translate(210.0,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(219.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(223.8,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(228.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0000</text></g>
+<g transform="translate(237.6,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#3a80d6" xml:space="preserve">0006</text></g>
+<g transform="translate(246.8,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<g transform="translate(251.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c78d3" xml:space="preserve">02</text></g>
+<g transform="translate(256.0,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1f6fd0" xml:space="preserve">0000</text></g>
+<g transform="translate(265.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">002c</text></g>
+<g transform="translate(274.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(279.0,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(283.6,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000000000000000</text></g>
+<g transform="translate(320.4,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b6102d" xml:space="preserve">0000000000000f50</text></g>
+<g transform="translate(357.2,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#ad0f2a" xml:space="preserve">0000118000000f50</text></g>
+<g transform="translate(394.0,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#a30e28" xml:space="preserve">0000118000000000</text></g>
+<g transform="translate(430.8,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#9a0e26" xml:space="preserve">0000000000000000</text></g>
+<g transform="translate(467.6,179.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(26.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(44.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(53.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(58.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(62.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">003f</text></g>
+<g transform="translate(72.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(81.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(85.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(90.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">003f</text></g>
+<g transform="translate(99.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(108.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(113.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(118.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0004</text></g>
+<g transform="translate(127.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(136.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(141.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(145.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(154.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(164.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(168.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(173.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">404ccccccccccccc</text></g>
+<g transform="translate(210.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(219.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(223.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(228.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000000000007d0</text></g>
+<g transform="translate(265.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">001c</text></g>
+<g transform="translate(274.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(279.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(283.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">262056656e646f7220474c4f42414c464f554e4452494553</text></g>
+<g transform="translate(394.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(412.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(430.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(440.0,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(444.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(449.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">003f</text></g>
+<g transform="translate(458.4,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(467.6,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(472.2,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(476.8,184.8) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">003f</text></g>
+<g transform="translate(26.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(35.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(39.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(44.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0004</text></g>
+<g transform="translate(53.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(62.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(67.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(72.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(81.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(90.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(95.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(99.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">404ccccccccccccc</text></g>
+<g transform="translate(136.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(145.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(150.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(154.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000000000005dc</text></g>
+<g transform="translate(191.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0020</text></g>
+<g transform="translate(200.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(205.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(210.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">262050726f64756374204746303138687635765f6d63755f73633700</text></g>
+<g transform="translate(338.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(357.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(375.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(384.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(389.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(394.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">003f</text></g>
+<g transform="translate(403.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(412.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(417.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(421.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">003f</text></g>
+<g transform="translate(430.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(440.0,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(444.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(449.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0004</text></g>
+<g transform="translate(458.4,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(467.6,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(472.2,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(476.8,190.6) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(26.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(35.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(39.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(44.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">404ccccccccccccc</text></g>
+<g transform="translate(81.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(90.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(95.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(99.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000000000003e8</text></g>
+<g transform="translate(136.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0016</text></g>
+<g transform="translate(145.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(150.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(154.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">262056657273696f6e203230313571327631</text></g>
+<g transform="translate(237.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(256.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(274.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(283.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(288.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(292.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">003f</text></g>
+<g transform="translate(302.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(311.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(315.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(320.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">003f</text></g>
+<g transform="translate(329.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(338.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(343.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(348.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0004</text></g>
+<g transform="translate(357.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(366.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(371.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(375.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(384.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(394.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(398.6,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(403.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">404ccccccccccccc</text></g>
+<g transform="translate(440.0,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(449.2,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(453.8,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(458.4,196.4) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">000000000000</text></g>
+<g transform="translate(26.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">01f4</text></g>
+<g transform="translate(35.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0012</text></g>
+<g transform="translate(44.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(49.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(53.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">26204d657472696320312e303000</text></g>
+<g transform="translate(118.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(136.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(154.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(164.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(168.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(173.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0015</text></g>
+<g transform="translate(182.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(191.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(196.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(200.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(210.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(219.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(223.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(228.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(237.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(246.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(251.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(256.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(265.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(274.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(279.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(283.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333340000</text></g>
+<g transform="translate(320.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(329.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(334.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(338.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">0000015900000f50</text></g>
+<g transform="translate(375.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0008</text></g>
+<g transform="translate(384.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(389.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(394.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">564e5700</text></g>
+<g transform="translate(412.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(430.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6b4bd8" xml:space="preserve">00040c00</text></g>
+<g transform="translate(449.2,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2b859d" xml:space="preserve">0006</text></g>
+<g transform="translate(458.4,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">0d</text></g>
+<g transform="translate(463.0,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1c7c97" xml:space="preserve">02</text></g>
+<g transform="translate(467.6,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0e7490" xml:space="preserve">00cc</text></g>
+<g transform="translate(476.8,202.2) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#2c676b" xml:space="preserve">0006</text></g>
+<g transform="translate(26.0,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">16</text></g>
+<g transform="translate(30.6,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1d5c61" xml:space="preserve">02</text></g>
+<g transform="translate(35.2,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#0f5257" xml:space="preserve">000a</text></g>
+<g transform="translate(44.4,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#6047b2" xml:space="preserve">0006</text></g>
+<g transform="translate(53.6,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">17</text></g>
+<g transform="translate(58.2,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#553bad" xml:space="preserve">01</text></g>
+<g transform="translate(62.8,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#4a2ea8" xml:space="preserve">0005</text></g>
+<g transform="translate(72.0,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#bd6827" xml:space="preserve">0006</text></g>
+<g transform="translate(81.2,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">1a</text></g>
+<g transform="translate(85.8,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b85d18" xml:space="preserve">01</text></g>
+<g transform="translate(90.4,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#b45309" xml:space="preserve">0000</text></g>
+<g transform="translate(99.6,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#8a741f" xml:space="preserve">000c</text></g>
+<g transform="translate(108.8,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">1b</text></g>
+<g transform="translate(113.4,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#826a0f" xml:space="preserve">05</text></g>
+<g transform="translate(118.0,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#7a6100" xml:space="preserve">4033333333340000</text></g>
+<g transform="translate(154.8,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c82e48" xml:space="preserve">000c</text></g>
+<g transform="translate(164.0,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">10</text></g>
+<g transform="translate(168.6,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c41f3b" xml:space="preserve">03</text></g>
+<g transform="translate(173.2,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#c0112f" xml:space="preserve">00000154ffffffab</text></g>
+<g transform="translate(210.0,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#358e4f" xml:space="preserve">0008</text></g>
+<g transform="translate(219.2,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">19</text></g>
+<g transform="translate(223.8,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#288743" xml:space="preserve">06</text></g>
+<g transform="translate(228.4,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#1a7f37" xml:space="preserve">56505700</text></g>
+<g transform="translate(246.8,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00041100</text></g>
+<g transform="translate(265.2,208.0) scale(0.6325,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="6.04" fill="#5a6270" xml:space="preserve">00040700</text></g>
+<rect x="172.0" y="146.0" width="296.8" height="6.4" fill="none" stroke="#24262b" stroke-width="0.9"/>
+<rect x="502.0" y="27.0" width="6.5" height="6.5" fill="#5a6270"/>
+<text x="513.0" y="34.0" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#5a6270" text-anchor="start" font-weight="bold" xml:space="preserve">frame</text>
+<text x="634.0" y="34.0" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#5a6270" text-anchor="end" font-weight="normal" xml:space="preserve">232
+B</text>
+<rect x="502.0" y="43.5" width="6.5" height="6.5" fill="#6b4bd8"/>
+<text x="513.0" y="50.5" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#6b4bd8" text-anchor="start" font-weight="bold" xml:space="preserve">element
+start</text>
+<text x="634.0" y="50.5" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#6b4bd8" text-anchor="end" font-weight="normal" xml:space="preserve">164
+B</text>
+<rect x="502.0" y="60.0" width="6.5" height="6.5" fill="#0e7490"/>
+<text x="513.0" y="67.0" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#0e7490" text-anchor="start" font-weight="bold" xml:space="preserve">LAYER</text>
+<text x="634.0" y="67.0" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#0e7490" text-anchor="end" font-weight="normal" xml:space="preserve">246
+B</text>
+<rect x="502.0" y="76.5" width="6.5" height="6.5" fill="#1f6fd0"/>
+<text x="513.0" y="83.5" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#1f6fd0" text-anchor="start" font-weight="bold" xml:space="preserve">DATATYPE</text>
+<text x="634.0" y="83.5" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#1f6fd0" text-anchor="end" font-weight="normal" xml:space="preserve">174
+B</text>
+<rect x="502.0" y="93.0" width="6.5" height="6.5" fill="#c0112f"/>
+<text x="513.0" y="100.0" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#c0112f" text-anchor="start" font-weight="bold" xml:space="preserve">XY</text>
+<text x="634.0" y="100.0" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#c0112f" text-anchor="end" font-weight="normal" xml:space="preserve">1724
+B</text>
+<rect x="502.0" y="109.5" width="6.5" height="6.5" fill="#0f5257"/>
+<text x="513.0" y="116.5" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#0f5257" text-anchor="start" font-weight="bold" xml:space="preserve">TEXTTYPE</text>
+<text x="634.0" y="116.5" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#0f5257" text-anchor="end" font-weight="normal" xml:space="preserve">72
+B</text>
+<rect x="502.0" y="126.0" width="6.5" height="6.5" fill="#4a2ea8"/>
+<text x="513.0" y="133.0" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#4a2ea8" text-anchor="start" font-weight="bold" xml:space="preserve">PRESENTATION</text>
+<text x="634.0" y="133.0" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#4a2ea8" text-anchor="end" font-weight="normal" xml:space="preserve">72
+B</text>
+<rect x="502.0" y="142.5" width="6.5" height="6.5" fill="#b45309"/>
+<text x="513.0" y="149.5" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#b45309" text-anchor="start" font-weight="bold" xml:space="preserve">STRANS</text>
+<text x="634.0" y="149.5" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#b45309" text-anchor="end" font-weight="normal" xml:space="preserve">72
+B</text>
+<rect x="502.0" y="159.0" width="6.5" height="6.5" fill="#7a6100"/>
+<text x="513.0" y="166.0" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#7a6100" text-anchor="start" font-weight="bold" xml:space="preserve">MAG</text>
+<text x="634.0" y="166.0" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#7a6100" text-anchor="end" font-weight="normal" xml:space="preserve">144
+B</text>
+<rect x="502.0" y="175.5" width="6.5" height="6.5" fill="#1a7f37"/>
+<text x="513.0" y="182.5" font-family="DejaVu Sans, sans-serif" font-size="8.8" fill="#1a7f37" text-anchor="start" font-weight="bold" xml:space="preserve">STRING</text>
+<text x="634.0" y="182.5" font-family="DejaVu Sans, sans-serif" font-size="8.4" fill="#1a7f37" text-anchor="end" font-weight="normal" xml:space="preserve">156
+B</text>
+<polyline points="468.8,149.0 494,149.0 494,206" fill="none" stroke="#24262b" stroke-width="0.9"/>
+<line x1="494.0" y1="206.0" x2="494.0" y2="212.8" stroke="#24262b" stroke-width="0.9"/><path d="M 494.0 217.0 L 495.9 212.8 L 492.1 212.8 Z" fill="#24262b"/>
+<rect x="18" y="220" width="624" height="153.5" rx="3" fill="#f7f8fa" stroke="#dfe3ea" stroke-width="0.8"/>
+<g transform="translate(30.0,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#ae9cea" xml:space="preserve">0004</text></g>
+<g transform="translate(62.5,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#6b4bd8" xml:space="preserve">08</text></g>
+<line x1="69.5" y1="255.6" x2="69.5" y2="254.0" stroke="#6b4bd8" stroke-width="0.9"/><path d="M 69.5 249.8 L 67.6 254.0 L 71.4 254.0 Z" fill="#6b4bd8"/>
+<text x="69.5" y="244.0" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#6b4bd8" text-anchor="middle" font-weight="bold" xml:space="preserve">BOUNDARY</text>
+<text x="69.5" y="232.4" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#6b4bd8" text-anchor="middle" font-weight="normal" xml:space="preserve">starts
+a polygon</text>
+<g transform="translate(81.1,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#8f76e1" xml:space="preserve">00</text></g>
+<g transform="translate(112.1,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#7ab3c2" xml:space="preserve">0006</text></g>
+<line x1="126.1" y1="270.6" x2="126.1" y2="273.4" stroke="#4a97ac" stroke-width="0.9"/><path d="M 126.1 277.6 L 128.0 273.4 L 124.2 273.4 Z" fill="#4a97ac"/>
+<text x="126.1" y="290.4" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#4a97ac" text-anchor="middle" font-weight="bold" xml:space="preserve">length</text>
+<text x="126.1" y="300.8" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#4a97ac" text-anchor="middle" font-weight="normal" xml:space="preserve">6
+bytes</text>
+<g transform="translate(144.7,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#0e7490" xml:space="preserve">0d</text></g>
+<line x1="151.6" y1="255.6" x2="151.6" y2="254.0" stroke="#0e7490" stroke-width="0.9"/><path d="M 151.6 249.8 L 149.7 254.0 L 153.5 254.0 Z" fill="#0e7490"/>
+<text x="151.6" y="244.0" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#0e7490" text-anchor="middle" font-weight="bold" xml:space="preserve">LAYER</text>
+<text x="151.6" y="232.4" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#0e7490" text-anchor="middle" font-weight="normal" xml:space="preserve">record
+type 0d</text>
+<g transform="translate(163.2,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#4895ab" xml:space="preserve">02</text></g>
+<line x1="170.2" y1="270.6" x2="170.2" y2="273.4" stroke="#26829b" stroke-width="0.9"/><path d="M 170.2 277.6 L 172.1 273.4 L 168.3 273.4 Z" fill="#26829b"/>
+<text x="170.2" y="290.4" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#26829b" text-anchor="middle" font-weight="bold" xml:space="preserve">dtype</text>
+<text x="170.2" y="300.8" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#26829b" text-anchor="middle" font-weight="normal" xml:space="preserve">int16</text>
+<g transform="translate(203.7,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#0e7490" xml:space="preserve">0022</text></g>
+<line x1="217.7" y1="255.6" x2="217.7" y2="254.0" stroke="#0e7490" stroke-width="0.9"/><path d="M 217.7 249.8 L 215.8 254.0 L 219.6 254.0 Z" fill="#0e7490"/>
+<text x="217.7" y="244.0" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#0e7490" text-anchor="middle" font-weight="bold" xml:space="preserve">value</text>
+<text x="217.7" y="232.4" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#0e7490" text-anchor="middle" font-weight="normal" xml:space="preserve">34
+= metal1</text>
+<g transform="translate(248.7,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#84b0e5" xml:space="preserve">0006</text></g>
+<g transform="translate(281.2,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#1f6fd0" xml:space="preserve">0e</text></g>
+<line x1="288.2" y1="270.6" x2="288.2" y2="273.4" stroke="#1f6fd0" stroke-width="0.9"/><path d="M 288.2 277.6 L 290.1 273.4 L 286.3 273.4 Z" fill="#1f6fd0"/>
+<text x="288.2" y="290.4" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#1f6fd0" text-anchor="middle" font-weight="bold" xml:space="preserve">DATATYPE</text>
+<text x="288.2" y="300.8" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#1f6fd0" text-anchor="middle" font-weight="normal" xml:space="preserve">record
+type 0e</text>
+<g transform="translate(299.8,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#5592db" xml:space="preserve">02</text></g>
+<g transform="translate(318.4,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#5592db" xml:space="preserve">0000</text></g>
+<line x1="332.3" y1="255.6" x2="332.3" y2="254.0" stroke="#357dd5" stroke-width="0.9"/><path d="M 332.3 249.8 L 330.4 254.0 L 334.2 254.0 Z" fill="#357dd5"/>
+<text x="332.3" y="244.0" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#357dd5" text-anchor="middle" font-weight="bold" xml:space="preserve">value</text>
+<text x="332.3" y="232.4" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#357dd5" text-anchor="middle" font-weight="normal" xml:space="preserve">0
+= drawn as is</text>
+<g transform="translate(363.4,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#dc7c8d" xml:space="preserve">002c</text></g>
+<g transform="translate(395.9,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#c0112f" xml:space="preserve">10</text></g>
+<line x1="402.9" y1="270.6" x2="402.9" y2="273.4" stroke="#c0112f" stroke-width="0.9"/><path d="M 402.9 277.6 L 404.8 273.4 L 401.0 273.4 Z" fill="#c0112f"/>
+<text x="402.9" y="290.4" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#c0112f" text-anchor="middle" font-weight="bold" xml:space="preserve">XY</text>
+<text x="402.9" y="300.8" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#c0112f" text-anchor="middle" font-weight="normal" xml:space="preserve">the
+polygon's points</text>
+<g transform="translate(414.5,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#cf4a61" xml:space="preserve">03</text></g>
+<g transform="translate(433.0,266.0) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#c0112f" xml:space="preserve">000002c100000226</text></g>
+<line x1="488.9" y1="255.6" x2="488.9" y2="254.0" stroke="#c0112f" stroke-width="0.9"/><path d="M 488.9 249.8 L 487.0 254.0 L 490.8 254.0 Z" fill="#c0112f"/>
+<text x="488.9" y="244.0" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#c0112f" text-anchor="middle" font-weight="bold" xml:space="preserve">point
+1</text>
+<text x="488.9" y="232.4" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#c0112f" text-anchor="middle" font-weight="normal" xml:space="preserve">(705,
+550)</text>
+<g transform="translate(30.0,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#c0112f" xml:space="preserve">000002c1000008b6</text></g>
+<line x1="85.8" y1="328.1" x2="85.8" y2="330.9" stroke="#c0112f" stroke-width="0.9"/><path d="M 85.8 335.1 L 87.7 330.9 L 83.9 330.9 Z" fill="#c0112f"/>
+<text x="85.8" y="347.9" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#c0112f" text-anchor="middle" font-weight="bold" xml:space="preserve">point
+2</text>
+<text x="85.8" y="358.3" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#c0112f" text-anchor="middle" font-weight="normal" xml:space="preserve">(705,
+2230)</text>
+<g transform="translate(146.3,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#c0112f" xml:space="preserve">000003e8000008b6</text></g>
+<line x1="202.1" y1="328.1" x2="202.1" y2="330.9" stroke="#c0112f" stroke-width="0.9"/><path d="M 202.1 335.1 L 204.0 330.9 L 200.2 330.9 Z" fill="#c0112f"/>
+<text x="202.1" y="347.9" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#c0112f" text-anchor="middle" font-weight="bold" xml:space="preserve">point
+3</text>
+<text x="202.1" y="358.3" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#c0112f" text-anchor="middle" font-weight="normal" xml:space="preserve">(1000,
+2230)</text>
+<g transform="translate(262.6,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#c0112f" xml:space="preserve">000003e800000226</text></g>
+<line x1="318.4" y1="328.1" x2="318.4" y2="330.9" stroke="#c0112f" stroke-width="0.9"/><path d="M 318.4 335.1 L 320.3 330.9 L 316.5 330.9 Z" fill="#c0112f"/>
+<text x="318.4" y="347.9" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#c0112f" text-anchor="middle" font-weight="bold" xml:space="preserve">point
+4</text>
+<text x="318.4" y="358.3" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#c0112f" text-anchor="middle" font-weight="normal" xml:space="preserve">(1000,
+550)</text>
+<g transform="translate(378.8,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#c0112f" xml:space="preserve">000002c100000226</text></g>
+<line x1="434.7" y1="328.1" x2="434.7" y2="330.9" stroke="#c0112f" stroke-width="0.9"/><path d="M 434.7 335.1 L 436.6 330.9 L 432.8 330.9 Z" fill="#c0112f"/>
+<text x="434.7" y="347.9" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#c0112f" text-anchor="middle" font-weight="bold" xml:space="preserve">point
+5</text>
+<text x="434.7" y="358.3" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#c0112f" text-anchor="middle" font-weight="normal" xml:space="preserve">(705,
+550) = point 1</text>
+<g transform="translate(507.6,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#a4a9b0" xml:space="preserve">0004</text></g>
+<g transform="translate(540.1,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#5a6270" xml:space="preserve">11</text></g>
+<line x1="547.1" y1="328.1" x2="547.1" y2="330.9" stroke="#5a6270" stroke-width="0.9"/><path d="M 547.1 335.1 L 549.0 330.9 L 545.2 330.9 Z" fill="#5a6270"/>
+<text x="547.1" y="347.9" font-family="DejaVu Sans, sans-serif" font-size="9.9" fill="#5a6270" text-anchor="middle" font-weight="bold" xml:space="preserve">ENDEL</text>
+<text x="547.1" y="358.3" font-family="DejaVu Sans, sans-serif" font-size="8.7" fill="#5a6270" text-anchor="middle" font-weight="normal" xml:space="preserve">the
+element ends</text>
+<g transform="translate(558.7,323.5) scale(0.9995,1)"><text x="0" y="0" font-family="DejaVu Sans Mono, monospace" font-size="11.6" fill="#828892" xml:space="preserve">00</text></g>
+</svg>

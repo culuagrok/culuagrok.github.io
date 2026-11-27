@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" font-family="&#39;DejaVu Sans&#39;, Verdana, sans-serif" style="letter-spacing:normal">
+<title>
+CMOS inverter: input 0 V gives 5 V out, input 5 V gives 0 V out
+</title>
+<rect width="360" height="360" fill="#fff"/>
+<rect x="231" y="215" width="19" height="54" rx="2.5" fill="#efeaf8" stroke="#dcd3ee" stroke-width="1.1"/>
+<rect x="231" y="95" width="19" height="54" rx="2.5" fill="#efeaf8" stroke="#dcd3ee" stroke-width="1.1"/>
+<g stroke="#2f6fd0" fill="none" stroke-width="2.6" stroke-linecap="round"><animate attributeName="stroke" dur="3.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.5;1" values="#2f6fd0;#d9772b;#2f6fd0"/>
+<path d="M6 182 H200 M200 242 V122"/> <path d="M200 242 H214.5"/>
+<path d="M200 122 H225.5"/>
+<path d="M228 256 V228 M228 136 V108" stroke-width="5"/> </g>
+<g stroke="#d9772b" fill="none" stroke-width="2.6" stroke-linecap="round">
+<path d="M0 58 H360 M240.5 58 V99"/> </g>
+<g stroke="#2f6fd0" fill="none" stroke-width="2.6" stroke-linecap="round">
+<path d="M0 308 H360 M240.5 308 V265"/> </g>
+<g stroke="#d9772b" fill="none" stroke-width="2.6" stroke-linecap="round"><animate attributeName="stroke" dur="3.2s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.5;1" values="#d9772b;#2f6fd0;#d9772b"/>
+<path d="M240.5 219 V145 M240.5 182 H352"/> </g>
+<rect x="235.5" y="219" width="10" height="46" rx="5" fill="#fff" stroke="#24262b" stroke-width="2.4"/>
+<circle cx="240.5" cy="265" r="2.5" fill="#24262b"/>
+<circle cx="240.5" cy="219" r="2.5" fill="#24262b"/>
+<rect x="235.5" y="99" width="10" height="46" rx="5" fill="#fff" stroke="#24262b" stroke-width="2.4"/>
+<circle cx="240.5" cy="145" r="2.5" fill="#24262b"/>
+<circle cx="240.5" cy="99" r="2.5" fill="#24262b"/>
+<circle cx="219.5" cy="242" r="5" fill="#fff" stroke="#24262b" stroke-width="2.4"/>
+<text x="196" y="233" font-size="15" font-weight="bold" fill="#24262b" text-anchor="end">PMOS</text>
+<text x="196" y="248.5" font-size="9.8" fill="#5b5f6b" text-anchor="end">(middle
+area doped with phosphorus)</text>
+<text x="196" y="113" font-size="15" font-weight="bold" fill="#24262b" text-anchor="end">NMOS</text>
+<text x="196" y="128.5" font-size="9.8" fill="#5b5f6b" text-anchor="end">(middle
+area doped with boron)</text>
+<text x="8" y="52" font-size="15" font-weight="bold" fill="#24262b" text-anchor="start">VSS</text>
+<text x="8" y="321" font-size="15" font-weight="bold" fill="#24262b" text-anchor="start">VDD</text>
+<text x="192" y="174" font-size="13.5" font-weight="bold" fill="#24262b" text-anchor="end">gate</text>
+<text x="352" y="174" font-size="13.5" font-weight="bold" fill="#24262b" text-anchor="end">output</text>
+<rect x="12" y="11" width="14" height="5.5" rx="1.5" fill="#2f6fd0"/>
+<text x="32" y="18" font-size="12.5" fill="#3b3f49" text-anchor="start">blue
+= at 5 V</text>
+<rect x="152" y="11" width="14" height="5.5" rx="1.5" fill="#d9772b"/>
+<text x="172" y="18" font-size="12.5" fill="#3b3f49" text-anchor="start">orange
+= at 0 V</text>
+</svg>
