@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Xây ngôn ngữ Zed với đội quân agent AI — Blog</title>
-<meta name="description" content="Bản dịch tiếng Việt bài đăng của Luke Hutchison (@LH) về việc dùng Opus và nhiều agent AI để xây ngôn ngữ lập trình Zed sau hơn 20 năm thiết kế.">
+<meta name="description" content="Bản dịch tiếng Việt bài đăng của Luke Hutchison (@LH) về việc dùng Opus và nhiều agent AI để xây ngôn ngữ lập trình Zed sau hơn 20 năm thiết kế. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -42,6 +58,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-mindmap pre.mermaid{margin:0;background:transparent;color:inherit}
 .blog-mindmap svg{max-width:none;height:auto;display:block;margin:0 auto}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
 </style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
@@ -82,17 +141,45 @@ Thẻ: ai-agents · programming-languages · opus · category-theory</p>
 </ul>
 </section>
 
-<p>Tôi đang xây một ngôn ngữ lập trình mới, Zed (khi phát hành tôi sẽ đăng về nó tại <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a>).</p>
-<p>Tôi đã làm việc trên ngôn ngữ này hơn 20 năm, nhưng chưa bao giờ dựng được nó, vì phạm vi quá tham vọng. Đây là một kiểu ngôn ngữ hoàn toàn mới dựa trên lý thuyết phạm trù (category theory), với các mục tiêu thiết kế cốt lõi là tự song song hóa chính xác đến giới hạn Amdahl; quản lý bộ nhớ tự động, không GC và không cần malloc/free thủ công; cùng việc dùng partial evaluation một cách lan tỏa để tăng sức mạnh của ngôn ngữ, bên cạnh nhiều tính năng rất độc đáo khác, chẳng hạn đơn vị đo (<code>accel = 5 with units("m s^-2")</code>) là một phần của hệ thống kiểu.</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản dịch tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản gốc tiếng Anh, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 13 cụm · 7 đoạn</span></div>
+<div class="art-modes" aria-describedby="how-to">
+
+<p class="m-vi" lang="vi">Tôi đang xây một ngôn ngữ lập trình mới, Zed (khi phát hành tôi sẽ đăng về nó tại <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a>).</p>
+<p class="m-en" lang="en">I'm building a new programming language, Zed (when it's released I'll post about it at <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a>).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Tôi đang xây một ngôn ngữ lập trình mới, Zed (khi phát hành sẽ đăng tại @ZedLang).">I'm building a new programming language, Zed (when it's released I'll post about it at <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a>).</span></p>
+
+<p class="m-vi" lang="vi">Tôi đã làm việc trên ngôn ngữ này hơn 20 năm, nhưng chưa bao giờ dựng được nó, vì phạm vi quá tham vọng. Đây là một kiểu ngôn ngữ hoàn toàn mới dựa trên lý thuyết phạm trù (category theory), với các mục tiêu thiết kế cốt lõi là tự song song hóa chính xác đến giới hạn Amdahl; quản lý bộ nhớ tự động, không GC và không cần malloc/free thủ công; cùng việc dùng partial evaluation một cách lan tỏa để tăng sức mạnh của ngôn ngữ, bên cạnh nhiều tính năng rất độc đáo khác, chẳng hạn đơn vị đo (<code>accel = 5 with units("m s^-2")</code>) là một phần của hệ thống kiểu.</p>
+<p class="m-en" lang="en">I've worked on this language for over 20 years, yet never built it because the scope was so ambitious. It's a totally new kind of language based on category theory, featuring automatic parallelization up to Amdahl's limit, automatic memory management without GC or manual malloc/free, pervasive partial evaluation, and unique features like physical units (<code>accel = 5 with units("m s^-2")</code>) built right into the type system.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Tôi đã thiết kế ngôn ngữ này hơn 20 năm nhưng chưa dựng được vì phạm vi quá tham vọng.">I've worked on this language for over 20 years, yet never built it because the scope was so ambitious.</span> <span class="ph" data-vi="Đây là ngôn ngữ dựa trên lý thuyết phạm trù với tự song song hóa đến giới hạn Amdahl, quản lý bộ nhớ không GC/malloc tay, partial evaluation lan tỏa và đơn vị đo ngay trong hệ thống kiểu.">It's a totally new kind of language based on category theory, featuring automatic parallelization up to Amdahl's limit, automatic memory management without GC or manual malloc/free, pervasive partial evaluation, and unique features like physical units (<code>accel = 5 with units("m s^-2")</code>) built right into the type system.</span></p>
+
 <img src="img/p1.jpg" alt="Dashboard Zed plan: đồ thị DAG nhiệm vụ với vài task đang chạy (cam), nhiều task chờ (xám), sidebar log realtime" loading="lazy">
 <p class="cap">Visualizer DAG “Zed plan”: trạng thái task realtime (completed / in progress / waiting) và log chạy song song</p>
-<p>Tôi đưa cho Opus 200 trang ghi chú thiết kế mà tôi đã biên soạn suốt 20 năm qua, cùng mã tôi đã viết, và nhờ Opus biên soạn mọi thứ tôi đã tạo đến nay thành một kế hoạch thống nhất, chi tiết. Sau đó tôi trải qua nhiều vòng phê bình chéo giữa Claude, ChatGPT và Gemini: để tất cả chúng phê bình nghiêm khắc, rồi meta-critique các phê bình của nhau, rồi cùng hợp tác gộp các phê bình thành kế hoạch cải tiến, đến khi hội tụ. Tôi cũng để các agent đối chiếu chéo mọi phần của đặc tả với mọi phần khác (so sánh all-pairs) để tìm mâu thuẫn, khoảng trống trong đặc tả, v.v. Rồi tôi để các agent biến đặc tả thành một chuỗi dài các bước tăng dần nhỏ (một thứ tự tôpô của việc gì phải dựng trước việc gì), cũng như cấu trúc DAG của các phụ thuộc nằm dưới thứ tự tôpô đó.</p>
-<p>Tiếp theo tôi nhờ Opus dựng một visualizer hiện cho tôi mọi task trong DAG trong lúc các coding agent đang làm từng task, cập nhật realtime khi trạng thái task đổi (đang chạy / đã xong) — thứ tôi rất khuyến nghị khi bạn nhờ Opus làm một nhiệm vụ khổng lồ phức tạp, vì bạn thấy chính xác nó đang làm gì và khi nào.</p>
+
+<p class="m-vi" lang="vi">Tôi đưa cho Opus 200 trang ghi chú thiết kế mà tôi đã biên soạn suốt 20 năm qua, cùng mã tôi đã viết, và nhờ Opus biên soạn mọi thứ tôi đã tạo đến nay thành một kế hoạch thống nhất, chi tiết. Sau đó tôi trải qua nhiều vòng phê bình chéo giữa Claude, ChatGPT và Gemini: để tất cả chúng phê bình nghiêm khắc, rồi meta-critique các phê bình của nhau, rồi cùng hợp tác gộp các phê bình thành kế hoạch cải tiến, đến khi hội tụ. Tôi cũng để các agent đối chiếu chéo mọi phần của đặc tả với mọi phần khác (so sánh all-pairs) để tìm mâu thuẫn, khoảng trống trong đặc tả, v.v. Rồi tôi để các agent biến đặc tả thành một chuỗi dài các bước tăng dần nhỏ (một thứ tự tôpô của việc gì phải dựng trước việc gì), cũng như cấu trúc DAG của các phụ thuộc nằm dưới thứ tự tôpô đó.</p>
+<p class="m-en" lang="en">I fed Opus 200 pages of design notes I'd written over 20 years plus existing code, asking it to compile everything into one unified, detailed plan. Then I ran multiple critique rounds across Claude, ChatGPT, and Gemini—having them harshly critique, meta-critique each other's critiques, and merge improvements until convergence—alongside an all-pairs cross-check of the spec for contradictions and gaps, before turning it into a topological sequence of small incremental steps and an underlying dependency DAG.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Tôi đưa cho Opus 200 trang ghi chú 20 năm cùng mã cũ để gom thành một kế hoạch thống nhất,">I fed Opus 200 pages of design notes I'd written over 20 years plus existing code, asking it to compile everything into one unified, detailed plan.</span> <span class="ph" data-vi="rồi cho Claude, ChatGPT và Gemini phê bình chéo, meta-critique đến khi hội tụ, kiểm tra all-pairs tìm mâu thuẫn,">Then I ran multiple critique rounds across Claude, ChatGPT, and Gemini—having them harshly critique, meta-critique each other's critiques, and merge improvements until convergence—alongside an all-pairs cross-check of the spec for contradictions and gaps,</span> <span class="ph" data-vi="rồi tách đặc tả thành chuỗi bước nhỏ theo thứ tự tôpô và đồ thị DAG phụ thuộc.">before turning it into a topological sequence of small incremental steps and an underlying dependency DAG.</span></p>
+
+<p class="m-vi" lang="vi">Tiếp theo tôi nhờ Opus dựng một visualizer hiện cho tôi mọi task trong DAG trong lúc các coding agent đang làm từng task, cập nhật realtime khi trạng thái task đổi (đang chạy / đã xong) — thứ tôi rất khuyến nghị khi bạn nhờ Opus làm một nhiệm vụ khổng lồ phức tạp, vì bạn thấy chính xác nó đang làm gì và khi nào.</p>
+<p class="m-en" lang="en">Next, I had Opus build a realtime visualizer showing every task in the DAG as coding agents work through them (updating live between running and done)—something I highly recommend for huge Opus tasks so you can see exactly what it's doing and when.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Tiếp theo tôi nhờ Opus dựng visualizer hiện toàn bộ DAG và cập nhật realtime trạng thái từng task — rất nên làm với tác vụ lớn để thấy rõ agent đang làm gì.">Next, I had Opus build a realtime visualizer showing every task in the DAG as coding agents work through them (updating live between running and done)—something I highly recommend for huge Opus tasks so you can see exactly what it's doing and when.</span></p>
+
 <img src="img/p2.jpg" alt="Toàn cảnh zoom-out của DAG Zed plan với hàng trăm nút nhiệm vụ và running log bên phải" loading="lazy">
 <p class="cap">Toàn cảnh DAG hàng trăm task trong “Zed plan”, kèm running log merge/verify/repair</p>
-<p>Thật sự như phép màu khi thấy mọi thứ đang thành hình trước mắt, và thấy cách Opus xử lý DAG khổng lồ gồm các task phức tạp cùng các phụ thuộc chéo giữa chúng.</p>
-<p>Thật điên rồ với tôi khi Opus giờ đang đơn giản xây những gì tôi đã mơ và ước tồn tại hơn 20 năm, nhưng chưa bao giờ có đủ giờ thức để triển khai! Bây giờ tôi có một đội quân làm việc cho mình, hoàn thành những gì tôi không làm nổi vì giới hạn băng thông của việc chỉ có một bộ não, và 24 giờ trong một ngày.</p>
-<p>Thật là một ngày của những phép màu mà chúng ta đang sống.</p>
+
+<p class="m-vi" lang="vi">Thật sự như phép màu khi thấy mọi thứ đang thành hình trước mắt, và thấy cách Opus xử lý DAG khổng lồ gồm các task phức tạp cùng các phụ thuộc chéo giữa chúng.</p>
+<p class="m-en" lang="en">It genuinely feels like magic watching everything take shape before my eyes and seeing Opus handle a massive DAG of complex tasks with cross-dependencies.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Thật sự như phép màu khi thấy mọi thứ thành hình trước mắt và cách Opus xử lý DAG khổng lồ đầy phụ thuộc chéo.">It genuinely feels like magic watching everything take shape before my eyes and seeing Opus handle a massive DAG of complex tasks with cross-dependencies.</span></p>
+
+<p class="m-vi" lang="vi">Thật khó tin với tôi khi Opus giờ đang trực tiếp xây những gì tôi đã mơ và ước tồn tại hơn 20 năm, nhưng chưa bao giờ có đủ giờ thức để triển khai! Bây giờ tôi có một đội quân làm việc cho mình, hoàn thành những gì tôi không làm nổi vì giới hạn băng thông của việc chỉ có một bộ não, và 24 giờ trong một ngày.</p>
+<p class="m-en" lang="en">It's wild to me that Opus is now simply building what I've dreamed about for over 20 years but never had enough waking hours to implement! Now I have an army working for me, accomplishing what I couldn't due to the bandwidth limit of having one brain and 24 hours in a day.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Thật khó tin khi Opus đang xây thứ tôi mơ suốt 20 năm nhưng không đủ giờ thức để làm;">It's wild to me that Opus is now simply building what I've dreamed about for over 20 years but never had enough waking hours to implement!</span> <span class="ph" data-vi="giờ tôi có một đội quân bù giới hạn băng thông của một bộ não và 24 giờ mỗi ngày.">Now I have an army working for me, accomplishing what I couldn't due to the bandwidth limit of having one brain and 24 hours in a day.</span></p>
+
+<p class="m-vi" lang="vi">Thật là một kỷ nguyên của những điều kỳ diệu mà chúng ta đang sống.</p>
+<p class="m-en" lang="en">What a time of miracles we are living in.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Thật là một kỷ nguyên kỳ diệu mà chúng ta đang sống.">What a time of miracles we are living in.</span></p>
+
+</div>
 
 <section class="blog-insight" aria-label="Know-how và Insight">
 <h2>Know-how &amp; Insight</h2>
@@ -106,7 +193,7 @@ Thẻ: ai-agents · programming-languages · opus · category-theory</p>
 <li><strong>Visualizer / observability cho agent swarm.</strong> Dashboard realtime trạng thái task (in progress / completed / waiting) biến “black box agent” thành hệ thống quan sát được — tương tự CI dashboard hoặc workflow engine. Khi scale nhiều agent song song, không có dual-pane log + DAG thì rất khó biết đang kẹt ở đâu.</li>
 <li><strong>Nhận ra nút thắt là băng thông con người, không phải ý tưởng.</strong> Bài này nhấn: thiết kế đã đủ; thiếu thời gian thức để implement. Với team nhỏ VN, ưu tiên dùng agent để thực thi kế hoạch đã chín (scaffold, test, migration nhỏ) thay vì để agent tự invent product từ đầu.</li>
 </ol>
-<p><em>Lưu ý:</em> Zed chưa phát hành tại thời điểm bài gốc; hãy theo <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a> cho cập nhật từ tác giả. Các con số tiến độ trên ảnh (ví dụ ~16–17/246 task) là snapshot lúc đăng, không phải cam kết roadmap công khai.</p>
+<p><em>Lưu ý:</em> Zed chưa phát hành tại thời điểm bài gốc; hãy theo <a href="https://x.com/ZedLang" target="_blank" rel="noopener">@ZedLang</a> cho cập nhật từ tác giả. Các con số tiến độ trên ảnh (ví dụ ~16–17/246 task) là snapshot lúc đăng, không phải cam kết roadmap công khai. Cập nhật ba chế độ đọc.</p>
 </section>
 <section class="blog-mindmap" aria-label="Mindmap">
 <h2>Mindmap</h2>
@@ -145,5 +232,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
