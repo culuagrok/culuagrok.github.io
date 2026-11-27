@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ChatGPT &amp; Codex cho kỹ thuật thế giới vật lý — thiết kế PCB Codex pet — Blog</title>
-<meta name="description" content="Bản dịch tiếng Việt bài OpenAI về ChatGPT/Codex hỗ trợ thiết kế cơ khí, điện và mô phỏng; kèm hướng dẫn thực hành thiết kế và tự làm mạch PCB kiểu Codex pet (TamaGPT).">
+<meta name="description" content="Bản dịch tiếng Việt bài OpenAI về ChatGPT/Codex hỗ trợ thiết kế cơ khí, điện và mô phỏng; kèm hướng dẫn thực hành thiết kế và tự làm mạch PCB kiểu Codex pet (TamaGPT). Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -46,6 +62,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-callout{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:12px 14px;margin:1.2em 0;border-radius:8px;font-size:14px;line-height:1.55}
 .blog-callout strong{color:#166534}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
+</style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
 </style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
@@ -103,60 +162,110 @@ Thẻ: openai · chatgpt · codex · astra · pcb · cad · hardware</p>
 <img src="img/social.png" alt="Ảnh social OpenAI: Accelerating engineering for the physical world" loading="lazy">
 <p class="cap">Ảnh xã hội chính thức của bài OpenAI (tải về thư mục bài; không hotlink)</p>
 
-<h2 id="nguon">Nội dung nguồn OpenAI (dịch / diễn giải)</h2>
-<p>Bài đăng X của OpenAI viết (dịch sát nghĩa):</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản tiếng Anh, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 72 cụm · 60 đoạn &amp; mục</span></div>
+<div class="art-modes" aria-describedby="how-to">
+
+<div class="hd" id="nguon"><h2 class="m-vi" lang="vi">Nội dung nguồn OpenAI (dịch / diễn giải)</h2><h2 class="m-en" lang="en">OpenAI source summary</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Nội dung nguồn OpenAI (dịch / diễn giải)">OpenAI source summary</span></h2></div>
+
+<p class="m-vi" lang="vi">Bài đăng X của OpenAI viết (dịch sát nghĩa):</p>
+<p class="m-en" lang="en">OpenAI's X post reads:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bài đăng X của OpenAI viết:">OpenAI's X post reads:</span></p>
+
 <blockquote>
-<p>ChatGPT và Codex đang giúp kỹ sư xây dựng cho thế giới vật lý.</p>
-<p>Chúng tôi chia sẻ tiến độ trên thiết kế cơ khí, kỹ thuật điện và mô phỏng — từ việc giúp đội hardware nội bộ lặp nhanh hơn đến thử nghiệm quy trình mới với cộng tác viên trong ngành.</p>
+<p class="m-vi" lang="vi">ChatGPT và Codex đang giúp kỹ sư xây dựng cho thế giới vật lý.<br>Chúng tôi chia sẻ tiến độ trên thiết kế cơ khí, kỹ thuật điện và mô phỏng — từ việc giúp đội hardware nội bộ lặp nhanh hơn đến thử nghiệm quy trình mới với cộng tác viên trong ngành.</p>
+<p class="m-en" lang="en">ChatGPT and Codex are helping engineers build for the physical world.<br>We’re sharing progress across mechanical engineering, electrical engineering, and simulation—from helping our internal hardware team iterate faster to testing new workflows with industry collaborators.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="ChatGPT và Codex đang giúp kỹ sư xây dựng cho thế giới vật lý — từ tăng tốc cho đội hardware nội bộ đến thử quy trình mới với đối tác trong ngành.">ChatGPT and Codex are helping engineers build for the physical world.<br>We’re sharing progress across mechanical engineering, electrical engineering, and simulation—from helping our internal hardware team iterate faster to testing new workflows with industry collaborators.</span></p>
 </blockquote>
-<p>Video kèm theo mang khẩu hiệu <em>“Hardware is the new software”</em> và phụ đề giới thiệu Justin Lin làm việc với ChatGPT. Trên khung hình có thể thấy màn hình <strong>KiCad PCB Editor</strong>, vỏ nhựa trong suốt màu tím kiểu thú ảo (Codex pet), và các phiên bản vỏ / board đang lắp ráp trên bàn thí nghiệm.</p>
+
+<p class="m-vi" lang="vi">Video kèm theo mang khẩu hiệu <em>“Hardware is the new software”</em> và phụ đề giới thiệu Justin Lin làm việc với ChatGPT. Trên khung hình có thể thấy màn hình <strong>KiCad PCB Editor</strong>, vỏ nhựa trong suốt màu tím kiểu thú ảo (Codex pet), và các phiên bản vỏ / board đang lắp ráp trên bàn thí nghiệm.</p>
+<p class="m-en" lang="en">The accompanying video carries the slogan <em>“Hardware is the new software”</em> and shows Justin Lin working with ChatGPT, alongside <strong>KiCad PCB Editor</strong>, a translucent purple Tamagotchi-style shell (“Codex pet”), and board/enclosure revisions on the lab bench.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Video kèm khẩu hiệu “Hardware is the new software” quay Justin Lin làm việc với ChatGPT, màn hình KiCad PCB Editor và các bản mẫu vỏ tím trong suốt Codex pet.">The accompanying video carries the slogan <em>“Hardware is the new software”</em> and shows Justin Lin working with ChatGPT, alongside <strong>KiCad PCB Editor</strong>, a translucent purple Tamagotchi-style shell (“Codex pet”), and board/enclosure revisions on the lab bench.</span></p>
 
 <img src="img/video-poster.jpg" alt="Poster video: Hardware is the new software — thiết bị cầm tay tím glitter" loading="lazy">
 <p class="cap">Poster video trên X: thiết bị cầm tay dạng “pet” với nhân vật pixel trên màn hình</p>
 
-<p>Bài blog <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank" rel="noopener">Accelerating engineering for the physical world</a> (3 tháng 11, 2026) mở rộng như sau.</p>
+<p class="m-vi" lang="vi">Bài blog <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank" rel="noopener">Accelerating engineering for the physical world</a> (3 tháng 11, 2026) mở rộng như sau.</p>
+<p class="m-en" lang="en">The blog post <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank" rel="noopener">Accelerating engineering for the physical world</a> (Nov 3, 2026) expands as follows.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bài blog Accelerating engineering for the physical world (3/11/2026) mở rộng chi tiết như sau.">The blog post <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank" rel="noopener">Accelerating engineering for the physical world</a> (Nov 3, 2026) expands as follows.</span></p>
 
-<h3>Thiết kế một thiết bị với Astra</h3>
-<p>OpenAI thử khả năng đa phương thức và <em>computer use</em> của Astra bằng việc xem có tạo được thiết bị <strong>không chỉnh sửa trực tiếp bởi con người</strong> hay không. Họ dùng GPT‑6 để định nghĩa yêu cầu chức năng và thiết kế vỏ, <strong>printed circuit board (PCB)</strong>, cùng tích hợp phần mềm cho một thiết bị người dùng có thể dùng để <strong>nói chuyện với Codex</strong>.</p>
+<div class="hd"><h3 class="m-vi" lang="vi">Thiết kế một thiết bị với Astra</h3><h3 class="m-en" lang="en">Designing a device with Astra</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Thiết kế một thiết bị với Astra">Designing a device with Astra</span></h3></div>
+
+<p class="m-vi" lang="vi">OpenAI thử khả năng đa phương thức và <em>computer use</em> của Astra bằng việc xem có tạo được thiết bị <strong>không chỉnh sửa trực tiếp bởi con người</strong> hay không. Họ dùng GPT‑6 để định nghĩa yêu cầu chức năng và thiết kế vỏ, <strong>printed circuit board (PCB)</strong>, cùng tích hợp phần mềm cho một thiết bị người dùng có thể dùng để <strong>nói chuyện với Codex</strong>.</p>
+<p class="m-en" lang="en">OpenAI tested Astra's multimodal and <em>computer use</em> capabilities by seeing whether it could design a device <strong>without direct human edits</strong>. They used GPT‑6 to define functional requirements and design the enclosure, <strong>printed circuit board (PCB)</strong>, and software integration for a handheld device to <strong>talk to Codex</strong>.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="OpenAI thử khả năng đa phương thức và computer use của GPT-6 Astra để tự thiết kế vỏ, PCB và phần mềm cho thiết bị nói chuyện với Codex mà không chỉnh tay trực tiếp.">OpenAI tested Astra's multimodal and <em>computer use</em> capabilities by seeing whether it could design a device <strong>without direct human edits</strong>. They used GPT‑6 to define functional requirements and design the enclosure, <strong>printed circuit board (PCB)</strong>, and software integration for a handheld device to <strong>talk to Codex</strong>.</span></p>
+
 <ul>
-<li><strong>Thẩm mỹ / thiết kế:</strong> Astra phát triển ngoại hình, lấy cảm hứng từ hợp tác gần đây với <em>Work Louder</em> và tham chiếu game / đồ chơi.</li>
-<li><strong>Cơ khí:</strong> thiết kế vỏ và cấu trúc nội bộ giữ linh kiện.</li>
-<li><strong>Điện:</strong> chọn linh kiện, layout PCB (đặt linh kiện + đấu nối) khớp với vỏ.</li>
-<li><strong>UI/UX &amp; phần mềm:</strong> giao diện, firmware và tích hợp kết nối thiết bị với Codex.</li>
+<li><span class="m-vi" lang="vi"><strong>Thẩm mỹ / thiết kế:</strong> Astra phát triển ngoại hình, lấy cảm hứng từ hợp tác gần đây với <em>Work Louder</em> và tham chiếu game / đồ chơi.</span><span class="m-en" lang="en"><strong>Aesthetics / industrial design:</strong> Astra developed the look, drawing on a recent <em>Work Louder</em> collaboration and game/toy references.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Thẩm mỹ: Astra phát triển ngoại hình lấy cảm hứng từ Work Louder và đồ chơi/game."><strong>Aesthetics / industrial design:</strong> Astra developed the look, drawing on a recent <em>Work Louder</em> collaboration and game/toy references.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Cơ khí:</strong> thiết kế vỏ và cấu trúc nội bộ giữ linh kiện.</span><span class="m-en" lang="en"><strong>Mechanical:</strong> enclosure design and internal mounts holding components.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Cơ khí: thiết kế vỏ và cấu trúc gá giữ linh kiện bên trong."><strong>Mechanical:</strong> enclosure design and internal mounts holding components.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Điện:</strong> chọn linh kiện, layout PCB (đặt linh kiện + đấu nối) khớp với vỏ.</span><span class="m-en" lang="en"><strong>Electrical:</strong> component selection and PCB layout (placement + routing) matching the shell.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Điện: chọn linh kiện và layout PCB khớp với vỏ."><strong>Electrical:</strong> component selection and PCB layout (placement + routing) matching the shell.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>UI/UX &amp; phần mềm:</strong> giao diện, firmware và tích hợp kết nối thiết bị với Codex.</span><span class="m-en" lang="en"><strong>UI/UX &amp; software:</strong> interface, firmware, and Codex connectivity.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="UI/UX &amp; phần mềm: giao diện, firmware và kết nối tới Codex."><strong>UI/UX &amp; software:</strong> interface, firmware, and Codex connectivity.</span></span></li>
 </ul>
-<p>Hai thành viên hoàn thành thử nghiệm này dưới dạng side project trong <strong>dưới một tuần</strong>. Nhà thầu sản xuất làm một lô prototype nhỏ trong <strong>dưới một tháng</strong>.</p>
-<p>OpenAI thừa nhận thẳng: đưa thiết bị sẵn sàng sản xuất vẫn cần <strong>nhiều vòng review và lặp</strong>. Astra chưa nhất quán tính đến giới hạn sản xuất của nhà máy, dung sai, hoặc chi tiết lắp ráp. Những khoảng trống này giúp họ biết model tương lai cần cải thiện gì.</p>
+
+<p class="m-vi" lang="vi">Hai thành viên hoàn thành thử nghiệm này dưới dạng side project trong <strong>dưới một tuần</strong>. Nhà thầu sản xuất làm một lô prototype nhỏ trong <strong>dưới một tháng</strong>.</p>
+<p class="m-en" lang="en">Two team members completed this as a side project in <strong>under a week</strong>, and a contract manufacturer built a small prototype batch in <strong>under a month</strong>.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hai thành viên hoàn thành thử nghiệm dưới dạng side project trong dưới một tuần, và nhà thầu làm lô prototype nhỏ trong dưới một tháng.">Two team members completed this as a side project in <strong>under a week</strong>, and a contract manufacturer built a small prototype batch in <strong>under a month</strong>.</span></p>
+
+<p class="m-vi" lang="vi">OpenAI thừa nhận thẳng: đưa thiết bị sẵn sàng sản xuất vẫn cần <strong>nhiều vòng review và lặp</strong>. Astra chưa nhất quán tính đến giới hạn sản xuất của nhà máy, dung sai, hoặc chi tiết lắp ráp. Những khoảng trống này giúp họ biết model tương lai cần cải thiện gì.</p>
+<p class="m-en" lang="en">OpenAI notes candidly that reaching production readiness still took <strong>multiple review iterations</strong>: Astra did not consistently account for fab limits, tolerances, or assembly details—highlighting clear targets for future models.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="OpenAI thừa nhận vẫn cần nhiều vòng review để đạt chuẩn sản xuất vì Astra chưa tính ổn định giới hạn nhà máy, dung sai và chi tiết lắp ráp.">OpenAI notes candidly that reaching production readiness still took <strong>multiple review iterations</strong>: Astra did not consistently account for fab limits, tolerances, or assembly details—highlighting clear targets for future models.</span></p>
 
 <img src="img/circuit-board-lab.jpg" alt="Ba người quanh bàn lab với vỏ thiết bị và linh kiện; phụ đề về Astra thiết kế circuit board" loading="lazy">
 <p class="cap">Khung video: lab lắp ráp — phụ đề nhắc Astra đã thiết kế circuit board</p>
 
-<p>Theo các báo cáo thứ cấp trích lời Justin Lin trong video (RD World, Orply): ông muốn một “Codex pet” trên màn hình nhỏ kèm nút push-to-talk, vì không muốn phải mở laptop để thì thầm với Codex; đây là lần đầu ông đi từ bare board tới PCB đã lắp — “super daunting” — nhưng ông bảo ChatGPT điều mình muốn, đưa vài plan, và model thiết kế board; sau đó vẫn cần vài vòng sửa với nhà máy. OpenAI gắn nhãn ảnh thí nghiệm là <em>“TamaGPT device experiments”</em>.</p>
+<p class="m-vi" lang="vi">Theo các báo cáo thứ cấp trích lời Justin Lin trong video (RD World, Orply): ông muốn một “Codex pet” trên màn hình nhỏ kèm nút push-to-talk, vì không muốn phải mở laptop để thì thầm với Codex; đây là lần đầu ông đi từ bare board tới PCB đã lắp — “rất đáng gờm” — nhưng ông bảo ChatGPT điều mình muốn, đưa vài plan, và model thiết kế board; sau đó vẫn cần vài vòng sửa với nhà máy. OpenAI gắn nhãn ảnh thí nghiệm là <em>“TamaGPT device experiments”</em>.</p>
+<p class="m-en" lang="en">Secondary reports quoting Justin Lin in the video note he wanted a small-screen “Codex pet” with push-to-talk so he wouldn't have to open a laptop to talk to Codex; going from bare board to assembled PCB was “super daunting,” yet he gave ChatGPT plans and it designed the board (still needing factory revisions). OpenAI labels the experiment photos <em>“TamaGPT device experiments.”</em></p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo lời Justin Lin trong video, ông muốn một “Codex pet” màn hình nhỏ kèm nút push-to-talk (nhãn ảnh TamaGPT) để nói chuyện với Codex mà không cần mở laptop.">Secondary reports quoting Justin Lin in the video note he wanted a small-screen “Codex pet” with push-to-talk so he wouldn't have to open a laptop to talk to Codex; going from bare board to assembled PCB was “super daunting,” yet he gave ChatGPT plans and it designed the board (still needing factory revisions). OpenAI labels the experiment photos <em>“TamaGPT device experiments.”</em></span></p>
 
 <blockquote>
-<p>“Codex has dramatically accelerated how we move from an idea to an engineered part. We’re iterating faster across CAD, converting 3D designs into production-ready 2D drawings, and setting up simulations and FEA with far less manual work.” — Grace Lam, Forward Deployed Engineer, OpenAI</p>
-</blockquote>
-<blockquote>
-<p>“…with the potential to grow into teams of hardware specialists that can take a board from concept to Gerber out.” — Qiong Wang, Member of Technical Staff, OpenAI</p>
-</blockquote>
-<blockquote>
-<p>(Về AEC/BIM) Codex được dùng để tự động hóa tác vụ lặp, gắn cờ mâu thuẫn giữa bản vẽ / thông số kỹ thuật, và biến phát hiện phối hợp thành issue hành động được — Jackie Lee, Member of Infrastructure Staff, OpenAI.</p>
+<p class="m-vi" lang="vi">“Codex đã tăng tốc đáng kể cách chúng tôi đi từ ý tưởng tới linh kiện kỹ thuật. Chúng tôi lặp nhanh hơn trên CAD, chuyển thiết kế 3D thành bản vẽ 2D sẵn sàng sản xuất, và thiết lập mô phỏng cùng FEA với ít công thủ công hơn hẳn.” — Grace Lam, Forward Deployed Engineer, OpenAI</p>
+<p class="m-en" lang="en">“Codex has dramatically accelerated how we move from an idea to an engineered part. We’re iterating faster across CAD, converting 3D designs into production-ready 2D drawings, and setting up simulations and FEA with far less manual work.” — Grace Lam, Forward Deployed Engineer, OpenAI</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="“Codex tăng tốc đáng kể từ ý tưởng tới linh kiện kỹ thuật: lặp CAD nhanh hơn, xuất bản vẽ 2D sản xuất và thiết lập mô phỏng/FEA ít công thủ công hơn.” — Grace Lam">“Codex has dramatically accelerated how we move from an idea to an engineered part. We’re iterating faster across CAD, converting 3D designs into production-ready 2D drawings, and setting up simulations and FEA with far less manual work.” — Grace Lam, Forward Deployed Engineer, OpenAI</span></p>
 </blockquote>
 
-<h3>Đo tiến độ &amp; cộng tác ngành</h3>
-<p>Từ tháng 2, mức dùng model của đội hardware OpenAI (theo token) tăng <strong>23 lần</strong>. Benchmark nội bộ <strong>BenchCAD 2.0</strong> (tái tạo chi tiết / cụm 3D và nhận diện kết nối trên mạch) cho điểm trung bình <strong>0.875</strong> với một model nội bộ mới hơn, so với <strong>0.594</strong> của GPT‑6 Astra ở mức reasoning cao nhất.</p>
-<p>OpenAI mở rộng hợp tác với <strong>Chip Ganassi Racing</strong>: biến scan 3D linh kiện hiện có thành CAD chỉnh được và bản vẽ sản xuất 2D (hữu ích khi thiếu file gốc). Họ cũng công bố hợp tác nghiên cứu mới với <strong>Mazda</strong> về khí động học và mô phỏng an toàn va chạm — Astra/Codex giúp khám phá biến thể mũi xe, mô phỏng dòng khí và tinh chỉnh phương án hứa hẹn (OpenAI ghi rõ thỏa thuận sử dụng với Mazda; cấm tái xuất bản hình ảnh liên quan ngoài ngữ cảnh đã cấp phép).</p>
-<p>Công ty đang tìm kỹ sư, công ty kỹ thuật và nhà cung cấp phần mềm để định hình huấn luyện model frontier quanh công cụ và bài toán thực tế.</p>
+<blockquote>
+<p class="m-vi" lang="vi">“…với tiềm năng phát triển thành đội ngũ chuyên gia phần cứng có thể đưa một bo mạch từ ý tưởng tới xuất Gerber.” — Qiong Wang, Member of Technical Staff, OpenAI</p>
+<p class="m-en" lang="en">“…with the potential to grow into teams of hardware specialists that can take a board from concept to Gerber out.” — Qiong Wang, Member of Technical Staff, OpenAI</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="“…với tiềm năng phát triển thành đội ngũ chuyên gia phần cứng đưa bo mạch từ ý tưởng tới xuất Gerber.” — Qiong Wang">“…with the potential to grow into teams of hardware specialists that can take a board from concept to Gerber out.” — Qiong Wang, Member of Technical Staff, OpenAI</span></p>
+</blockquote>
+
+<blockquote>
+<p class="m-vi" lang="vi">(Về AEC/BIM) Codex được dùng để tự động hóa tác vụ lặp, gắn cờ mâu thuẫn giữa bản vẽ / thông số kỹ thuật, và biến phát hiện phối hợp thành issue hành động được — Jackie Lee, Member of Infrastructure Staff, OpenAI.</p>
+<p class="m-en" lang="en">(On AEC/BIM) Codex automates repetitive tasks, flags conflicts between drawings and specs, and turns coordination findings into actionable issues—Jackie Lee, Member of Infrastructure Staff, OpenAI.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="(Về AEC/BIM) Codex tự động hóa việc lặp, bắt mâu thuẫn giữa bản vẽ/spec và chuyển thành issue hành động được — Jackie Lee.">(On AEC/BIM) Codex automates repetitive tasks, flags conflicts between drawings and specs, and turns coordination findings into actionable issues—Jackie Lee, Member of Infrastructure Staff, OpenAI.</span></p>
+</blockquote>
+
+<div class="hd"><h3 class="m-vi" lang="vi">Đo tiến độ &amp; cộng tác ngành</h3><h3 class="m-en" lang="en">Measuring progress &amp; industry collaboration</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Đo tiến độ &amp; cộng tác ngành">Measuring progress &amp; industry collaboration</span></h3></div>
+
+<p class="m-vi" lang="vi">Từ tháng 2, mức dùng model của đội hardware OpenAI (theo token) tăng <strong>23 lần</strong>. Benchmark nội bộ <strong>BenchCAD 2.0</strong> (tái tạo chi tiết / cụm 3D và nhận diện kết nối trên mạch) cho điểm trung bình <strong>0.875</strong> với một model nội bộ mới hơn, so với <strong>0.594</strong> của GPT‑6 Astra ở mức reasoning cao nhất.</p>
+<p class="m-en" lang="en">Since February, token usage by OpenAI's internal hardware team grew <strong>23×</strong>. On the internal <strong>BenchCAD 2.0</strong> benchmark (3D part/assembly reconstruction and circuit connection recognition), a newer internal model averages <strong>0.875</strong> versus <strong>0.594</strong> for GPT‑6 Astra at max reasoning.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Từ tháng 2, lượng token của đội hardware nội bộ tăng 23×; trên BenchCAD 2.0, model nội bộ mới đạt 0.875 so với 0.594 của GPT-6 Astra.">Since February, token usage by OpenAI's internal hardware team grew <strong>23×</strong>. On the internal <strong>BenchCAD 2.0</strong> benchmark (3D part/assembly reconstruction and circuit connection recognition), a newer internal model averages <strong>0.875</strong> versus <strong>0.594</strong> for GPT‑6 Astra at max reasoning.</span></p>
+
+<p class="m-vi" lang="vi">OpenAI mở rộng hợp tác với <strong>Chip Ganassi Racing</strong>: biến scan 3D linh kiện hiện có thành CAD chỉnh được và bản vẽ sản xuất 2D (hữu ích khi thiếu file gốc). Họ cũng công bố hợp tác nghiên cứu mới với <strong>Mazda</strong> về khí động học và mô phỏng an toàn va chạm — Astra/Codex giúp khám phá biến thể mũi xe, mô phỏng dòng khí và tinh chỉnh phương án hứa hẹn (OpenAI ghi rõ thỏa thuận sử dụng với Mazda; cấm tái xuất bản hình ảnh liên quan ngoài ngữ cảnh đã cấp phép).</p>
+<p class="m-en" lang="en">OpenAI expanded work with <strong>Chip Ganassi Racing</strong> (turning 3D scans into editable CAD and 2D production drawings) and announced a research collaboration with <strong>Mazda</strong> on aerodynamics and crash-safety simulation (noting Mazda image licensing limits).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="OpenAI mở rộng hợp tác với Chip Ganassi Racing (scan 3D → CAD/bản vẽ 2D) và Mazda (khí động học &amp; an toàn va chạm).">OpenAI expanded work with <strong>Chip Ganassi Racing</strong> (turning 3D scans into editable CAD and 2D production drawings) and announced a research collaboration with <strong>Mazda</strong> on aerodynamics and crash-safety simulation (noting Mazda image licensing limits).</span></p>
+
+<p class="m-vi" lang="vi">Công ty đang tìm kỹ sư, công ty kỹ thuật và nhà cung cấp phần mềm để định hình huấn luyện model frontier quanh công cụ và bài toán thực tế.</p>
+<p class="m-en" lang="en">The company is seeking engineers, engineering firms, and software vendors to help shape frontier model training around real tools and workflows.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="OpenAI đang tìm kỹ sư, công ty kỹ thuật và nhà cung cấp phần mềm để huấn luyện model frontier quanh bài toán thực tế.">The company is seeking engineers, engineering firms, and software vendors to help shape frontier model training around real tools and workflows.</span></p>
 
 <img src="img/kicad-editor.jpg" alt="Laptop mở KiCad PCB Editor với layout mạch dày đặc" loading="lazy">
 <p class="cap">Khung video: KiCad PCB Editor — phụ đề nhắc “a combination of computer use”</p>
 
-<h2 id="physics-board">“Physics board” trong ngữ cảnh bài này là gì?</h2>
-<p>Trong yêu cầu “detail how to design and how to make physic board”, đối tượng thực tế mà nguồn thể hiện là <strong>printed circuit board (PCB)</strong> — mạch in điện tử của thiết bị Codex pet / TamaGPT — chứ không phải bảng thí nghiệm vật lý (physics lab board) hay simulation canvas trừu tượng.</p>
-<p>Bằng chứng từ nguồn:</p>
+<div class="hd" id="physics-board"><h2 class="m-vi" lang="vi">“Physics board” trong ngữ cảnh bài này là gì?</h2><h2 class="m-en" lang="en">What is “physics board” in this context?</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="“Physics board” trong ngữ cảnh bài này là gì?">What is “physics board” in this context?</span></h2></div>
+
+<p class="m-vi" lang="vi">Trong yêu cầu “chi tiết cách thiết kế và tự làm physics board”, đối tượng thực tế mà nguồn thể hiện là <strong>printed circuit board (PCB)</strong> — mạch in điện tử của thiết bị Codex pet / TamaGPT — chứ không phải bảng thí nghiệm vật lý hay simulation canvas trừu tượng.</p>
+<p class="m-en" lang="en">Here, “physics board” refers concretely to the <strong>printed circuit board (PCB)</strong> of the Codex pet / TamaGPT handheld—not an abstract physics lab board or simulation canvas.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Trong ngữ cảnh bài này, “physics board” chính là mạch in PCB của thiết bị Codex pet / TamaGPT.">Here, “physics board” refers concretely to the <strong>printed circuit board (PCB)</strong> of the Codex pet / TamaGPT handheld—not an abstract physics lab board or simulation canvas.</span></p>
+
+<p class="m-vi" lang="vi">Bằng chứng từ nguồn:</p>
+<p class="m-en" lang="en">Evidence from the source:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bằng chứng từ nguồn:">Evidence from the source:</span></p>
+
 <ul>
-<li>Bài blog OpenAI nêu rõ Astra thiết kế <strong>PCB</strong>, đặt linh kiện và đấu nối khớp vỏ.</li>
-<li>Qiong Wang nói thẳng lộ trình “board from concept to <strong>Gerber</strong> out” (Gerber = định dạng xuất xưởng PCB).</li>
-<li>Video cho thấy layout trong <strong>KiCad</strong>, board hình trứng / hữu cơ với USB‑C, module được che chắn, nút (APPROVE / REJECT / DIAL trên một số khung), LED, test point; nhiều phiên bản vỏ (“We made so many different shell versions”).</li>
+<li><span class="m-vi" lang="vi">Bài blog OpenAI nêu rõ Astra thiết kế <strong>PCB</strong>, đặt linh kiện và đấu nối khớp vỏ.</span><span class="m-en" lang="en">The OpenAI post explicitly states Astra designed the <strong>PCB</strong>, placement, and routing to fit the enclosure.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Blog OpenAI nêu rõ Astra thiết kế PCB, đặt linh kiện và đấu nối khớp vỏ.">The OpenAI post explicitly states Astra designed the <strong>PCB</strong>, placement, and routing to fit the enclosure.</span></span></li>
+<li><span class="m-vi" lang="vi">Qiong Wang nói thẳng lộ trình “board from concept to <strong>Gerber</strong> out” (Gerber = định dạng xuất xưởng PCB).</span><span class="m-en" lang="en">Qiong Wang cites taking a board “from concept to <strong>Gerber</strong> out” (the standard PCB fab output).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Qiong Wang nhắc thẳng lộ trình từ ý tưởng tới xuất Gerber.">Qiong Wang cites taking a board “from concept to <strong>Gerber</strong> out” (the standard PCB fab output).</span></span></li>
+<li><span class="m-vi" lang="vi">Video cho thấy layout trong <strong>KiCad</strong>, board hình trứng / hữu cơ với USB‑C, module được che chắn, nút (APPROVE / REJECT / DIAL trên một số khung), LED, test point; nhiều phiên bản vỏ (“We made so many different shell versions”).</span><span class="m-en" lang="en">The video shows a <strong>KiCad</strong> layout of an egg-shaped board with USB‑C, shielded module, buttons (APPROVE / REJECT / DIAL), LEDs, and test points across many shell iterations.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Video quay layout trong KiCad với USB-C, module che chắn, nút bấm, LED, test point và nhiều bản vỏ.">The video shows a <strong>KiCad</strong> layout of an egg-shaped board with USB‑C, shielded module, buttons (APPROVE / REJECT / DIAL), LEDs, and test points across many shell iterations.</span></span></li>
 </ul>
 
 <img src="img/pcb-design-montage.jpg" alt="Montage PCB hình trứng / CAD 3D và layout dấu đồng" loading="lazy">
@@ -166,23 +275,34 @@ Thẻ: openai · chatgpt · codex · astra · pcb · cad · hardware</p>
 <p class="cap">Nhiều phiên bản vỏ (shell) song song với mạch</p>
 
 <div class="blog-callout">
-<strong>Ranh giới chính xác:</strong> OpenAI <em>không</em> công bố file KiCad / Gerber / BOM của Codex pet. Phần hướng dẫn dưới đây là <em>gợi ý thực hành của người dịch</em> để bạn tự thiết kế một board <em>cùng lớp vấn đề</em> (handheld + màn hình nhỏ + nút PTT + MCU Wi‑Fi nói chuyện với agent), không phải bản sao thiết kế nội bộ của họ.
+<p class="m-vi" lang="vi"><strong>Ranh giới chính xác:</strong> OpenAI <em>không</em> công bố file KiCad / Gerber / BOM của Codex pet. Phần hướng dẫn dưới đây là <em>gợi ý thực hành của người dịch</em> để bạn tự thiết kế một board <em>cùng lớp vấn đề</em> (handheld + màn hình nhỏ + nút PTT + MCU Wi‑Fi nói chuyện với agent), không phải bản sao thiết kế nội bộ của họ.</p>
+<p class="m-en" lang="en"><strong>Exact boundary:</strong> OpenAI has <em>not</em> released KiCad, Gerber, or BOM files for the Codex pet. The guide below is the translator's practical blueprint for a <em>similar class of device</em> (handheld + small screen + PTT button + Wi‑Fi MCU talking to an agent), not a copy of OpenAI's internal design.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Ranh giới chính xác: OpenAI không công bố file KiCad/Gerber/BOM của Codex pet — phần sau là gợi ý thực hành để bạn tự làm một thiết bị cùng lớp bài toán."><strong>Exact boundary:</strong> OpenAI has <em>not</em> released KiCad, Gerber, or BOM files for the Codex pet. The guide below is the translator's practical blueprint for a <em>similar class of device</em> (handheld + small screen + PTT button + Wi‑Fi MCU talking to an agent), not a copy of OpenAI's internal design.</span></p>
 </div>
 
-<h2 id="thiet-ke">Cách thiết kế mạch PCB kiểu Codex pet — gợi ý của người dịch</h2>
+<div class="hd" id="thiet-ke"><h2 class="m-vi" lang="vi">Cách thiết kế mạch PCB kiểu Codex pet — gợi ý của người dịch</h2><h2 class="m-en" lang="en">How to design a Codex-pet-style PCB (translator guide)</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Cách thiết kế mạch PCB kiểu Codex pet — gợi ý của người dịch">How to design a Codex-pet-style PCB (translator guide)</span></h2></div>
+
 <p class="blog-insight-label" style="color:#166534;font-weight:600">Gợi ý thực hành (không phải tài liệu OpenAI)</p>
 
-<h3>1. Khái niệm trước khi mở EDA</h3>
-<p>Một “Codex pet” thu nhỏ là hệ <strong>mechatronics</strong> bốn lớp phải khớp nhau:</p>
-<ol>
-<li><strong>Cơ khí (MCAD):</strong> vỏ, khoảng hở màn hình, nút, khe USB‑C, khoang pin, cấu trúc giữ board.</li>
-<li><strong>Điện (ECAD):</strong> schematic + PCB layout + BOM + Gerber/drill/pick-and-place.</li>
-<li><strong>Firmware:</strong> driver màn hình / nút / âm thanh (hoặc chỉ PTT), client nói chuyện với host / API Codex.</li>
-<li><strong>DFM / DFT:</strong> dung sai nhà máy, test point, panelization, fiducial — đúng chỗ OpenAI nói Astra còn yếu.</li>
-</ol>
-<p>Quy tắc vàng: <strong>khóa envelope cơ khí trước</strong> (kích thước board tối đa, chiều cao linh kiện, vị trí connector), rồi mới route. Làm ngược lại là nguyên nhân phổ biến phải “vài vòng với nhà máy”.</p>
+<div class="hd"><h3 class="m-vi" lang="vi">1. Khái niệm trước khi mở EDA</h3><h3 class="m-en" lang="en">1. Concepts before opening EDA</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="1. Khái niệm trước khi mở EDA">1. Concepts before opening EDA</span></h3></div>
 
-<h3>2. Kiến trúc tham chiếu (ví dụ mở, không phải BOM OpenAI)</h3>
+<p class="m-vi" lang="vi">Một “Codex pet” thu nhỏ là hệ <strong>cơ điện tử (mechatronics)</strong> bốn lớp phải khớp nhau:</p>
+<p class="m-en" lang="en">A pocket “Codex pet” is a four-layer <strong>mechatronics</strong> system where every piece must align:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Một “Codex pet” thu nhỏ là hệ cơ điện tử bốn lớp phải khớp nhau:">A pocket “Codex pet” is a four-layer <strong>mechatronics</strong> system where every piece must align:</span></p>
+
+<ol>
+<li><span class="m-vi" lang="vi"><strong>Cơ khí (MCAD):</strong> vỏ, khoảng hở màn hình, nút, khe USB‑C, khoang pin, cấu trúc giữ board.</span><span class="m-en" lang="en"><strong>Mechanical (MCAD):</strong> enclosure, screen cutout, buttons, USB‑C slot, battery bay, board mounts.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Cơ khí (MCAD): vỏ, khe màn hình, nút, USB-C, khoang pin và gá giữ board."><strong>Mechanical (MCAD):</strong> enclosure, screen cutout, buttons, USB‑C slot, battery bay, board mounts.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Điện (ECAD):</strong> schematic + PCB layout + BOM + Gerber/drill/pick-and-place.</span><span class="m-en" lang="en"><strong>Electrical (ECAD):</strong> schematic, PCB layout, BOM, and Gerber/drill/pick-and-place outputs.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Điện (ECAD): schematic, layout PCB, BOM và Gerber/drill/pick-and-place."><strong>Electrical (ECAD):</strong> schematic, PCB layout, BOM, and Gerber/drill/pick-and-place outputs.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Firmware:</strong> driver màn hình / nút / âm thanh (hoặc chỉ PTT), client nói chuyện với host / API Codex.</span><span class="m-en" lang="en"><strong>Firmware:</strong> display/button/audio drivers and the client talking to the Codex host or API.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Firmware: driver màn hình/nút/âm thanh và client giao tiếp host/API Codex."><strong>Firmware:</strong> display/button/audio drivers and the client talking to the Codex host or API.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>DFM / DFT:</strong> dung sai nhà máy, test point, panelization, fiducial — đúng chỗ OpenAI nói Astra còn yếu.</span><span class="m-en" lang="en"><strong>DFM / DFT:</strong> fab tolerances, test points, panelization, fiducials—the exact gaps OpenAI noted in Astra.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="DFM / DFT: dung sai nhà máy, test point, panelization, fiducial — đúng chỗ Astra còn yếu."><strong>DFM / DFT:</strong> fab tolerances, test points, panelization, fiducials—the exact gaps OpenAI noted in Astra.</span></span></li>
+</ol>
+
+<p class="m-vi" lang="vi">Quy tắc vàng: <strong>khóa envelope cơ khí trước</strong> (kích thước board tối đa, chiều cao linh kiện, vị trí connector), rồi mới đi dây (route). Làm ngược lại là nguyên nhân phổ biến phải “chỉnh vài vòng với nhà máy”.</p>
+<p class="m-en" lang="en">Golden rule: <strong>lock the mechanical envelope first</strong> (max board outline, component height, connector positions) before routing—doing it backward is the #1 cause of extra factory spins.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Quy tắc vàng: khóa kích thước và vị trí cơ khí trước khi đi dây PCB để tránh sửa đi sửa lại với nhà máy.">Golden rule: <strong>lock the mechanical envelope first</strong> (max board outline, component height, connector positions) before routing—doing it backward is the #1 cause of extra factory spins.</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">2. Kiến trúc tham chiếu (ví dụ mở, không phải BOM OpenAI)</h3><h3 class="m-en" lang="en">2. Reference architecture (open example, not OpenAI's BOM)</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="2. Kiến trúc tham chiếu (ví dụ mở, không phải BOM OpenAI)">2. Reference architecture (open example, not OpenAI's BOM)</span></h3></div>
+
 <pre><code>┌─────────────────────────────────────────┐
 │  Shell (3D print / resin)               │
 │  ┌───────────────────────────────────┐  │
@@ -198,24 +318,29 @@ Thẻ: openai · chatgpt · codex · astra · pcb · cad · hardware</p>
         ▼
    Host hoặc API agent (Codex / ChatGPT)
 </code></pre>
-<p>Khối tối thiểu cho bản DIY học tập:</p>
+
+<p class="m-vi" lang="vi">Khối tối thiểu cho bản DIY học tập:</p>
+<p class="m-en" lang="en">Minimum blocks for a learning DIY build:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Khối tối thiểu cho bản DIY học tập:">Minimum blocks for a learning DIY build:</span></p>
+
 <ul>
-<li>MCU có Wi‑Fi (ESP32‑S3 hoặc tương đương) — dễ flash, cộng đồng lớn.</li>
-<li>Màn hình nhỏ SPI (ví dụ 1.3–1.54&quot; ST7789) + FPC/connector cứng nhắc vị trí trên board.</li>
-<li>Một nút push-to-talk (debounce phần cứng RC hoặc firmware).</li>
-<li>USB‑C với CC resistors đúng chuẩn (tránh chỉ hàn USB‑C “cho có”).</li>
-<li>Mạch sạc LiPo an toàn (IC chuyên dụng + bảo vệ cực).</li>
+<li><span class="m-vi" lang="vi">MCU có Wi‑Fi (ESP32‑S3 hoặc tương đương) — dễ flash, cộng đồng lớn.</span><span class="m-en" lang="en">Wi‑Fi MCU (ESP32‑S3 or equivalent)—easy to flash with strong community support.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="MCU có Wi-Fi (ESP32-S3 hoặc tương đương) dễ nạp và có cộng đồng lớn.">Wi‑Fi MCU (ESP32‑S3 or equivalent)—easy to flash with strong community support.</span></span></li>
+<li><span class="m-vi" lang="vi">Màn hình nhỏ SPI (ví dụ 1.3–1.54&quot; ST7789) + FPC/connector cố định vị trí trên board.</span><span class="m-en" lang="en">Small SPI display (e.g., 1.3–1.54&quot; ST7789) with a firmly anchored FPC/connector.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Màn hình nhỏ SPI (ST7789 1.3–1.54&quot;) gắn connector chắc chắn trên board.">Small SPI display (e.g., 1.3–1.54&quot; ST7789) with a firmly anchored FPC/connector.</span></span></li>
+<li><span class="m-vi" lang="vi">Một nút push-to-talk (debounce phần cứng RC hoặc firmware).</span><span class="m-en" lang="en">Push-to-talk button (with RC hardware or firmware debounce).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Một nút push-to-talk có chống dội (RC hoặc firmware).">Push-to-talk button (with RC hardware or firmware debounce).</span></span></li>
+<li><span class="m-vi" lang="vi">USB‑C với điện trở CC đúng chuẩn (tránh chỉ hàn USB‑C “cho có”).</span><span class="m-en" lang="en">USB‑C with proper CC resistors (never wire a bare USB‑C port without them).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="USB-C có điện trở CC đúng chuẩn.">USB‑C with proper CC resistors (never wire a bare USB‑C port without them).</span></span></li>
+<li><span class="m-vi" lang="vi">Mạch sạc LiPo an toàn (IC chuyên dụng + bảo vệ cực).</span><span class="m-en" lang="en">Safe LiPo charging circuit (dedicated charger IC + polarity/protection).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Mạch sạc LiPo an toàn dùng IC chuyên dụng và bảo vệ ngược cực.">Safe LiPo charging circuit (dedicated charger IC + polarity/protection).</span></span></li>
 </ul>
 
-<h3>3. Luồng thiết kế ECAD khuyến nghị</h3>
+<div class="hd"><h3 class="m-vi" lang="vi">3. Luồng thiết kế ECAD khuyến nghị</h3><h3 class="m-en" lang="en">3. Recommended ECAD workflow</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="3. Luồng thiết kế ECAD khuyến nghị">3. Recommended ECAD workflow</span></h3></div>
+
 <ol class="steps">
-<li><strong>Viết PRD một trang:</strong> use-case (“hỏi agent đang chạy bao nhiêu task”), nguồn điện, kích thước vỏ, giao diện người–máy, ràng buộc an toàn (pin).</li>
-<li><strong>Block diagram → schematic</strong> trong KiCad: tách net nguồn (VBAT, 3V3, USB_VBUS), đánh dấu net cao tốc / anten nếu có module RF.</li>
-<li><strong>Footprint &amp; 3D model:</strong> mỗi linh kiện phải có footprint đã kiểm; xuất STEP để chồng lên vỏ MCAD.</li>
-<li><strong>Placement:</strong> USB‑C và nút khớp cutout vỏ; anten xa pin kim loại / loa; tụ decoupling sát chân nguồn MCU.</li>
-<li><strong>Routing:</strong> ưu tiên mặt đất liên tục; USB differential ~90 Ω; tránh cắt plane dưới crystal. Có thể nhờ agent điều phối workflow + Freerouting như thí nghiệm NextPCB từng mô tả (autorouter làm phần nặng; người / model vẫn chịu trách nhiệm DRC).</li>
-<li><strong>ERC + DRC + bom-check:</strong> zero unconnected, clearance/mask theo capability nhà máy bạn chọn (thường 4/4 mil cho prototype rẻ; chặt hơn thì đắt hơn).</li>
-<li><strong>Xuất xưởng:</strong> Gerber + drill + IPC‑356 + CPL (pick-and-place) + BOM có MPN thật.</li>
+<li><span class="m-vi" lang="vi"><strong>Viết PRD một trang:</strong> use-case (“hỏi agent đang chạy bao nhiêu task”), nguồn điện, kích thước vỏ, giao diện người–máy, ràng buộc an toàn (pin).</span><span class="m-en" lang="en"><strong>One-page PRD:</strong> use case, power budget, enclosure dimensions, HMI, and battery safety constraints.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Viết PRD 1 trang chốt use-case, nguồn, kích thước vỏ, nút/màn hình và an toàn pin."><strong>One-page PRD:</strong> use case, power budget, enclosure dimensions, HMI, and battery safety constraints.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Block diagram → schematic</strong> trong KiCad: tách net nguồn (VBAT, 3V3, USB_VBUS), đánh dấu net cao tốc / anten nếu có module RF.</span><span class="m-en" lang="en"><strong>Block diagram → schematic</strong> in KiCad: separate power nets (VBAT, 3V3, USB_VBUS) and flag high-speed/RF nets.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Vẽ block diagram → schematic trong KiCad, tách rõ các net nguồn và net cao tốc/RF."><strong>Block diagram → schematic</strong> in KiCad: separate power nets (VBAT, 3V3, USB_VBUS) and flag high-speed/RF nets.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Footprint &amp; 3D model:</strong> mỗi linh kiện phải có footprint đã kiểm; xuất STEP để chồng lên vỏ MCAD.</span><span class="m-en" lang="en"><strong>Footprints &amp; 3D models:</strong> verify every footprint and export STEP to check fit inside the MCAD shell.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Kiểm tra đủ footprint và 3D model, xuất STEP ướm vào vỏ MCAD."><strong>Footprints &amp; 3D models:</strong> verify every footprint and export STEP to check fit inside the MCAD shell.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Placement:</strong> USB‑C và nút khớp cutout vỏ; anten xa pin kim loại / loa; tụ decoupling sát chân nguồn MCU.</span><span class="m-en" lang="en"><strong>Placement:</strong> align USB‑C and buttons with cutouts, keep antennas clear of batteries/speakers, and place decoupling caps near MCU power pins.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Placement: khớp USB-C và nút với lỗ vỏ, đặt anten xa pin/loa và tụ lọc sát chân MCU."><strong>Placement:</strong> align USB‑C and buttons with cutouts, keep antennas clear of batteries/speakers, and place decoupling caps near MCU power pins.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Routing:</strong> ưu tiên mặt đất liên tục; USB differential ~90 Ω; tránh cắt plane dưới crystal. Có thể nhờ agent điều phối workflow + Freerouting như thí nghiệm NextPCB từng mô tả (autorouter làm phần nặng; người / model vẫn chịu trách nhiệm DRC).</span><span class="m-en" lang="en"><strong>Routing:</strong> keep a solid ground plane, 90 Ω differential USB pairs, and unbroken ground under crystals (agents can orchestrate Freerouting, while humans still own DRC).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Routing: giữ mặt đất liền, cặp USB ~90 Ω, tránh cắt plane dưới thạch anh."><strong>Routing:</strong> keep a solid ground plane, 90 Ω differential USB pairs, and unbroken ground under crystals (agents can orchestrate Freerouting, while humans still own DRC).</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>ERC + DRC + bom-check:</strong> không còn chân hở (zero unconnected), clearance/mask theo năng lực nhà máy bạn chọn (thường 4/4 mil cho prototype rẻ; chặt hơn thì đắt hơn).</span><span class="m-en" lang="en"><strong>ERC + DRC + BOM check:</strong> zero unconnected nets, clearances matching fab capabilities (e.g., 4/4 mil for budget prototypes).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Chạy ERC, DRC theo chuẩn nhà máy (vd. 4/4 mil) và kiểm tra BOM."><strong>ERC + DRC + BOM check:</strong> zero unconnected nets, clearances matching fab capabilities (e.g., 4/4 mil for budget prototypes).</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Xuất xưởng:</strong> Gerber + drill + IPC‑356 + CPL (pick-and-place) + BOM có mã linh kiện MPN thật.</span><span class="m-en" lang="en"><strong>Fab package:</strong> Gerber, drill, IPC‑356, CPL (pick-and-place), and BOM with real MPNs.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Xuất đủ Gerber, drill, IPC-356, CPL và BOM có MPN thật."><strong>Fab package:</strong> Gerber, drill, IPC‑356, CPL (pick-and-place), and BOM with real MPNs.</span></span></li>
 </ol>
 
 <pre><code># Ví dụ checklist trước khi bấm “Order PCB”
@@ -230,22 +355,24 @@ Thẻ: openai · chatgpt · codex · astra · pcb · cad · hardware</p>
 [ ] BOM: mọi dòng có MPN + nhà phân phối dự phòng
 </code></pre>
 
-<h2 id="tu-lam">Cách tự làm — từ file đến board trên tay</h2>
+<div class="hd" id="tu-lam"><h2 class="m-vi" lang="vi">Cách tự làm — từ file đến board trên tay</h2><h2 class="m-en" lang="en">How to build it—from files to board in hand</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Cách tự làm — từ file đến board trên tay">How to build it—from files to board in hand</span></h2></div>
+
 <p class="blog-insight-label" style="color:#166534;font-weight:600">Gợi ý thực hành (không phải quy trình nhà máy của OpenAI)</p>
 
 <ol class="steps">
-<li><strong>Chọn nhà fab / PCBA:</strong> JLCPCB, PCBWay, hoặc xưởng địa phương. Với lần đầu: đặt PCB + stencil + lắp SMT cơ bản; linh kiện khó (connector LCD) có thể hàn tay.</li>
-<li><strong>Đặt số lượng nhỏ:</strong> 5–10 board là đủ để học “rev với nhà máy”. Đừng kỳ vọng rev A hoàn hảo — OpenAI cũng nói Astra cần nhiều vòng.</li>
-<li><strong>Bring-up điện:</strong> đo ngắn mạch trước khi cấp nguồn → cấp qua hạn dòng → kiểm 3V3 → flash bootloader qua USB/UART.</li>
-<li><strong>Smoke test ngoại vi:</strong> GPIO nút, khởi tạo SPI màn hình (màu solid), Wi‑Fi scan. Chỉ sau đó mới nối agent.</li>
-<li><strong>Vỏ:</strong> in 3D (PETG/resin) nhiều biến thể như video nhấn mạnh — khớp dung sai lỗ nút và cửa sổ kính/màn hình trước khi đúc đẹp.</li>
-<li><strong>An toàn:</strong> pin LiPo phải có bảo vệ; không sạc unsupervised trên bàn gỗ; tuân thủ quy định RF nếu phát sóng.</li>
+<li><span class="m-vi" lang="vi"><strong>Chọn nhà fab / PCBA:</strong> JLCPCB, PCBWay, hoặc xưởng địa phương. Với lần đầu: đặt PCB + stencil + lắp SMT cơ bản; linh kiện khó (connector LCD) có thể hàn tay.</span><span class="m-en" lang="en"><strong>Pick a fab/PCBA:</strong> JLCPCB, PCBWay, or a local shop—order PCB + stencil + basic SMT assembly and hand-solder tricky connectors if needed.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Chọn nhà fab/PCBA (JLCPCB, PCBWay hoặc xưởng nội địa), đặt PCB + stencil + SMT cơ bản."><strong>Pick a fab/PCBA:</strong> JLCPCB, PCBWay, or a local shop—order PCB + stencil + basic SMT assembly and hand-solder tricky connectors if needed.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Đặt số lượng nhỏ:</strong> 5–10 board là đủ để học “rev với nhà máy”. Đừng kỳ vọng rev A hoàn hảo — OpenAI cũng nói Astra cần nhiều vòng.</span><span class="m-en" lang="en"><strong>Order small batches:</strong> 5–10 boards are enough to learn factory revisions; don't expect Rev A to be perfect.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Đặt lô nhỏ 5–10 board; đừng kỳ vọng Rev A hoàn hảo ngay."><strong>Order small batches:</strong> 5–10 boards are enough to learn factory revisions; don't expect Rev A to be perfect.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Bring-up điện:</strong> đo ngắn mạch trước khi cấp nguồn → cấp qua hạn dòng → kiểm 3V3 → flash bootloader qua USB/UART.</span><span class="m-en" lang="en"><strong>Electrical bring-up:</strong> check for shorts first, power up via current limit, verify 3V3, then flash the bootloader over USB/UART.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Bring-up điện: đo chạm chập → cấp nguồn hạn dòng → đo 3V3 → nạp bootloader."><strong>Electrical bring-up:</strong> check for shorts first, power up via current limit, verify 3V3, then flash the bootloader over USB/UART.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Smoke test ngoại vi:</strong> GPIO nút, khởi tạo SPI màn hình (màu solid), Wi‑Fi scan. Chỉ sau đó mới nối agent.</span><span class="m-en" lang="en"><strong>Peripheral smoke test:</strong> verify button GPIO, SPI display init, and Wi‑Fi scan before connecting the agent.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Smoke test nút bấm, màn hình SPI và Wi-Fi scan trước khi nối với agent."><strong>Peripheral smoke test:</strong> verify button GPIO, SPI display init, and Wi‑Fi scan before connecting the agent.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Vỏ:</strong> in 3D (PETG/resin) nhiều biến thể như video nhấn mạnh — khớp dung sai lỗ nút và cửa sổ kính/màn hình trước khi đúc đẹp.</span><span class="m-en" lang="en"><strong>Enclosure:</strong> 3D print (PETG/resin) multiple shell revisions to dial in button tolerances and screen windows before final molding.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="In 3D nhiều bản vỏ để khớp dung sai nút bấm và cửa sổ màn hình trước khi hoàn thiện."><strong>Enclosure:</strong> 3D print (PETG/resin) multiple shell revisions to dial in button tolerances and screen windows before final molding.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>An toàn:</strong> pin LiPo phải có bảo vệ; không sạc khi không có người trông trên bàn gỗ; tuân thủ quy định RF nếu phát sóng.</span><span class="m-en" lang="en"><strong>Safety:</strong> use protected LiPo cells, never charge unattended on wood desks, and follow local RF rules.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="An toàn: pin LiPo phải có mạch bảo vệ, không sạc qua đêm thiếu giám sát và tuân thủ quy định RF."><strong>Safety:</strong> use protected LiPo cells, never charge unattended on wood desks, and follow local RF rules.</span></span></li>
 </ol>
 
 <img src="img/ecad-laptop.jpg" alt="Tay làm việc trên laptop với thiết kế mạch trên màn hình" loading="lazy">
 <p class="cap">Computer-use trên công cụ ECAD — đúng hướng “model điều khiển phần mềm kỹ thuật”</p>
 
-<h3>Sơ đồ quyết định nhanh</h3>
+<div class="hd"><h3 class="m-vi" lang="vi">Sơ đồ quyết định nhanh</h3><h3 class="m-en" lang="en">Quick decision tree</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="Sơ đồ quyết định nhanh">Quick decision tree</span></h3></div>
+
 <pre><code>Có cần RF + màn hình màu trong vỏ &lt; 60 mm?
   ├─ Có → ESP32‑S3 + ST7789 + PCB 4 lớp (khuyến nghị)
   └─ Không, chỉ học flow → module sẵn (devkit) + shield in 3D
@@ -257,8 +384,12 @@ Muốn giống demo “agent tự layout”?
   └─ Không bao giờ gửi Gerber chưa đọc diff so với rev trước
 </code></pre>
 
-<h2 id="firmware">Ví dụ firmware tối giản (Minh họa — không phải firmware OpenAI)</h2>
-<p>Đoạn dưới chỉ minh họa vòng lặp “nhấn PTT → gửi câu hỏi → hiện trạng thái pet trên OLED”. Thay endpoint bằng API / bridge local của bạn. Đây <strong>không</strong> phải mã nguồn thiết bị TamaGPT.</p>
+<div class="hd" id="firmware"><h2 class="m-vi" lang="vi">Ví dụ firmware tối giản (Minh họa — không phải firmware OpenAI)</h2><h2 class="m-en" lang="en">Minimal firmware example (illustrative, not OpenAI's)</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Ví dụ firmware tối giản (minh họa)">Minimal firmware example (illustrative, not OpenAI's)</span></h2></div>
+
+<p class="m-vi" lang="vi">Đoạn dưới chỉ minh họa vòng lặp “nhấn PTT → gửi câu hỏi → hiện trạng thái pet trên OLED”. Thay endpoint bằng API / bridge local của bạn. Đây <strong>không</strong> phải mã nguồn thiết bị TamaGPT.</p>
+<p class="m-en" lang="en">This snippet illustrates a simple “press PTT → send query → show pet mood” loop—swap the URL for your local bridge/API (this is <strong>not</strong> TamaGPT's source).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Đoạn mã dưới minh họa vòng lặp nhấn PTT → gọi bridge local → hiển thị trạng thái pet (không phải mã nguồn TamaGPT).">This snippet illustrates a simple “press PTT → send query → show pet mood” loop—swap the URL for your local bridge/API (this is <strong>not</strong> TamaGPT's source).</span></p>
+
 <pre><code>// ESP32 / Arduino-style sketch (illustrative)
 #include &lt;WiFi.h&gt;
 #include &lt;HTTPClient.h&gt;
@@ -319,7 +450,12 @@ void loop() {
   if (digitalRead(PIN_PTT) == HIGH) armed = false;
 }
 </code></pre>
-<p>Bridge phía host có thể chỉ là vài chục dòng Python gọi CLI Codex / API ChatGPT rồi trả JSON — đúng tinh thần “thiết bị là UI vật lý, não vẫn nằm ở agent”.</p>
+
+<p class="m-vi" lang="vi">Bridge phía host có thể chỉ là vài chục dòng Python gọi CLI Codex / API ChatGPT rồi trả JSON — đúng tinh thần “thiết bị là UI vật lý, não vẫn nằm ở agent”.</p>
+<p class="m-en" lang="en">The host bridge can be a few dozen lines of Python calling the Codex CLI or ChatGPT API and returning JSON—keeping the device as a physical UI while the agent remains the brain.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bridge phía host chỉ cần vài chục dòng Python gọi Codex CLI hoặc API rồi trả JSON — thiết bị là UI vật lý, não vẫn nằm ở agent.">The host bridge can be a few dozen lines of Python calling the Codex CLI or ChatGPT API and returning JSON—keeping the device as a physical UI while the agent remains the brain.</span></p>
+
+</div>
 
 <section class="blog-insight" aria-label="Know-how và Insight" id="insight">
 <h2>Know-how &amp; Insight</h2>
@@ -327,12 +463,12 @@ void loop() {
 <ol>
 <li><strong>Hardware đang trở thành bề mặt mới của agent coding.</strong> Codex vốn gắn với repo phần mềm; bài này đẩy cùng agent vào CAD/ECAD/FEA. Với team VN làm IoT/fintech-device, lợi thế gần nhất là: để model soạn bản vẽ 2D, checklist DFM và test plan — vẫn giữ kỹ sư ký duyệt dung sai.</li>
 <li><strong>“Không human edit” ≠ “không human review”.</strong> OpenAI tự tách hai việc: model sinh thiết kế end-to-end, nhưng manufacturing readiness cần vòng lặp với nhà máy. Đừng bán nội bộ câu chuyện “AI làm board một phát là lên kệ”.</li>
-<li><strong>Computer use + tool chuyên dụng thắng GUI thuần.</strong> Bài học từ phía NextPCB ( Freerouting + KiCad ): model giỏi điều phối workflow hơn là tự kéo từng đoạn trace. Hãy đưa agent vào CLI/plugin thay vì bắt nó “nhìn màn hình” để vẽ đồng.</li>
+<li><strong>Computer use + tool chuyên dụng thắng GUI thuần.</strong> Bài học từ phía NextPCB (Freerouting + KiCad): model giỏi điều phối workflow hơn là tự kéo từng đoạn trace. Hãy đưa agent vào CLI/plugin thay vì bắt nó “nhìn màn hình” để vẽ đồng.</li>
 <li><strong>Đo bằng benchmark kỹ thuật, không chỉ bằng token.</strong> 23× token là tín hiệu adoption nội bộ, không phải 23× năng suất. BenchCAD 0.875 vs 0.594 mới là tín hiệu năng lực thiết kế.</li>
 <li><strong>Co-design vỏ–board là nửa trận đấu.</strong> Video nhấn nhiều shell version song song board. Nếu bạn chỉ optimize PCB mà quên cutout USB / hành trình nút, bạn sẽ lặp đúng pain “assembly details” mà Astra chưa nắm vững.</li>
 <li><strong>An toàn và giấy phép.</strong> Tự làm board học tập thì được; đưa ra thị trường cần EMC/RF, pin UN38.3, và tôn trọng bản quyền thiết kế / hình ảnh OpenAI–Mazda. Không sao chép silkscreen hay industrial design của TamaGPT.</li>
 </ol>
-<p><em>Lưu ý nguồn:</em> một số khung hình phụ đề video có thể khó đọc chính xác từng chữ; các trích dẫn lời Justin Lin ở trên dựa trên bài tường thuật thứ cấp (RD World, Orply) khớp nội dung blog OpenAI. Model trong blog chính thức là <strong>GPT‑6 Astra</strong>. OpenAI chưa mở KiCad project công khai của thiết bị này tại thời điểm viết bài dịch.</p>
+<p><em>Lưu ý nguồn:</em> một số khung hình phụ đề video có thể khó đọc chính xác từng chữ; các trích dẫn lời Justin Lin ở trên dựa trên bài tường thuật thứ cấp (RD World, Orply) khớp nội dung blog OpenAI. Model trong blog chính thức là <strong>GPT‑6 Astra</strong>. OpenAI chưa mở KiCad project công khai của thiết bị này tại thời điểm viết bài dịch. Cập nhật ba chế độ đọc.</p>
 </section>
 
 <section class="blog-mindmap" aria-label="Mindmap" id="mindmap">
@@ -376,5 +512,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
