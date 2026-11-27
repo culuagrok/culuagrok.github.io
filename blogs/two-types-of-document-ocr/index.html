@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hai loại OCR tài liệu mà thế giới cần: nhanh-rẻ và chính xác bằng VLM — Blog</title>
-<meta name="description" content="Jerry Liu (LlamaIndex) chia OCR tài liệu thành hai loại: công cụ nhanh, rẻ như LiteParse và mô hình VLM chính xác như OCRia-1; kèm cách thiết kế pipeline hai lớp.">
+<meta name="description" content="Jerry Liu (LlamaIndex) chia OCR tài liệu thành hai loại: công cụ nhanh, rẻ như LiteParse và mô hình VLM chính xác như OCRia-1; kèm cách thiết kế pipeline hai lớp. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -47,6 +63,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-callout strong{color:#166534}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
+</style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
@@ -78,36 +137,76 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li>Cả hai đều cần benchmark nghiêm ngặt, pipeline dữ liệu + huấn luyện và đội ngũ mạnh để đẩy biên Pareto giữa độ chính xác và chi phí.</li>
 </ul></section>
 <p class="blog-note">Bài tổng hợp và diễn giải từ <a href="https://x.com/jerryjliu0/status/2118875764066222117">bài đăng của @jerryjliu0</a> (07/11/2026, 08:18 giờ Bangkok, UTC+7), bài blog OCRia-1 và README của LiteParse. Số liệu lấy nguyên từ nguồn của LlamaIndex (bên tự công bố, chưa được kiểm chứng độc lập). Phần thiết kế pipeline là gợi ý của người viết.</p>
-<h2 id="post">Nội dung bài đăng</h2>
-<blockquote>The world needs two types of document OCR</blockquote>
-<h3>1. OCR cực nhanh, cực rẻ</h3>
-<p>Mỗi tổ chức có thể có hàng nghìn tỷ tài liệu. Một lượt quét đầu nhanh và rẻ giúp số hóa toàn bộ để AI agent truy cập được. Độ chính xác không cao nhất nhưng "good enough" cho agentic retrieval và cho một lượt xử lý sâu hơn sau đó.</p>
-<p>Nhóm này gồm pypdf, pymupdf và LiteParse — theo Jerry là "the fastest/most accurate free/OSS parser". Ông cho biết LlamaIndex còn làm thêm nhiều thứ ở mảng này ("stay tuned").</p>
-<h3>2. OCR chính xác dựa trên VLM</h3>
-<p>Dành cho phần tài liệu vừa <em>phức tạp</em>, vừa <em>bắt buộc phải đọc đúng</em> vì dữ liệu dùng trong quy trình trọng yếu ở tài chính, bảo hiểm, y tế… Dù không miễn phí, VLM vẫn phải mở rộng được tới hàng tỷ trang với chi phí hợp lý.</p>
-<p>Hai tuần trước bài đăng, LlamaIndex ra mắt OCRia-1, "the best general purpose model for document parsing": xử lý bố cục văn bản phức tạp, bảng phức tạp, cả sơ đồ và biểu đồ. Nó chạy mọi chế độ của LlamaParse; benchmark mới nhất ở <a href="https://www.parsebench.ai/">ParseBench</a>.</p>
-<h2 id="liteparse">LiteParse: lớp nhanh, chạy cục bộ</h2>
-<p>Theo README, LiteParse là công cụ parse PDF độc lập, mã nguồn mở (Apache 2.0), tập trung "fast and light", chạy hoàn toàn trên máy, không phụ thuộc cloud hay LLM. Có bản trên crates.io, npm, WASM và PyPI.</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản tiếng Anh tương ứng, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 29 cụm · 18 đoạn &amp; mục</span></div>
+<div class="art-modes" aria-describedby="how-to">
+
+<div class="hd" id="post"><h2 class="m-vi" lang="vi">Nội dung bài đăng</h2><h2 class="m-en" lang="en">Post summary</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Nội dung bài đăng">Post summary</span></h2></div>
+
+<blockquote>
+<p class="m-vi" lang="vi">Thế giới cần hai loại OCR tài liệu.</p>
+<p class="m-en" lang="en">The world needs two types of document OCR.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Thế giới cần hai loại OCR tài liệu.">The world needs two types of document OCR.</span></p>
+</blockquote>
+
+<div class="hd"><h3 class="m-vi" lang="vi">1. OCR cực nhanh, cực rẻ</h3><h3 class="m-en" lang="en">1. Ultra-fast, ultra-cheap OCR</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="1. OCR cực nhanh, cực rẻ">1. Ultra-fast, ultra-cheap OCR</span></h3></div>
+
+<p class="m-vi" lang="vi">Mỗi tổ chức có thể nắm giữ hàng nghìn tỷ tài liệu. Một lượt quét đầu nhanh và rẻ giúp số hóa toàn bộ để AI agent truy cập được. Độ chính xác không cần cao nhất nhưng “đủ dùng” cho truy xuất bằng agent và cho một lượt xử lý sâu hơn sau đó.</p>
+<p class="m-en" lang="en">Organizations hold trillions of documents. A fast, cheap first pass digitizes everything so AI agents can access it. Accuracy does not need to be state-of-the-art—just “good enough” for agentic retrieval and a deeper pass later.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Mỗi tổ chức có thể nắm giữ hàng nghìn tỷ tài liệu; một lượt quét đầu nhanh và rẻ giúp số hóa toàn bộ cho AI agent,">Organizations hold trillions of documents. A fast, cheap first pass digitizes everything so AI agents can access it.</span> <span class="ph" data-vi="chỉ cần “đủ dùng” cho truy xuất và một lượt xử lý sâu hơn sau đó.">Accuracy does not need to be state-of-the-art—just “good enough” for agentic retrieval and a deeper pass later.</span></p>
+
+<p class="m-vi" lang="vi">Nhóm này gồm pypdf, pymupdf và LiteParse — theo Jerry là “trình parse miễn phí/mã nguồn mở nhanh và chính xác nhất”. Ông cho biết LlamaIndex còn đang làm thêm nhiều thứ ở mảng này (“cứ chờ xem”).</p>
+<p class="m-en" lang="en">This tier includes pypdf, pymupdf, and LiteParse—which Jerry calls “the fastest/most accurate free/OSS parser.” He adds that LlamaIndex has more coming in this space (“stay tuned”).</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nhóm này gồm pypdf, pymupdf và LiteParse (được Jerry gọi là trình parse OSS nhanh và chính xác nhất), cùng nhiều thứ sắp ra mắt.">This tier includes pypdf, pymupdf, and LiteParse—which Jerry calls “the fastest/most accurate free/OSS parser.” He adds that LlamaIndex has more coming in this space (“stay tuned”).</span></p>
+
+<div class="hd"><h3 class="m-vi" lang="vi">2. OCR chính xác dựa trên VLM</h3><h3 class="m-en" lang="en">2. High-accuracy VLM-based OCR</h3><h3 class="m-chunk" lang="en"><span class="ph" data-vi="2. OCR chính xác dựa trên VLM">2. High-accuracy VLM-based OCR</span></h3></div>
+
+<p class="m-vi" lang="vi">Dành cho phần tài liệu vừa <em>phức tạp</em>, vừa <em>bắt buộc phải đọc đúng</em> vì dữ liệu đi thẳng vào quy trình trọng yếu ở tài chính, bảo hiểm, y tế… Dù không miễn phí, VLM vẫn phải mở rộng được tới hàng tỷ trang với chi phí hợp lý.</p>
+<p class="m-en" lang="en">Built for documents that are both <em>complex</em> and <em>mission-critical</em> in finance, insurance, and healthcare. While not free, VLM-based OCR still needs to scale to billions of pages at reasonable cost.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Dành cho tài liệu phức tạp và bắt buộc đúng trong tài chính, bảo hiểm, y tế — dù không miễn phí nhưng VLM vẫn phải mở rộng tới hàng tỷ trang với chi phí hợp lý.">Built for documents that are both <em>complex</em> and <em>mission-critical</em> in finance, insurance, and healthcare. While not free, VLM-based OCR still needs to scale to billions of pages at reasonable cost.</span></p>
+
+<p class="m-vi" lang="vi">Hai tuần trước bài đăng, LlamaIndex ra mắt OCRia-1, “mô hình đa dụng tốt nhất cho phân tích tài liệu”: xử lý bố cục văn bản phức tạp, bảng phức tạp, cả sơ đồ và biểu đồ. Nó chạy mọi chế độ của LlamaParse; benchmark mới nhất được công bố trên <a href="https://www.parsebench.ai/">ParseBench</a>.</p>
+<p class="m-en" lang="en">Two weeks before the post, LlamaIndex launched OCRia-1, “the best general purpose model for document parsing,” handling complex text layouts, intricate tables, diagrams, and charts across all LlamaParse modes, with benchmarks on <a href="https://www.parsebench.ai/">ParseBench</a>.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hai tuần trước bài đăng, LlamaIndex ra mắt OCRia-1 xử lý bố cục phức tạp, bảng, sơ đồ và biểu đồ trên mọi chế độ LlamaParse, kèm benchmark tại ParseBench.">Two weeks before the post, LlamaIndex launched OCRia-1, “the best general purpose model for document parsing,” handling complex text layouts, intricate tables, diagrams, and charts across all LlamaParse modes, with benchmarks on <a href="https://www.parsebench.ai/">ParseBench</a>.</span></p>
+
+<div class="hd" id="liteparse"><h2 class="m-vi" lang="vi">LiteParse: lớp nhanh, chạy cục bộ</h2><h2 class="m-en" lang="en">LiteParse: the fast, local layer</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="LiteParse: lớp nhanh, chạy cục bộ">LiteParse: the fast, local layer</span></h2></div>
+
+<p class="m-vi" lang="vi">Theo README, LiteParse là công cụ parse PDF độc lập, mã nguồn mở (Apache 2.0), tập trung vào sự “nhanh và nhẹ”, chạy hoàn toàn trên máy, không phụ thuộc cloud hay LLM. Hiện có bản trên crates.io, npm, WASM và PyPI.</p>
+<p class="m-en" lang="en">Per its README, LiteParse is a standalone, Apache 2.0 open-source PDF parser focused on being “fast and light,” running fully locally with no cloud or LLM dependency—available on crates.io, npm, WASM, and PyPI.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo README, LiteParse là trình parse PDF mã nguồn mở (Apache 2.0) chạy hoàn toàn cục bộ, không cần cloud hay LLM, có mặt trên crates.io, npm, WASM và PyPI.">Per its README, LiteParse is a standalone, Apache 2.0 open-source PDF parser focused on being “fast and light,” running fully locally with no cloud or LLM dependency—available on crates.io, npm, WASM, and PyPI.</span></p>
+
 <ul>
-<li>Parse văn bản theo không gian bằng PDFium, khoảng 2–5 ms/trang, kèm bounding box.</li>
-<li>OCR linh hoạt: Tesseract tích hợp sẵn; hoặc cắm server OCR qua HTTP (EasyOCR, PaddleOCR, tự viết).</li>
-<li><strong>Complexity Detection</strong>: kiểm tra rẻ xem tài liệu có cần OCR/parse nặng không — để định tuyến, từ chối hoặc ước tính chi phí trước.</li>
-<li>Chụp ảnh trang cho LLM agent; xuất Markdown, JSON, Text.</li>
+<li><span class="m-vi" lang="vi">Parse văn bản theo không gian bằng PDFium, khoảng 2–5 ms/trang, kèm bounding box.</span><span class="m-en" lang="en">Spatial text parsing via PDFium at roughly 2–5 ms/page, including bounding boxes.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Parse văn bản theo không gian bằng PDFium (~2–5 ms/trang) kèm bounding box.">Spatial text parsing via PDFium at roughly 2–5 ms/page, including bounding boxes.</span></span></li>
+<li><span class="m-vi" lang="vi">OCR linh hoạt: Tesseract tích hợp sẵn; hoặc cắm server OCR qua HTTP (EasyOCR, PaddleOCR, tự viết).</span><span class="m-en" lang="en">Flexible OCR: built-in Tesseract or HTTP-pluggable OCR servers (EasyOCR, PaddleOCR, or custom).</span><span class="m-chunk" lang="en"><span class="ph" data-vi="OCR linh hoạt: Tesseract tích hợp sẵn hoặc cắm server OCR qua HTTP (EasyOCR, PaddleOCR, tự viết).">Flexible OCR: built-in Tesseract or HTTP-pluggable OCR servers (EasyOCR, PaddleOCR, or custom).</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Complexity Detection:</strong> kiểm tra rẻ xem tài liệu có cần OCR/parse nặng không — để định tuyến, từ chối hoặc ước tính chi phí trước.</span><span class="m-en" lang="en"><strong>Complexity Detection:</strong> a cheap check for whether a document needs heavy OCR/parsing—useful for routing, rejection, or cost estimation.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Complexity Detection: kiểm tra rẻ xem tài liệu có cần OCR nặng không để định tuyến, từ chối hoặc ước tính chi phí."><strong>Complexity Detection:</strong> a cheap check for whether a document needs heavy OCR/parsing—useful for routing, rejection, or cost estimation.</span></span></li>
+<li><span class="m-vi" lang="vi">Chụp ảnh trang cho LLM agent; xuất Markdown, JSON, Text.</span><span class="m-en" lang="en">Page screenshots for LLM agents; exports to Markdown, JSON, and plain text.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Chụp ảnh trang cho LLM agent; xuất Markdown, JSON và Text.">Page screenshots for LLM agents; exports to Markdown, JSON, and plain text.</span></span></li>
 </ul>
-<h2 id="ocria">OCRia-1: lớp chính xác</h2>
-<p>Theo blog LlamaIndex: OCRia-1 là VLM 4 tỷ tham số; trên ParseBench đạt <strong>87,4</strong> điểm tổng (văn bản, định dạng, bảng, biểu đồ) — cao nhất trong các mô hình parse dưới 35 tỷ tham số, hơn mô hình kế tiếp 12,1 điểm. Bảng so sánh của họ: LightOnOCR-3-4B 75,3; Chandra-OCR-2 (4B) 74,8; Mistral OCR 4.1 67,5; olmOCR-2 (7B) 43,3. Họ cũng báo dẫn đầu phần bảng ở olmOCR-bench (92,9), PulseBench-Tab (84,1) và fr-bench-pdf2md.</p>
-<p class="blog-callout"><strong>Lưu ý:</strong> ParseBench do chính LlamaIndex vận hành. Hãy chạy thử trên tài liệu thật của bạn trước khi tin bảng xếp hạng.</p>
+
+<div class="hd" id="ocria"><h2 class="m-vi" lang="vi">OCRia-1: lớp chính xác</h2><h2 class="m-en" lang="en">OCRia-1: the accuracy layer</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="OCRia-1: lớp chính xác">OCRia-1: the accuracy layer</span></h2></div>
+
+<p class="m-vi" lang="vi">Theo blog LlamaIndex: OCRia-1 là VLM 4 tỷ tham số; trên ParseBench đạt <strong>87,4</strong> điểm tổng (văn bản, định dạng, bảng, biểu đồ) — cao nhất trong các mô hình parse dưới 35 tỷ tham số, hơn mô hình kế tiếp 12,1 điểm. Bảng so sánh của họ: LightOnOCR-3-4B 75,3; Chandra-OCR-2 (4B) 74,8; Mistral OCR 4.1 67,5; olmOCR-2 (7B) 43,3. Họ cũng báo dẫn đầu phần bảng ở olmOCR-bench (92,9), PulseBench-Tab (84,1) và fr-bench-pdf2md.</p>
+<p class="m-en" lang="en">Per the LlamaIndex blog, OCRia-1 is a 4B-parameter VLM scoring <strong>87.4</strong> overall on ParseBench (text, formatting, tables, charts)—highest among parsers under 35B parameters, 12.1 points ahead of the runner-up (LightOnOCR-3-4B 75.3, Chandra-OCR-2 4B 74.8, Mistral OCR 4.1 67.5, olmOCR-2 7B 43.3)—and leading table scores on olmOCR-bench (92.9), PulseBench-Tab (84.1), and fr-bench-pdf2md.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo blog LlamaIndex, OCRia-1 (VLM 4B) đạt 87,4 điểm tổng trên ParseBench — dẫn đầu nhóm dưới 35B, hơn 12,1 điểm so với mô hình kế tiếp, và đứng đầu phần bảng trên nhiều benchmark.">Per the LlamaIndex blog, OCRia-1 (a 4B-parameter VLM) scores <strong>87.4</strong> overall on ParseBench (text, formatting, tables, charts)—highest among parsers under 35B parameters, 12.1 points ahead of the runner-up (LightOnOCR-3-4B 75.3, Chandra-OCR-2 4B 74.8, Mistral OCR 4.1 67.5, olmOCR-2 7B 43.3)—and leads table scores on olmOCR-bench (92.9), PulseBench-Tab (84.1), and fr-bench-pdf2md.</span></p>
+
+<div class="blog-callout">
+<p class="m-vi" lang="vi"><strong>Lưu ý:</strong> ParseBench do chính LlamaIndex vận hành. Hãy chạy thử trên tài liệu thật của bạn trước khi tin bảng xếp hạng.</p>
+<p class="m-en" lang="en"><strong>Caveat:</strong> ParseBench is operated by LlamaIndex itself. Test on your own real documents before trusting any leaderboard.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Lưu ý: ParseBench do chính LlamaIndex vận hành — hãy tự thử trên tài liệu thật của bạn trước khi tin bảng xếp hạng."><strong>Caveat:</strong> ParseBench is operated by LlamaIndex itself. Test on your own real documents before trusting any leaderboard.</span></p>
+</div>
+
+</div>
+
 <section class="blog-insight" id="insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
 <p><strong>Thiết kế pipeline hai lớp.</strong> Lớp 1 (LiteParse/pymupdf) chạy cho 100% tài liệu → đánh chỉ mục để agent tìm kiếm. Bộ phát hiện độ phức tạp hoặc tín hiệu nghiệp vụ (hóa đơn, báo cáo tài chính, bảng dày) quyết định trang nào đi lớp 2 (VLM). Chi phí VLM chỉ dồn vào phần trăm nhỏ trang thật sự cần.</p>
 <ul>
 <li>Định tuyến theo <em>trang</em>, không theo cả file: một báo cáo 200 trang có thể chỉ 10 trang bảng.</li>
 <li>Lưu bounding box từ lớp 1 để trích dẫn ngược về vị trí gốc khi agent trả lời.</li>
-<li>Lượt sâu có thể "lazy": chỉ parse lại bằng VLM khi agent truy xuất trúng trang đó.</li>
+<li>Lượt sâu có thể “lazy”: chỉ parse lại bằng VLM khi agent truy xuất trúng trang đó.</li>
 <li>Tự dựng bộ test nhỏ (50–100 trang thật, có đáp án) để so công cụ; benchmark công khai khó phản ánh tài liệu tiếng Việt, bản scan mờ hay con dấu.</li>
 <li>Với dữ liệu nhạy cảm, lớp cục bộ giúp không phải gửi mọi thứ lên cloud.</li>
 </ul></section>
 <h2 id="sources">Nguồn và ghi công</h2>
-<p>Đối chiếu nguồn ngày 08/11/2026 (giờ Bangkok, UTC+7). Trích dẫn ngắn giữ nguyên tiếng Anh; phần còn lại là tóm lược. Quyền đối với nội dung gốc thuộc tác giả tương ứng.</p>
+<p>Đối chiếu nguồn ngày 08/11/2026 (giờ Bangkok, UTC+7). Trích dẫn ngắn giữ nguyên tiếng Anh; phần còn lại là tóm lược. Quyền đối với nội dung gốc thuộc tác giả tương ứng. Cập nhật ba chế độ đọc.</p>
 <ol><li><a href="https://x.com/jerryjliu0/status/2118875764066222117" target="_blank" rel="noopener">@jerryjliu0 — The world needs two types of document OCR</a></li>
 <li><a href="https://github.com/run-llama/liteparse" target="_blank" rel="noopener">run-llama/liteparse — README</a></li>
 <li><a href="https://www.llamaindex.ai/blog/parse-ocria-1" target="_blank" rel="noopener">LlamaIndex — Introducing OCRia-1</a></li>
@@ -142,5 +241,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
