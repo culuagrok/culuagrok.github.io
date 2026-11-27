@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Brian Armstrong và đội ngũ AI: giá trị nằm ở hàng đợi quyết định — Blog</title>
-<meta name="description" content="Brian Armstrong mô tả đội agent và một hàng đợi duyệt duy nhất: ảnh, video, bộ nhớ sở thích và ranh giới phán đoán của con người.">
+<meta name="description" content="Brian Armstrong mô tả đội agent và một hàng đợi duyệt duy nhất: ảnh, video, bộ nhớ sở thích và ranh giới phán đoán của con người. Ba chế độ đọc: tiếng Việt, nguyên văn tiếng Anh, và tiếng Anh tách cụm.">
+<script>
+(function(){
+  var m='chunk';
+  try {
+    var q=new URLSearchParams(location.search).get('mode');
+    if(/^(vi|en|chunk)$/.test(q||'')) m=q;
+    else {
+      var h=(location.hash||'').replace(/^#/,'');
+      if(/^mode=(vi|en|chunk)$/.test(h)) m=h.slice(5);
+      else { var s=localStorage.getItem('blog-art-mode'); if(/^(vi|en|chunk)$/.test(s||'')) m=s; }
+    }
+  } catch(e){}
+  document.documentElement.setAttribute('data-art-mode', m);
+  document.documentElement.classList.add('ph-js');
+})();
+</script>
 <style id="theme-classic">body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
 a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);color:#fff;padding:18px 20px}header.bh a{color:#fde68a}
 .blog-wrap{max-width:70ch;margin:0 auto;padding:20px 16px 48px}
@@ -47,6 +63,49 @@ a{color:#0f3d75}header.bh{background:linear-gradient(135deg,#0f3d75,#15803d);col
 .blog-callout strong{color:#166534}
 footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:#64748b}
 </style>
+<style id="page-local">
+.blog-prose figure{margin:1.2em 0}.blog-prose figure img{margin:0 auto .5em}
+.credits{font-size:13px;color:#64748b;margin:1.6em 0 0;padding-top:12px;border-top:1px solid #e2e8f0}
+.blog-prose sup{font-size:.75em}
+.art-modes p,.art-modes li{line-height:1.8}
+.art-modes h1.art-title{line-height:1.5;font-size:1.85rem;margin:0 0 8px}
+.art-modes .hd{scroll-margin-top:1rem}
+html[data-art-mode="chunk"] .art-modes p,html[data-art-mode="chunk"] .art-modes li{line-height:1.95}
+/* Three reading modes: default = chunk (also when attribute missing) */
+html:not([data-art-mode]) .m-vi,html:not([data-art-mode]) .m-en,
+html[data-art-mode="chunk"] .m-vi,html[data-art-mode="chunk"] .m-en,
+html[data-art-mode="en"] .m-vi,html[data-art-mode="en"] .m-chunk,
+html[data-art-mode="vi"] .m-en,html[data-art-mode="vi"] .m-chunk{display:none}
+html[data-art-mode="en"] .ph-bar,html[data-art-mode="vi"] .ph-bar{display:none}
+.m-vi,.m-en,.m-chunk{margin:0}
+li>.m-vi,li>.m-en,li>.m-chunk{display:inline}
+html[data-art-mode="chunk"] li>.m-vi,html[data-art-mode="chunk"] li>.m-en,
+html[data-art-mode="en"] li>.m-vi,html[data-art-mode="en"] li>.m-chunk,
+html[data-art-mode="vi"] li>.m-en,html[data-art-mode="vi"] li>.m-chunk,
+html:not([data-art-mode]) li>.m-vi,html:not([data-art-mode]) li>.m-en{display:none}
+.ph{border-radius:3px;cursor:help;text-decoration:underline dotted rgba(100,116,139,.55);text-decoration-thickness:1px;text-underline-offset:3px;transition:background .12s}
+.ph:hover,.ph.on{background:rgba(250,204,21,.34);text-decoration-color:#b45309}
+.art-modes.hints-off .ph{text-decoration:none}
+html:not(.ph-js) .ph{position:relative}
+html:not(.ph-js) .ph:hover::after{content:attr(data-vi);position:absolute;left:0;bottom:100%;z-index:50;width:max-content;max-width:min(300px,80vw);white-space:normal;background:#0f172a;color:#f8fafc;font-size:14px;line-height:1.45;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px #0004;text-decoration:none;font-style:normal;font-weight:400}
+#ph-tip{position:fixed;left:0;top:0;display:none;z-index:99999;max-width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#0f172a;color:#f8fafc;font:400 14px/1.45 system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:7px 11px;border-radius:7px;box-shadow:0 6px 18px #0005;pointer-events:none;overflow-wrap:anywhere}
+.ph-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em;font-size:14px}
+.ph-bar label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Floating mode switcher */
+.mode-fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:8px;align-items:center}
+.mode-fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--color-bd2,#94a3b8);background:var(--color-panel,#fff);color:var(--color-fg,#0f172a);box-shadow:0 3px 15px #0002;font:700 13px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.mode-fab .fab-aa{font:700 14px/1 system-ui,Segoe UI,Roboto,Arial,sans-serif;border-bottom:2px dotted currentColor;padding-bottom:1px}
+.mode-fab button[aria-pressed="true"]{background:#0f3d75;color:#fff;border-color:#0f3d75}
+.mode-fab button:focus-visible{outline:3px solid var(--color-link,#2563eb);outline-offset:3px}
+body:has(.mode-fab){padding-bottom:170px}
+@media(max-width:480px){
+  body:has(.mode-fab){padding-bottom:76px}
+  .mode-fab{flex-direction:row;right:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(50%);gap:8px;padding:6px 8px;border-radius:28px;background:var(--color-panel,#fff);border:1px solid var(--color-bd2,#94a3b8);box-shadow:0 3px 15px #0003}
+  .mode-fab button{width:42px;height:42px;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){.mode-fab button,.ph{transition:none}}
+@media print{.mode-fab,#ph-tip,.ph-bar{display:none!important}.m-vi,.m-en,.m-chunk,li>.m-vi,li>.m-en,li>.m-chunk{display:block!important}body{padding-bottom:0}}
+</style>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../assets/tailwind.css">
 <script>(function(){var t,d=document.documentElement;try{t=localStorage.getItem("jb-theme")}catch(e){}if(!/^(yahoojp|classic|dark|steam|shadcn|dracula|catppuccin|nord|cupcake)$/.test(t||""))t="yahoojp";d.setAttribute("data-theme",t);if(t!=="classic"){d.setAttribute("data-layout","portal");var s=document.getElementById("theme-classic");if(s)s.media="not all"}})()</script>
@@ -78,36 +137,111 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li>Theo ông, kiểm duyệt của con người và kiểm tra bảo mật vẫn giữ nguyên. Tự động hóa tác vụ không đồng nghĩa chuyển giao quyền phán đoán.</li>
 </ul></section>
 <p class="blog-note">Nguồn chính: <a href="https://x.com/brian_armstrong/status/2119112609223827547">bài đăng của Brian Armstrong</a>. Đây là bài phân tích tiếng Việt, không phải bản dịch nguyên văn hay xác minh độc lập hệ thống nội bộ. Phần mô tả cách vận hành là lời kể của tác giả; các đề xuất triển khai bên dưới là nhận định riêng của người viết.</p>
-<h2>Bớt chuyển tab quan trọng hơn thêm một agent</h2>
-<p>Khi dùng nhiều trợ lý AI, một vấn đề xuất hiện rất nhanh: mỗi cuộc chat biến thành một nơi cần theo dõi. Bạn phải nhớ ai đang làm gì, việc nào bị kẹt và kết quả nào đủ tốt để duyệt. Công việc được phân tán, nhưng gánh nặng điều phối vẫn tập trung trong đầu người dùng.</p>
-<p>Trong bài đăng, Brian Armstrong, đồng sáng lập kiêm CEO Coinbase theo phần giới thiệu tài khoản, nói ông đã thay đổi cách làm việc trong vài tuần gần đây. Mỗi mảng trọng tâm có một <em>lead agent</em> chạy liên tục; một agent kiểu <em>chief of staff</em> giám sát các lead. Mỗi lead quản lý các agent con để viết mã, kiểm thử, theo sát việc review và phối hợp với thành viên trong nhóm.</p>
-<p>Nhưng chi tiết đáng chú ý nhất không phải sơ đồ cấp bậc. Đó là một <strong>hàng đợi ưu tiên duy nhất</strong>, trong một ứng dụng web đơn giản chạy cục bộ, nơi tập hợp mọi việc ông cần xem hoặc quyết định. Ông xử lý hàng đợi theo từng đợt, chủ yếu bằng giọng nói và phím tắt.</p>
-<p>Hệ thống như vậy chuyển giao diện làm việc từ “nói chuyện với nhiều bot” sang “xử lý những quyết định đã được chuẩn bị”. Theo lời ông, điều này giảm đáng kể gánh nặng tinh thần do phải chuyển qua hàng chục cuộc chat. Không có số đo thời gian tiết kiệm nào được công bố trong bài.</p>
-<h2>Tách người làm việc khỏi người có quyền quyết định</h2>
-<p>Có thể đọc cấu trúc Brian mô tả thành bốn vai trò:</p>
-<ul><li><strong>Agent con:</strong> thực hiện phần việc cụ thể như viết mã và chạy kiểm thử.</li>
-<li><strong>Lead agent:</strong> chịu trách nhiệm một mảng, điều phối các agent con và đưa kết quả lên.</li>
-<li><strong>Chief of staff agent:</strong> điều phối ở tầng tổng thể.</li>
-<li><strong>Con người:</strong> xem xét những việc cần phán đoán và quyết định.</li></ul>
-<p>Đây là cách diễn giải các vai trò trong bài đăng, không phải tài liệu kiến trúc được công bố. Ta chưa biết hệ thống lưu trạng thái ra sao, xử lý xung đột giữa lead thế nào, hay những hành động nào thực sự được tự động thực hiện.</p>
-<p>Brian nhấn mạnh rằng mọi thay đổi vẫn trải qua cùng quy trình review của con người và kiểm tra bảo mật. Ông mô tả mục tiêu là loại bỏ tác vụ, không loại bỏ phán đoán của con người. Điều đó khác với cách hiểu “AI tự làm mọi thứ, chủ nhân chỉ thỉnh thoảng nhìn qua”.</p>
-<h2>Ảnh và demo: đưa bằng chứng đến ngay nơi duyệt</h2>
-<p>Theo bài gốc, mỗi lần review sản phẩm đều có screenshot và video demo tính năng. Đây là khác biệt giữa một thông báo “đã hoàn thành” và một gói kết quả mà người duyệt có thể kiểm tra.</p>
-<p>Ảnh giúp nhìn bố cục và trạng thái. Video giúp thấy luồng thao tác và phản hồi theo thời gian. Tuy vậy, cả hai chỉ phản ánh những trường hợp đã được ghi lại; một demo chạy được không chứng minh mọi quyền truy cập, dữ liệu đầu vào hay tình huống lỗi đều đúng.</p>
-<p>Với thay đổi phần mềm, người viết đề xuất một thẻ review gồm: mục tiêu, phạm vi thay đổi, bằng chứng chạy thật, kết quả kiểm thử, điểm chưa kiểm chứng và quyết định đang cần. Ảnh và video bổ sung cho mã nguồn cùng kiểm tra bảo mật, không thay thế chúng.</p>
-<h2>“Brian brain”: học cách phán đoán, không chỉ nhớ cách viết</h2>
-<p>Brian nói hệ thống liên tục học sở thích của ông và chắt lọc phán đoán thành một “Brian brain”, để đề xuất và bản nháp tốt hơn trước khi tới tay ông. Đích đến được nêu rất cụ thể về mặt hành vi: <strong>ít lần sửa hơn trên mỗi thay đổi</strong>. Ông cũng nói các lead mang về những ý tưởng ông chưa nghĩ đến.</p>
-<p>Bài đăng không giải thích “Brian brain” là bộ quy tắc, kho bộ nhớ, cơ chế truy xuất, mô hình được tinh chỉnh hay một cách kết hợp nào khác. Không nên biến một cách đặt tên thành tuyên bố rằng ông đã huấn luyện một mô hình riêng hoặc sao chép được bộ não của mình.</p>
-<p>Điểm có thể học là biến phản hồi thành kiến thức dùng lại. Ví dụ, thay vì chỉ lưu “đừng làm giao diện như thế”, nên ghi điều kiện áp dụng, nguyên tắc mong muốn và một ví dụ đã được duyệt. Đó là gợi ý của người viết, không phải mô tả cách Brian đã triển khai.</p>
-<p>Cũng cần tránh vòng lặp chiều ý: ít sửa có thể do đề xuất tốt hơn, nhưng cũng có thể do người duyệt mệt hoặc hệ thống chỉ chọn việc dễ. Muốn đo hiệu quả, nên xem cả chất lượng sau khi phát hành và tỷ lệ lỗi lọt qua, chứ không chỉ số lần nhấn duyệt.</p>
-<h2>Phản hồi cộng đồng: ba câu hỏi cần giữ lại</h2>
-<p>Trong phần phản hồi đã đọc, <a href="https://x.com/TurnerNovak/status/2119162223457128817">Turner Novak hỏi ông dùng gì cho hàng đợi trung tâm</a>. Đây là câu hỏi hợp lý, nhưng bài gốc chỉ nói đến một ứng dụng web cục bộ; không có tên sản phẩm, repository hay hướng dẫn cài đặt được liên kết.</p>
-<p><a href="https://x.com/wassimk/status/2119489100352745978">Wassim Metallaoui lưu ý</a> rằng tóm tắt chuyển lên trên đôi khi không đủ, khiến người dùng vẫn phải đi xuống tầng lead để hiểu chuyện gì thực sự xảy ra. Đó là một kinh nghiệm cá nhân trong phản hồi, nhưng nêu đúng rủi ro thiết kế: hàng đợi phải cho phép truy về dữ liệu gốc, không trở thành màn hình che khuất vấn đề.</p>
-<p><a href="https://x.com/graycorso/status/2119482144862937552">Một phản hồi khác đặt câu hỏi về cửa sổ ngữ cảnh của lead theo thời gian</a>. Agent chạy liên tục không tự có trí nhớ vô hạn. Đây là câu hỏi chưa được giải đáp trong những nội dung đã đọc, không phải bằng chứng rằng hệ thống của Brian đang mắc lỗi đó.</p>
-<p>Ở một trả lời cho câu hỏi có dùng Grok Bot không, <a href="https://x.com/brian_armstrong/status/2119212940922384566">Brian nói hệ thống có mượn một số ý tưởng từ Grok Bot</a>. Điều này không đủ để gán toàn bộ workflow cho Grok Bot, Claude hay một sản phẩm cụ thể khác. Bài đăng không công bố đầy đủ mô hình và hạ tầng sử dụng.</p>
-<h2>Liên hệ với agentic finance: tầm nhìn, chưa phải hướng dẫn chuyển tiền</h2>
-<p>Cuối bài, Brian gắn sự hào hứng về năng suất với việc xây nền kinh tế cho agent, gọi là <em>agentic finance</em>. Trong ngữ cảnh bài này, đó là hướng nhìn rộng hơn của tác giả, không phải thông báo về một sản phẩm thanh toán mới hay xác nhận các agent trong hệ thống đang có quyền chuyển tiền.</p>
-<p>Nếu áp dụng mô hình này cho công việc liên quan đến tiền hoặc dữ liệu nhạy cảm, ranh giới quyền hạn phải được thiết kế riêng: quyền đọc khác quyền ghi, chuẩn bị giao dịch khác phê duyệt giao dịch. Tự động gom việc không đồng nghĩa tự động cấp quyền thực hiện.</p>
+<p class="blog-note" id="how-to"><strong>Ba chế độ đọc:</strong> dùng 3 nút tròn ở góc dưới bên phải để chuyển nhanh (trên điện thoại, ba nút nằm thành một thanh ở cuối màn hình để không đè chữ bên phải). <strong>VI</strong> — bản tiếng Việt đầy đủ, theo từng đoạn. <strong>EN</strong> — bản tiếng Anh tương ứng, không tách cụm. <strong>Cụm</strong> (mặc định, biểu tượng A gạch dưới) — tiếng Anh tách thành các cụm theo mệnh đề; <strong>rê chuột hoặc chạm vào một cụm để xem nghĩa tiếng Việt</strong>. Chạm lần nữa hoặc chạm ra ngoài để đóng; với cụm chứa liên kết, trên điện thoại chạm lần đầu để xem nghĩa, chạm lần hai để mở liên kết. Chế độ được ghi nhớ trên máy này; có thể mở thẳng bằng <code>?mode=vi</code>, <code>?mode=en</code> hoặc <code>?mode=chunk</code>.</p>
+<div class="ph-bar"><label><input type="checkbox" id="ph-hints" checked> Gạch chân nhẹ các cụm (bỏ chọn để đọc sạch hơn)</label><span>· 56 cụm · 32 đoạn &amp; mục</span></div>
+<div class="art-modes" aria-describedby="how-to">
+
+<div class="hd"><h2 class="m-vi" lang="vi">Bớt chuyển tab quan trọng hơn thêm một agent</h2><h2 class="m-en" lang="en">Fewer tab switches matter more than another agent</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Bớt chuyển tab quan trọng hơn thêm một agent">Fewer tab switches matter more than another agent</span></h2></div>
+
+<p class="m-vi" lang="vi">Khi dùng nhiều trợ lý AI, một vấn đề xuất hiện rất nhanh: mỗi cuộc chat biến thành một nơi cần theo dõi. Bạn phải nhớ ai đang làm gì, việc nào bị kẹt và kết quả nào đủ tốt để duyệt. Công việc được phân tán, nhưng gánh nặng điều phối vẫn dồn trong đầu người dùng.</p>
+<p class="m-en" lang="en">When using multiple AI assistants, a problem surfaces quickly: every chat turns into another thread to track. You have to remember who is doing what, what is stuck, and which output is ready to approve. Execution is distributed, yet the coordination overhead stays in your head.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Khi dùng nhiều trợ lý AI, mỗi cuộc chat nhanh chóng biến thành một đầu việc phải theo dõi.">When using multiple AI assistants, a problem surfaces quickly: every chat turns into another thread to track.</span> <span class="ph" data-vi="Bạn phải nhớ ai đang làm gì, việc nào kẹt và kết quả nào đủ tốt để duyệt — việc thì phân tán nhưng gánh nặng điều phối vẫn dồn trong đầu bạn.">You have to remember who is doing what, what is stuck, and which output is ready to approve. Execution is distributed, yet the coordination overhead stays in your head.</span></p>
+
+<p class="m-vi" lang="vi">Trong bài đăng, Brian Armstrong, đồng sáng lập kiêm CEO Coinbase theo phần giới thiệu tài khoản, nói ông đã thay đổi cách làm việc trong vài tuần gần đây. Mỗi mảng trọng tâm có một <em>lead agent</em> chạy liên tục; một agent kiểu <em>chief of staff</em> giám sát các lead. Mỗi lead quản lý các agent con để viết mã, kiểm thử, theo sát việc review và phối hợp với thành viên trong nhóm.</p>
+<p class="m-en" lang="en">In his post, Brian Armstrong—Coinbase co-founder and CEO per his bio—says he changed how he works over recent weeks. Each focus area has a continuously running <em>lead agent</em>, overseen by a <em>chief-of-staff</em> agent. Each lead manages sub-agents to write code, run tests, track reviews, and coordinate with human teammates.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Brian Armstrong (đồng sáng lập kiêm CEO Coinbase) cho biết đã đổi cách làm việc trong vài tuần gần đây:">In his post, Brian Armstrong—Coinbase co-founder and CEO per his bio—says he changed how he works over recent weeks.</span> <span class="ph" data-vi="mỗi mảng có một lead agent chạy liên tục, bên trên là chief-of-staff agent, bên dưới là các agent con viết mã, kiểm thử, theo dõi review và phối hợp với đồng nghiệp.">Each focus area has a continuously running <em>lead agent</em>, overseen by a <em>chief-of-staff</em> agent. Each lead manages sub-agents to write code, run tests, track reviews, and coordinate with human teammates.</span></p>
+
+<p class="m-vi" lang="vi">Nhưng chi tiết đáng chú ý nhất không phải sơ đồ cấp bậc. Đó là một <strong>hàng đợi ưu tiên duy nhất</strong>, trong một ứng dụng web đơn giản chạy cục bộ, nơi tập hợp mọi việc ông cần xem hoặc quyết định. Ông xử lý hàng đợi theo từng đợt, chủ yếu bằng giọng nói và phím tắt.</p>
+<p class="m-en" lang="en">Yet the most interesting detail is not the org chart. It is a <strong>single prioritized queue</strong> in a simple local web app that collects everything needing his eyes or decision, which he batches through using voice and keyboard shortcuts.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nhưng chi tiết đáng chú ý nhất không phải sơ đồ cấp bậc, mà là một hàng đợi ưu tiên duy nhất trong ứng dụng web cục bộ,">Yet the most interesting detail is not the org chart. It is a <strong>single prioritized queue</strong> in a simple local web app that collects everything needing his eyes or decision,</span> <span class="ph" data-vi="gom mọi việc ông cần xem hoặc quyết định để xử lý theo đợt bằng giọng nói và phím tắt.">which he batches through using voice and keyboard shortcuts.</span></p>
+
+<p class="m-vi" lang="vi">Hệ thống như vậy chuyển giao diện làm việc từ “nói chuyện với nhiều bot” sang “xử lý những quyết định đã được chuẩn bị”. Theo lời ông, điều này giảm đáng kể gánh nặng tinh thần do phải chuyển qua hàng chục cuộc chat. Không có số đo thời gian tiết kiệm nào được công bố trong bài.</p>
+<p class="m-en" lang="en">Such a setup shifts the interface from “chatting with many bots” to “processing prepared decisions.” According to him, this sharply cuts the mental load of context-switching across dozens of chats—though no time-saved metrics are published.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Hệ thống chuyển giao diện từ “chat với nhiều bot” sang “xử lý những quyết định đã chuẩn bị sẵn”,">Such a setup shifts the interface from “chatting with many bots” to “processing prepared decisions.”</span> <span class="ph" data-vi="giúp giảm gánh nặng tinh thần khi chuyển giữa hàng chục cuộc chat (dù không công bố số đo thời gian tiết kiệm).">According to him, this sharply cuts the mental load of context-switching across dozens of chats—though no time-saved metrics are published.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Tách người làm việc khỏi người có quyền quyết định</h2><h2 class="m-en" lang="en">Separating execution from decision-making</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Tách người làm việc khỏi người có quyền quyết định">Separating execution from decision-making</span></h2></div>
+
+<p class="m-vi" lang="vi">Có thể đọc cấu trúc Brian mô tả thành bốn vai trò:</p>
+<p class="m-en" lang="en">The structure Brian describes maps cleanly to four roles:</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Có thể đọc cấu trúc Brian mô tả thành bốn vai trò:">The structure Brian describes maps cleanly to four roles:</span></p>
+
+<ul>
+<li><span class="m-vi" lang="vi"><strong>Agent con:</strong> thực hiện phần việc cụ thể như viết mã và chạy kiểm thử.</span><span class="m-en" lang="en"><strong>Sub-agents:</strong> execute concrete tasks like writing code and running tests.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Agent con: thực hiện phần việc cụ thể như viết mã và chạy kiểm thử."><strong>Sub-agents:</strong> execute concrete tasks like writing code and running tests.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Lead agent:</strong> chịu trách nhiệm một mảng, điều phối các agent con và đưa kết quả lên.</span><span class="m-en" lang="en"><strong>Lead agents:</strong> own a focus area, coordinate sub-agents, and surface results upward.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Lead agent: phụ trách một mảng, điều phối agent con và đẩy kết quả lên."><strong>Lead agents:</strong> own a focus area, coordinate sub-agents, and surface results upward.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Chief of staff agent:</strong> điều phối ở tầng tổng thể.</span><span class="m-en" lang="en"><strong>Chief-of-staff agent:</strong> coordinates at the top level across leads.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Chief-of-staff agent: điều phối ở tầng tổng thể."><strong>Chief-of-staff agent:</strong> coordinates at the top level across leads.</span></span></li>
+<li><span class="m-vi" lang="vi"><strong>Con người:</strong> xem xét những việc cần phán đoán và quyết định.</span><span class="m-en" lang="en"><strong>Human:</strong> reviews items that require judgment and final decisions.</span><span class="m-chunk" lang="en"><span class="ph" data-vi="Con người: xem xét những việc cần phán đoán và quyết định."><strong>Human:</strong> reviews items that require judgment and final decisions.</span></span></li>
+</ul>
+
+<p class="m-vi" lang="vi">Đây là cách diễn giải các vai trò trong bài đăng, không phải tài liệu kiến trúc được công bố. Ta chưa biết hệ thống lưu trạng thái ra sao, xử lý xung đột giữa lead thế nào, hay những hành động nào thực sự được tự động thực hiện.</p>
+<p class="m-en" lang="en">This is an interpretation of the post rather than a published architecture spec. We do not know how state is persisted, how conflicts between leads are resolved, or which actions run autonomously.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Đây là cách diễn giải vai trò từ bài đăng chứ không phải tài liệu kiến trúc;">This is an interpretation of the post rather than a published architecture spec.</span> <span class="ph" data-vi="ta chưa biết hệ thống lưu trạng thái, xử lý xung đột giữa lead hay tự động thực thi ở mức nào.">We do not know how state is persisted, how conflicts between leads are resolved, or which actions run autonomously.</span></p>
+
+<p class="m-vi" lang="vi">Brian nhấn mạnh rằng mọi thay đổi vẫn trải qua cùng quy trình review của con người và kiểm tra bảo mật. Ông mô tả mục tiêu là loại bỏ tác vụ, không loại bỏ phán đoán của con người. Điều đó khác với cách hiểu “AI tự làm mọi thứ, chủ nhân chỉ thỉnh thoảng nhìn qua”.</p>
+<p class="m-en" lang="en">Brian stresses that all changes still go through the same human reviews and security checks. He frames the goal as removing busywork, not human judgment—unlike the caricature of “AI does everything while the owner glances occasionally.”</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Brian nhấn mạnh mọi thay đổi vẫn qua quy trình review của con người và kiểm tra bảo mật:">Brian stresses that all changes still go through the same human reviews and security checks.</span> <span class="ph" data-vi="mục tiêu là loại bỏ tác vụ lặp chứ không loại bỏ phán đoán của con người.">He frames the goal as removing busywork, not human judgment—unlike the caricature of “AI does everything while the owner glances occasionally.”</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Ảnh và demo: đưa bằng chứng đến ngay nơi duyệt</h2><h2 class="m-en" lang="en">Screenshots and demos: bringing evidence to the review</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Ảnh và demo: đưa bằng chứng đến ngay nơi duyệt">Screenshots and demos: bringing evidence to the review</span></h2></div>
+
+<p class="m-vi" lang="vi">Theo bài gốc, mỗi lần review sản phẩm đều có screenshot và video demo tính năng. Đây là khác biệt giữa một thông báo “đã hoàn thành” và một gói kết quả mà người duyệt có thể kiểm tra.</p>
+<p class="m-en" lang="en">Per the original post, every product review includes screenshots and demo videos of the feature—the difference between a bare “done” message and a reviewable artifact package.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Theo bài gốc, mỗi lần review sản phẩm đều có ảnh chụp màn hình và video demo — khác hẳn một thông báo “đã xong” suông.">Per the original post, every product review includes screenshots and demo videos of the feature—the difference between a bare “done” message and a reviewable artifact package.</span></p>
+
+<p class="m-vi" lang="vi">Ảnh giúp nhìn bố cục và trạng thái. Video giúp thấy luồng thao tác và phản hồi theo thời gian. Tuy vậy, cả hai chỉ phản ánh những trường hợp đã được ghi lại; một demo chạy được không chứng minh mọi quyền truy cập, dữ liệu đầu vào hay tình huống lỗi đều đúng.</p>
+<p class="m-en" lang="en">Screenshots show layout and state; video shows interaction flow and timing. Still, both only capture recorded happy paths—a working demo does not prove access controls, edge-case inputs, or error handling are sound.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Ảnh cho thấy bố cục và trạng thái, video cho thấy luồng thao tác và thời gian phản hồi;">Screenshots show layout and state; video shows interaction flow and timing.</span> <span class="ph" data-vi="nhưng cả hai chỉ phản ánh trường hợp được quay lại, không chứng minh quyền truy cập hay xử lý lỗi đã đúng.">Still, both only capture recorded happy paths—a working demo does not prove access controls, edge-case inputs, or error handling are sound.</span></p>
+
+<p class="m-vi" lang="vi">Với thay đổi phần mềm, người viết đề xuất một thẻ review gồm: mục tiêu, phạm vi thay đổi, bằng chứng chạy thật, kết quả kiểm thử, điểm chưa kiểm chứng và quyết định đang cần. Ảnh và video bổ sung cho mã nguồn cùng kiểm tra bảo mật, không thay thế chúng.</p>
+<p class="m-en" lang="en">For software changes, a practical review card includes goal, scope of diff, live-run evidence, test results, unverified areas, and the exact decision needed. Media complements code and security checks rather than replacing them.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Với thay đổi phần mềm, thẻ review nên gồm mục tiêu, phạm vi diff, bằng chứng chạy thật, kết quả test, điểm chưa kiểm chứng và quyết định cần chốt — ảnh/video bổ sung chứ không thay code review.">For software changes, a practical review card includes goal, scope of diff, live-run evidence, test results, unverified areas, and the exact decision needed. Media complements code and security checks rather than replacing them.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">“Brian brain”: học cách phán đoán, không chỉ nhớ cách viết</h2><h2 class="m-en" lang="en">“Brian brain”: learning judgment, not just style</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="“Brian brain”: học cách phán đoán, không chỉ nhớ cách viết">“Brian brain”: learning judgment, not just style</span></h2></div>
+
+<p class="m-vi" lang="vi">Brian nói hệ thống liên tục học sở thích của ông và chắt lọc phán đoán thành một “Brian brain”, để đề xuất và bản nháp tốt hơn trước khi tới tay ông. Đích đến được nêu rất cụ thể về mặt hành vi: <strong>ít lần sửa hơn trên mỗi thay đổi</strong>. Ông cũng nói các lead mang về những ý tưởng ông chưa nghĩ đến.</p>
+<p class="m-en" lang="en">Brian says the system continuously learns his preferences and distills his judgment into a “Brian brain,” so proposals and drafts arrive closer to ready. His behavioral target is concrete: <strong>fewer edits per change</strong>. He also notes that leads surface ideas he had not thought of.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Brian nói hệ thống liên tục học sở thích và chắt lọc phán đoán thành “Brian brain” để bản nháp tốt hơn trước khi tới tay ông;">Brian says the system continuously learns his preferences and distills his judgment into a “Brian brain,” so proposals and drafts arrive closer to ready.</span> <span class="ph" data-vi="đích đến rất cụ thể là ít lần sửa hơn trên mỗi thay đổi, và các lead còn gợi ý thêm ý tưởng mới.">His behavioral target is concrete: <strong>fewer edits per change</strong>. He also notes that leads surface ideas he had not thought of.</span></p>
+
+<p class="m-vi" lang="vi">Bài đăng không giải thích “Brian brain” là bộ quy tắc, kho bộ nhớ, cơ chế truy xuất, mô hình được tinh chỉnh hay một cách kết hợp nào khác. Không nên biến một cách đặt tên thành tuyên bố rằng ông đã huấn luyện một mô hình riêng hoặc sao chép được bộ não của mình.</p>
+<p class="m-en" lang="en">The post does not specify whether “Brian brain” is a rule set, memory store, retrieval index, fine-tuned model, or hybrid. A catchy name should not be read as a claim of training a custom model or cloning a human brain.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Bài đăng không nói “Brian brain” là bộ quy tắc, kho nhớ, retrieval hay fine-tune; đừng biến một cái tên thành tuyên bố đã nhân bản bộ não.">The post does not specify whether “Brian brain” is a rule set, memory store, retrieval index, fine-tuned model, or hybrid. A catchy name should not be read as a claim of training a custom model or cloning a human brain.</span></p>
+
+<p class="m-vi" lang="vi">Điểm có thể học là biến phản hồi thành kiến thức dùng lại. Ví dụ, thay vì chỉ lưu “đừng làm giao diện như thế”, nên ghi điều kiện áp dụng, nguyên tắc mong muốn và một ví dụ đã được duyệt. Đó là gợi ý của người viết, không phải mô tả cách Brian đã triển khai.</p>
+<p class="m-en" lang="en">The transferable lesson is turning feedback into reusable knowledge: rather than storing “don’t build UI like that,” record the condition, desired principle, and an approved example—our own suggestion, not a claim about Brian's implementation.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Điểm đáng học là biến phản hồi thành kiến thức dùng lại: ghi rõ điều kiện, nguyên tắc và ví dụ đã duyệt thay vì chỉ câu chê chung chung.">The transferable lesson is turning feedback into reusable knowledge: rather than storing “don’t build UI like that,” record the condition, desired principle, and an approved example—our own suggestion, not a claim about Brian's implementation.</span></p>
+
+<p class="m-vi" lang="vi">Cũng cần tránh vòng lặp chiều ý: ít sửa có thể do đề xuất tốt hơn, nhưng cũng có thể do người duyệt mệt hoặc hệ thống chỉ chọn việc dễ. Muốn đo hiệu quả, nên xem cả chất lượng sau khi phát hành và tỷ lệ lỗi lọt qua, chứ không chỉ số lần nhấn duyệt.</p>
+<p class="m-en" lang="en">Watch out for sycophancy loops too: fewer edits can mean better proposals, or simply reviewer fatigue or cherry-picked easy tasks. Measure post-release quality and escaped-bug rates alongside approval counts.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Cũng cần tránh vòng lặp chiều ý: ít sửa có thể do đề xuất tốt hơn hoặc do người duyệt mệt; cần đo cả chất lượng sau phát hành và lỗi lọt qua.">Watch out for sycophancy loops too: fewer edits can mean better proposals, or simply reviewer fatigue or cherry-picked easy tasks. Measure post-release quality and escaped-bug rates alongside approval counts.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Phản hồi cộng đồng: ba câu hỏi cần giữ lại</h2><h2 class="m-en" lang="en">Community replies: three questions worth keeping</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Phản hồi cộng đồng: ba câu hỏi cần giữ lại">Community replies: three questions worth keeping</span></h2></div>
+
+<p class="m-vi" lang="vi">Trong phần phản hồi đã đọc, <a href="https://x.com/TurnerNovak/status/2119162223457128817">Turner Novak hỏi ông dùng gì cho hàng đợi trung tâm</a>. Đây là câu hỏi hợp lý, nhưng bài gốc chỉ nói đến một ứng dụng web cục bộ; không có tên sản phẩm, repository hay hướng dẫn cài đặt được liên kết.</p>
+<p class="m-en" lang="en">In the replies, <a href="https://x.com/TurnerNovak/status/2119162223457128817">Turner Novak asked what tool powers the central queue</a>. Fair question, though the post only mentions a local web app—no product name, repo, or install guide is linked.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Trong phản hồi, Turner Novak hỏi ông dùng công cụ gì cho hàng đợi trung tâm, nhưng bài gốc chỉ nói đó là ứng dụng web cục bộ và không nêu tên sản phẩm hay repo.">In the replies, <a href="https://x.com/TurnerNovak/status/2119162223457128817">Turner Novak asked what tool powers the central queue</a>. Fair question, though the post only mentions a local web app—no product name, repo, or install guide is linked.</span></p>
+
+<p class="m-vi" lang="vi"><a href="https://x.com/wassimk/status/2119489100352745978">Wassim Metallaoui lưu ý</a> rằng tóm tắt chuyển lên trên đôi khi không đủ, khiến người dùng vẫn phải đi xuống tầng lead để hiểu chuyện gì thực sự xảy ra. Đó là một kinh nghiệm cá nhân trong phản hồi, nhưng nêu đúng rủi ro thiết kế: hàng đợi phải cho phép truy về dữ liệu gốc, không trở thành màn hình che khuất vấn đề.</p>
+<p class="m-en" lang="en"><a href="https://x.com/wassimk/status/2119489100352745978">Wassim Metallaoui noted</a> that rolled-up summaries sometimes fall short, forcing you down to the lead level to see what actually happened. That highlights a real design risk: a queue must let you drill down to raw data rather than hiding problems behind polish.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Wassim Metallaoui lưu ý tóm tắt đẩy lên đôi khi thiếu ngữ cảnh, buộc phải lần xuống tầng lead — cho thấy hàng đợi cần cho phép truy về dữ liệu gốc."> <a href="https://x.com/wassimk/status/2119489100352745978">Wassim Metallaoui noted</a> that rolled-up summaries sometimes fall short, forcing you down to the lead level to see what actually happened. That highlights a real design risk: a queue must let you drill down to raw data rather than hiding problems behind polish.</span></p>
+
+<p class="m-vi" lang="vi"><a href="https://x.com/graycorso/status/2119482144862937552">Một phản hồi khác đặt câu hỏi về cửa sổ ngữ cảnh của lead theo thời gian</a>. Agent chạy liên tục không tự có trí nhớ vô hạn. Đây là câu hỏi chưa được giải đáp trong những nội dung đã đọc, không phải bằng chứng rằng hệ thống của Brian đang mắc lỗi đó.</p>
+<p class="m-en" lang="en"><a href="https://x.com/graycorso/status/2119482144862937552">Another reply asked about lead context windows over time</a>: continuously running agents do not automatically have infinite memory. That remains an open question in the thread, not proof that Brian's system suffers from it.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Một phản hồi khác hỏi về cửa sổ ngữ cảnh của lead theo thời gian: agent chạy liên tục không tự có trí nhớ vô hạn (câu hỏi còn bỏ ngỏ trong chuỗi bài)."> <a href="https://x.com/graycorso/status/2119482144862937552">Another reply asked about lead context windows over time</a>: continuously running agents do not automatically have infinite memory. That remains an open question in the thread, not proof that Brian's system suffers from it.</span></p>
+
+<p class="m-vi" lang="vi">Ở một trả lời cho câu hỏi có dùng Grok Bot không, <a href="https://x.com/brian_armstrong/status/2119212940922384566">Brian nói hệ thống có mượn một số ý tưởng từ Grok Bot</a>. Điều này không đủ để gán toàn bộ workflow cho Grok Bot, Claude hay một sản phẩm cụ thể khác. Bài đăng không công bố đầy đủ mô hình và hạ tầng sử dụng.</p>
+<p class="m-en" lang="en">Asked if he uses Grok Bot, <a href="https://x.com/brian_armstrong/status/2119212940922384566">Brian replied that the system borrows some ideas from Grok Bot</a>—not enough to attribute the whole workflow to Grok Bot, Claude, or any single product, as the stack is not disclosed.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Khi được hỏi có dùng Grok Bot không, Brian đáp hệ thống có mượn vài ý tưởng từ đó nhưng không công bố đầy đủ mô hình hay hạ tầng.">Asked if he uses Grok Bot, <a href="https://x.com/brian_armstrong/status/2119212940922384566">Brian replied that the system borrows some ideas from Grok Bot</a>—not enough to attribute the whole workflow to Grok Bot, Claude, or any single product, as the stack is not disclosed.</span></p>
+
+<div class="hd"><h2 class="m-vi" lang="vi">Liên hệ với agentic finance: tầm nhìn, chưa phải hướng dẫn chuyển tiền</h2><h2 class="m-en" lang="en">Tie-in to agentic finance: vision, not payment instructions</h2><h2 class="m-chunk" lang="en"><span class="ph" data-vi="Liên hệ với agentic finance: tầm nhìn, chưa phải hướng dẫn chuyển tiền">Tie-in to agentic finance: vision, not payment instructions</span></h2></div>
+
+<p class="m-vi" lang="vi">Cuối bài, Brian gắn sự hào hứng về năng suất với việc xây nền kinh tế cho agent, gọi là <em>agentic finance</em>. Trong ngữ cảnh bài này, đó là hướng nhìn rộng hơn của tác giả, không phải thông báo về một sản phẩm thanh toán mới hay xác nhận các agent trong hệ thống đang có quyền chuyển tiền.</p>
+<p class="m-en" lang="en">At the end, Brian connects his productivity excitement to building an economy for agents—<em>agentic finance</em>. In context, that is a broader thesis rather than a payment product announcement or confirmation that his internal agents can move money.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Cuối bài, Brian nối câu chuyện năng suất với tầm nhìn agentic finance — góc nhìn rộng hơn chứ không phải thông báo sản phẩm thanh toán hay cấp quyền chuyển tiền cho agent.">At the end, Brian connects his productivity excitement to building an economy for agents—<em>agentic finance</em>. In context, that is a broader thesis rather than a payment product announcement or confirmation that his internal agents can move money.</span></p>
+
+<p class="m-vi" lang="vi">Nếu áp dụng mô hình này cho công việc liên quan đến tiền hoặc dữ liệu nhạy cảm, ranh giới quyền hạn phải được thiết kế riêng: quyền đọc khác quyền ghi, chuẩn bị giao dịch khác phê duyệt giao dịch. Tự động gom việc không đồng nghĩa tự động cấp quyền thực hiện.</p>
+<p class="m-en" lang="en">If you apply this pattern to money or sensitive data, design permission boundaries explicitly: separate read from write, and transaction preparation from transaction approval. Automatic batching does not imply automatic execution authority.</p>
+<p class="m-chunk" lang="en"><span class="ph" data-vi="Nếu áp dụng mô hình này cho tiền hoặc dữ liệu nhạy cảm, phải tách rõ quyền đọc/ghi và chuẩn bị/phê duyệt — gom việc tự động không đồng nghĩa tự động cấp quyền thực thi.">If you apply this pattern to money or sensitive data, design permission boundaries explicitly: separate read from write, and transaction preparation from transaction approval. Automatic batching does not imply automatic execution authority.</span></p>
+
+</div>
+
 <section class="blog-insight"><h2>Know-how &amp; Insight</h2><p class="blog-insight-label">Ghi chú của người viết</p>
 <ol><li><strong>Xây hàng đợi trước khi mở rộng đội agent.</strong> Bắt đầu với một mảng nhỏ. Chỉ đưa lên những mục thực sự cần quyết định, với câu hỏi rõ ràng và bằng chứng kèm theo. Đừng nhân số thông báo cùng tốc độ với số agent.</li>
 <li><strong>Mỗi việc có một chủ sở hữu.</strong> Phân công trách nhiệm và tách vùng làm việc để tránh hai agent sửa cùng một thứ. Tầng điều phối nên giải quyết phụ thuộc, không chỉ chuyển tiếp tin nhắn.</li>
@@ -116,7 +250,7 @@ footer.bf{max-width:70ch;margin:0 auto;padding:0 16px 32px;font-size:13px;color:
 <li><strong>Ghi phản hồi có điều kiện và có thể sửa lại.</strong> Tách sở thích trình bày khỏi quy tắc bảo mật. Bộ nhớ học từ một lần duyệt không được tự biến thành quyền hành động vĩnh viễn.</li>
 <li><strong>Đo cả chi phí phối hợp.</strong> Ngoài số lần sửa, theo dõi thời gian chờ review, công sức kiểm tra, lỗi sau duyệt và chi phí vận hành. Đây là phép đo đề xuất, không phải thành tích đã được Brian công bố.</li></ol>
 <p>Điểm cốt lõi: nhiều agent chỉ hữu ích khi chúng làm giảm lượng điều phối và kiểm tra mà con người phải gánh, chứ không chỉ tạo thêm việc chờ duyệt.</p></section>
-<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/brian_armstrong/status/2119112609223827547">Brian Armstrong — bài gốc</a>; <a href="https://x.com/brian_armstrong/status/2119212940922384566">trả lời về Grok Bot</a>; các phản hồi được dẫn ngay trong bài. Đọc nguồn ngày 09/11/2026 (UTC+7, giờ Việt Nam). Đã đọc một phần phản hồi và tra cứu riêng bài của tác giả trong hội thoại, không duyệt toàn bộ bình luận. Bài gốc không có tweet trích dẫn, X Article, liên kết kỹ thuật hay video đính kèm; không có demo công khai được kiểm thử trong bài này.</p>
+<p class="blog-note"><strong>Nguồn và ghi công:</strong> <a href="https://x.com/brian_armstrong/status/2119112609223827547">Brian Armstrong — bài gốc</a>; <a href="https://x.com/brian_armstrong/status/2119212940922384566">trả lời về Grok Bot</a>; các phản hồi được dẫn ngay trong bài. Đọc nguồn ngày 09/11/2026 (UTC+7, giờ Việt Nam). Đã đọc một phần phản hồi và tra cứu riêng bài của tác giả trong hội thoại, không duyệt toàn bộ bình luận. Bài gốc không có tweet trích dẫn, X Article, liên kết kỹ thuật hay video đính kèm; không có demo công khai được kiểm thử trong bài này. Cập nhật ba chế độ đọc.</p>
 <section class="blog-mindmap" id="mindmap"><h2>Mindmap — Đội agent và hàng đợi quyết định</h2><div class="blog-mindmap-scroll pele"><pre class="mermaid">
 mindmap
   root((Hàng đợi quyết định))
@@ -151,5 +285,58 @@ mindmap
 <footer class="yj yj-page yj-foot"><nav><a href="../../index.html">Trang chủ</a><a href="../../viec-moi.html">Việc mới</a><a href="../../viec-lam-chinh.html">Việc làm chính</a><a href="../../viec-lam-phu.html">Việc làm phụ</a><a href="../index.html">Blog</a><a href="#" data-theme-open>Giao diện</a></nav><p>Bảng việc làm TP.HCM · Giao diện lấy cảm hứng từ Yahoo! JAPAN, không liên kết với Yahoo! JAPAN hay LY Corporation.</p></footer>
 <script type="module" src="../assets/mindmap.js"></script>
 <script src="../../theme.js"></script>
+<div id="ph-tip" role="tooltip"></div>
+<nav class="mode-fab" aria-label="Chế độ đọc">
+<button type="button" data-mode="vi" title="Toàn bộ tiếng Việt" aria-label="Chế độ toàn bộ tiếng Việt">VI</button>
+<button type="button" data-mode="en" title="Bản gốc tiếng Anh" aria-label="Chế độ bản gốc tiếng Anh">EN</button>
+<button type="button" data-mode="chunk" title="Tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa" aria-label="Chế độ tiếng Anh tách cụm, rê chuột hoặc chạm để xem nghĩa"><span class="fab-aa">Aa</span></button>
+</nav>
+<script>
+(function(){
+  var d=document,root=d.documentElement,tip=d.getElementById("ph-tip"),cur=null,lastType="mouse";
+  var VALID={vi:1,en:1,chunk:1};
+  function current(){ return root.getAttribute('data-art-mode')||'chunk'; }
+  function apply(m, updateUrl){
+    if(!VALID[m]) m='chunk';
+    root.setAttribute('data-art-mode', m);
+    d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-mode')===m));
+    });
+    try{ localStorage.setItem('blog-art-mode', m); }catch(e){}
+    if(updateUrl){
+      try{
+        var url=new URL(location.href);
+        url.searchParams.set('mode', m);
+        history.replaceState(null,'',url);
+      }catch(e){}
+    }
+    hide();
+  }
+  d.querySelectorAll('.mode-fab [data-mode]').forEach(function(btn){
+    btn.addEventListener('click', function(){ apply(btn.getAttribute('data-mode'), true); });
+  });
+  apply(current(), false);
+
+  function rectFor(el,x,y){var rs=el.getClientRects(),i;if(x==null)return rs[0]||el.getBoundingClientRect();for(i=0;i<rs.length;i++){if(y>=rs[i].top-3&&y<=rs[i].bottom+3)return rs[i];}return rs[0]||el.getBoundingClientRect();}
+  function place(el,x,y){var r=rectFor(el,x,y),vw=root.clientWidth,tw,th,px,py;tip.style.left="0px";tip.style.top="0px";tw=tip.offsetWidth;th=tip.offsetHeight;
+    px=r.left+r.width/2-tw/2;px=Math.max(8,Math.min(px,vw-tw-8));py=r.top-th-8;if(py<8)py=r.bottom+8;tip.style.left=px+"px";tip.style.top=py+"px";}
+  function show(el,x,y){if(cur&&cur!==el)cur.classList.remove("on");cur=el;tip.textContent=el.getAttribute("data-vi");tip.style.display="block";el.classList.add("on");place(el,x,y);}
+  function hide(){if(cur){cur.classList.remove("on");cur=null;}tip.style.display="none";}
+  d.addEventListener("pointerdown",function(e){lastType=e.pointerType||"mouse";},true);
+  d.addEventListener("pointerover",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el)show(el,e.clientX,e.clientY);});
+  d.addEventListener("pointermove",function(e){if(current()!=='chunk')return;if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&el===cur)place(el,e.clientX,e.clientY);});
+  d.addEventListener("pointerout",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var el=e.target.closest&&e.target.closest(".ph");if(el&&!(e.relatedTarget&&el.contains(e.relatedTarget)))hide();});
+  d.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('.mode-fab'))return;
+    if(current()!=='chunk')return;
+    if(lastType==="mouse")return;var el=e.target.closest&&e.target.closest(".ph");
+    if(!el){hide();return;}
+    if(cur===el){hide();return;}
+    show(el,e.clientX,e.clientY);if(e.target.closest("a"))e.preventDefault();});
+  window.addEventListener("scroll",function(){if(lastType!=="mouse")hide();else if(cur)hide();},{passive:true});
+  d.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+  var cb=d.getElementById("ph-hints"),art=d.querySelector(".art-modes");
+  if(cb&&art)cb.addEventListener("change",function(){art.classList.toggle("hints-off",!cb.checked);});
+})();
+</script>
 </body>
 </html>
